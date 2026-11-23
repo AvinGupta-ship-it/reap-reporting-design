@@ -1,0 +1,25 @@
+{
+  "config_hash": "15a2f58edfb30fe0db8dd852f470434c17d47a03a7fa04a2ebd8c8d140d66a1c",
+  "created_utc": "2026-11-23T06:37:54+00:00",
+  "data_basis": "synthetic",
+  "git_commit": "443706b9130da102504ace165def992a51fdb40d",
+  "input_checksums": {
+    "convergence.csv": "df61252d260c4eb8d7ac7e7a592f4fea000925c1d0f9927a6d2b07fe6a6c667d"
+  },
+  "output": "si_convergence.pdf",
+  "package_versions": {
+    "SALib": "1.6.0",
+    "highspy": "1.16.0",
+    "linkml": "1.12.1",
+    "linopy": "0.10.1",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "pvlib": "0.16.1",
+    "pydantic": "2.14.4",
+    "python": "3.12.14",
+    "scipy": "1.18.1",
+    "statsmodels": "0.15.0"
+  },
+  "seed": null
+}

@@ -1,0 +1,400 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage[numbers]{natbib}
+\graphicspath{{../paper/}}
+\input{../paper/generated/values.tex}
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+\begin{document}
+
+\begin{center}
+{\large\bfseries Comment on the Information Collection for the Rural Energy for America
+Program\\[3pt] OMB Control Number 0570-0067}\\[6pt]
+Paperwork Reduction Act notice in ``Unleashing American Energy and Economic Prosperity;
+Rural Energy for America Program (REAP),'' final rule with comment period\\
+91 FR 62600, 62610--62611 (October 1, 2026); FR Doc.\ 2026-20178; RIN 0570-AB13\\
+Docket No.\ RBS-26-Business-0529\\[6pt]
+Submitted by Avin Gupta\\
+November 2026
+\end{center}
+
+\section*{1. Commenter and proceeding}
+
+I submit this comment as an individual researcher. It responds to the Paperwork
+Reduction Act (PRA) notice printed in the preamble of the final rule cited above, in
+which the Rural Business-Cooperative Service (RBCS) announces its intention to request a
+revision of the information collection approved under OMB Control Number 0570-0067 and
+invites comments to be received by November 30, 2026 \cite{fr2026reap}. The comment
+addresses only the four questions the notice poses under 5 CFR 1320.8(d)
+\cite{cfr1320_8}: (a) necessity and practical utility, (b) accuracy of the burden
+estimate, (c) quality, utility and clarity of the information, and (d) minimizing burden,
+including through information technology. It does not address eligibility, scoring or
+award structure.
+
+The notice directs commenters to a docket document titled ``Notice of Extension of a
+Currently Approved Information Collection.'' As of November 23, 2026, the docket as
+listed through the Regulations.gov public data interface contained the rule
+(RBS-26-BUSINESS-0529-0001), whose comment period closed on November 2, 2026, and a
+regulatory impact analysis (RBS-26-BUSINESS-0529-0004), but no document with that title.
+I ask that this comment be treated as timely under the notice's November 30 date and be
+included in the summary of comments in the request for OMB approval, as the notice
+states all responses will be.
+
+The analysis behind the comment is described in the technical attachment. It combines
+(i) arithmetic on the figures published in the notice and on the current OMB inventory,
+and (ii) a simulation study of \NApplicants{} \emph{synthetic} applicants. The synthetic
+applicants are constructed from public building load profiles, measured weather and
+stated assumptions; they are not REAP application data, and nothing in this comment is a
+finding about any real applicant, project or award. Recommendations that rest on the
+simulation are therefore framed as requests for analysis, disclosure or clarification.
+
+\section*{2. Summary of recommendations}
+
+\textbf{(b) Accuracy of the burden estimate.}
+\begin{enumerate}
+\item[B1.] Reconcile the published estimate. The notice's factors do not reproduce its
+totals: \AuditRespondents{} respondents $\times$ \AuditResponsesPerRespondent{} responses
+gives \AuditProductResponses{} responses, not \AuditResponses; and \AuditResponses{}
+responses $\times$ \AuditHoursPerResponse{} hours gives \AuditProductHours{} hours, not
+\AuditTotalHours{} (a difference of \AuditHoursDiscrepancy{} hours).
+\item[B2.] Correct the respondent description (``Nonprofit corporations and institutions
+of higher education'') and state consistently whether the request is a revision or an
+extension.
+\item[B3.] Place the supporting statement and a per-instrument burden table in the docket,
+and state the time assumed for assembling twenty-four months of energy records, which is
+the principal new element of the collection.
+\end{enumerate}
+
+\textbf{(a) Practical utility.}
+\begin{enumerate}
+\item[A1.] State how the twelve-month quantities will be verified and with what
+tolerance, and assess with the Agency's own historical data whether savings computed
+from twelve bills before and after an efficiency project are precise enough for the
+uses the rule makes of them.
+\item[A2.] Collect production of renewable energy systems as monthly production-meter
+readings with dates, not only as an annual total.
+\end{enumerate}
+
+\textbf{(c) Quality, utility and clarity.}
+\begin{enumerate}
+\item[C1.] Specify the energy evidence as data elements: for each bill, the period start
+and end dates, the quantity with a coded unit, whether the read was actual or estimated,
+the account or meter identifier, and whether the quantity is delivered energy or net of
+exports; for the project, the in-service date; for photovoltaic systems, array tilt and
+azimuth; for efficiency projects, the share of use in the affected end uses.
+\item[C2.] Publish a machine-readable format for these elements. A schema, JSON Schema
+and tabular templates are offered in the attachment.
+\item[C3.] State the calculation the Agency will apply to the records (annualization,
+any weather adjustment, treatment of estimated reads and of exports), so that applicants
+do not have to devise it.
+\end{enumerate}
+
+\textbf{(d) Minimizing burden through information technology.}
+\begin{enumerate}
+\item[D1.] Accept utility billing-history files and production-monitoring exports in the
+planned online application portal in place of manual transcription.
+\item[D2.] Validate submissions at entry with deterministic checks (units and ranges,
+date continuity and alignment with the in-service date, account identity, agreement of
+totals with records) so that applicants correct errors before scoring.
+\item[D3.] Compute sums, annualized values and payback from the submitted records in the
+portal rather than asking applicants to calculate them.
+\end{enumerate}
+
+\section*{3. The issue}
+
+Under the revised rule a project must be complete before application, and the applicant
+submits ``the historical energy use in terms of quantity and unit of measurement for the
+12 consecutive months pre-installation and 12 months of energy produced
+post-installation'' for a renewable energy system (RES), or pre- and post-installation
+consumption for an energy efficiency improvement (EEI) (7 CFR 4280.131(b)(17)(i))
+\cite{ecfr4280b}. Eligibility and merit points are computed from these quantities
+(\S\S4280.122(a)(18)--(19), 4280.140(d)(2), (3), (6)). The rule eliminates the
+semi-annual and annual outcome reports (\S4280.160), so the application evidence is the
+only record of performance the Agency will hold.
+
+The Agency has experience with self-reported energy quantities in this program. The
+USDA Office of Inspector General's 2016 audit estimated that \OigInaccurate{} of
+\OigWithReports{} projects (\OigPct\%; 95\% confidence interval
+\OigCiLow--\OigCiHigh\%) did not have accurate energy produced or saved data in the
+Agency's system, and that \OigNoReports{} of \OigRequired{} recipients (\OigNoReportsPct\%)
+had not filed required reports; it attributed the inaccurate amounts to guidance that
+``explained what should be reported, but did not outline the processes recipients must
+carry out in order to accurately calculate the production or savings,'' and to data-entry
+errors \cite{oig2016reap}. A later OIG memorandum records that the audit's
+recommendations were reported as implemented \cite{oig2023memo}. The revised collection
+moves the same kind of quantity from an after-the-fact report to the basis of award, which
+raises the stakes of how it is specified, validated and estimated.
+
+\section*{4. Analysis and findings}
+
+\subsection*{4.1 Burden estimate (question b)}
+
+Table~\ref{tab:audit} reproduces the notice's figures and their products. These are
+exact calculations on published numbers.
+
+\begin{table}[h]
+\caption{Arithmetic of the burden estimate in the PRA notice (91 FR 62611) and the
+current OMB inventory (ICR \InvIcr).}\label{tab:audit}
+\centering\footnotesize
+\input{../paper/generated/tab_burden_audit.tex}
+\end{table}
+
+\begin{itemize}
+\item \emph{The factors and totals are inconsistent.} The published ratios equal the exact
+ratios cut off, rather than rounded, at two decimals (\AuditImpliedResponsesPerRespondent{}
+and \AuditImpliedHoursPerResponse; rounding would give
+\AuditRoundedResponsesPerRespondent{} and \AuditRoundedHoursPerResponse). The discrepancy
+is small (\AuditHoursDiscrepancyPct\% of total hours) but a reader cannot tell which
+figures are primary.
+\item \emph{The respondent category does not match the program.} The notice lists
+respondents as nonprofit corporations and institutions of higher education, while its own
+abstract describes agricultural producers and rural small businesses, the applicants
+under subpart B.
+\item \emph{The request type and docket instruction are inconsistent.} The notice
+announces a revision, describes the collection as being submitted ``for extension,'' and
+refers to a docket document by a title that the docket does not contain.
+\item \emph{The change from the current inventory is not explained.} The current
+approval covers \InvResponses{} responses and \InvHours{} hours from \InvRespondents{}
+respondents \cite{omb05700067}. The revision reports \ChangeResponsesPct\% more responses
+and \ChangeHoursPct\% fewer hours from \ChangeRespondentsPct\% fewer respondents:
+responses per respondent rise by a factor of \ChangeResponsesPerRespondentFactor{} while
+hours per response fall by \ChangeHoursPerResponsePct\%. The rule removes three recurring
+reports, which would be expected to lower, not raise, responses per respondent. The
+regulatory impact analysis in the docket estimates \RiaApplications{} RES/EEI applications
+and \RiaEaReda{} energy audit and development assistance applications a year
+\cite{ria2026reap}, which sum to \RiaTotal, the notice's respondent count; so the estimate
+appears to assume about \AuditResponsesPerRespondent{} responses per application. No
+supporting statement or per-instrument table for the revised collection was found in the
+docket or on reginfo.gov as of November 23, 2026.
+\end{itemize}
+
+Without a per-instrument table it is not possible to tell what time, if any, the estimate
+allows for locating twenty-four utility bills, extracting quantities and prices,
+obtaining twelve months of production data and computing the values the application
+asks for. Under the PRA rules burden includes the time to ``generate, maintain, retain,
+or disclose or provide information'' \cite{cfr1320_3}, and the Agency's review is to
+include ``a specific, objectively supported estimate of burden''
+(5 CFR 1320.8(a)(4)) \cite{cfr1320_8}.
+
+\subsection*{4.2 What twelve-month evidence can establish (question a)}
+
+The following findings are from the simulation of synthetic applicants and hold under
+its stated assumptions (Section~6).
+
+\emph{Renewable energy systems.} Production read from a meter is an observation, and in
+the simulation it is verified to within about \AccCurrentCleanResMedian\% when reported
+correctly. Its accuracy as evidence depends on whether reporting errors are caught. With
+hypothetical error rates and only an annual total collected,
+\AccCurrentUnvalidatedResShareTen\% of synthetic RES applicants had a verified value more
+than 10\% from the truth if values were taken as submitted,
+\AccCurrentValidatedResShareTen\% after the checks possible on the current elements, and
+\AccProductionMeterValidatedResShareTen\% when monthly production-meter readings were
+collected, because the claim can then be recomputed (Figure~\ref{fig:errors}).
+
+\emph{Efficiency improvements.} Savings are the difference between measured use and
+what use would have been. With error-free synthetic evidence, the calculation in the
+rule's definition of Simple Payback (historical minus actual use over twelve bills) had
+a median absolute error of \PathUndatedNormalMedian\% of true normal-year savings; using
+bill dates and a degree-day adjustment computed by the verifier,
+\PathNormNormalMedian\%, or \PathNormMergedNormalMedian\% when estimated reads are
+identified; and with daily interval data, \PathIntervalPathNormalMedian\%. For synthetic
+projects saving less than 10\% of facility use the median error of the twelve-bill
+difference was \BandLowUndatedMedian\%; for those saving more than 20\% it was
+\BandHighUndatedMedian\%. A mixed result is also relevant: degree-day adjustment
+of twelve bills lowered the typical error but not the root-mean-square error
+(\NormEeiNormRmse\% of pre-installation use, against \NormEeiRawRmse\% for the simple
+difference), because a regression on twelve points occasionally fails badly. Weather
+adjustment is therefore not a remedy by itself, and the choice of calculation should be
+tested on real program data.
+
+\emph{Consequence for decisions.} In simulated competitions with hypothetical funding and
+the scoring formulas of \S4280.140(d)(2), (3) and (6), \SelCurrentCleanMid\% of awards
+differed from the selection on true values even with error-free evidence under the
+current specification, \SelCurrentValidatedMid\% with injected errors after validation,
+and \SelCurrentUnvalidatedMid\% with errors taken at face value. Collecting the monthly
+metadata listed in recommendation C1 reduced the middle figure to \SelRecValidatedMid\%.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/fig3_error_distributions}
+\caption{Synthetic data (attachment Figure 3). Absolute relative error of the verified
+quantity by evidence specification: median, interquartile range and 5th--95th
+percentile; the numbers at right give the share of applicants with error above 10\%.
+Blue: error-free evidence; vermilion: with injected errors, after validation. Error
+rates are hypothetical.}\label{fig:errors}
+\end{figure}
+
+\subsection*{4.3 Which checks work, and what they need (questions c and d)}
+
+Each automated check needs particular data elements. In the simulation
+(Figure~\ref{fig:roc}; attachment Table 2):
+
+\begin{itemize}
+\item Capacity-factor bounds from the rated system size and location caught every unit
+error in production, with no element beyond those the rule already requires.
+\item Date checks caught every wrong-period error (bills from another year, or periods
+straddling the in-service date), but only when bill dates were collected; without dates
+the checks available detected \DetCurrentEeiPeriod\% (EEI) and \DetCurrentResPeriod\%
+(RES) of them.
+\item Account identifiers caught every case of a second meter included in
+pre-installation use; without them \DetCurrentEeiDouble\% (EEI) and
+\DetCurrentResDouble\% (RES) were detected. The rule requires a dedicated meter
+(\S4280.122(a)(16)) but collects a certification rather than the identifier.
+\item Recomputing the claim from monthly production readings caught
+\DetProductionMeterResGrossNet\% of cases where exports or bill reductions were reported
+as production and \DetProductionMeterResNameplate\% of cases where a
+capacity-times-sun-hours estimate was reported.
+\item Some checks did not work. A bill-outlier test did not detect transposed digits
+(area under the ROC curve \AucOutlierTransposed). Comparing claimed production with the
+change in utility bills was weak even with exports and the netting basis known (area
+\AucBillDiffGrossNet), because facility use changes between years. Post-installation
+utility bills for RES projects did not appear on the accuracy--burden frontier in this
+study; I note that the simulation did not include fabricated readings, against which
+utility records would be the only independent source.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/fig4_validation_roc}
+\caption{Synthetic data (attachment Figure 4). Detection rate against false-positive rate
+of the statistical validation rules by injected error class; area under the curve in the
+legend.}\label{fig:roc}
+\end{figure}
+
+\subsection*{4.4 Accuracy and burden together (questions c and d)}
+
+No source reports respondent time by data element for this collection, so the study uses
+stated time assumptions, scaled so that the evidence the rule now requires equals
+\AnchorResponses{} responses of the notice's average of \AuditHoursPerResponse{} hours.
+On that scale (Figure~\ref{fig:frontier}), adding bill dates with Agency-side adjustment
+costs about \DatesNormBurdenIncrease{} minutes per application and lowers the accuracy
+loss by \DatesNormMareReductionPct\%; the monthly-data specification on the frontier
+(\RecElements) costs about \RecBurdenIncrease{} minutes more than the current elements
+(\RecBurden{} against \BaseBurden{} minutes) and lowers the loss by
+\RecMareReductionPct\%. These minutes are scenario values, not measurements; their ordering
+is more reliable than their size.
+
+The mode of collection matters more than the number of elements. If the applicant
+uploads the utility's billing-history file instead of typing from bills, the same
+specification takes an estimated \ModeRecUploadBurden{} minutes,
+\ModeRecUploadVsCurrentPct\% less than manual entry of the current elements, because
+dates, read types and account identifiers are already in the file. Where Green Button
+data \cite{naesbreq21espi} are available, interval data come with the download.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figures/fig6_frontier}
+\caption{Synthetic data, hypothetical element times (attachment Figure 6). Respondent time
+and loss of every feasible combination of \NOptionalElements{} optional elements under
+manual entry (grey), the Pareto frontier with a 90\% Monte Carlo band (blue), the current
+rule (square) and the monthly-data frontier specification (diamond). Left: accuracy loss.
+Right: share of awards changed by verification error.}\label{fig:frontier}
+\end{figure}
+
+\section*{5. Recommendations}
+
+Table~\ref{tab:recs} ties each recommendation to the PRA question, the provision it
+concerns, the evidence in the attachment and the level of validation behind that
+evidence. All are within the Agency's authority to design its application instruments
+and instructions for this collection and to estimate and certify its burden under
+44 U.S.C. 3506(c) and 5 CFR 1320.8 and 1320.9 \cite{cfr1320_8,cfr1320_9}; none requires
+amending 7 CFR part 4280.
+
+{\footnotesize
+\begin{longtable}{p{0.05\linewidth}p{0.33\linewidth}p{0.2\linewidth}p{0.3\linewidth}}
+\caption{Recommendations, provisions and supporting evidence.}\label{tab:recs}\\
+\hline
+ & Recommendation & Provision and question & Evidence and validation level \\
+\hline
+\endfirsthead
+\hline
+ & Recommendation & Provision and question & Evidence and validation level \\
+\hline
+\endhead
+B1 & Reconcile respondents, responses, hours per response and total hours; publish
+ratios to sufficient precision & PRA notice, 91 FR 62611; 5 CFR 1320.8(a)(4); question
+(b) & Attachment Table 1. Exact arithmetic on published figures (numerical correctness;
+observed data) \\
+B2 & Correct the respondent description and the request type; identify the docket
+document for PRA comments & PRA notice, 91 FR 62610--62611; question (b) & Text of the
+notice and docket listing (observed) \\
+B3 & Docket the supporting statement and per-instrument burden; state time assumed for
+assembling 12+12 months of energy records & 5 CFR 1320.8(a)(4), 1320.3(b)(1);
+\S4280.131(b)(17); question (b) & Attachment Table 1 and Section 2.5. Request for
+disclosure; the study's element times are hypothetical \\
+A1 & State verification method and tolerance for 12-month quantities; assess precision
+of EEI savings from 12 bills with historical program data & \S4280.131(b)(17)(i);
+definition of Simple Payback, \S4280.104; 5 CFR 1320.8(a)(1), (7); question (a) &
+Attachment Figure 3, Tables 3--4. Verified model of stated assumptions; synthetic data;
+request for analysis \\
+A2 & Collect monthly production-meter readings with dates & \S4280.131(b)(13),
+(b)(17)(i); definition of Annual Energy Production, \S4280.104; question (a) &
+Attachment Figure 3, Table 2. Synthetic data \\
+C1 & Specify bill dates, coded units, read type, account identifier, delivered/net
+basis, in-service date, array geometry, affected end-use share as data elements &
+\S4280.131(b)(9), (b)(13), (b)(17); \S4280.122(a)(8)(i)(F), (a)(16); 5 CFR 1320.9(d);
+question (c) & Attachment Tables 2, 5, 6 and Figure 6. Synthetic data; requirement
+traceability from the rule text (observed). The delivered/net basis is recommended for
+interpretability of bills under the metering agreements named in
+\S4280.122(a)(8)(i)(F)(3); it did not improve accuracy in the simulation \\
+C2 & Publish a machine-readable format (schema and templates) & 5 CFR 1320.9(e), (j);
+question (c) & Attachment Section 5 (schema documentation) \\
+C3 & Publish the calculation applied to the records (annualization, adjustment,
+estimated reads, exports) & Definition of Simple Payback, \S4280.104
+(``same input and output conditions''); 5 CFR 1320.9(d); question (c) & OIG audit
+finding on calculation guidance (observed); attachment Table 3 (synthetic) \\
+D1 & Accept billing-history files and monitoring exports in the application portal &
+5 CFR 1320.8(a)(5), 1320.9(j); question (d) & Attachment Table 7. Hypothetical element
+times; direction of effect follows from the file containing the elements \\
+D2 & Validate at entry with deterministic checks; do not rely on outlier screens &
+5 CFR 1320.9(j); question (d) & Attachment Table 2, Figure 4. Synthetic data, including
+null results \\
+D3 & Compute sums, annualized values and payback in the portal & 5 CFR 1320.8(a)(5);
+\S4280.131(b)(17); question (d) & OIG audit finding (observed); attachment Table 2
+(synthetic) \\
+\hline
+\end{longtable}
+}
+
+Two matters of clarity affect what precision the collected information needs and could
+be resolved in the application instructions. The payback tables in \S4280.140(d)(6)
+assign points to ``at least 4 and up to 7'' and ``at least 8 and up to 12'' years (EEI)
+and ``at least 10 and up to 14'' and ``at least 15 and up to 25'' years (RES), leaving
+values between 7 and 8 and between 14 and 15 years unassigned; and the rule does not
+say whether twelve billing periods that span more or fewer than 365 days are to be
+adjusted. I raise these only as questions about how reported values will be read, not
+as comments on the scoring criteria.
+
+\section*{6. Limitations}
+
+\begin{itemize}
+\item The applicant-level results are for synthetic applicants. Load shapes for
+commercial buildings are State-level aggregates of a modelled building stock;
+agricultural load shapes are assumptions and cover electricity only, although many REAP
+efficiency projects save propane or diesel; only photovoltaic RES projects are modelled.
+\item Error-class rates, noise levels, competition size, funding and element times are
+hypothetical scenario parameters. In particular the error rates are not estimates of how
+often such errors occur in REAP submissions, and the minutes attached to data elements
+are not measurements.
+\item The study has no REAP application microdata and its agreement with real
+submissions is not established. The Agency holds historical bills and outcome reports
+with which the central question, the precision of twelve-month savings estimates, could
+be tested directly; recommendation A1 asks for that.
+\item The burden-arithmetic findings in Section 4.1 do not depend on the simulation.
+\end{itemize}
+
+\section*{7. Technical attachment}
+
+The attachment (\texttt{attachment\_technical.pdf}) gives the methods, the tables and
+figures cited above, the validation rules and the schema element list. The code,
+configurations, input provenance and synthetic datasets that reproduce every number in
+this comment are in the research repository \texttt{reap-reporting-schema}; no archive
+identifier has been assigned.
+
+\bibliographystyle{unsrtnat}
+\bibliography{../paper/references}
+\end{document}

@@ -1,0 +1,25 @@
+{
+  "config_hash": "755e90cb21f407570f6f2cd94fae286e0fbabe53ffdb806feca9919707d58c8a",
+  "created_utc": "2026-11-23T06:37:51+00:00",
+  "data_basis": "synthetic",
+  "git_commit": "443706b9130da102504ace165def992a51fdb40d",
+  "input_checksums": {
+    "e3_roc.parquet": "fc53fa3638ba4500feaa44e3db9a3e61e2397e5f5bf756dba113b17d42077a87"
+  },
+  "output": "fig4_validation_roc.pdf",
+  "package_versions": {
+    "SALib": "1.6.0",
+    "highspy": "1.16.0",
+    "linkml": "1.12.1",
+    "linopy": "0.10.1",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "pvlib": "0.16.1",
+    "pydantic": "2.14.4",
+    "python": "3.12.14",
+    "scipy": "1.18.1",
+    "statsmodels": "0.15.0"
+  },
+  "seed": null
+}

@@ -1,0 +1,9 @@
+# Figures quoted from the regulatory impact analysis in the docket, Regulations.gov
+# document RBS-26-BUSINESS-0529-0004 ("REAP RIA"). Double-entered.
+citation: "Regulations.gov document RBS-26-BUSINESS-0529-0004, REAP RIA, sections 'Cost to and Transfers among Participants' (RES EEI Program; EA REDA Program)"
+entry_a:
+  res_eei_applications_per_year: 2949
+  ea_reda_applications_per_year: 28
+entry_b:
+  res_eei_applications_per_year: 2949
+  ea_reda_applications_per_year: 28

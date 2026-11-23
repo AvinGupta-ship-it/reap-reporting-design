@@ -28,8 +28,9 @@ figures:
 
 paper:
 	cd paper && latexmk -pdf -interaction=nonstopmode -halt-on-error manuscript.tex si.tex
-	cd paper && pandoc manuscript.tex --from=latex --to=docx --citeproc \
-		--bibliography=references.bib --resource-path=.:figures -o manuscript.docx
+	cd paper && sed -E 's/\\label\{eq:[a-z]+\}//' manuscript.tex | pandoc --from=latex --to=docx \
+		--citeproc --bibliography=references.bib --resource-path=.:figures \
+		--default-image-extension=png -o manuscript.docx
 
 comment:
 	$(MAKE) -C comment

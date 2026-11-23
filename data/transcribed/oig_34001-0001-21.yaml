@@ -1,0 +1,24 @@
+# Figures quoted from USDA OIG Audit Report 34001-0001-21, "Rural Energy for America
+# Program" (August 2016), report page 6 and footnote 23, and page 5 and footnote 16.
+# Double-entered from the PDF recorded in data/MANIFEST.yaml.
+citation: "USDA OIG Audit Report 34001-0001-21 (Aug. 2016), pp. 5-6, fns. 16, 21-23"
+entry_a:
+  projects_inaccurate: 4338
+  projects_with_reports: 5423
+  percent_inaccurate: 80
+  ci_low_percent: 63
+  ci_high_percent: 97
+  sample_projects_inaccurate: 20
+  recipients_without_reports: 2494
+  recipients_required: 6983
+  percent_without_reports: 36
+entry_b:
+  projects_inaccurate: 4338
+  projects_with_reports: 5423
+  percent_inaccurate: 80
+  ci_low_percent: 63
+  ci_high_percent: 97
+  sample_projects_inaccurate: 20
+  recipients_without_reports: 2494
+  recipients_required: 6983
+  percent_without_reports: 36

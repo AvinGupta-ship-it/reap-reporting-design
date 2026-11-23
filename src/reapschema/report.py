@@ -174,6 +174,31 @@ def build_values(res: Path, cfg: Config) -> Values:
           fmt(a["implied_responses_per_respondent"]
               / a["inventory_responses_per_respondent"], 1))
 
+    oig = bm.load_transcribed("oig_34001-0001-21.yaml")["entry_a"]
+    v.add("OigInaccurate", fmt_int(oig["projects_inaccurate"]))
+    v.add("OigWithReports", fmt_int(oig["projects_with_reports"]))
+    v.add("OigPct", fmt_int(oig["percent_inaccurate"]))
+    v.add("OigCiLow", fmt_int(oig["ci_low_percent"]))
+    v.add("OigCiHigh", fmt_int(oig["ci_high_percent"]))
+    v.add("OigSampleInaccurate", fmt_int(oig["sample_projects_inaccurate"]))
+    v.add("OigNoReports", fmt_int(oig["recipients_without_reports"]))
+    v.add("OigRequired", fmt_int(oig["recipients_required"]))
+    v.add("OigNoReportsPct", fmt_int(oig["percent_without_reports"]))
+    scoring = bm.load_transcribed("scoring_4280_140.yaml")["numeric"]
+    eei_bands = [b for b in scoring["percent_saved_eei"]["lower_bounds"] if b > 0]
+    v.add("EeiBandEdges", ", ".join(f"{b:g}\\%" for b in eei_bands[:-1])
+          + f" and {eei_bands[-1]:g}\\%")
+    v.add("ScoreEnergyCap", fmt_int(scoring["energy_per_dollar"]["cap"]))
+    v.add("ScoreMinimum", fmt_int(scoring["minimum_score"]))
+    v.add("SmallRequest", fmt_int(cfg.competition.small_request_threshold))
+    ria = bm.load_transcribed("ria_RBS-26-BUSINESS-0529-0004.yaml")["entry_a"]
+    v.add("RiaApplications", fmt_int(ria["res_eei_applications_per_year"]))
+    v.add("RiaEaReda", fmt_int(ria["ea_reda_applications_per_year"]))
+    v.add("RiaTotal", fmt_int(ria["res_eei_applications_per_year"]
+                              + ria["ea_reda_applications_per_year"]))
+    inv = bm.load_transcribed("omb_inventory_0570-0067.yaml")["entry_a"]
+    v.add("InvIcr", str(inv["icr_reference"]))
+
     # --- population and schema ------------------------------------------------------------
     p = rj("population.json")
     rec = pd.read_parquet(res / "records.parquet", columns=["category", "error_class"])
@@ -191,6 +216,10 @@ def build_values(res: Path, cfg: Config) -> Values:
     for cat in ("RES", "EEI"):
         v.add(f"AwardFitAD{cat.title()}", fmt(p["award_fit"][cat]["anderson_darling"], 1))
         v.add(f"AwardFitN{cat.title()}", fmt_int(p["award_fit"][cat]["n"]))
+    awards = pd.read_csv(REPO_ROOT / "data" / "processed" / "reap_awards.csv")
+    fit_awards = awards[awards["fiscal_year"].isin(cfg.population.size_fit_fiscal_years)]
+    v.add("AwardShareAtSmallCap", pct(
+        (fit_awards["amount_usd"] == cfg.competition.small_request_threshold).mean(), 0))
     v.add("AwardFitADCritical", fmt(p["award_fit"]["RES"]["ad_critical_5pct"], 2))
     trace = rd("traceability.csv")
     v.add("TraceTotal", fmt_int(len(trace)))
@@ -229,6 +258,9 @@ def build_values(res: Path, cfg: Config) -> Values:
             base = "PathCpre" + ("Dated" if r["spec"] == "cpre_dated" else "Undated")
             v.add(base + "Median", pct(r["median"], 2))
             v.add(base + "QHigh", pct(r["q95"], 1))
+    pth = acc[acc["condition"] == "path_vs_normal_year"].set_index("spec")["median"]
+    v.add("GapClosedPct", pct((pth["eei_undated"] - pth["eei_normalized_merged"])
+                              / (pth["eei_undated"] - pth["eei_interval"]), 0))
     bands = rd("e2_by_savings_fraction.csv")
     band_names = {"below 10%": "Low", "10-20%": "Mid", "above 20%": "High"}
     for r in records(bands):
@@ -276,6 +308,11 @@ def build_values(res: Path, cfg: Config) -> Values:
         v.add(tag.replace("Auc", "Recall"), pct(auc.loc[(rule, cat, cls),
                                                         "recall_at_5pct_fpr"], 0))
     matrix = rd("e3_rule_matrix.csv")
+    by_rule = matrix[matrix["category"] == "RES"].set_index("rule")
+    v.add("DetRulePlausNameplate", pct(by_rule.loc["plausibility_z", "nameplate_hours"], 0))
+    v.add("DetRulePlausGeomNameplate",
+          pct(by_rule.loc["plausibility_z_geometry", "nameplate_hours"], 0))
+    v.add("DetRulePlausGrossNet", pct(by_rule.loc["plausibility_z", "gross_net"], 0))
     fit = matrix[matrix["rule"] == "model_fit"].iloc[0]
     v.add("ModelFitFailShare", pct(fit["false_positive_rate"], 0))
     v.add("StatRuleFpr", pct(cfg.validation.statistical_rule_fpr, 0))
@@ -287,6 +324,7 @@ def build_values(res: Path, cfg: Config) -> Values:
         ("EEI", "unnormalized"): "NormEeiRaw", ("EEI", "normalized_annual"): "NormEeiNorm",
         ("EEI", "normalized_unguarded"): "NormEeiUnguarded",
         ("EEI", "interval_normalized"): "NormEeiInterval",
+        ("EEI", "normalized_avoided"): "NormEeiAvoided",
         ("RES", "unnormalized"): "NormResRaw", ("RES", "normalized_annual"): "NormResNorm",
     }.items():
         e4_row: Any = e4.loc[(cat, est)]
@@ -638,6 +676,13 @@ def build_tables(res: Path, out: Path, cfg: Config) -> None:
     (out / "tab_tests.tex").write_text(_tabular(
         ["", "Comparison (a vs b)", "$n$", "Median a (\\%)", "Median b (\\%)", "Holm $p$"],
         rows, "lp{0.5\\linewidth}rrrr"))
+    paths = rd("e2_accuracy.csv")
+    paths = paths[paths["condition"] == "path_vs_normal_year"]
+    rows = [[tex_escape(r.label), pct(r.q05, 1), pct(r.median, 1), pct(r.q95, 0),
+             pct(r.share_above_10pct, 0)] for r in rows_of(paths)]
+    (out / "tab_paths.tex").write_text(_tabular(
+        ["Estimator of annual savings", "5th pct.", "Median", "95th pct.", "Share $>10\\%$"],
+        rows, "p{0.5\\linewidth}rrrr"))
     bands = rd("e2_by_savings_fraction.csv")
     piv = bands.pivot(index="estimator", columns="savings_fraction", values="median_are")
     order = ["below 10%", "10-20%", "above 20%"]

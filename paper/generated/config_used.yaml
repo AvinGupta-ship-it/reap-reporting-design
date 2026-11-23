@@ -1,0 +1,372 @@
+name: paper
+seed: 20261130
+n_applicants: 20000
+n_workers: 8
+population:
+  res_share_source: usaspending
+  award_share_of_cost: 0.25
+  historical_award_share_of_cost: 0.25
+  size_fit_fiscal_years:
+  - 2021
+  - 2022
+  size_distribution: empirical
+  max_request_res: 500000.0
+  max_request_eei: 250000.0
+  min_request: 1500.0
+  install_date_range:
+  - '2007-05-01'
+  - '2014-10-31'
+  facility_types:
+    warehouse: 0.15
+    retailstandalone: 0.15
+    smalloffice: 0.1
+    fullservicerestaurant: 0.1
+    scenario_hypothetical_irrigation: 0.15
+    scenario_hypothetical_grain_drying: 0.2
+    scenario_hypothetical_dairy: 0.15
+  load:
+    daily_noise_sd: 0.06
+    daily_noise_ar1: 0.5
+    hourly_noise_sd: 0.1
+    hvac_coef_log_sd: 0.3
+    balance_shift_sd_c: 1.5
+    occupancy_change_prob: 0.15
+    occupancy_change_sd: 0.08
+  res:
+    cost_per_watt_median: 2.6
+    cost_per_watt_log_sd: 0.25
+    replaced_fraction_range:
+    - 0.15
+    - 1.3
+    tilt_range_deg:
+    - 5.0
+    - 40.0
+    azimuth_mean_deg: 180.0
+    azimuth_sd_deg: 30.0
+    dc_ac_ratio: 1.2
+    inverter_efficiency: 0.96
+    system_losses: 0.14
+    temperature_coefficient: -0.0047
+    derate_log_sd: 0.05
+    shading_loss_max: 0.08
+    irradiance_bias_sd: 0.05
+    meter_error_sd: 0.005
+    storage_share: 0.1
+    useful_life_years: 25.0
+    netting_arrangements:
+      conventional_net_metering: 0.6
+      net_billing: 0.3
+      none: 0.1
+  eei:
+    measures:
+      eei_lighting:
+        end_uses:
+        - interior_lighting
+        - exterior_lighting
+        reduction:
+        - 0.3
+        - 0.6
+      eei_hvac:
+        end_uses:
+        - cooling
+        - heating
+        - fans_pumps
+        reduction:
+        - 0.15
+        - 0.35
+      eei_refrigeration:
+        end_uses:
+        - refrigeration
+        reduction:
+        - 0.15
+        - 0.4
+      eei_motors_pumps:
+        end_uses:
+        - fans_pumps
+        - process
+        reduction:
+        - 0.15
+        - 0.35
+      eei_grain_drying:
+        end_uses:
+        - drying
+        reduction:
+        - 0.25
+        - 0.5
+      eei_irrigation:
+        end_uses:
+        - pumping
+        reduction:
+        - 0.15
+        - 0.4
+    payback_median_years: 6.0
+    payback_log_sd: 0.5
+    useful_life_years: 15.0
+    min_savings_fraction: 0.03
+billing:
+  cycle_mean_days: 30.4375
+  read_jitter_days: 2
+  estimated_read_prob: 0.05
+  estimate_noise_sd: 0.1
+  fixed_charge_usd: 25.0
+  transcription_rounding: 1
+errors:
+  rates:
+    unit: 0.04
+    transposed_digits: 0.05
+    wrong_period: 0.05
+    double_counting: 0.04
+    gross_net: 0.05
+    nameplate_hours: 0.05
+  second_meter_fraction_range:
+  - 0.15
+  - 0.6
+  correction_success: 1.0
+validation:
+  capacity_factor_bounds_rel:
+  - 0.5
+  - 1.4
+  billing_days_total:
+  - 350
+  - 380
+  billing_days_each:
+  - 25
+  - 36
+  period_alignment_days: 45
+  payback_lower_bound_years: 0.25
+  claim_recompute_tolerance: 0.02
+  enduse_bound_tolerance: 0.05
+  statistical_rule_fpr: 0.01
+  charge_consistency_tolerance: 0.25
+  payback_upper_multiple: 4.0
+  estimated_share_max: 0.25
+  cvrmse_max: 0.25
+  ndb_max: 0.005
+mv:
+  balance_grid_f:
+  - 30.0
+  - 90.0
+  - 3.0
+  daily_heating_grid_f:
+  - 40.0
+  - 70.0
+  - 3.0
+  daily_cooling_grid_f:
+  - 55.0
+  - 85.0
+  - 3.0
+  confidence: 0.9
+  bootstrap_replicates: 200
+  bootstrap_block: 3
+  bootstrap_subsample: 400
+  default_tilt_deg: 20.0
+  default_azimuth_deg: 180.0
+competition:
+  n_applicants: 2000
+  n_competitions: 400
+  funding_ratio: 0.35
+  funding_ratio_sensitivity:
+  - 0.15
+  - 0.35
+  - 0.6
+  top_per_state: 2
+  small_request_threshold: 20000.0
+  small_request_reserve_share: 0.2
+  minimum_score: 40.0
+  points:
+    employees_prob: 0.5
+    critical_service_prob: 0.15
+    forest_point_prob: 0.05
+    water_point_prob: 0.1
+    prior_award_probs:
+      never: 0.75
+      not_within_two_years: 0.15
+      within_two_years: 0.1
+    priority_points_values:
+    - 0.0
+    - 5.0
+    - 10.0
+    priority_points_probs:
+    - 0.6
+    - 0.3
+    - 0.1
+burden:
+  anchor_responses: 2.0
+  calibrate_to_notice: true
+  rework_minutes:
+  - 10.0
+  - 20.0
+  - 45.0
+  elements:
+    required_evidence:
+      locate_bills:
+      - 15
+      - 30
+      - 60
+      bill_energy_per_bill:
+      - 0.5
+      - 1.0
+      - 2.0
+      annual_claim:
+      - 5
+      - 10
+      - 20
+      rated_capacity:
+      - 1
+      - 2
+      - 5
+      energy_price:
+      - 10
+      - 20
+      - 40
+    optional:
+      billing_dates:
+        per_bill:
+        - 0.25
+        - 0.5
+        - 1.0
+      read_type:
+        per_bill:
+        - 0.1
+        - 0.25
+        - 0.5
+      bill_charges:
+        per_bill:
+        - 0.4
+        - 0.75
+        - 1.5
+      meter_ids:
+        fixed:
+        - 2
+        - 5
+        - 10
+      res_post_bills:
+        per_post_bill:
+        - 0.5
+        - 1.0
+        - 2.0
+        applies_to: RES
+      export_channel:
+        per_post_bill:
+        - 0.25
+        - 0.5
+        - 1.0
+        fixed:
+        - 1
+        - 3
+        - 6
+        applies_to: RES
+      inverter_monthly:
+        fixed:
+        - 8
+        - 15
+        - 30
+        applies_to: RES
+      pv_geometry:
+        fixed:
+        - 2
+        - 5
+        - 15
+        applies_to: RES
+      inverter_interval:
+        fixed:
+        - 10
+        - 20
+        - 45
+        applies_to: RES
+      enduse_share:
+        fixed:
+        - 5
+        - 10
+        - 20
+        applies_to: EEI
+      claim_method:
+        fixed:
+        - 1
+        - 2
+        - 5
+      utility_interval:
+        fixed:
+        - 15
+        - 30
+        - 90
+      weather_normalization:
+        fixed:
+        - 0
+        - 0
+        - 0
+  modes:
+    manual_transcription: {}
+    utility_file_upload:
+      bill_block_minutes:
+      - 10
+      - 15
+      - 30
+    green_button_download:
+      bill_block_minutes:
+      - 10
+      - 15
+      - 30
+      includes_interval: true
+    automated_utility_access:
+      bill_block_minutes:
+      - 3
+      - 5
+      - 10
+      includes_interval: true
+  monte_carlo_draws: 2000
+  sobol_base_samples: 4096
+experiments:
+  e4_min_per_bin: 30
+  e5_missing_months:
+  - 0
+  - 1
+  - 2
+  - 3
+  e5_estimated_read_probs:
+  - 0.0
+  - 0.1
+  - 0.3
+  - 0.5
+  e5_subsample: 1500
+  e3_rate_multipliers:
+  - 0.5
+  - 1.0
+  - 2.0
+  roc_points: 60
+  bootstrap_replicates: 1000
+  frontier_mc_bands:
+  - 0.05
+  - 0.95
+  availability_grid:
+  - 0.0
+  - 0.25
+  - 0.5
+  - 0.75
+  - 1.0
+  recommended_tolerance: 0.05
+  e3_per_class: 2000
+  size_sensitivity_n: 4000
+  evidence_sample: 5
+hypothesis_tests:
+  alpha: 0.05
+  correction: holm
+  family:
+  - id: H1
+    description: Dated monthly bills with normalization vs interval data (EEI absolute
+      relative error)
+    a: eei_normalized_monthly
+    b: eei_interval
+  - id: H2
+    description: Normalized vs unnormalized dated monthly bills (EEI absolute relative
+      error)
+    a: eei_normalized_monthly
+    b: eei_dated
+  - id: H3
+    description: Dated vs undated monthly bills (EEI absolute relative error)
+    a: eei_dated
+    b: eei_undated
+  - id: H4
+    description: Dated vs undated pre-period consumption (absolute relative error)
+    a: cpre_dated
+    b: cpre_undated

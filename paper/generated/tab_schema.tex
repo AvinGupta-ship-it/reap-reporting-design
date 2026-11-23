@@ -1,0 +1,89 @@
+\begin{longtable}{llllp{0.1\linewidth}}
+\caption{Elements of the evidence schema (generated from the LinkML source).}\label{tab:schema}\\
+\hline
+Class & Element & Range & Required & Unit \\
+\hline
+\endfirsthead
+\hline
+Class & Element & Range & Required & Unit \\
+\hline
+\endhead
+Applicant & id & string & yes &  \\
+Applicant & legal\_name & string & yes &  \\
+Applicant & applicant\_type & ApplicantType & yes &  \\
+Applicant & unique\_entity\_identifier & string & no &  \\
+Facility & id & string & yes &  \\
+Facility & address & string & yes &  \\
+Facility & state & string & yes &  \\
+Facility & latitude & float & no & deg \\
+Facility & longitude & float & no & deg \\
+Facility & climate\_zone & integer & no &  \\
+Facility & weather\_station\_id & string & no &  \\
+Project & id & string & yes &  \\
+Project & category & ProjectCategory & yes &  \\
+Project & res\_subcategory & ResSubcategory & no &  \\
+Project & technology & TechnologyClass & yes &  \\
+Project & rated\_capacity & float & no &  \\
+Project & rated\_capacity\_unit & PowerUnit & no &  \\
+Project & in\_service\_date & date & yes &  \\
+Project & project\_period\_start & date & no &  \\
+Project & project\_period\_end & date & no &  \\
+Project & project\_cost & float & no & [USD] \\
+Project & amount\_requested & float & no &  \\
+Project & useful\_life\_years & float & no & a \\
+Project & array\_tilt & float & no & deg \\
+Project & array\_azimuth & float & no & deg \\
+Project & storage\_capacity & float & no &  \\
+Project & affected\_end\_use\_share & float & no &  \\
+Meter & id & string & yes &  \\
+Meter & meter\_type & MeterType & yes &  \\
+Meter & netting\_arrangement & NettingArrangement & no &  \\
+Meter & billed\_quantity\_basis & BilledQuantityBasis & no &  \\
+Meter & dedicated & boolean & no &  \\
+Meter & utility\_account & string & no &  \\
+Meter & interval\_minutes & integer & no &  \\
+BillingRecord & meter & Meter & yes &  \\
+BillingRecord & is\_pre\_installation & boolean & yes &  \\
+BillingRecord & period\_start & date & no &  \\
+BillingRecord & period\_end & date & no &  \\
+BillingRecord & read\_type & ReadType & no &  \\
+BillingRecord & energy\_imported & float & yes &  \\
+BillingRecord & energy\_exported & float & no &  \\
+BillingRecord & energy\_unit & EnergyUnit & yes &  \\
+BillingRecord & peak\_demand & float & no & kW \\
+BillingRecord & energy\_charge & float & no & [USD] \\
+IntervalSeries & meter & Meter & yes &  \\
+IntervalSeries & is\_pre\_installation & boolean & yes &  \\
+IntervalSeries & start\_time & datetime & yes &  \\
+IntervalSeries & time\_zone & string & yes &  \\
+IntervalSeries & interval\_minutes & integer & yes &  \\
+IntervalSeries & energy\_unit & EnergyUnit & yes &  \\
+IntervalSeries & values & float & yes &  \\
+PerformanceClaim & quantity & ClaimQuantity & yes &  \\
+PerformanceClaim & claimed\_value & float & yes &  \\
+PerformanceClaim & energy\_unit & EnergyUnit & yes &  \\
+PerformanceClaim & method & ClaimMethod & no &  \\
+PerformanceClaim & normalization\_basis & NormalizationBasis & no &  \\
+PerformanceClaim & relative\_uncertainty & float & no &  \\
+PerformanceClaim & pre\_period\_energy & float & no &  \\
+PerformanceClaim & post\_period\_energy & float & no &  \\
+PerformanceClaim & energy\_price & float & no &  \\
+EquipmentItem & make & string & yes &  \\
+EquipmentItem & model & string & yes &  \\
+EquipmentItem & item\_quantity & integer & yes &  \\
+EquipmentItem & component\_role & string & no &  \\
+EquipmentItem & country\_of\_origin & string & no &  \\
+EquipmentItem & acquisition\_cost & float & no &  \\
+EquipmentItem & acquisition\_date & date & no &  \\
+EvidencePackage & id & string & yes &  \\
+EvidencePackage & collection\_mode & CollectionMode & no &  \\
+EvidencePackage & applicant & Applicant & yes &  \\
+EvidencePackage & facility & Facility & yes &  \\
+EvidencePackage & project & Project & yes &  \\
+EvidencePackage & meters & Meter & yes &  \\
+EvidencePackage & billing\_records & BillingRecord & no &  \\
+EvidencePackage & interval\_series & IntervalSeries & no &  \\
+EvidencePackage & performance\_claim & PerformanceClaim & yes &  \\
+EvidencePackage & equipment & EquipmentItem & no &  \\
+\hline
+\end{longtable}

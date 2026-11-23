@@ -8,8 +8,7 @@ from common import BLUE, SPEC_LABELS, VERMILION, read, save, style
 
 ORDER = {"RES": ["current", "netting", "production_meter", "metadata", "interval"],
          "EEI": ["current", "dates", "dates_norm", "dates_norm_read", "interval"]}
-TITLES = {"RES": "Renewable energy systems: annual production",
-          "EEI": "Efficiency improvements: annual savings"}
+TITLES = {"RES": "RES: annual production", "EEI": "EEI: annual savings"}
 
 
 def main() -> None:
@@ -38,8 +37,7 @@ def main() -> None:
         ax.set_title(TITLES[cat])
         ax.axvline(0.10, color="0.5", lw=0.5, ls=":")
         ax.grid(axis="y", visible=False)
-        ax.text(1.02, len(specs) - 0.45, ">10%", fontsize=5.5, va="center",
-                transform=ax.get_yaxis_transform())
+        ax.text(1.02, 1.02, "error >10%", fontsize=5.5, va="bottom", transform=ax.transAxes)
     axes[0].plot([], [], color=BLUE, lw=3, label="Error-free evidence")
     axes[0].plot([], [], color=VERMILION, lw=3, label="With injected errors, after validation")
     fig.legend(*axes[0].get_legend_handles_labels(), loc="lower center", ncol=2, fontsize=6.5)

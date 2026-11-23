@@ -1,0 +1,269 @@
+\begin{longtable}{p{0.2\linewidth}p{0.2\linewidth}p{0.09\linewidth}p{0.42\linewidth}}
+\caption{Requirement-to-schema traceability for 7 CFR part 4280 subpart B (91 FR 62600). A mapping to a paragraph covers its sub-paragraphs unless they are mapped separately.}\label{tab:trace-full}\\
+\hline
+Requirement & Heading & Scope & Schema elements \\
+\hline
+\endfirsthead
+\hline
+Requirement & Heading & Scope & Schema elements \\
+\hline
+\endhead
+4280.104:Annual energy production & Annual energy production & evidence & PerformanceClaim.claimed\_value, PerformanceClaim.energy\_unit, Meter.meter\_type, BillingRecord.energy\_imported \\
+4280.104:Energy assessment & Energy assessment & evidence & BillingRecord.energy\_imported, Project.affected\_end\_use\_share \\
+4280.104:Energy audit (EA) & Energy audit (EA) & evidence & BillingRecord.energy\_imported, Project.affected\_end\_use\_share, PerformanceClaim.claimed\_value \\
+4280.104:Kilowatt-hour (kWh) & Kilowatt-hour (kWh) & evidence & BillingRecord.energy\_unit, PerformanceClaim.energy\_unit \\
+4280.104:Megawatt-hour (MWh) & Megawatt-hour (MWh) & evidence & BillingRecord.energy\_unit, PerformanceClaim.energy\_unit \\
+4280.104:Metering agreement & Metering agreement & evidence & Meter.netting\_arrangement, Meter.billed\_quantity\_basis \\
+4280.104:Rated system size & Rated system size & evidence & Project.rated\_capacity, Project.rated\_capacity\_unit \\
+4280.104:Renewable energy system (RES) & Renewable energy system (RES) & evidence & Project.res\_subcategory, PerformanceClaim.pre\_period\_energy, PerformanceClaim.claimed\_value \\
+4280.104:Simple payback & Simple payback & evidence & Project.project\_cost, PerformanceClaim.pre\_period\_energy, PerformanceClaim.post\_period\_energy, PerformanceClaim.energy\_price, BillingRecord.energy\_charge, BillingRecord.energy\_imported, BillingRecord.is\_pre\_installation \\
+4280.104:Useful life & Useful life & evidence & Project.useful\_life\_years \\
+4280.122(a) & Eligible Projects & out of scope &  \\
+4280.122(a)(1) & Project purpose & evidence & Project.category, Project.technology, Project.in\_service\_date \\
+4280.122(a)(1)(i) & RES Projects & evidence & Project.category, Project.technology, Project.in\_service\_date \\
+4280.122(a)(1)(i)(A) &  & evidence & Project.category, Project.technology, Project.in\_service\_date \\
+4280.122(a)(1)(i)(B) &  & evidence & Project.category, Project.technology, Project.in\_service\_date \\
+4280.122(a)(1)(i)(C) &  & evidence & Project.category, Project.technology, Project.in\_service\_date \\
+4280.122(a)(1)(ii) & EEI Projects & evidence & Project.category, Project.technology, Project.in\_service\_date \\
+4280.122(a)(1)(ii)(A) & Energy Efficiency Improvements & evidence & Project.category, Project.technology, Project.in\_service\_date \\
+4280.122(a)(1)(ii)(B) & Efficiency improvements & evidence & Project.category, Project.technology, Project.in\_service\_date \\
+4280.122(a)(1)(ii)(C) & Replacement of previously funded Proje & evidence & Project.category, Project.technology, Project.in\_service\_date \\
+4280.122(a)(2) & Amount requested & evidence & Project.amount\_requested \\
+4280.122(a)(2)(i) & Minimum request & evidence & Project.amount\_requested \\
+4280.122(a)(2)(ii) & Maximum request & evidence & Project.amount\_requested \\
+4280.122(a)(3) & Cost Sharing & evidence & Project.project\_cost, Project.amount\_requested \\
+4280.122(a)(4) & Rural area & out of scope &  \\
+4280.122(a)(5) & Allowable use of funds & out of scope &  \\
+4280.122(a)(6) & Project Period & evidence & Project.project\_period\_start, Project.project\_period\_end, Project.in\_service\_date \\
+4280.122(a)(7) & Commercially Available technology & out of scope &  \\
+4280.122(a)(8) & Technical sustainability & out of scope &  \\
+4280.122(a)(8)(i) & Resource Assessment & out of scope &  \\
+4280.122(a)(8)(i)(A) & Source of energy & evidence & Project.technology \\
+4280.122(a)(8)(i)(B) & Type of technology & evidence & Project.technology, Project.storage\_capacity \\
+4280.122(a)(8)(i)(C) & Energy output & evidence & PerformanceClaim.quantity, PerformanceClaim.energy\_unit \\
+4280.122(a)(8)(i)(D) & Byproducts & out of scope &  \\
+4280.122(a)(8)(i)(E) & Storage system & evidence & Project.storage\_capacity, IntervalSeries.values \\
+4280.122(a)(8)(i)(F) & Use of energy & evidence & Meter.netting\_arrangement, Meter.billed\_quantity\_basis \\
+4280.122(a)(8)(i)(F)(1) & Interconnection & evidence & Meter.netting\_arrangement, Meter.billed\_quantity\_basis \\
+4280.122(a)(8)(i)(F)(2) & End User & evidence & Meter.netting\_arrangement, Meter.billed\_quantity\_basis \\
+4280.122(a)(8)(i)(F)(3) & Metering Agreement & evidence & Meter.netting\_arrangement, Meter.billed\_quantity\_basis \\
+4280.122(a)(8)(i)(G) & Sale of energy & evidence & BillingRecord.energy\_exported, PerformanceClaim.energy\_price \\
+4280.122(a)(8)(i)(G)(1) & Percentage & evidence & BillingRecord.energy\_exported, PerformanceClaim.energy\_price \\
+4280.122(a)(8)(i)(G)(2) & Quantity & evidence & BillingRecord.energy\_exported, PerformanceClaim.energy\_price \\
+4280.122(a)(8)(i)(G)(3) & Price & evidence & BillingRecord.energy\_exported, PerformanceClaim.energy\_price \\
+4280.122(a)(8)(i)(G)(4) & Buyer & evidence & BillingRecord.energy\_exported, PerformanceClaim.energy\_price \\
+4280.122(a)(8)(i)(G)(5) & Type of agreement & evidence & BillingRecord.energy\_exported, PerformanceClaim.energy\_price \\
+4280.122(a)(8)(i)(G)(5)(i) & Purchasing energy output & evidence & BillingRecord.energy\_exported, PerformanceClaim.energy\_price \\
+4280.122(a)(8)(i)(G)(5)(ii) & Byproducts & evidence & BillingRecord.energy\_exported, PerformanceClaim.energy\_price \\
+4280.122(a)(8)(i)(H) & Additional information & out of scope &  \\
+4280.122(a)(8)(i)(H)(1) & Wind & out of scope &  \\
+4280.122(a)(8)(i)(H)(1)(i) & Source & out of scope &  \\
+4280.122(a)(8)(i)(H)(1)(ii) & Conditions and assumptions & out of scope &  \\
+4280.122(a)(8)(i)(H)(2) & Solar & evidence & Project.technology, Project.array\_tilt, Project.array\_azimuth, Facility.latitude, Facility.longitude \\
+4280.122(a)(8)(i)(H)(2)(i) & Source & evidence & Project.technology, Project.array\_tilt, Project.array\_azimuth, Facility.latitude, Facility.longitude \\
+4280.122(a)(8)(i)(H)(2)(ii) & Type of system & evidence & Project.technology, Project.array\_tilt, Project.array\_azimuth, Facility.latitude, Facility.longitude \\
+4280.122(a)(8)(i)(H)(2)(iii) & Assumptions & evidence & Project.technology, Project.array\_tilt, Project.array\_azimuth, Facility.latitude, Facility.longitude \\
+4280.122(a)(8)(i)(H)(3) & Bioenergy/Biomass Project & out of scope &  \\
+4280.122(a)(8)(i)(H)(3)(i) & Renewable Biomass resource & out of scope &  \\
+4280.122(a)(8)(i)(H)(3)(ii) & Shipping and receiving & out of scope &  \\
+4280.122(a)(8)(i)(H)(3)(iii) & Process method & out of scope &  \\
+4280.122(a)(8)(i)(H)(3)(iv) & Woody biomass & out of scope &  \\
+4280.122(a)(8)(i)(H)(3)(v) & Feedstock & out of scope &  \\
+4280.122(a)(8)(i)(H)(4) & Geothermal Electric Generation & out of scope &  \\
+4280.122(a)(8)(i)(H)(4)(i) & Ground-source & out of scope &  \\
+4280.122(a)(8)(i)(H)(4)(ii) & Quality of the resource & out of scope &  \\
+4280.122(a)(8)(i)(H)(4)(iii) & Special handling & out of scope &  \\
+4280.122(a)(8)(i)(H)(4)(iv) & Resource determination & out of scope &  \\
+4280.122(a)(8)(i)(H)(5) & Geothermal Direct Generation & out of scope &  \\
+4280.122(a)(8)(i)(H)(5)(i) & Quality of resource & out of scope &  \\
+4280.122(a)(8)(i)(H)(5)(ii) & Special handling & out of scope &  \\
+4280.122(a)(8)(i)(H)(5)(iii) & Resource determination & out of scope &  \\
+4280.122(a)(8)(i)(H)(6) & Biogas & out of scope &  \\
+4280.122(a)(8)(i)(H)(6)(i) & Capture and treatment & out of scope &  \\
+4280.122(a)(8)(i)(H)(6)(ii) & Feedstock information & out of scope &  \\
+4280.122(a)(8)(i)(H)(7) & Anaerobic Digester & out of scope &  \\
+4280.122(a)(8)(i)(H)(7)(i) & Type of system & out of scope &  \\
+4280.122(a)(8)(i)(H)(7)(ii) & Feedstock information & out of scope &  \\
+4280.122(a)(8)(i)(H)(7)(iii) & Gas production estimates & out of scope &  \\
+4280.122(a)(8)(i)(H)(7)(iv) & Type of operation & out of scope &  \\
+4280.122(a)(8)(i)(H)(7)(v) & Waste collection & out of scope &  \\
+4280.122(a)(8)(i)(H)(7)(vi) & System developer & out of scope &  \\
+4280.122(a)(8)(i)(H)(7)(vii) & Digester design assumptions & out of scope &  \\
+4280.122(a)(8)(i)(H)(7)(viii) & Treatment of digester effluent & out of scope &  \\
+4280.122(a)(8)(i)(H)(8) & Hydrogen Project & out of scope &  \\
+4280.122(a)(8)(i)(H)(8)(i) & Resource information & out of scope &  \\
+4280.122(a)(8)(i)(H)(8)(ii) & Renewable resource & out of scope &  \\
+4280.122(a)(8)(i)(H)(9) & Hydroelectric/Ocean Energy Projects & out of scope &  \\
+4280.122(a)(8)(i)(H)(9)(i) & Quality of the resource & out of scope &  \\
+4280.122(a)(8)(i)(H)(9)(ii) & Resource evaluation & out of scope &  \\
+4280.122(a)(8)(i)(H)(9)(iii) & Measurement setup & out of scope &  \\
+4280.122(a)(8)(i)(H)(9)(iv) & Proximity & out of scope &  \\
+4280.122(a)(8)(i)(H)(10) & Storage components & evidence & Project.storage\_capacity \\
+4280.122(a)(8)(i)(H)(10)(i) & Storage system specifications & evidence & Project.storage\_capacity \\
+4280.122(a)(8)(i)(H)(10)(ii) & Integration of the system & evidence & Project.storage\_capacity \\
+4280.122(a)(8)(i)(H)(10)(iii) & Distribution of the stored resource(s) & evidence & Project.storage\_capacity \\
+4280.122(a)(8)(ii) & Feasibility Study & out of scope &  \\
+4280.122(a)(8)(ii)(A) & Economic analysis & out of scope &  \\
+4280.122(a)(8)(ii)(A)(1) &  & out of scope &  \\
+4280.122(a)(8)(ii)(A)(2) &  & out of scope &  \\
+4280.122(a)(8)(ii)(A)(3) &  & out of scope &  \\
+4280.122(a)(8)(ii)(A)(5) &  & out of scope &  \\
+4280.122(a)(8)(ii)(B) & Market analysis & out of scope &  \\
+4280.122(a)(8)(ii)(B)(1) &  & out of scope &  \\
+4280.122(a)(8)(ii)(B)(2) &  & out of scope &  \\
+4280.122(a)(8)(ii)(B)(3) &  & out of scope &  \\
+4280.122(a)(8)(ii)(B)(4) &  & out of scope &  \\
+4280.122(a)(8)(ii)(B)(5) &  & out of scope &  \\
+4280.122(a)(8)(ii)(B)(6) &  & out of scope &  \\
+4280.122(a)(8)(ii)(C) & Technical analysis & out of scope &  \\
+4280.122(a)(8)(ii)(C)(1) &  & out of scope &  \\
+4280.122(a)(8)(ii)(C)(2) &  & out of scope &  \\
+4280.122(a)(8)(ii)(C)(3) &  & out of scope &  \\
+4280.122(a)(8)(ii)(C)(4) &  & out of scope &  \\
+4280.122(a)(8)(ii)(C)(5) &  & out of scope &  \\
+4280.122(a)(8)(ii)(C)(6) &  & out of scope &  \\
+4280.122(a)(8)(ii)(C)(7) &  & out of scope &  \\
+4280.122(a)(8)(ii)(C)(8) &  & out of scope &  \\
+4280.122(a)(8)(ii)(C)(9) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D) & Financial analysis & out of scope &  \\
+4280.122(a)(8)(ii)(D)(1) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(2) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(3) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(4) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(5) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(6) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(7) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(8) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(9) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(10) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(11) &  & out of scope &  \\
+4280.122(a)(8)(ii)(D)(12) &  & out of scope &  \\
+4280.122(a)(8)(ii)(E) & Management analysis & out of scope &  \\
+4280.122(a)(8)(ii)(E)(1) &  & out of scope &  \\
+4280.122(a)(8)(ii)(E)(2) &  & out of scope &  \\
+4280.122(a)(8)(ii)(E)(3) &  & out of scope &  \\
+4280.122(a)(8)(ii)(E)(4) &  & out of scope &  \\
+4280.122(a)(8)(ii)(E)(5) &  & out of scope &  \\
+4280.122(a)(8)(ii)(F) & Recommendation & out of scope &  \\
+4280.122(a)(8)(ii)(G) & Qualifications & out of scope &  \\
+4280.122(a)(9) & Qualified Key Service Providers & out of scope &  \\
+4280.122(a)(10) & Key Service Provider selection & out of scope &  \\
+4280.122(a)(11) & Completion certificate & out of scope &  \\
+4280.122(a)(12) & Environmental requirements & out of scope &  \\
+4280.122(a)(13) & Architectural barriers & out of scope &  \\
+4280.122(a)(14) & Seismic safety & out of scope &  \\
+4280.122(a)(15) & Bioenergy & out of scope &  \\
+4280.122(a)(16) & Dedicated metering & evidence & Meter.dedicated, Meter.utility\_account \\
+4280.122(a)(17) & Residential use exceptions & out of scope &  \\
+4280.122(a)(17)(i) &  & out of scope &  \\
+4280.122(a)(17)(ii) &  & out of scope &  \\
+4280.122(a)(17)(iii) &  & out of scope &  \\
+4280.122(a)(18) & Simple Payback Period & evidence & Project.useful\_life\_years, Project.project\_cost, PerformanceClaim.energy\_price, PerformanceClaim.claimed\_value \\
+4280.122(a)(19) & Energy Storage Systems including BESS & evidence & Project.storage\_capacity, Project.rated\_capacity, PerformanceClaim.pre\_period\_energy, PerformanceClaim.claimed\_value \\
+4280.122(a)(20) & Permits and codes & out of scope &  \\
+4280.122(b) & Ineligible projects & out of scope &  \\
+4280.122(b)(1) & Amount requested & evidence & Project.amount\_requested \\
+4280.122(b)(2) & Research and development & out of scope &  \\
+4280.122(b)(3) & Technology & out of scope &  \\
+4280.122(b)(4) & Residential & out of scope &  \\
+4280.122(b)(5) & Use of energy & out of scope &  \\
+4280.122(b)(5)(i) &  & out of scope &  \\
+4280.122(b)(5)(ii) &  & out of scope &  \\
+4280.122(b)(5)(iii) &  & out of scope &  \\
+4280.122(b)(6) & Co-firing with non-Renewable Energy so & out of scope &  \\
+4280.122(b)(7) & RES Retrofitting Projects & out of scope &  \\
+4280.122(b)(8) & EEI replacement Projects & out of scope &  \\
+4280.122(b)(9) & Multiple technologies & out of scope &  \\
+4280.122(b)(10) & Multiple locations & out of scope &  \\
+4280.122(b)(11) & Cropland installation & out of scope &  \\
+4280.122(b)(12) & Rated System Size & evidence & Project.rated\_capacity, Project.rated\_capacity\_unit \\
+4280.122(b)(13) & Historical Energy Usage Documentation & evidence & PerformanceClaim.pre\_period\_energy, BillingRecord.energy\_imported, BillingRecord.is\_pre\_installation \\
+4280.122(b)(14) & Mobile system & out of scope &  \\
+4280.122(b)(15) & Dispensing energy at retail & out of scope &  \\
+4280.122(b)(16) & Labor only Projects & out of scope &  \\
+4280.122(b)(17) & Distribution only Projects & out of scope &  \\
+4280.122(b)(18) & Storage systems & out of scope &  \\
+4280.122(b)(18)(i) & Retrofitting an existing RES to add an & out of scope &  \\
+4280.122(b)(18)(ii) & Stand-alone energy storage systems & out of scope &  \\
+4280.122(b)(19) & Foreign components & evidence & EquipmentItem.country\_of\_origin, Project.in\_service\_date \\
+4280.122(b)(20) & REAP funding limitation & evidence & Project.project\_cost, Project.amount\_requested \\
+4280.122(b)(21) & Unallowable costs & out of scope &  \\
+4280.122(b)(22) & Conflict of interest & out of scope &  \\
+4280.131(a) & Applicant eligibility & out of scope &  \\
+4280.131(a)(1) & Applicant's legal name & evidence & Applicant.legal\_name \\
+4280.131(a)(2) & Applicant's address & out of scope &  \\
+4280.131(a)(3) & Identification numbers & evidence & Applicant.unique\_entity\_identifier \\
+4280.131(a)(4) & Incorporation date & out of scope &  \\
+4280.131(a)(5) & Certificate of Good Standing & out of scope &  \\
+4280.131(a)(6) & Entity bylaws & out of scope &  \\
+4280.131(a)(7) & Principals & out of scope &  \\
+4280.131(a)(8) & Applicant entity type & evidence & Applicant.applicant\_type \\
+4280.131(a)(8)(i) & Agricultural Producer & out of scope &  \\
+4280.131(a)(8)(i)(A) & Owner names & out of scope &  \\
+4280.131(a)(8)(i)(B) & Percentage of ownership & out of scope &  \\
+4280.131(a)(8)(i)(C) & Participation in operations & out of scope &  \\
+4280.131(a)(8)(i)(D) & Agricultural Commodity & out of scope &  \\
+4280.131(a)(8)(i)(E) & Annual income & out of scope &  \\
+4280.131(a)(8)(ii) & Rural Small Business & out of scope &  \\
+4280.131(a)(8)(ii)(A) & Owner names & out of scope &  \\
+4280.131(a)(8)(ii)(B) & Percentage of ownership & out of scope &  \\
+4280.131(a)(9) & Financial statements & out of scope &  \\
+4280.131(a)(9)(i) & All applications & out of scope &  \\
+4280.131(a)(9)(ii) & Project Cost \$200,000 and greater & out of scope &  \\
+4280.131(a)(10) & Summary of REAP awards & out of scope &  \\
+4280.131(a)(11) & Business operations & out of scope &  \\
+4280.131(a)(12) & Foreign ownership & out of scope &  \\
+4280.131(a)(13) & Conflict of interest & out of scope &  \\
+4280.131(b) & Project eligibility & out of scope &  \\
+4280.131(b)(1) & Project description & out of scope &  \\
+4280.131(b)(2) & Type of Project & evidence & Project.category, Project.res\_subcategory \\
+4280.131(b)(3) & Technical sustainability & evidence & BillingRecord.energy\_imported, PerformanceClaim.claimed\_value, Project.affected\_end\_use\_share \\
+4280.131(b)(4) & Agreements & out of scope &  \\
+4280.131(b)(5) & Country of origin & evidence & EquipmentItem.country\_of\_origin, EquipmentItem.make, EquipmentItem.model \\
+4280.131(b)(6) & Commercially Available technology & out of scope &  \\
+4280.131(b)(6)(i) & Operating history & out of scope &  \\
+4280.131(b)(6)(ii) & Performance data & out of scope &  \\
+4280.131(b)(6)(iii) & Feedstock & out of scope &  \\
+4280.131(b)(6)(iv) & Process to produce or save energy & out of scope &  \\
+4280.131(b)(6)(v) & Design and installation procedures & out of scope &  \\
+4280.131(b)(6)(vi) & Replicability & out of scope &  \\
+4280.131(b)(6)(vii) & Service providers & out of scope &  \\
+4280.131(b)(6)(viii) & Equipment availability & out of scope &  \\
+4280.131(b)(6)(ix) & Service availability & out of scope &  \\
+4280.131(b)(6)(x) & Warranty & out of scope &  \\
+4280.131(b)(7) & Key Service Providers & out of scope &  \\
+4280.131(b)(7)(i) &  & out of scope &  \\
+4280.131(b)(7)(ii) &  & out of scope &  \\
+4280.131(b)(7)(iii) &  & out of scope &  \\
+4280.131(b)(7)(iv) &  & out of scope &  \\
+4280.131(b)(7)(v) &  & out of scope &  \\
+4280.131(b)(7)(vi) &  & out of scope &  \\
+4280.131(b)(8) & Procurement contracts & out of scope &  \\
+4280.131(b)(8)(i) &  & out of scope &  \\
+4280.131(b)(8)(ii) &  & out of scope &  \\
+4280.131(b)(8)(iii) &  & out of scope &  \\
+4280.131(b)(8)(iv) &  & out of scope &  \\
+4280.131(b)(9) & Dedicated meter & evidence & Meter.dedicated \\
+4280.131(b)(10) & Completion certificate & out of scope &  \\
+4280.131(b)(11) & Project location & evidence & Facility.address, Facility.state, Facility.latitude, Facility.longitude \\
+4280.131(b)(12) & Cropland usage & out of scope &  \\
+4280.131(b)(13) & Size of RES & evidence & Project.rated\_capacity, Project.rated\_capacity\_unit, PerformanceClaim.claimed\_value, PerformanceClaim.energy\_unit \\
+4280.131(b)(14) & Project Period & evidence & Project.project\_period\_start, Project.project\_period\_end \\
+4280.131(b)(15) & Budget & evidence & Project.project\_cost, Project.amount\_requested \\
+4280.131(b)(16) & Cost Sharing verification & out of scope &  \\
+4280.131(b)(17) & Simple Payback & evidence & PerformanceClaim.pre\_period\_energy, PerformanceClaim.post\_period\_energy, PerformanceClaim.energy\_price \\
+4280.131(b)(17)(i) & Energy amount & evidence & PerformanceClaim.pre\_period\_energy, PerformanceClaim.post\_period\_energy, PerformanceClaim.energy\_unit, BillingRecord.energy\_imported, BillingRecord.energy\_unit, BillingRecord.is\_pre\_installation, BillingRecord.period\_start, BillingRecord.period\_end \\
+4280.131(b)(17)(ii) & Energy value & evidence & PerformanceClaim.energy\_price, BillingRecord.energy\_charge \\
+4280.131(b)(18) & Ownership of the RES or EEI & out of scope &  \\
+4280.131(b)(19) & Ownership of the Project site & out of scope &  \\
+4280.131(b)(19)(i) &  & out of scope &  \\
+4280.131(b)(19)(ii) &  & out of scope &  \\
+4280.131(b)(19)(iii) &  & out of scope &  \\
+4280.131(b)(20) & Architectural barriers & out of scope &  \\
+4280.131(b)(21) & Seismic safety & out of scope &  \\
+4280.131(b)(22) & Applicable laws, regulations, agreemen & out of scope &  \\
+4280.160(a) & Financial report & out of scope &  \\
+4280.160(b) & Performance report & evidence & PerformanceClaim.claimed\_value, PerformanceClaim.method \\
+4280.160(c) & Equipment report & evidence & EquipmentItem.make, EquipmentItem.model, EquipmentItem.item\_quantity, EquipmentItem.acquisition\_cost, EquipmentItem.acquisition\_date \\
+\hline
+\end{longtable}

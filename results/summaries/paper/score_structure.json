@@ -1,9 +1,9 @@
 {
-  "distinct_energy_scores": 15.0,
-  "share_eligible": 0.7845,
-  "share_eligible_eei": 0.9808541973490427,
-  "share_eligible_res": 0.7270573028866868,
-  "share_energy_points_at_cap": 0.9988333333333334,
+  "distinct_energy_scores": 27.0,
+  "share_eligible": 0.7718,
+  "share_eligible_eei": 0.9798070450975993,
+  "share_eligible_res": 0.7121533809431898,
+  "share_energy_points_at_cap": 0.99905,
   "share_energy_points_at_cap_eei": 1.0,
-  "share_energy_points_at_cap_res": 0.9984920292977165
+  "share_energy_points_at_cap_res": 0.9987775847648459
 }

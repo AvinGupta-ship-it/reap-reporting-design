@@ -1,0 +1,145 @@
+\begin{longtable}{p{0.55\linewidth}p{0.38\linewidth}}
+\caption{Configuration of the reported run (\texttt{configs/paper.yaml}). Values not attributed to a source in the comments of that file are hypothetical scenario parameters.}\label{tab:params}\\
+\hline
+Parameter & Value \\
+\hline
+\endfirsthead
+\hline
+Parameter & Value \\
+\hline
+\endhead
+name & paper \\
+seed & 20261130 \\
+n\_applicants & 20000 \\
+n\_workers & 8 \\
+population.res\_share\_source & usaspending \\
+population.award\_share\_of\_cost & 0.25 \\
+population.historical\_award\_share\_of\_cost & 0.25 \\
+population.size\_fit\_fiscal\_years & [2021, 2022] \\
+population.size\_distribution & empirical \\
+population.max\_request\_res & 500000.0 \\
+population.max\_request\_eei & 250000.0 \\
+population.min\_request & 1500.0 \\
+population.install\_date\_range & ['2007-05-01', '2014-10-31'] \\
+population.facility\_types.warehouse & 0.15 \\
+population.facility\_types.retailstandalone & 0.15 \\
+population.facility\_types.smalloffice & 0.1 \\
+population.facility\_types.fullservicerestaurant & 0.1 \\
+population.facility\_types.scenario\_hypothetical\_irrigation & 0.15 \\
+population.facility\_types.scenario\_hypothetical\_grain\_drying & 0.2 \\
+population.facility\_types.scenario\_hypothetical\_dairy & 0.15 \\
+population.load.daily\_noise\_sd & 0.06 \\
+population.load.daily\_noise\_ar1 & 0.5 \\
+population.load.hourly\_noise\_sd & 0.1 \\
+population.load.hvac\_coef\_log\_sd & 0.3 \\
+population.load.balance\_shift\_sd\_c & 1.5 \\
+population.load.occupancy\_change\_prob & 0.15 \\
+population.load.occupancy\_change\_sd & 0.08 \\
+population.res.cost\_per\_watt\_median & 2.6 \\
+population.res.cost\_per\_watt\_log\_sd & 0.25 \\
+population.res.replaced\_fraction\_range & [0.15, 1.3] \\
+population.res.tilt\_range\_deg & [5.0, 40.0] \\
+population.res.azimuth\_mean\_deg & 180.0 \\
+population.res.azimuth\_sd\_deg & 30.0 \\
+population.res.dc\_ac\_ratio & 1.2 \\
+population.res.inverter\_efficiency & 0.96 \\
+population.res.system\_losses & 0.14 \\
+population.res.temperature\_coefficient & -0.0047 \\
+population.res.derate\_log\_sd & 0.05 \\
+population.res.shading\_loss\_max & 0.08 \\
+population.res.irradiance\_bias\_sd & 0.05 \\
+population.res.meter\_error\_sd & 0.005 \\
+population.res.storage\_share & 0.1 \\
+population.res.useful\_life\_years & 25.0 \\
+population.res.netting\_arrangements.conventional\_net\_metering & 0.6 \\
+population.res.netting\_arrangements.net\_billing & 0.3 \\
+population.res.netting\_arrangements.none & 0.1 \\
+population.eei.measures.eei\_lighting.end\_uses & ['interior\_lighting', 'exterior\_lighting'] \\
+population.eei.measures.eei\_lighting.reduction & [0.3, 0.6] \\
+population.eei.measures.eei\_hvac.end\_uses & ['cooling', 'heating', 'fans\_pumps'] \\
+population.eei.measures.eei\_hvac.reduction & [0.15, 0.35] \\
+population.eei.measures.eei\_refrigeration.end\_uses & ['refrigeration'] \\
+population.eei.measures.eei\_refrigeration.reduction & [0.15, 0.4] \\
+population.eei.measures.eei\_motors\_pumps.end\_uses & ['fans\_pumps', 'process'] \\
+population.eei.measures.eei\_motors\_pumps.reduction & [0.15, 0.35] \\
+population.eei.measures.eei\_grain\_drying.end\_uses & ['drying'] \\
+population.eei.measures.eei\_grain\_drying.reduction & [0.25, 0.5] \\
+population.eei.measures.eei\_irrigation.end\_uses & ['pumping'] \\
+population.eei.measures.eei\_irrigation.reduction & [0.15, 0.4] \\
+population.eei.payback\_median\_years & 6.0 \\
+population.eei.payback\_log\_sd & 0.5 \\
+population.eei.useful\_life\_years & 15.0 \\
+population.eei.min\_savings\_fraction & 0.03 \\
+billing.cycle\_mean\_days & 30.4375 \\
+billing.read\_jitter\_days & 2 \\
+billing.estimated\_read\_prob & 0.05 \\
+billing.estimate\_noise\_sd & 0.1 \\
+billing.fixed\_charge\_usd & 25.0 \\
+billing.transcription\_rounding & 1 \\
+errors.rates.unit & 0.04 \\
+errors.rates.transposed\_digits & 0.05 \\
+errors.rates.wrong\_period & 0.05 \\
+errors.rates.double\_counting & 0.04 \\
+errors.rates.gross\_net & 0.05 \\
+errors.rates.nameplate\_hours & 0.05 \\
+errors.second\_meter\_fraction\_range & [0.15, 0.6] \\
+errors.correction\_success & 1.0 \\
+validation.capacity\_factor\_bounds\_rel & [0.5, 1.4] \\
+validation.billing\_days\_total & [350, 380] \\
+validation.billing\_days\_each & [25, 36] \\
+validation.period\_alignment\_days & 45 \\
+validation.payback\_lower\_bound\_years & 0.25 \\
+validation.claim\_recompute\_tolerance & 0.02 \\
+validation.enduse\_bound\_tolerance & 0.05 \\
+validation.statistical\_rule\_fpr & 0.01 \\
+validation.charge\_consistency\_tolerance & 0.25 \\
+validation.payback\_upper\_multiple & 4.0 \\
+validation.estimated\_share\_max & 0.25 \\
+validation.cvrmse\_max & 0.25 \\
+validation.ndb\_max & 0.005 \\
+mv.balance\_grid\_f & [30.0, 90.0, 3.0] \\
+mv.daily\_heating\_grid\_f & [40.0, 70.0, 3.0] \\
+mv.daily\_cooling\_grid\_f & [55.0, 85.0, 3.0] \\
+mv.confidence & 0.9 \\
+mv.bootstrap\_replicates & 200 \\
+mv.bootstrap\_block & 3 \\
+mv.bootstrap\_subsample & 400 \\
+mv.default\_tilt\_deg & 20.0 \\
+mv.default\_azimuth\_deg & 180.0 \\
+competition.n\_applicants & 2000 \\
+competition.n\_competitions & 400 \\
+competition.funding\_ratio & 0.35 \\
+competition.funding\_ratio\_sensitivity & [0.15, 0.35, 0.6] \\
+competition.top\_per\_state & 2 \\
+competition.small\_request\_threshold & 20000.0 \\
+competition.small\_request\_reserve\_share & 0.2 \\
+competition.minimum\_score & 40.0 \\
+competition.points.employees\_prob & 0.5 \\
+competition.points.critical\_service\_prob & 0.15 \\
+competition.points.forest\_point\_prob & 0.05 \\
+competition.points.water\_point\_prob & 0.1 \\
+competition.points.prior\_award\_probs.never & 0.75 \\
+competition.points.prior\_award\_probs.not\_within\_two\_years & 0.15 \\
+competition.points.prior\_award\_probs.within\_two\_years & 0.1 \\
+competition.points.priority\_points\_values & [0.0, 5.0, 10.0] \\
+competition.points.priority\_points\_probs & [0.6, 0.3, 0.1] \\
+burden.anchor\_responses & 2.0 \\
+burden.calibrate\_to\_notice & True \\
+burden.rework\_minutes & [10.0, 20.0, 45.0] \\
+burden.monte\_carlo\_draws & 2000 \\
+burden.sobol\_base\_samples & 4096 \\
+experiments.e4\_min\_per\_bin & 30 \\
+experiments.e5\_missing\_months & [0, 1, 2, 3] \\
+experiments.e5\_estimated\_read\_probs & [0.0, 0.1, 0.3, 0.5] \\
+experiments.e5\_subsample & 1500 \\
+experiments.e3\_rate\_multipliers & [0.5, 1.0, 2.0] \\
+experiments.roc\_points & 60 \\
+experiments.bootstrap\_replicates & 1000 \\
+experiments.frontier\_mc\_bands & [0.05, 0.95] \\
+experiments.availability\_grid & [0.0, 0.25, 0.5, 0.75, 1.0] \\
+experiments.recommended\_tolerance & 0.05 \\
+experiments.e3\_per\_class & 2000 \\
+experiments.size\_sensitivity\_n & 4000 \\
+experiments.evidence\_sample & 5 \\
+\hline
+\end{longtable}

@@ -50,6 +50,7 @@ def save(fig: plt.Figure, name: str, inputs: list[str]) -> None:
     path = OUT / f"{name}.pdf"
     fig.savefig(path, metadata={"CreationDate": datetime(2026, 1, 1), "ModDate": None,
                                 "Producer": "matplotlib", "Creator": "reapschema"})
+    fig.savefig(OUT / f"{name}.png", dpi=200)  # raster copy for the DOCX build
     plt.close(fig)
     checksums = {i: sha256_file(RESULTS / i) for i in inputs if (RESULTS / i).exists()}
     write_sidecar(path, config={"figure": name, "results": RESULTS.name}, seed=None,

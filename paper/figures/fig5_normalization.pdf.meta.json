@@ -1,0 +1,25 @@
+{
+  "config_hash": "83d8662680c8cbd30c8a1c1615256159a55ae6eadcca220d06b5988622b545b8",
+  "created_utc": "2026-11-23T06:37:51+00:00",
+  "data_basis": "synthetic",
+  "git_commit": "443706b9130da102504ace165def992a51fdb40d",
+  "input_checksums": {
+    "e4_bins.csv": "67faaa21a2bf74faafa3cef9d4175f0760c2f2e03a9167ae452f65dd36ee3120"
+  },
+  "output": "fig5_normalization.pdf",
+  "package_versions": {
+    "SALib": "1.6.0",
+    "highspy": "1.16.0",
+    "linkml": "1.12.1",
+    "linopy": "0.10.1",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "pvlib": "0.16.1",
+    "pydantic": "2.14.4",
+    "python": "3.12.14",
+    "scipy": "1.18.1",
+    "statsmodels": "0.15.0"
+  },
+  "seed": null
+}
