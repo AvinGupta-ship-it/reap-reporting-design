@@ -2,8 +2,9 @@ cff-version: 1.2.0
 message: "If you use this software or its outputs, please cite it as below."
 title: "Verifying documented performance in small renewable-energy and efficiency grants: a machine-readable evidence schema, automated validation, and the accuracy–burden frontier for twelve-month pre/post metered data"
 type: software
-version: 1.0.0
+version: 1.0.1
 date-released: "2026-11-23"
+doi: 10.5281/zenodo.24460622
 authors:
   - family-names: Gupta
     given-names: Avin

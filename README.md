@@ -63,7 +63,8 @@ contacted by `scripts/fetch_data.py`.
 
 ## Citation
 
-See `CITATION.cff`. No archive DOI has been assigned.
+See `CITATION.cff`. The repository is archived on Zenodo at
+https://doi.org/10.5281/zenodo.24460622 (concept DOI, resolving to the latest version).
 
 ## License
 
