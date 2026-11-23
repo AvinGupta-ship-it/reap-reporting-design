@@ -1,7 +1,7 @@
 {
   "config_hash": "8b77500f938673a4bdb49f854982b60fe8bb1d40ba1246d8ffb34e01d7ca181b",
-  "created_utc": "2026-11-23T07:22:57+00:00",
-  "git_commit": "a0ef3753da65b791b56063da3224722f5995641c",
+  "created_utc": "2026-11-23T07:28:01+00:00",
+  "git_commit": "unknown",
   "input_checksums": {
     "avgprice_annual.xlsx": "27af5b91bd669756e72912c454eb58cea88a195cc5f67548eda12213aaa24522"
   },
@@ -16,7 +16,7 @@
     "pandas": "3.1.1",
     "pvlib": "0.16.1",
     "pydantic": "2.14.4",
-    "python": "3.12.14",
+    "python": "3.12.16",
     "scipy": "1.18.1",
     "statsmodels": "0.15.0"
   },

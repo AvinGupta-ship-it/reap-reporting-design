@@ -5,7 +5,8 @@
 .ruff_cache
 .hypothesis
 __pycache__
-results
+results/*
+!results/summaries
 data/raw/comstock
 data/raw/pvgis
 data/raw/isd_lite
