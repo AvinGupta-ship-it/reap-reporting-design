@@ -1,0 +1,352 @@
+{
+  "AK": {
+    "distance_km": 1.0,
+    "latitude": 59.642,
+    "longitude": -151.491,
+    "name": "HOMER AIRPORT",
+    "station": "703410-25507"
+  },
+  "AL": {
+    "distance_km": 47.6,
+    "latitude": 32.3,
+    "longitude": -86.407,
+    "name": "MONTGOMERY RGNL (DANNELLY FD) AP",
+    "station": "722260-13895"
+  },
+  "AR": {
+    "distance_km": 50.1,
+    "latitude": 34.18,
+    "longitude": -91.934,
+    "name": "GRIDER FIELD AIRPORT",
+    "station": "723417-93988"
+  },
+  "AZ": {
+    "distance_km": 63.3,
+    "latitude": 33.428,
+    "longitude": -112.004,
+    "name": "PHOENIX SKY HARBOR INTL AIRPORT",
+    "station": "722780-23183"
+  },
+  "CA": {
+    "distance_km": 50.4,
+    "latitude": 36.78,
+    "longitude": -119.72,
+    "name": "FRESNO YOSEMITE INTERNATIONAL AIRPORT",
+    "station": "723890-93193"
+  },
+  "CO": {
+    "distance_km": 100.3,
+    "latitude": 39.717,
+    "longitude": -104.75,
+    "name": "BUCKLEY AIR FORCE BASE",
+    "station": "724695-23036"
+  },
+  "CT": {
+    "distance_km": 55.5,
+    "latitude": 41.735,
+    "longitude": -72.651,
+    "name": "HARTFORD-BRAINARD AIRPORT",
+    "station": "725087-14752"
+  },
+  "DE": {
+    "distance_km": 26.1,
+    "latitude": 39.133,
+    "longitude": -75.467,
+    "name": "DOVER AFB AIRPORT",
+    "station": "724088-13707"
+  },
+  "FL": {
+    "distance_km": 85.1,
+    "latitude": 26.585,
+    "longitude": -81.861,
+    "name": "PAGE FIELD AIRPORT",
+    "station": "722106-12835"
+  },
+  "GA": {
+    "distance_km": 66.1,
+    "latitude": 31.536,
+    "longitude": -84.196,
+    "name": "SW GEORGIA REGIONAL ARPT",
+    "station": "722160-13869"
+  },
+  "HI": {
+    "distance_km": 5.7,
+    "latitude": 19.719,
+    "longitude": -155.049,
+    "name": "HILO INTERNATIONAL AIRPORT",
+    "station": "912850-21504"
+  },
+  "IA": {
+    "distance_km": 52.0,
+    "latitude": 41.534,
+    "longitude": -93.653,
+    "name": "DES MOINES INTERNATIONAL AIRPORT",
+    "station": "725460-14933"
+  },
+  "ID": {
+    "distance_km": 55.8,
+    "latitude": 42.545,
+    "longitude": -113.769,
+    "name": "BURLEY MUNICIPAL AIRPORT",
+    "station": "725867-24133"
+  },
+  "IL": {
+    "distance_km": 72.6,
+    "latitude": 39.845,
+    "longitude": -89.684,
+    "name": "ABRAHAM LINCOLN CAPITAL AIRPORT",
+    "station": "724390-93822"
+  },
+  "IN": {
+    "distance_km": 39.9,
+    "latitude": 40.412,
+    "longitude": -86.947,
+    "name": "PURDUE UNIVERSITY AIRPORT",
+    "station": "724386-14835"
+  },
+  "KS": {
+    "distance_km": 52.6,
+    "latitude": 38.873,
+    "longitude": -98.809,
+    "name": "RUSSELL MUNICIPAL AIRPORT",
+    "station": "724585-93997"
+  },
+  "KY": {
+    "distance_km": 4.4,
+    "latitude": 36.965,
+    "longitude": -86.424,
+    "name": "BOW GRN-WARREN CO. RGNL AP",
+    "station": "746716-93808"
+  },
+  "LA": {
+    "distance_km": 39.4,
+    "latitude": 30.199,
+    "longitude": -91.99,
+    "name": "LAFAYETTE REGIONAL AIRPORT",
+    "station": "722405-13976"
+  },
+  "MA": {
+    "distance_km": 28.2,
+    "latitude": 42.16,
+    "longitude": -72.712,
+    "name": "BARNES MUNICIPAL AIRPORT",
+    "station": "744915-14775"
+  },
+  "MD": {
+    "distance_km": 69.0,
+    "latitude": 39.173,
+    "longitude": -76.684,
+    "name": "BALTIMORE-WASHINGTON INTL AIRPORT",
+    "station": "724060-93721"
+  },
+  "ME": {
+    "distance_km": 62.3,
+    "latitude": 44.316,
+    "longitude": -69.797,
+    "name": "AUGUSTA STATE AIRPORT",
+    "station": "726185-14605"
+  },
+  "MI": {
+    "distance_km": 44.2,
+    "latitude": 43.528,
+    "longitude": -84.081,
+    "name": "MBS INTERNATIONAL AIRPORT",
+    "station": "726379-14845"
+  },
+  "MN": {
+    "distance_km": 8.3,
+    "latitude": 44.548,
+    "longitude": -95.08,
+    "name": "REDWOOD FALLS MUNI AIRPORT",
+    "station": "726556-14992"
+  },
+  "MO": {
+    "distance_km": 114.3,
+    "latitude": 40.097,
+    "longitude": -92.547,
+    "name": "KIRKSVILLE REGIONAL ARPT",
+    "station": "724455-14938"
+  },
+  "MS": {
+    "distance_km": 131.8,
+    "latitude": 32.338,
+    "longitude": -90.221,
+    "name": "HAWKINS FIELD AIRPORT",
+    "station": "722354-13927"
+  },
+  "MT": {
+    "distance_km": 6.9,
+    "latitude": 47.473,
+    "longitude": -111.383,
+    "name": "GREAT FALLS INTERNATIONAL AIRPORT",
+    "station": "727750-24143"
+  },
+  "NC": {
+    "distance_km": 89.4,
+    "latitude": 35.892,
+    "longitude": -78.782,
+    "name": "RALEIGH-DURHAM INTERNATIONAL AP",
+    "station": "723060-13722"
+  },
+  "ND": {
+    "distance_km": 3.7,
+    "latitude": 46.926,
+    "longitude": -98.67,
+    "name": "JAMESTOWN REGIONAL AIRPORT",
+    "station": "727535-14919"
+  },
+  "NE": {
+    "distance_km": 6.9,
+    "latitude": 40.961,
+    "longitude": -98.313,
+    "name": "CENTRAL NEBRASKA REGIONAL AIRPORT",
+    "station": "725520-14935"
+  },
+  "NH": {
+    "distance_km": 44.6,
+    "latitude": 43.205,
+    "longitude": -71.503,
+    "name": "CONCORD MUNICIPAL AIRPORT",
+    "station": "726050-14745"
+  },
+  "NJ": {
+    "distance_km": 15.0,
+    "latitude": 39.366,
+    "longitude": -75.078,
+    "name": "MILLVILLE MUNICIPAL ARPT",
+    "station": "724075-13735"
+  },
+  "NM": {
+    "distance_km": 94.2,
+    "latitude": 35.181,
+    "longitude": -103.601,
+    "name": "TUCUMCARI MUNICIPAL ARPT",
+    "station": "723676-23048"
+  },
+  "NV": {
+    "distance_km": 66.1,
+    "latitude": 40.068,
+    "longitude": -118.57,
+    "name": "DERBY FIELD AIRPORT",
+    "station": "725805-24172"
+  },
+  "NY": {
+    "distance_km": 49.9,
+    "latitude": 42.57,
+    "longitude": -77.714,
+    "name": "DANSVILLE MUNICIPAL ARPT",
+    "station": "724988-94704"
+  },
+  "OH": {
+    "distance_km": 24.5,
+    "latitude": 41.014,
+    "longitude": -83.668,
+    "name": "FINDLAY AIRPORT",
+    "station": "725366-14825"
+  },
+  "OK": {
+    "distance_km": 80.5,
+    "latitude": 36.737,
+    "longitude": -97.102,
+    "name": "PONCA CITY REGIONAL ARPT",
+    "station": "724530-13969"
+  },
+  "OR": {
+    "distance_km": 2.6,
+    "latitude": 45.698,
+    "longitude": -118.834,
+    "name": "EASTERN OR REGIONAL AT PENDLETON AP",
+    "station": "726880-24155"
+  },
+  "PA": {
+    "distance_km": 11.5,
+    "latitude": 40.819,
+    "longitude": -76.866,
+    "name": "PENN VALLEY AIRPORT",
+    "station": "725105-14770"
+  },
+  "RI": {
+    "distance_km": 28.5,
+    "latitude": 41.723,
+    "longitude": -71.432,
+    "name": "THEODORE F GREEN STATE AIRPORT",
+    "station": "725070-14765"
+  },
+  "SC": {
+    "distance_km": 17.1,
+    "latitude": 33.967,
+    "longitude": -80.467,
+    "name": "SHAW AIR FORCE BASE",
+    "station": "747900-13849"
+  },
+  "SD": {
+    "distance_km": 3.0,
+    "latitude": 44.379,
+    "longitude": -98.223,
+    "name": "HURON REGIONAL AIRPORT",
+    "station": "726540-14936"
+  },
+  "TN": {
+    "distance_km": 10.6,
+    "latitude": 35.593,
+    "longitude": -88.917,
+    "name": "MCKELLAR-SIPES RGNL ARPT",
+    "station": "723346-03811"
+  },
+  "TX": {
+    "distance_km": 7.6,
+    "latitude": 33.666,
+    "longitude": -101.823,
+    "name": "LUBBOCK INTERNATIONAL AIRPORT",
+    "station": "722670-23042"
+  },
+  "UT": {
+    "distance_km": 103.8,
+    "latitude": 38.423,
+    "longitude": -113.011,
+    "name": "MILFORD MUNICIPAL AIRPORT",
+    "station": "724750-23176"
+  },
+  "VA": {
+    "distance_km": 39.1,
+    "latitude": 38.137,
+    "longitude": -78.455,
+    "name": "CHARLOTTESVILLE ALBEMARLE ARPT",
+    "station": "724016-93736"
+  },
+  "VT": {
+    "distance_km": 21.5,
+    "latitude": 44.205,
+    "longitude": -72.565,
+    "name": "EDWARD F KNAPP STATE ARPT",
+    "station": "726145-94705"
+  },
+  "WA": {
+    "distance_km": 4.8,
+    "latitude": 46.564,
+    "longitude": -120.535,
+    "name": "YAKIMA AIR TERMINAL/MCALSR FIELD AP",
+    "station": "727810-24243"
+  },
+  "WI": {
+    "distance_km": 84.8,
+    "latitude": 43.77,
+    "longitude": -88.491,
+    "name": "FOND DU LAC COUNTY AIRPORT",
+    "station": "726506-04840"
+  },
+  "WV": {
+    "distance_km": 76.2,
+    "latitude": 39.65,
+    "longitude": -79.921,
+    "name": "MGTN RGNL-W L B HART FD AP",
+    "station": "724176-13736"
+  },
+  "WY": {
+    "distance_km": 134.5,
+    "latitude": 43.965,
+    "longitude": -107.95,
+    "name": "WORLAND MUNICIPAL AIRPORT",
+    "station": "726665-24062"
+  }
+}

@@ -1,0 +1,76 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "reapschema"
+version = "1.0.0"
+description = "Evidence schema, synthetic applicants, M&V estimators, validation rules and accuracy-burden optimization for REAP performance evidence"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "BSD-3-Clause" }
+authors = [{ name = "Avin Gupta" }]
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "scipy>=1.12",
+    "statsmodels>=0.14",
+    "pvlib>=0.11",
+    "xarray>=2024.1",
+    "linopy>=0.3.14",
+    "highspy>=1.7",
+    "linkml>=1.8",
+    "linkml-runtime>=1.8",
+    "jsonschema>=4.21",
+    "pydantic>=2.6",
+    "pyyaml>=6.0",
+    "pint>=0.23",
+    "pyarrow>=15",
+    "matplotlib>=3.8",
+    "SALib>=1.5",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "hypothesis>=6.100",
+    "ruff>=0.5",
+    "mypy>=1.10",
+    "pandas-stubs",
+    "types-PyYAML",
+    "types-requests",
+    "types-jsonschema",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/reapschema"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = ["network: requires network access", "slow: long-running validation test"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["src/reapschema/schema/generated"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "NPY"]
+ignore = ["E741"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy", "numpy.typing.mypy_plugin"]
+exclude = ["src/reapschema/schema/generated/"]
+
+[[tool.mypy.overrides]]
+module = ["pvlib.*", "SALib.*", "scipy.*", "statsmodels.*", "linopy.*", "highspy.*", "linkml.*", "linkml_runtime.*", "pint.*", "pyarrow.*", "matplotlib.*", "xarray.*"]
+ignore_missing_imports = true
+follow_imports = "skip"
+
+[[tool.mypy.overrides]]
+module = ["reapschema.schema.generated.*"]
+ignore_errors = true

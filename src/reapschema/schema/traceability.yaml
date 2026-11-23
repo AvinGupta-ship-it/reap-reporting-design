@@ -1,0 +1,193 @@
+# Requirement-to-schema traceability for 7 CFR part 4280 subpart B (91 FR 62600).
+# A mapping applies to the named paragraph and all of its sub-paragraphs unless a
+# longer designator is mapped separately. scope is "evidence" when the paragraph
+# calls for information held in the performance-evidence schema and
+# "out_of_scope" when it concerns eligibility, financial, narrative or
+# certification material that the schema does not represent.
+mappings:
+  - requirement: "4280.104:Annual energy production"
+    scope: evidence
+    elements: [PerformanceClaim.claimed_value, PerformanceClaim.energy_unit, Meter.meter_type, BillingRecord.energy_imported]
+    note: Measured at the common point of electrical coupling; production-meter readings are BillingRecord rows of an inverter Meter.
+  - requirement: "4280.104:Energy assessment"
+    scope: evidence
+    elements: [BillingRecord.energy_imported, Project.affected_end_use_share]
+    note: Analysis of energy bills; the schema carries the bill data the assessment summarises.
+  - requirement: "4280.104:Energy audit (EA)"
+    scope: evidence
+    elements: [BillingRecord.energy_imported, Project.affected_end_use_share, PerformanceClaim.claimed_value]
+  - requirement: "4280.104:Kilowatt-hour (kWh)"
+    scope: evidence
+    elements: [BillingRecord.energy_unit, PerformanceClaim.energy_unit]
+  - requirement: "4280.104:Megawatt-hour (MWh)"
+    scope: evidence
+    elements: [BillingRecord.energy_unit, PerformanceClaim.energy_unit]
+  - requirement: "4280.104:Metering agreement"
+    scope: evidence
+    elements: [Meter.netting_arrangement, Meter.billed_quantity_basis]
+  - requirement: "4280.104:Rated system size"
+    scope: evidence
+    elements: [Project.rated_capacity, Project.rated_capacity_unit]
+  - requirement: "4280.104:Renewable energy system (RES)"
+    scope: evidence
+    elements: [Project.res_subcategory, PerformanceClaim.pre_period_energy, PerformanceClaim.claimed_value]
+    note: The 120 percent subcategory test compares annual production with use in the 12 months before installation.
+  - requirement: "4280.104:Simple payback"
+    scope: evidence
+    elements: [Project.project_cost, PerformanceClaim.pre_period_energy, PerformanceClaim.post_period_energy, PerformanceClaim.energy_price, BillingRecord.energy_charge, BillingRecord.energy_imported, BillingRecord.is_pre_installation]
+  - requirement: "4280.104:Useful life"
+    scope: evidence
+    elements: [Project.useful_life_years]
+
+  - requirement: "4280.122(a)"
+    scope: out_of_scope
+    note: Eligibility conditions established from documents other than energy evidence.
+  - requirement: "4280.122(a)(1)"
+    scope: evidence
+    elements: [Project.category, Project.technology, Project.in_service_date]
+  - requirement: "4280.122(a)(2)"
+    scope: evidence
+    elements: [Project.amount_requested]
+  - requirement: "4280.122(a)(3)"
+    scope: evidence
+    elements: [Project.project_cost, Project.amount_requested]
+  - requirement: "4280.122(a)(6)"
+    scope: evidence
+    elements: [Project.project_period_start, Project.project_period_end, Project.in_service_date]
+  - requirement: "4280.122(a)(8)(i)(A)"
+    scope: evidence
+    elements: [Project.technology]
+  - requirement: "4280.122(a)(8)(i)(B)"
+    scope: evidence
+    elements: [Project.technology, Project.storage_capacity]
+  - requirement: "4280.122(a)(8)(i)(C)"
+    scope: evidence
+    elements: [PerformanceClaim.quantity, PerformanceClaim.energy_unit]
+  - requirement: "4280.122(a)(8)(i)(D)"
+    scope: out_of_scope
+    note: Byproduct quantities are not electrical or thermal energy evidence.
+  - requirement: "4280.122(a)(8)(i)(E)"
+    scope: evidence
+    elements: [Project.storage_capacity, IntervalSeries.values]
+    note: Storage dispatch curves for the 12 months after installation are interval series.
+  - requirement: "4280.122(a)(8)(i)(F)"
+    scope: evidence
+    elements: [Meter.netting_arrangement, Meter.billed_quantity_basis]
+    note: Interconnection and metering agreement type.
+  - requirement: "4280.122(a)(8)(i)(G)"
+    scope: evidence
+    elements: [BillingRecord.energy_exported, PerformanceClaim.energy_price]
+    note: Quantity and price of energy sold; buyer identity and agreement type are narrative.
+  - requirement: "4280.122(a)(8)(i)(H)"
+    scope: out_of_scope
+    note: Technology-specific resource narrative.
+  - requirement: "4280.122(a)(8)(i)(H)(2)"
+    scope: evidence
+    elements: [Project.technology, Project.array_tilt, Project.array_azimuth, Facility.latitude, Facility.longitude]
+    note: Solar resource source and assumptions; array geometry and location determine the modelled resource.
+  - requirement: "4280.122(a)(8)(i)(H)(10)"
+    scope: evidence
+    elements: [Project.storage_capacity]
+  - requirement: "4280.122(a)(8)(ii)"
+    scope: out_of_scope
+    note: Feasibility study narrative.
+  - requirement: "4280.122(a)(16)"
+    scope: evidence
+    elements: [Meter.dedicated, Meter.utility_account]
+  - requirement: "4280.122(a)(18)"
+    scope: evidence
+    elements: [Project.useful_life_years, Project.project_cost, PerformanceClaim.energy_price, PerformanceClaim.claimed_value]
+  - requirement: "4280.122(a)(19)"
+    scope: evidence
+    elements: [Project.storage_capacity, Project.rated_capacity, PerformanceClaim.pre_period_energy, PerformanceClaim.claimed_value]
+  - requirement: "4280.122(b)"
+    scope: out_of_scope
+    note: Ineligibility conditions established from documents other than energy evidence.
+  - requirement: "4280.122(b)(1)"
+    scope: evidence
+    elements: [Project.amount_requested]
+  - requirement: "4280.122(b)(12)"
+    scope: evidence
+    elements: [Project.rated_capacity, Project.rated_capacity_unit]
+  - requirement: "4280.122(b)(13)"
+    scope: evidence
+    elements: [PerformanceClaim.pre_period_energy, BillingRecord.energy_imported, BillingRecord.is_pre_installation]
+    note: Commensurate historical energy usage for ground-mount solar or wind.
+  - requirement: "4280.122(b)(19)"
+    scope: evidence
+    elements: [EquipmentItem.country_of_origin, Project.in_service_date]
+  - requirement: "4280.122(b)(20)"
+    scope: evidence
+    elements: [Project.project_cost, Project.amount_requested]
+
+  - requirement: "4280.131(a)"
+    scope: out_of_scope
+    note: Applicant identity, ownership, financial and conflict-of-interest information.
+  - requirement: "4280.131(a)(1)"
+    scope: evidence
+    elements: [Applicant.legal_name]
+  - requirement: "4280.131(a)(3)"
+    scope: evidence
+    elements: [Applicant.unique_entity_identifier]
+    note: Only the Unique Entity Identifier is carried, to link evidence to an application; taxpayer identifiers are excluded.
+  - requirement: "4280.131(a)(8)"
+    scope: evidence
+    elements: [Applicant.applicant_type]
+  - requirement: "4280.131(a)(8)(i)"
+    scope: out_of_scope
+    note: Ownership and income details.
+  - requirement: "4280.131(a)(8)(ii)"
+    scope: out_of_scope
+    note: Ownership details.
+  - requirement: "4280.131(b)"
+    scope: out_of_scope
+    note: Project eligibility items established from narrative, contractual or certification documents.
+  - requirement: "4280.131(b)(2)"
+    scope: evidence
+    elements: [Project.category, Project.res_subcategory]
+  - requirement: "4280.131(b)(3)"
+    scope: evidence
+    elements: [BillingRecord.energy_imported, PerformanceClaim.claimed_value, Project.affected_end_use_share]
+    note: Information from the Energy Assessment, Energy Audit or Resource Assessment that the Agency uses to assess the project.
+  - requirement: "4280.131(b)(5)"
+    scope: evidence
+    elements: [EquipmentItem.country_of_origin, EquipmentItem.make, EquipmentItem.model]
+  - requirement: "4280.131(b)(9)"
+    scope: evidence
+    elements: [Meter.dedicated]
+  - requirement: "4280.131(b)(11)"
+    scope: evidence
+    elements: [Facility.address, Facility.state, Facility.latitude, Facility.longitude]
+  - requirement: "4280.131(b)(13)"
+    scope: evidence
+    elements: [Project.rated_capacity, Project.rated_capacity_unit, PerformanceClaim.claimed_value, PerformanceClaim.energy_unit]
+  - requirement: "4280.131(b)(14)"
+    scope: evidence
+    elements: [Project.project_period_start, Project.project_period_end]
+  - requirement: "4280.131(b)(15)"
+    scope: evidence
+    elements: [Project.project_cost, Project.amount_requested]
+    note: Totals only; the itemised budget is outside the schema.
+  - requirement: "4280.131(b)(17)"
+    scope: evidence
+    elements: [PerformanceClaim.pre_period_energy, PerformanceClaim.post_period_energy, PerformanceClaim.energy_price]
+  - requirement: "4280.131(b)(17)(i)"
+    scope: evidence
+    elements: [PerformanceClaim.pre_period_energy, PerformanceClaim.post_period_energy, PerformanceClaim.energy_unit, BillingRecord.energy_imported, BillingRecord.energy_unit, BillingRecord.is_pre_installation, BillingRecord.period_start, BillingRecord.period_end]
+    note: Quantity and unit of historical use for 12 consecutive months before installation and 12 months of production or use after it.
+  - requirement: "4280.131(b)(17)(ii)"
+    scope: evidence
+    elements: [PerformanceClaim.energy_price, BillingRecord.energy_charge]
+    note: Per-unit dollar value excluding fixed meter, demand and subsidy charges and sales tax.
+
+  - requirement: "4280.160(a)"
+    scope: out_of_scope
+    note: Financial report (SF-425).
+  - requirement: "4280.160(b)"
+    scope: evidence
+    elements: [PerformanceClaim.claimed_value, PerformanceClaim.method]
+    note: Content specified in Form RD 4280-2, which is not reproduced in the rule.
+  - requirement: "4280.160(c)"
+    scope: evidence
+    elements: [EquipmentItem.make, EquipmentItem.model, EquipmentItem.item_quantity, EquipmentItem.acquisition_cost, EquipmentItem.acquisition_date]
+    note: Equipment records under 2 CFR 200.313.

@@ -1,0 +1,57 @@
+# Hypothetical facility sites: one illustrative rural location per State.
+# Coordinates are scenario parameters chosen for this study; they are not REAP project locations.
+# utc_offset is local standard time (hours from UTC).
+radiation_years: [2005, 2015]   # PVGIS-NSRDB coverage used for pre/post year pairs
+load_profile_year: 2018         # ComStock actual-meteorological-year basis
+comstock_building_types: [warehouse, retailstandalone, smalloffice, fullservicerestaurant]
+sites:
+  - {state: AL, site_id: scenario_hypothetical_site_AL, latitude: 32.40, longitude: -86.90, utc_offset: -6}
+  - {state: AK, site_id: scenario_hypothetical_site_AK, latitude: 59.65, longitude: -151.50, utc_offset: -9}
+  - {state: AZ, site_id: scenario_hypothetical_site_AZ, latitude: 32.90, longitude: -111.75, utc_offset: -7}
+  - {state: AR, site_id: scenario_hypothetical_site_AR, latitude: 34.50, longitude: -91.55, utc_offset: -6}
+  - {state: CA, site_id: scenario_hypothetical_site_CA, latitude: 36.33, longitude: -119.65, utc_offset: -8}
+  - {state: CO, site_id: scenario_hypothetical_site_CO, latitude: 40.25, longitude: -103.80, utc_offset: -7}
+  - {state: CT, site_id: scenario_hypothetical_site_CT, latitude: 41.85, longitude: -72.00, utc_offset: -5}
+  - {state: DE, site_id: scenario_hypothetical_site_DE, latitude: 38.90, longitude: -75.50, utc_offset: -5}
+  - {state: FL, site_id: scenario_hypothetical_site_FL, latitude: 27.20, longitude: -81.35, utc_offset: -5}
+  - {state: GA, site_id: scenario_hypothetical_site_GA, latitude: 31.50, longitude: -83.50, utc_offset: -6}
+  - {state: HI, site_id: scenario_hypothetical_site_HI, latitude: 19.70, longitude: -155.10, utc_offset: -10}
+  - {state: ID, site_id: scenario_hypothetical_site_ID, latitude: 42.55, longitude: -114.45, utc_offset: -8}
+  - {state: IL, site_id: scenario_hypothetical_site_IL, latitude: 40.10, longitude: -88.90, utc_offset: -6}
+  - {state: IN, site_id: scenario_hypothetical_site_IN, latitude: 40.30, longitude: -86.50, utc_offset: -6}
+  - {state: IA, site_id: scenario_hypothetical_site_IA, latitude: 42.00, longitude: -93.60, utc_offset: -6}
+  - {state: KS, site_id: scenario_hypothetical_site_KS, latitude: 38.40, longitude: -98.80, utc_offset: -7}
+  - {state: KY, site_id: scenario_hypothetical_site_KY, latitude: 37.00, longitude: -86.40, utc_offset: -6}
+  - {state: LA, site_id: scenario_hypothetical_site_LA, latitude: 30.20, longitude: -92.40, utc_offset: -6}
+  - {state: ME, site_id: scenario_hypothetical_site_ME, latitude: 44.80, longitude: -69.40, utc_offset: -5}
+  - {state: MD, site_id: scenario_hypothetical_site_MD, latitude: 39.30, longitude: -75.90, utc_offset: -5}
+  - {state: MA, site_id: scenario_hypothetical_site_MA, latitude: 42.40, longitude: -72.60, utc_offset: -5}
+  - {state: MI, site_id: scenario_hypothetical_site_MI, latitude: 43.40, longitude: -84.60, utc_offset: -6}
+  - {state: MN, site_id: scenario_hypothetical_site_MN, latitude: 44.50, longitude: -95.00, utc_offset: -6}
+  - {state: MS, site_id: scenario_hypothetical_site_MS, latitude: 33.50, longitude: -90.50, utc_offset: -6}
+  - {state: MO, site_id: scenario_hypothetical_site_MO, latitude: 39.20, longitude: -93.20, utc_offset: -6}
+  - {state: MT, site_id: scenario_hypothetical_site_MT, latitude: 47.50, longitude: -111.30, utc_offset: -7}
+  - {state: NE, site_id: scenario_hypothetical_site_NE, latitude: 40.90, longitude: -98.30, utc_offset: -7}
+  - {state: NV, site_id: scenario_hypothetical_site_NV, latitude: 39.50, longitude: -118.80, utc_offset: -8}
+  - {state: NH, site_id: scenario_hypothetical_site_NH, latitude: 43.60, longitude: -71.60, utc_offset: -5}
+  - {state: NJ, site_id: scenario_hypothetical_site_NJ, latitude: 39.50, longitude: -75.10, utc_offset: -5}
+  - {state: NM, site_id: scenario_hypothetical_site_NM, latitude: 34.40, longitude: -103.20, utc_offset: -7}
+  - {state: NY, site_id: scenario_hypothetical_site_NY, latitude: 42.90, longitude: -77.30, utc_offset: -5}
+  - {state: NC, site_id: scenario_hypothetical_site_NC, latitude: 35.40, longitude: -78.00, utc_offset: -5}
+  - {state: ND, site_id: scenario_hypothetical_site_ND, latitude: 46.90, longitude: -98.70, utc_offset: -7}
+  - {state: OH, site_id: scenario_hypothetical_site_OH, latitude: 40.80, longitude: -83.60, utc_offset: -6}
+  - {state: OK, site_id: scenario_hypothetical_site_OK, latitude: 36.40, longitude: -97.90, utc_offset: -7}
+  - {state: OR, site_id: scenario_hypothetical_site_OR, latitude: 45.70, longitude: -118.80, utc_offset: -8}
+  - {state: PA, site_id: scenario_hypothetical_site_PA, latitude: 40.80, longitude: -77.00, utc_offset: -5}
+  - {state: RI, site_id: scenario_hypothetical_site_RI, latitude: 41.50, longitude: -71.60, utc_offset: -5}
+  - {state: SC, site_id: scenario_hypothetical_site_SC, latitude: 33.90, longitude: -80.30, utc_offset: -5}
+  - {state: SD, site_id: scenario_hypothetical_site_SD, latitude: 44.40, longitude: -98.20, utc_offset: -7}
+  - {state: TN, site_id: scenario_hypothetical_site_TN, latitude: 35.60, longitude: -88.80, utc_offset: -6}
+  - {state: TX, site_id: scenario_hypothetical_site_TX, latitude: 33.60, longitude: -101.80, utc_offset: -7}
+  - {state: UT, site_id: scenario_hypothetical_site_UT, latitude: 39.30, longitude: -112.60, utc_offset: -8}
+  - {state: VT, site_id: scenario_hypothetical_site_VT, latitude: 44.30, longitude: -72.80, utc_offset: -5}
+  - {state: VA, site_id: scenario_hypothetical_site_VA, latitude: 38.10, longitude: -78.90, utc_offset: -5}
+  - {state: WA, site_id: scenario_hypothetical_site_WA, latitude: 46.60, longitude: -120.50, utc_offset: -8}
+  - {state: WV, site_id: scenario_hypothetical_site_WV, latitude: 39.00, longitude: -80.20, utc_offset: -5}
+  - {state: WI, site_id: scenario_hypothetical_site_WI, latitude: 44.00, longitude: -89.50, utc_offset: -6}
+  - {state: WY, site_id: scenario_hypothetical_site_WY, latitude: 42.80, longitude: -108.40, utc_offset: -7}

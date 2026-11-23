@@ -1,0 +1,867 @@
+{
+  "$defs": {
+    "Applicant": {
+      "additionalProperties": false,
+      "description": "Legal entity submitting the application.",
+      "properties": {
+        "applicant_type": {
+          "$ref": "#/$defs/ApplicantType"
+        },
+        "id": {
+          "type": "string"
+        },
+        "legal_name": {
+          "description": "Legal name of the applicant (section 4280.131(a)(1)).",
+          "type": "string"
+        },
+        "unique_entity_identifier": {
+          "description": "Unique Entity Identifier from SAM.gov (section 4280.131(a)(3)).",
+          "pattern": "^[A-Z0-9]{12}$",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "legal_name",
+        "applicant_type"
+      ],
+      "title": "Applicant",
+      "type": "object"
+    },
+    "ApplicantType": {
+      "description": "Entity type under which the applicant applies (section 4280.131(a)(8)).",
+      "enum": [
+        "agricultural_producer",
+        "rural_small_business"
+      ],
+      "title": "ApplicantType",
+      "type": "string"
+    },
+    "BilledQuantityBasis": {
+      "description": "Whether billed energy on a utility record is net of exports.",
+      "enum": [
+        "delivered_only",
+        "net_of_exports"
+      ],
+      "title": "BilledQuantityBasis",
+      "type": "string"
+    },
+    "BillingRecord": {
+      "additionalProperties": false,
+      "description": "One billing-period record of a utility revenue meter, or one period reading of a production meter.",
+      "properties": {
+        "energy_charge": {
+          "description": "Energy charges in U.S. dollars, excluding fixed meter charges, demand charges, subsidy charges and sales tax (definition of Simple Payback, section 4280.104).",
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "energy_exported": {
+          "description": "Energy exported to the utility in the period.",
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "energy_imported": {
+          "description": "Energy delivered by the utility in the period (or net energy when the basis is net_of_exports).",
+          "type": "number"
+        },
+        "energy_unit": {
+          "$ref": "#/$defs/EnergyUnit"
+        },
+        "is_pre_installation": {
+          "description": "True for records in the 12 months before installation.",
+          "type": "boolean"
+        },
+        "meter": {
+          "description": "Meter to which a record belongs.",
+          "type": "string"
+        },
+        "peak_demand": {
+          "description": "Billed peak demand in the period.",
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "period_end": {
+          "description": "Last day of the billing period (inclusive).",
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "period_start": {
+          "description": "First day of the billing period (inclusive).",
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "read_type": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReadType"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "meter",
+        "is_pre_installation",
+        "energy_imported",
+        "energy_unit"
+      ],
+      "title": "BillingRecord",
+      "type": "object"
+    },
+    "ClaimMethod": {
+      "description": "How the claimed quantity was obtained.",
+      "enum": [
+        "metered_production",
+        "billing_difference",
+        "regression_normalized",
+        "engineering_estimate"
+      ],
+      "title": "ClaimMethod",
+      "type": "string"
+    },
+    "ClaimQuantity": {
+      "description": "",
+      "enum": [
+        "annual_energy_production",
+        "annual_energy_savings"
+      ],
+      "title": "ClaimQuantity",
+      "type": "string"
+    },
+    "CollectionMode": {
+      "description": "How the energy records were captured for submission.",
+      "enum": [
+        "manual_transcription",
+        "utility_file_upload",
+        "green_button_download",
+        "automated_utility_access"
+      ],
+      "title": "CollectionMode",
+      "type": "string"
+    },
+    "EnergyUnit": {
+      "description": "Energy units as UCUM codes.",
+      "enum": [
+        "kW.h",
+        "MW.h",
+        "[Btu_IT]",
+        "k[Btu_IT]",
+        "M[Btu_IT]",
+        "[therm_us]"
+      ],
+      "title": "EnergyUnit",
+      "type": "string"
+    },
+    "EquipmentItem": {
+      "additionalProperties": false,
+      "description": "Equipment acquired for the project (Equipment report, section 4280.160(c); country of origin, section 4280.131(b)(5)).",
+      "properties": {
+        "acquisition_cost": {
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "acquisition_date": {
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "component_role": {
+          "description": "Function of the item in the system (module, inverter, turbine, luminaire, ...).",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "country_of_origin": {
+          "description": "ISO 3166-1 alpha-2 country code of manufacture (section 4280.131(b)(5)).",
+          "pattern": "^[A-Z]{2}$",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "item_quantity": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "make": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "make",
+        "model",
+        "item_quantity"
+      ],
+      "title": "EquipmentItem",
+      "type": "object"
+    },
+    "EvidencePackage": {
+      "additionalProperties": false,
+      "description": "Complete performance evidence for one application.",
+      "properties": {
+        "applicant": {
+          "$ref": "#/$defs/Applicant"
+        },
+        "billing_records": {
+          "items": {
+            "$ref": "#/$defs/BillingRecord"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "collection_mode": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CollectionMode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "equipment": {
+          "items": {
+            "$ref": "#/$defs/EquipmentItem"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "facility": {
+          "$ref": "#/$defs/Facility"
+        },
+        "id": {
+          "type": "string"
+        },
+        "interval_series": {
+          "items": {
+            "$ref": "#/$defs/IntervalSeries"
+          },
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "meters": {
+          "items": {
+            "$ref": "#/$defs/Meter"
+          },
+          "type": "array"
+        },
+        "performance_claim": {
+          "$ref": "#/$defs/PerformanceClaim"
+        },
+        "project": {
+          "$ref": "#/$defs/Project"
+        }
+      },
+      "required": [
+        "id",
+        "applicant",
+        "facility",
+        "project",
+        "meters",
+        "performance_claim"
+      ],
+      "title": "EvidencePackage",
+      "type": "object"
+    },
+    "Facility": {
+      "additionalProperties": false,
+      "description": "Site at which the project is installed.",
+      "properties": {
+        "address": {
+          "description": "Street address of the project location (section 4280.131(b)(11)).",
+          "type": "string"
+        },
+        "climate_zone": {
+          "description": "IECC/ASHRAE 169 thermal climate zone number.",
+          "maximum": 8,
+          "minimum": 1,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "latitude": {
+          "maximum": 90,
+          "minimum": -90,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "longitude": {
+          "maximum": 180,
+          "minimum": -180,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "state": {
+          "description": "Two-letter State or territory code.",
+          "pattern": "^[A-Z]{2}$",
+          "type": "string"
+        },
+        "weather_station_id": {
+          "description": "Identifier (USAF-WBAN) of the nearest weather station used for degree days.",
+          "pattern": "^[0-9A-Z]{6}-[0-9]{5}$",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "address",
+        "state"
+      ],
+      "title": "Facility",
+      "type": "object"
+    },
+    "IntervalSeries": {
+      "additionalProperties": false,
+      "description": "Regular time series of interval energy from one meter.",
+      "properties": {
+        "energy_unit": {
+          "$ref": "#/$defs/EnergyUnit"
+        },
+        "interval_minutes": {
+          "description": "Length of the recording interval for interval data.",
+          "maximum": 1440,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "is_pre_installation": {
+          "description": "True for records in the 12 months before installation.",
+          "type": "boolean"
+        },
+        "meter": {
+          "description": "Meter to which a record belongs.",
+          "type": "string"
+        },
+        "start_time": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "time_zone": {
+          "description": "IANA time zone or fixed UTC offset of the timestamps.",
+          "type": "string"
+        },
+        "values": {
+          "description": "Energy per interval in chronological order.",
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "meter",
+        "is_pre_installation",
+        "start_time",
+        "time_zone",
+        "interval_minutes",
+        "energy_unit",
+        "values"
+      ],
+      "title": "IntervalSeries",
+      "type": "object"
+    },
+    "Meter": {
+      "additionalProperties": false,
+      "description": "Device whose readings document energy use or production.",
+      "properties": {
+        "billed_quantity_basis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BilledQuantityBasis"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "dedicated": {
+          "description": "Whether the meter serves only the project facility (section 4280.122(a)(16)).",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "interval_minutes": {
+          "description": "Length of the recording interval for interval data.",
+          "maximum": 1440,
+          "minimum": 1,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "meter_type": {
+          "$ref": "#/$defs/MeterType"
+        },
+        "netting_arrangement": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NettingArrangement"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "utility_account": {
+          "description": "Utility account or meter number as printed on the bill.",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "meter_type"
+      ],
+      "title": "Meter",
+      "type": "object"
+    },
+    "MeterType": {
+      "description": "",
+      "enum": [
+        "utility_revenue_meter",
+        "inverter",
+        "sub_meter"
+      ],
+      "title": "MeterType",
+      "type": "string"
+    },
+    "NettingArrangement": {
+      "description": "Metering agreement type (section 4280.122(a)(8)(i)(F)(3)).",
+      "enum": [
+        "none",
+        "conventional_net_metering",
+        "net_billing",
+        "aggregate_net_metering",
+        "virtual_net_metering",
+        "off_grid"
+      ],
+      "title": "NettingArrangement",
+      "type": "string"
+    },
+    "NormalizationBasis": {
+      "description": "",
+      "enum": [
+        "none",
+        "post_period_weather",
+        "normal_year_weather"
+      ],
+      "title": "NormalizationBasis",
+      "type": "string"
+    },
+    "PerformanceClaim": {
+      "additionalProperties": false,
+      "description": "The applicant's stated annual production or savings and its basis.",
+      "properties": {
+        "claimed_value": {
+          "type": "number"
+        },
+        "energy_price": {
+          "description": "Average price of energy in U.S. dollars per unit (section 4280.131(b)(17)(ii)).",
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "energy_unit": {
+          "$ref": "#/$defs/EnergyUnit"
+        },
+        "method": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClaimMethod"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "normalization_basis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NormalizationBasis"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "post_period_energy": {
+          "description": "Energy used (EEI) or produced (RES) in the 12 months after installation.",
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "pre_period_energy": {
+          "description": "Energy used in the 12 consecutive months before installation (section 4280.131(b)(17)(i)).",
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "quantity": {
+          "$ref": "#/$defs/ClaimQuantity"
+        },
+        "relative_uncertainty": {
+          "description": "Relative standard uncertainty of the claimed value.",
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "quantity",
+        "claimed_value",
+        "energy_unit"
+      ],
+      "title": "PerformanceClaim",
+      "type": "object"
+    },
+    "PowerUnit": {
+      "description": "",
+      "enum": [
+        "kW",
+        "MW"
+      ],
+      "title": "PowerUnit",
+      "type": "string"
+    },
+    "Project": {
+      "additionalProperties": false,
+      "description": "Completed RES or EEI for which the award is requested.",
+      "if": {
+        "properties": {
+          "category": {
+            "const": "RES"
+          }
+        },
+        "required": [
+          "category"
+        ]
+      },
+      "properties": {
+        "affected_end_use_share": {
+          "description": "Share of pre-installation annual energy use attributable to the end uses the EEI modifies, from the Energy Assessment or Energy Audit.",
+          "maximum": 1,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "amount_requested": {
+          "description": "Federal award requested in U.S. dollars (section 4280.122(a)(2)).",
+          "maximum": 500000,
+          "minimum": 1500,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "array_azimuth": {
+          "description": "Azimuth of a fixed photovoltaic array, degrees clockwise from north.",
+          "maximum": 360,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "array_tilt": {
+          "description": "Tilt of a fixed photovoltaic array from horizontal.",
+          "maximum": 90,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "category": {
+          "$ref": "#/$defs/ProjectCategory"
+        },
+        "id": {
+          "type": "string"
+        },
+        "in_service_date": {
+          "description": "Date the RES or EEI was installed and operational.",
+          "format": "date",
+          "type": "string"
+        },
+        "project_cost": {
+          "description": "Total project cost in U.S. dollars.",
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "project_period_end": {
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "project_period_start": {
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rated_capacity": {
+          "description": "Rated system size (section 4280.131(b)(13)).",
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "rated_capacity_unit": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PowerUnit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "res_subcategory": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ResSubcategory"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "storage_capacity": {
+          "description": "Rated power of a paired energy storage system.",
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "technology": {
+          "$ref": "#/$defs/TechnologyClass"
+        },
+        "useful_life_years": {
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "category",
+        "technology",
+        "in_service_date"
+      ],
+      "then": {
+        "properties": {
+          "rated_capacity": {},
+          "rated_capacity_unit": {}
+        },
+        "required": [
+          "rated_capacity",
+          "rated_capacity_unit"
+        ]
+      },
+      "title": "Project",
+      "type": "object"
+    },
+    "ProjectCategory": {
+      "description": "Project type declared under section 4280.131(b)(2).",
+      "enum": [
+        "RES",
+        "EEI"
+      ],
+      "title": "ProjectCategory",
+      "type": "string"
+    },
+    "ReadType": {
+      "description": "",
+      "enum": [
+        "actual",
+        "estimated"
+      ],
+      "title": "ReadType",
+      "type": "string"
+    },
+    "ResSubcategory": {
+      "description": "Subcategory of a renewable energy system (definition in section 4280.104).",
+      "enum": [
+        "energy_replacement",
+        "energy_generation",
+        "retrofit",
+        "distribution_or_ancillary"
+      ],
+      "title": "ResSubcategory",
+      "type": "string"
+    },
+    "TechnologyClass": {
+      "description": "Controlled vocabulary of technologies. RES values follow section 4280.122(a)(8)(i)(B) and the definitions of section 4280.104; EEI values are measure classes commonly funded and are not enumerated in the rule.",
+      "enum": [
+        "solar_electric",
+        "solar_thermal",
+        "wind",
+        "biomass",
+        "bioenergy",
+        "anaerobic_digester",
+        "geothermal_direct_generation",
+        "geothermal_electric_generation",
+        "hydrogen",
+        "hydroelectric",
+        "ocean_energy",
+        "hybrid",
+        "eei_lighting",
+        "eei_hvac",
+        "eei_refrigeration",
+        "eei_building_envelope",
+        "eei_motors_pumps",
+        "eei_grain_drying",
+        "eei_irrigation",
+        "eei_other"
+      ],
+      "title": "TechnologyClass",
+      "type": "string"
+    }
+  },
+  "$id": "https://w3id.org/reapschema/reap_evidence",
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "additionalProperties": false,
+  "description": "Complete performance evidence for one application.",
+  "metamodel_version": "1.12.0",
+  "properties": {
+    "applicant": {
+      "$ref": "#/$defs/Applicant"
+    },
+    "billing_records": {
+      "items": {
+        "$ref": "#/$defs/BillingRecord"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "collection_mode": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CollectionMode"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "equipment": {
+      "items": {
+        "$ref": "#/$defs/EquipmentItem"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "facility": {
+      "$ref": "#/$defs/Facility"
+    },
+    "id": {
+      "type": "string"
+    },
+    "interval_series": {
+      "items": {
+        "$ref": "#/$defs/IntervalSeries"
+      },
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "meters": {
+      "items": {
+        "$ref": "#/$defs/Meter"
+      },
+      "type": "array"
+    },
+    "performance_claim": {
+      "$ref": "#/$defs/PerformanceClaim"
+    },
+    "project": {
+      "$ref": "#/$defs/Project"
+    }
+  },
+  "required": [
+    "id",
+    "applicant",
+    "facility",
+    "project",
+    "meters",
+    "performance_claim"
+  ],
+  "title": "reap_evidence",
+  "type": "object",
+  "version": "1.0.0"
+}

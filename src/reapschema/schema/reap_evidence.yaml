@@ -1,0 +1,537 @@
+id: https://w3id.org/reapschema/reap_evidence
+name: reap_evidence
+title: REAP performance-evidence schema
+description: >-
+  Machine-readable specification of the pre- and post-installation energy evidence
+  submitted with a Rural Energy for America Program (REAP) application under
+  7 CFR part 4280 subpart B as amended by 91 FR 62600 (October 1, 2026). The schema
+  covers the energy quantities, metering context and equipment information from
+  which documented performance is verified; it does not cover applicant financial,
+  ownership or certification documents.
+version: 1.0.0
+license: https://creativecommons.org/licenses/by/4.0/
+prefixes:
+  linkml: https://w3id.org/linkml/
+  reap: https://w3id.org/reapschema/
+  ucum: http://unitsofmeasure.org/
+  schema: http://schema.org/
+default_prefix: reap
+default_range: string
+imports:
+  - linkml:types
+
+enums:
+  ApplicantType:
+    description: Entity type under which the applicant applies (section 4280.131(a)(8)).
+    permissible_values:
+      agricultural_producer: {}
+      rural_small_business: {}
+  ProjectCategory:
+    description: Project type declared under section 4280.131(b)(2).
+    permissible_values:
+      RES:
+        description: Renewable energy system.
+      EEI:
+        description: Energy efficiency improvement.
+  ResSubcategory:
+    description: Subcategory of a renewable energy system (definition in section 4280.104).
+    permissible_values:
+      energy_replacement:
+        description: Replaces 120 percent or less of annual energy use in the 12 months before installation.
+      energy_generation:
+        description: Produces more than 120 percent of annual energy use in the 12 months before installation.
+      retrofit: {}
+      distribution_or_ancillary: {}
+  TechnologyClass:
+    description: >-
+      Controlled vocabulary of technologies. RES values follow section
+      4280.122(a)(8)(i)(B) and the definitions of section 4280.104; EEI values are
+      measure classes commonly funded and are not enumerated in the rule.
+    permissible_values:
+      solar_electric: {}
+      solar_thermal: {}
+      wind: {}
+      biomass: {}
+      bioenergy: {}
+      anaerobic_digester: {}
+      geothermal_direct_generation: {}
+      geothermal_electric_generation: {}
+      hydrogen: {}
+      hydroelectric: {}
+      ocean_energy: {}
+      hybrid: {}
+      eei_lighting: {}
+      eei_hvac: {}
+      eei_refrigeration: {}
+      eei_building_envelope: {}
+      eei_motors_pumps: {}
+      eei_grain_drying: {}
+      eei_irrigation: {}
+      eei_other: {}
+  MeterType:
+    permissible_values:
+      utility_revenue_meter:
+        description: Utility billing meter at the service point.
+      inverter:
+        description: Production measured at the point of electrical coupling of the RES.
+      sub_meter:
+        description: Customer-owned meter on a circuit or piece of equipment.
+  NettingArrangement:
+    description: Metering agreement type (section 4280.122(a)(8)(i)(F)(3)).
+    permissible_values:
+      none:
+        description: No export crediting; the meter registers delivered energy only.
+      conventional_net_metering:
+        description: Exports offset imports within the billing period; the bill may show a single net quantity.
+      net_billing:
+        description: Imports and exports are metered and valued separately.
+      aggregate_net_metering:
+        description: Exports are credited across several meters of the same customer.
+      virtual_net_metering:
+        description: Credits from an off-site or shared system are allocated to the account.
+      off_grid:
+        description: No utility interconnection.
+  BilledQuantityBasis:
+    description: Whether billed energy on a utility record is net of exports.
+    permissible_values:
+      delivered_only:
+        description: Energy delivered by the utility (imports); exports reported separately or absent.
+      net_of_exports:
+        description: Imports minus exports within the billing period.
+  ReadType:
+    permissible_values:
+      actual: {}
+      estimated: {}
+  EnergyUnit:
+    description: Energy units as UCUM codes.
+    permissible_values:
+      kW.h:
+        description: Kilowatt-hour.
+      MW.h:
+        description: Megawatt-hour.
+      "[Btu_IT]":
+        description: British thermal unit (International Table).
+      "k[Btu_IT]":
+        description: Thousand Btu.
+      "M[Btu_IT]":
+        description: Million Btu.
+      "[therm_us]":
+        description: U.S. therm (100,000 Btu).
+  PowerUnit:
+    permissible_values:
+      kW:
+        description: Kilowatt.
+      MW:
+        description: Megawatt.
+  ClaimQuantity:
+    permissible_values:
+      annual_energy_production:
+        description: Annual energy production of an RES as defined in section 4280.104.
+      annual_energy_savings:
+        description: Annual energy saved by an EEI (pre-installation minus post-installation use).
+  ClaimMethod:
+    description: How the claimed quantity was obtained.
+    permissible_values:
+      metered_production:
+        description: Sum of production-meter (inverter) readings over the post-installation period.
+      billing_difference:
+        description: Pre-installation minus post-installation billed energy.
+      regression_normalized:
+        description: Degree-day or other regression baseline adjusted to post-period or normal-year conditions.
+      engineering_estimate:
+        description: Calculated from rated capacity or equipment specifications rather than measured data.
+  NormalizationBasis:
+    permissible_values:
+      none: {}
+      post_period_weather:
+        description: Baseline adjusted to post-installation weather (avoided energy use).
+      normal_year_weather:
+        description: Both periods adjusted to long-term normal weather.
+  CollectionMode:
+    description: How the energy records were captured for submission.
+    permissible_values:
+      manual_transcription: {}
+      utility_file_upload: {}
+      green_button_download:
+        description: Customer download in the NAESB REQ.21 ESPI ("Green Button") format.
+      automated_utility_access:
+        description: Records retrieved from the utility under customer authorization.
+
+slots:
+  id:
+    identifier: true
+    range: string
+  legal_name:
+    description: Legal name of the applicant (section 4280.131(a)(1)).
+    required: true
+  applicant_type:
+    range: ApplicantType
+    required: true
+  unique_entity_identifier:
+    description: Unique Entity Identifier from SAM.gov (section 4280.131(a)(3)).
+    pattern: "^[A-Z0-9]{12}$"
+  address:
+    description: Street address of the project location (section 4280.131(b)(11)).
+    required: true
+  state:
+    description: Two-letter State or territory code.
+    pattern: "^[A-Z]{2}$"
+    required: true
+  latitude:
+    range: float
+    unit:
+      ucum_code: deg
+    minimum_value: -90
+    maximum_value: 90
+  longitude:
+    range: float
+    unit:
+      ucum_code: deg
+    minimum_value: -180
+    maximum_value: 180
+  climate_zone:
+    description: IECC/ASHRAE 169 thermal climate zone number.
+    range: integer
+    minimum_value: 1
+    maximum_value: 8
+  weather_station_id:
+    description: Identifier (USAF-WBAN) of the nearest weather station used for degree days.
+    pattern: "^[0-9A-Z]{6}-[0-9]{5}$"
+  category:
+    range: ProjectCategory
+    required: true
+  res_subcategory:
+    range: ResSubcategory
+  technology:
+    range: TechnologyClass
+    required: true
+  rated_capacity:
+    description: Rated system size (section 4280.131(b)(13)).
+    range: float
+    minimum_value: 0
+  rated_capacity_unit:
+    range: PowerUnit
+  in_service_date:
+    description: Date the RES or EEI was installed and operational.
+    range: date
+    required: true
+  project_period_start:
+    range: date
+  project_period_end:
+    range: date
+  project_cost:
+    description: Total project cost in U.S. dollars.
+    range: float
+    minimum_value: 0
+    unit:
+      ucum_code: "[USD]"
+  amount_requested:
+    description: Federal award requested in U.S. dollars (section 4280.122(a)(2)).
+    range: float
+    minimum_value: 1500
+    maximum_value: 500000
+  useful_life_years:
+    range: float
+    minimum_value: 0
+    unit:
+      ucum_code: a
+  array_tilt:
+    description: Tilt of a fixed photovoltaic array from horizontal.
+    range: float
+    minimum_value: 0
+    maximum_value: 90
+    unit:
+      ucum_code: deg
+  array_azimuth:
+    description: Azimuth of a fixed photovoltaic array, degrees clockwise from north.
+    range: float
+    minimum_value: 0
+    maximum_value: 360
+    unit:
+      ucum_code: deg
+  storage_capacity:
+    description: Rated power of a paired energy storage system.
+    range: float
+    minimum_value: 0
+  affected_end_use_share:
+    description: >-
+      Share of pre-installation annual energy use attributable to the end uses the
+      EEI modifies, from the Energy Assessment or Energy Audit.
+    range: float
+    minimum_value: 0
+    maximum_value: 1
+  meter_type:
+    range: MeterType
+    required: true
+  netting_arrangement:
+    range: NettingArrangement
+  billed_quantity_basis:
+    range: BilledQuantityBasis
+  dedicated:
+    description: Whether the meter serves only the project facility (section 4280.122(a)(16)).
+    range: boolean
+  utility_account:
+    description: Utility account or meter number as printed on the bill.
+  interval_minutes:
+    description: Length of the recording interval for interval data.
+    range: integer
+    minimum_value: 1
+    maximum_value: 1440
+  meter:
+    description: Meter to which a record belongs.
+    range: Meter
+    required: true
+  period_start:
+    description: First day of the billing period (inclusive).
+    range: date
+  period_end:
+    description: Last day of the billing period (inclusive).
+    range: date
+  read_type:
+    range: ReadType
+  energy_imported:
+    description: Energy delivered by the utility in the period (or net energy when the basis is net_of_exports).
+    range: float
+    required: true
+  energy_exported:
+    description: Energy exported to the utility in the period.
+    range: float
+    minimum_value: 0
+  energy_unit:
+    range: EnergyUnit
+    required: true
+  peak_demand:
+    description: Billed peak demand in the period.
+    range: float
+    minimum_value: 0
+    unit:
+      ucum_code: kW
+  energy_charge:
+    description: >-
+      Energy charges in U.S. dollars, excluding fixed meter charges, demand charges,
+      subsidy charges and sales tax (definition of Simple Payback, section 4280.104).
+    range: float
+    minimum_value: 0
+    unit:
+      ucum_code: "[USD]"
+  is_pre_installation:
+    description: True for records in the 12 months before installation.
+    range: boolean
+    required: true
+  time_zone:
+    description: IANA time zone or fixed UTC offset of the timestamps.
+    required: true
+  start_time:
+    range: datetime
+    required: true
+  values:
+    description: Energy per interval in chronological order.
+    range: float
+    multivalued: true
+    required: true
+  quantity:
+    range: ClaimQuantity
+    required: true
+  claimed_value:
+    range: float
+    required: true
+  method:
+    range: ClaimMethod
+  normalization_basis:
+    range: NormalizationBasis
+  relative_uncertainty:
+    description: Relative standard uncertainty of the claimed value.
+    range: float
+    minimum_value: 0
+  pre_period_energy:
+    description: Energy used in the 12 consecutive months before installation (section 4280.131(b)(17)(i)).
+    range: float
+    minimum_value: 0
+  post_period_energy:
+    description: Energy used (EEI) or produced (RES) in the 12 months after installation.
+    range: float
+    minimum_value: 0
+  energy_price:
+    description: Average price of energy in U.S. dollars per unit (section 4280.131(b)(17)(ii)).
+    range: float
+    minimum_value: 0
+  make:
+    required: true
+  model:
+    required: true
+  item_quantity:
+    range: integer
+    minimum_value: 1
+    required: true
+  country_of_origin:
+    description: ISO 3166-1 alpha-2 country code of manufacture (section 4280.131(b)(5)).
+    pattern: "^[A-Z]{2}$"
+  component_role:
+    description: Function of the item in the system (module, inverter, turbine, luminaire, ...).
+  acquisition_cost:
+    range: float
+    minimum_value: 0
+  acquisition_date:
+    range: date
+  collection_mode:
+    range: CollectionMode
+  applicant:
+    range: Applicant
+    required: true
+    inlined: true
+  facility:
+    range: Facility
+    required: true
+    inlined: true
+  project:
+    range: Project
+    required: true
+    inlined: true
+  meters:
+    range: Meter
+    multivalued: true
+    inlined_as_list: true
+    required: true
+  billing_records:
+    range: BillingRecord
+    multivalued: true
+    inlined_as_list: true
+  interval_series:
+    range: IntervalSeries
+    multivalued: true
+    inlined_as_list: true
+  performance_claim:
+    range: PerformanceClaim
+    required: true
+    inlined: true
+  equipment:
+    range: EquipmentItem
+    multivalued: true
+    inlined_as_list: true
+
+classes:
+  Applicant:
+    description: Legal entity submitting the application.
+    slots:
+      - id
+      - legal_name
+      - applicant_type
+      - unique_entity_identifier
+  Facility:
+    description: Site at which the project is installed.
+    slots:
+      - id
+      - address
+      - state
+      - latitude
+      - longitude
+      - climate_zone
+      - weather_station_id
+  Project:
+    description: Completed RES or EEI for which the award is requested.
+    slots:
+      - id
+      - category
+      - res_subcategory
+      - technology
+      - rated_capacity
+      - rated_capacity_unit
+      - in_service_date
+      - project_period_start
+      - project_period_end
+      - project_cost
+      - amount_requested
+      - useful_life_years
+      - array_tilt
+      - array_azimuth
+      - storage_capacity
+      - affected_end_use_share
+    rules:
+      - description: An RES declares its rated system size with a unit.
+        preconditions:
+          slot_conditions:
+            category:
+              equals_string: RES
+        postconditions:
+          slot_conditions:
+            rated_capacity:
+              required: true
+            rated_capacity_unit:
+              required: true
+  Meter:
+    description: Device whose readings document energy use or production.
+    slots:
+      - id
+      - meter_type
+      - netting_arrangement
+      - billed_quantity_basis
+      - dedicated
+      - utility_account
+      - interval_minutes
+  BillingRecord:
+    description: One billing-period record of a utility revenue meter, or one period reading of a production meter.
+    slots:
+      - meter
+      - is_pre_installation
+      - period_start
+      - period_end
+      - read_type
+      - energy_imported
+      - energy_exported
+      - energy_unit
+      - peak_demand
+      - energy_charge
+    slot_usage:
+      meter:
+        inlined: false
+  IntervalSeries:
+    description: Regular time series of interval energy from one meter.
+    slots:
+      - meter
+      - is_pre_installation
+      - start_time
+      - time_zone
+      - interval_minutes
+      - energy_unit
+      - values
+    slot_usage:
+      meter:
+        inlined: false
+      interval_minutes:
+        required: true
+  PerformanceClaim:
+    description: The applicant's stated annual production or savings and its basis.
+    slots:
+      - quantity
+      - claimed_value
+      - energy_unit
+      - method
+      - normalization_basis
+      - relative_uncertainty
+      - pre_period_energy
+      - post_period_energy
+      - energy_price
+  EquipmentItem:
+    description: Equipment acquired for the project (Equipment report, section 4280.160(c); country of origin, section 4280.131(b)(5)).
+    slots:
+      - make
+      - model
+      - item_quantity
+      - component_role
+      - country_of_origin
+      - acquisition_cost
+      - acquisition_date
+  EvidencePackage:
+    description: Complete performance evidence for one application.
+    tree_root: true
+    slots:
+      - id
+      - collection_mode
+      - applicant
+      - facility
+      - project
+      - meters
+      - billing_records
+      - interval_series
+      - performance_claim
+      - equipment

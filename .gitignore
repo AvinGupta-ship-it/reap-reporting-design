@@ -1,0 +1,39 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+*.egg-info/
+dist/
+build/
+.DS_Store
+# large unmodified downloads are fetched by scripts/fetch_data.py and recorded in data/MANIFEST.yaml
+data/raw/comstock/
+data/raw/pvgis/
+data/raw/isd_lite/
+data/raw/usaspending/
+# generated outputs; small summaries are committed
+results/*
+!results/summaries/
+data/synthetic/*
+!data/synthetic/README.md
+!data/synthetic/*sample*
+# LaTeX build products
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.spl
+paper/*.toc
+comment/*.aux
+comment/*.log
+comment/*.out
+comment/*.fls
+comment/*.fdb_latexmk
+comment/*.bbl
+comment/*.blg
