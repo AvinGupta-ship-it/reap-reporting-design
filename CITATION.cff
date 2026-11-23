@@ -1,15 +1,21 @@
 cff-version: 1.2.0
 message: "If you use this software or its outputs, please cite it as below."
-title: "reap-reporting-design: evidence schema, synthetic applicants and accuracy-burden analysis for REAP performance evidence"
+title: "Verifying documented performance in small renewable-energy and efficiency grants: a machine-readable evidence schema, automated validation, and the accuracy–burden frontier for twelve-month pre/post metered data"
 type: software
 version: 1.0.0
+date-released: "2026-11-23"
 authors:
   - family-names: Gupta
     given-names: Avin
-license: BSD-3-Clause
+repository-code: "https://github.com/AvinGupta-ship-it/reap-reporting-design"
+url: "https://github.com/AvinGupta-ship-it/reap-reporting-design"
+license:
+  - BSD-3-Clause
+  - CC-BY-4.0
 keywords:
   - measurement and verification
-  - response burden
   - data quality
-  - Paperwork Reduction Act
-  - Rural Energy for America Program
+  - response burden
+  - performance-based grants
+  - degree-day regression
+  - synthetic data

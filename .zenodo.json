@@ -1,0 +1,21 @@
+{
+  "title": "Verifying documented performance in small renewable-energy and efficiency grants: a machine-readable evidence schema, automated validation, and the accuracy–burden frontier for twelve-month pre/post metered data",
+  "upload_type": "software",
+  "version": "1.0.0",
+  "publication_date": "2026-11-23",
+  "creators": [
+    {
+      "name": "Gupta, Avin"
+    }
+  ],
+  "access_right": "open",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "measurement and verification",
+    "data quality",
+    "response burden",
+    "performance-based grants",
+    "degree-day regression",
+    "synthetic data"
+  ]
+}
