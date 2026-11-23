@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import yaml
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -63,6 +63,7 @@ class PopulationConfig(_Strict):
     award_share_of_cost: float = Field(gt=0, le=1)
     historical_award_share_of_cost: float = Field(gt=0, le=1)
     size_fit_fiscal_years: list[int]
+    size_distribution: Literal["empirical", "lognormal"]
     max_request_res: float
     max_request_eei: float
     min_request: float
@@ -172,6 +173,7 @@ class ExperimentConfig(_Strict):
     availability_grid: list[float]
     recommended_tolerance: float = Field(ge=0, le=1)
     e3_per_class: int = Field(ge=1)
+    size_sensitivity_n: int = Field(ge=1)
     evidence_sample: int = Field(ge=1)
 
 

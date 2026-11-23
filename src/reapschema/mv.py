@@ -42,10 +42,10 @@ class DegreeDayTable:
 
     def hdd(self, start: np.ndarray, end: np.ndarray) -> np.ndarray:
         """Heating degree days of inclusive day ranges; shape (n, G)."""
-        return self.cum_hdd[np.asarray(end) + 1] - self.cum_hdd[np.asarray(start)]
+        return np.asarray(self.cum_hdd[np.asarray(end) + 1] - self.cum_hdd[np.asarray(start)])
 
     def cdd(self, start: np.ndarray, end: np.ndarray) -> np.ndarray:
-        return self.cum_cdd[np.asarray(end) + 1] - self.cum_cdd[np.asarray(start)]
+        return np.asarray(self.cum_cdd[np.asarray(end) + 1] - self.cum_cdd[np.asarray(start)])
 
 
 def degree_day_table(daily_temp_c: np.ndarray, grid_f: np.ndarray) -> DegreeDayTable:
@@ -360,7 +360,8 @@ def bootstrap_avoided_interval(
     if base.i_c >= 0:
         pcols.append(pcdd[:, base.i_c] / pdays)
     xp = np.column_stack(pcols)
-    resid = base.residuals
+    # residuals inflated for the degrees of freedom used by the fit
+    resid = base.residuals * np.sqrt(n / max(n - base.p, 1))
     n_blocks = int(np.ceil(n / block))
     m = penergy.size
     m_blocks = int(np.ceil(m / block))

@@ -6442,6 +6442,24 @@ files:
   sha256: 6e5c0bf2f3f85c1d26f0f6bcb7326c7e66f12572a9df1eb96405c7740b81bc98
   bytes: 85982
   terms: NOAA NCEI; U.S. Government work, WMO Resolution 40 terms for non-U.S. data
+- path: data/raw/oversight/oig_34001-0001-21.pdf
+  source: USDA OIG Audit Report 34001-0001-21 (August 2016), Internet Archive capture
+  url: https://web.archive.org/web/20191013053312id_/https://www.usda.gov/oig/webdocs/34001-0001-21.pdf
+  query: {}
+  retrieved: '2026-11-23'
+  sha256: 155427e6490d166c3c3eae77a2e9ecd825ef27526e7010adb4acf7f8e6614715
+  bytes: 2469414
+  terms: USDA Office of Inspector General; U.S. Government work, public domain
+  note: no copy was found on a live USDA or oversight.gov address at retrieval
+- path: data/raw/oversight/oig_rd_ira_memo_2023-01-09.pdf
+  source: USDA OIG memorandum, Prior OIG Audits Relevant to Rural Development's Inflation
+    Reduction Act Funding (January 9, 2023)
+  url: https://www.oig.usda.gov/sites/default/files/reports/2026-07/RD-Lessons-Learned-MemoFinal.pdf
+  query: {}
+  retrieved: '2026-11-23'
+  sha256: 675fafce676d7f9b3bd14943e372a0af658abb27c980fcbcda51860cce5f85a2
+  bytes: 1208756
+  terms: USDA Office of Inspector General; U.S. Government work, public domain
 - path: data/raw/pvgis/AK_era5_2018.csv
   source: EC JRC PVGIS 5.2 (ERA5)
   url: https://re.jrc.ec.europa.eu/api/v5_2/seriescalc

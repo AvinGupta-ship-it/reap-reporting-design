@@ -54,7 +54,7 @@ def percent_points(percent: np.ndarray, bounds: np.ndarray, points: np.ndarray) 
     raw = np.nan_to_num(np.asarray(percent, dtype=float), nan=0.0, posinf=1e9, neginf=-1e9)
     p = np.floor(raw * 10.0 + 0.5 + 1e-9) / 10.0  # round half up
     idx = np.clip(np.searchsorted(bounds, p, side="right") - 1, 0, points.size - 1)
-    return points[idx]
+    return np.asarray(points[idx])
 
 
 def payback_points(payback: np.ndarray, bounds: np.ndarray, points: np.ndarray) -> np.ndarray:
@@ -69,7 +69,7 @@ def energy_points(energy_kwh: np.ndarray, request: np.ndarray, tables: ScoringTa
                   ) -> np.ndarray:
     """Equation 1/2 of 4280.140(d)(2): BTU per award dollar / 100, capped."""
     pts = np.maximum(energy_kwh, 0.0) * BTU_PER_KWH / request / tables.energy_divisor
-    return np.minimum(np.round(pts, 2), tables.energy_cap)
+    return np.asarray(np.minimum(np.round(pts, 2), tables.energy_cap))
 
 
 def simple_payback(cost: np.ndarray, energy_kwh: np.ndarray, price: np.ndarray) -> np.ndarray:

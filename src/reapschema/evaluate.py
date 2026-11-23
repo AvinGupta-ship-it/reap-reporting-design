@@ -51,12 +51,20 @@ def path_values(ev: Evidence, cfg: Config, *, with_bootstrap: np.random.Generato
     out["ndb"] = est.baseline.ndb
     out["adj_r2"] = est.baseline.adj_r2
     out["rho"] = est.autocorrelation
+    out["cvrmse_post"] = est.reporting.cvrmse
+    # normalization is used only when both models meet the fit criterion; otherwise the
+    # day-annualized difference is retained
+    limit = cfg.validation.cvrmse_max
+    fits = est.baseline.cvrmse <= limit and est.reporting.cvrmse <= limit
+    out["s_norm_guarded"] = est.normalized if fits else out["s_dated"]
     merged = mv.estimate_savings(
         mv.merge_estimated(pre.start, pre.end, pre.printed, pre.estimated),
         mv.merge_estimated(post.start, post.end, post.printed, post.estimated),
         table, cfg.mv.confidence)
     out["s_norm_merged"] = merged.normalized
     out["s_avoided_merged"] = merged.avoided
+    fits_m = merged.baseline.cvrmse <= limit and merged.reporting.cvrmse <= limit
+    out["s_norm_merged_guarded"] = merged.normalized if fits_m else out["s_dated"]
     weekend = weather.daytype.reshape(-1, 24)[:, 0]
     d0 = ev.in_service_day
     daily = mv.estimate_savings_daily(

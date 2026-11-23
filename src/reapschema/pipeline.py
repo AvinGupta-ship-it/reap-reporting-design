@@ -35,6 +35,7 @@ SUMMARY_FILES = (
     "e6_frontier.csv", "e6_bands.csv", "e6_ilp.csv", "e6_calibration.csv", "e7_selection.csv",
     "e8_modes.csv", "sobol_burden.csv", "convergence.csv", "interval_coverage.csv",
     "population.json", "score_structure.json", "traceability.csv", "recommended.json",
+    "e2_by_savings_fraction.csv", "sensitivity_size_distribution.csv",
 )
 
 
@@ -134,6 +135,9 @@ def run(cfg: Config) -> Path:
     _save(frontier["calibration"], out / "e6_calibration.csv", cfg)
     rec_row = ex.recommended_spec(specs, cfg.experiments.recommended_tolerance)
     rec_elements = ex.spec_elements(rec_row)
+    int_row = ex.recommended_spec(specs, cfg.experiments.recommended_tolerance,
+                                  allow_interval=True)
+    int_elements = ex.spec_elements(int_row)
     base_row = specs[(specs["mode"] == "manual_transcription")
                      & (specs["n_elements"] == 0)].iloc[0]
     ex.write_json(out / "recommended.json", {
@@ -146,14 +150,23 @@ def run(cfg: Config) -> Path:
         "baseline_selection_change": float(base_row["selection_change"]),
         "baseline_flag_rate": float(base_row["flag_rate"]),
         "tolerance": cfg.experiments.recommended_tolerance,
+        "interval_elements": sorted(int_elements),
+        "interval_burden_min": float(int_row["burden_min"]),
+        "interval_mare": float(int_row["mare"]),
+        "interval_selection_change": float(int_row["selection_change"]),
     })
-    extra = {"recommended": rec_elements}
+    extra = {"recommended": rec_elements, "recommended_interval": int_elements}
 
     _save(ex.e7_selection(records, cfg, extra), out / "e7_selection.csv", cfg)
     ex.write_json(out / "score_structure.json", ex.score_structure(records, cfg))
     named = {"current": frozenset(), "recommended": rec_elements,
+             "recommended_interval": int_elements,
              "metadata": ex.NAMED_SPECS["metadata"][1],
              "interval": ex.NAMED_SPECS["interval"][1]}
+    _save(ex.accuracy_by_savings_fraction(records), out / "e2_by_savings_fraction.csv", cfg)
+    _save(ex.size_distribution_sensitivity(
+        cfg, {"current": frozenset(), "recommended": rec_elements}),
+        out / "sensitivity_size_distribution.csv", cfg)
     _save(ex.e8_modes(records, cfg, rng, hours, named), out / "e8_modes.csv", cfg)
     _save(ex.burden_sobol(cfg, hours, rec_elements, float(frontier["calibration"][
         "res_share"].iloc[0]), (float(base_row["flag_rate"]), float(rec_row["flag_rate"]))),

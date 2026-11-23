@@ -160,7 +160,8 @@ class SpecEvaluator:
             s = (self._col["c_s_interval_norm"] if "weather_normalization" in el
                  else self._col["c_s_dated"])
         elif "weather_normalization" in el and "billing_dates" in el:
-            s = self._pick("s_norm_merged" if "read_type" in el else "s_norm", use_rep)
+            s = self._pick("s_norm_merged_guarded" if "read_type" in el else "s_norm_guarded",
+                           use_rep)
         elif "billing_dates" in el:
             s = self._pick("s_dated", use_rep)
         else:

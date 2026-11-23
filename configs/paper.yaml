@@ -2,7 +2,7 @@
 # Every parameter not taken from a cited source is a hypothetical scenario value.
 name: paper
 seed: 20261130
-n_applicants: 6000
+n_applicants: 20000
 n_workers: 8
 
 population:
@@ -10,6 +10,7 @@ population:
   award_share_of_cost: 0.25            # 7 CFR 4280.122(a)(3): cost sharing of at least 75 percent
   historical_award_share_of_cost: 0.25 # FY2021-2022 grants were limited to 25 percent of cost
   size_fit_fiscal_years: [2021, 2022]
+  size_distribution: empirical         # empirical (resampled awards) or lognormal (fitted)
   max_request_res: 500000              # 4280.122(a)(2)(ii)
   max_request_eei: 250000
   min_request: 1500
@@ -175,6 +176,7 @@ experiments:
   bootstrap_replicates: 1000
   frontier_mc_bands: [0.05, 0.95]
   recommended_tolerance: 0.05          # share of the attainable loss reduction that may be forgone
+  size_sensitivity_n: 4000
   e3_per_class: 2000
   evidence_sample: 5
   availability_grid: [0.0, 0.25, 0.5, 0.75, 1.0]

@@ -32,7 +32,6 @@ from reapschema.optimize import (
     frontier_at_budgets,
     pareto_front,
     solve_surrogate_ilp,
-    spec_vector,
 )
 from reapschema.synth.errors import ERROR_CLASSES
 from reapschema.synth.generator import generate_applicant, load_population, spawn_seeds
@@ -64,10 +63,32 @@ EEI_PATHS = {
     "eei_undated": ("s_undated", "Undated monthly difference"),
     "eei_dated": ("s_dated", "Dated, day-annualized difference"),
     "eei_normalized_monthly": ("s_norm", "Dated monthly, degree-day normalized"),
-    "eei_normalized_merged": ("s_norm_merged", "Dated monthly, normalized, estimated reads "
-                              "merged"),
+    "eei_normalized_guarded": ("s_norm_guarded", "Dated monthly, normalized when the models "
+                               "meet the fit criterion"),
+    "eei_normalized_merged": ("s_norm_merged_guarded", "As above, estimated reads merged"),
     "eei_interval": ("s_interval_norm", "Daily interval data, normalized"),
 }
+SAVINGS_BANDS = ((0.0, 0.10, "below 10%"), (0.10, 0.20, "10-20%"), (0.20, 1.0, "above 20%"))
+
+
+def accuracy_by_savings_fraction(records: pd.DataFrame) -> pd.DataFrame:
+    """EEI estimator error on error-free evidence by true savings fraction."""
+    eei = records[records["category"] == "EEI"]
+    truth = eei["true_savings_normal"].to_numpy()
+    frac = eei["savings_fraction"].to_numpy()
+    rows = []
+    for lo, hi, label in SAVINGS_BANDS:
+        m = (frac >= lo) & (frac < hi)
+        for key, (col, _label) in EEI_PATHS.items():
+            are = np.abs(eei[f"c_{col}"].to_numpy()[m] - truth[m]) / np.abs(truth[m])
+            rows.append({"savings_fraction": label, "estimator": key, "n": int(m.sum()),
+                         "median_are": float(np.median(are)) if m.any() else np.nan,
+                         "share_above_10pct": float((are > 0.10).mean()) if m.any()
+                         else np.nan})
+    return pd.DataFrame(rows)
+# (label, evidence contains injected errors, validation rules applied)
+CONDITIONS = (("error_free", False, True), ("with_errors_validated", True, True),
+              ("with_errors_unvalidated", True, False))
 CPRE_PATHS = {
     "cpre_undated": ("cpre_undated", "Sum of twelve bills"),
     "cpre_dated": ("cpre_dated", "Day-annualized twelve bills"),
@@ -108,10 +129,8 @@ def e2_accuracy(records: pd.DataFrame, cfg: Config, rng: np.random.Generator
     rows = []
     samples = []
     for key, (label, elements) in NAMED_SPECS.items():
-        for condition, kwargs in (("error_free", {"with_errors": False}),
-                                  ("with_errors_validated", {}),
-                                  ("with_errors_unvalidated", {"apply_rules": False})):
-            res = ev.evaluate(elements, **kwargs)
+        for condition, with_errors, apply_rules in CONDITIONS:
+            res = ev.evaluate(elements, with_errors=with_errors, apply_rules=apply_rules)
             for cat, mask in (("RES", ev.is_res), ("EEI", ~ev.is_res)):
                 are = res.are[mask]
                 rows.append({
@@ -269,13 +288,13 @@ def e3_validation(class_records: pd.DataFrame, cfg: Config
     # positive predictive value of an ensemble flag at scaled class rates
     ppv_rows = []
     for mult in cfg.experiments.e3_rate_multipliers:
-        for _, row in ens.iterrows():
-            tp = sum(mult * cfg.errors.rates[c] * row[c] for c in ERROR_CLASSES
-                     if not np.isnan(row[c]))
+        for erow in ens.to_dict("records"):
+            tp = sum(mult * cfg.errors.rates[c] * erow[c] for c in ERROR_CLASSES
+                     if not np.isnan(erow[c]))
             p_err = sum(mult * cfg.errors.rates[c] for c in ERROR_CLASSES
-                        if not np.isnan(row[c]))
-            fp = (1.0 - p_err) * row["false_positive_rate"]
-            ppv_rows.append({"spec": row["spec"], "category": row["category"],
+                        if not np.isnan(erow[c]))
+            fp = (1.0 - p_err) * erow["false_positive_rate"]
+            ppv_rows.append({"spec": erow["spec"], "category": erow["category"],
                              "rate_multiplier": mult, "error_rate": p_err,
                              "recall": tp / p_err if p_err > 0 else np.nan,
                              "ppv": tp / (tp + fp) if tp + fp > 0 else np.nan})
@@ -295,7 +314,8 @@ def e4_normalization(records: pd.DataFrame, cfg: Config) -> tuple[pd.DataFrame, 
     truth = eei["true_savings_normal"].to_numpy()
     x = eei["delta_mean_temp"].to_numpy()
     estimators = {"unnormalized": "c_s_dated", "normalized_avoided": "c_s_avoided",
-                  "normalized_annual": "c_s_norm", "interval_normalized": "c_s_interval_norm"}
+                  "normalized_unguarded": "c_s_norm", "normalized_annual": "c_s_norm_guarded",
+                  "interval_normalized": "c_s_interval_norm"}
     edges = np.quantile(x, np.linspace(0, 1, 9))
     for name, col in estimators.items():
         # error as a share of pre-installation use, so that projects are comparable
@@ -443,7 +463,7 @@ def e6_frontier(records: pd.DataFrame, cfg: Config, rng: np.random.Generator,
     table = pd.DataFrame(rows)
     table["on_frontier_mare"] = False
     table["on_frontier_selection"] = False
-    for mode, grp in table.groupby("mode"):
+    for _mode, grp in table.groupby("mode"):
         idx = grp.index.to_numpy()
         table.loc[idx[pareto_front(grp["burden_min"].to_numpy(), grp["mare"].to_numpy())],
                   "on_frontier_mare"] = True
@@ -468,16 +488,17 @@ def e6_frontier(records: pd.DataFrame, cfg: Config, rng: np.random.Generator,
     budgets = np.linspace(float(manual["burden_min"].min()),
                           float(manual["burden_min"].quantile(0.9)), 60)
     lo_q, hi_q = cfg.experiments.frontier_mc_bands
-    # loss uncertainty: nonparametric bootstrap over applicants for each budget's best spec
     band_rows = []
     for metric in ("mare", "selection_change"):
-        loss = manual[metric].to_numpy()
+        loss_values = manual[metric].to_numpy(dtype=float)
         se = manual["mare_se" if metric == "mare" else "selection_change_se"].to_numpy()
         curves = np.empty((burden_draws.shape[1], budgets.size))
         for d in range(burden_draws.shape[1]):
-            noisy = loss + rng.normal(0.0, 1.0, loss.size) * se
+            # sampling error of the loss is common to all specifications, which are
+            # evaluated on the same applicants
+            noisy = loss_values + rng.normal(0.0, 1.0) * se
             curves[d] = frontier_at_budgets(burden_draws[:, d], noisy, budgets)
-        central = frontier_at_budgets(manual["burden_min"].to_numpy(), loss, budgets)
+        central = frontier_at_budgets(manual["burden_min"].to_numpy(), loss_values, budgets)
         for b, budget in enumerate(budgets):
             band_rows.append({"metric": metric, "budget_min": float(budget),
                               "central": float(central[b]),
@@ -516,14 +537,46 @@ def e6_frontier(records: pd.DataFrame, cfg: Config, rng: np.random.Generator,
                                              zip(OPTIONAL_ELEMENTS, tau, strict=True)}}])}
 
 
-def recommended_spec(specs: pd.DataFrame, tolerance: float) -> pd.Series:
-    """Lowest-burden frontier specification within ``tolerance`` of the minimum loss."""
-    manual = specs[(specs["mode"] == "manual_transcription") & specs["on_frontier_mare"]]
-    floor = manual["mare"].min()
-    base = specs[(specs["mode"] == "manual_transcription")
-                 & (specs["n_elements"] == 0)]["mare"].iloc[0]
-    ok = manual[manual["mare"] <= floor + tolerance * (base - floor)]
-    return ok.sort_values("burden_min").iloc[0]
+INTERVAL_ELEMENTS = ("utility_interval", "inverter_interval")
+
+
+def recommended_spec(specs: pd.DataFrame, tolerance: float, allow_interval: bool = False
+                     ) -> pd.Series:
+    """Lowest-burden specification within ``tolerance`` of the attainable loss reduction.
+
+    With ``allow_interval`` false the search is restricted to specifications that use
+    monthly records only (no interval data from the utility or the production meter).
+    """
+    manual = specs[specs["mode"] == "manual_transcription"]
+    if not allow_interval:
+        manual = manual[(manual[list(INTERVAL_ELEMENTS)].sum(axis=1) == 0)]
+    front = manual.iloc[pareto_front(manual["burden_min"].to_numpy(),
+                                     manual["mare"].to_numpy())]
+    floor = front["mare"].min()
+    base = manual[manual["n_elements"] == 0]["mare"].iloc[0]
+    ok = front[front["mare"] <= floor + tolerance * (base - floor)]
+    best: pd.Series = ok.sort_values("burden_min").iloc[0]
+    return best
+
+
+def size_distribution_sensitivity(cfg: Config, specs: dict[str, frozenset[str]]
+                                  ) -> pd.DataFrame:
+    """Headline accuracy under the empirical and the fitted lognormal size distributions."""
+    rows = []
+    for dist in ("empirical", "lognormal"):
+        pop = cfg.population.model_copy(update={"size_distribution": dist})
+        alt = cfg.model_copy(update={"population": pop})
+        rec = simulate(alt, cfg.experiments.size_sensitivity_n, seed=cfg.seed + 901)
+        ev = SpecEvaluator(rec, alt)
+        for key, elements in specs.items():
+            res = ev.evaluate(elements)
+            loss = ev.losses(res)
+            rows.append({"size_distribution": dist, "spec": key, "n": len(rec),
+                         "mare": loss["mare"], "mare_se": loss["mare_se"],
+                         "median_are_res": loss["median_are_res"],
+                         "median_are_eei": loss["median_are_eei"],
+                         "median_request": float(rec["amount_requested"].median())})
+    return pd.DataFrame(rows)
 
 
 def spec_elements(row: pd.Series) -> frozenset[str]:
@@ -542,10 +595,10 @@ def e7_selection(records: pd.DataFrame, cfg: Config, extra: dict[str, frozenset[
     for ratio in cfg.competition.funding_ratio_sensitivity:
         true_sel = sel.true_selection(ratio)
         for key, elements in named.items():
-            for condition, kwargs in (("error_free", {"with_errors": False}),
-                                      ("with_errors_validated", {}),
-                                      ("with_errors_unvalidated", {"apply_rules": False})):
-                p, se = sel.change_probability(ev.evaluate(elements, **kwargs), ratio)
+            for condition, with_errors, apply_rules in CONDITIONS:
+                p, se = sel.change_probability(
+                    ev.evaluate(elements, with_errors=with_errors, apply_rules=apply_rules),
+                    ratio)
                 rows.append({"spec": key, "condition": condition, "funding_ratio": ratio,
                              "selection_change": p, "se": se,
                              "mean_selected": float(true_sel.sum(axis=1).mean())})

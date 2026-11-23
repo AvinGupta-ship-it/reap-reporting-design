@@ -31,13 +31,13 @@ class Bills:
 
     @property
     def days(self) -> np.ndarray:
-        return self.end - self.start + 1
+        return np.asarray(self.end - self.start + 1)
 
     @property
     def printed(self) -> np.ndarray:
         if self.basis == "net_of_exports":
-            return self.delivered - self.export
-        return self.delivered
+            return np.asarray(self.delivered - self.export)
+        return np.asarray(self.delivered)
 
     def __len__(self) -> int:
         return int(self.start.size)
@@ -92,9 +92,12 @@ def make_bills(rng: np.random.Generator, daily_delivered: np.ndarray, daily_expo
             days_cur = reads[i] - reads[i - 1]
             noise = 1.0 + rng.normal(0.0, cfg.estimate_noise_sd)
             use_prev = reg_d[i - 1] - reg_d[i - 2]
-            reg_d[i] = reg_d[i - 1] + max(use_prev / days_prev * days_cur * noise, 0.0)
+            # an estimate cannot exceed the register at the next actual read
+            reg_d[i] = min(reg_d[i - 1] + max(use_prev / days_prev * days_cur * noise, 0.0),
+                           true_d[i + 1])
             exp_prev = reg_e[i - 1] - reg_e[i - 2]
-            reg_e[i] = reg_e[i - 1] + max(exp_prev / days_prev * days_cur * noise, 0.0)
+            reg_e[i] = min(reg_e[i - 1] + max(exp_prev / days_prev * days_cur * noise, 0.0),
+                           true_e[i + 1])
     delivered = np.diff(reg_d)
     export = np.diff(reg_e)
     demand = np.array([daily_peak[offset[i]:offset[i + 1]].max() for i in range(n)])

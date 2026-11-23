@@ -37,6 +37,7 @@ requirement_id,heading,scope,schema_elements,mapped_by,note
 4280.122(a)(8)(i)(F),Use of energy,evidence,Meter.netting_arrangement; Meter.billed_quantity_basis,4280.122(a)(8)(i)(F),Interconnection and metering agreement type.
 4280.122(a)(8)(i)(F)(1),Interconnection,evidence,Meter.netting_arrangement; Meter.billed_quantity_basis,4280.122(a)(8)(i)(F),Interconnection and metering agreement type.
 4280.122(a)(8)(i)(F)(2),End User,evidence,Meter.netting_arrangement; Meter.billed_quantity_basis,4280.122(a)(8)(i)(F),Interconnection and metering agreement type.
+4280.122(a)(8)(i)(F)(3),Metering Agreement,evidence,Meter.netting_arrangement; Meter.billed_quantity_basis,4280.122(a)(8)(i)(F),Interconnection and metering agreement type.
 4280.122(a)(8)(i)(G),Sale of energy,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.
 4280.122(a)(8)(i)(G)(1),Percentage,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.
 4280.122(a)(8)(i)(G)(2),Quantity,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.

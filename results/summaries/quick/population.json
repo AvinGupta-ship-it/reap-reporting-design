@@ -3,29 +3,29 @@
     "EEI": {
       "ad_critical_5pct": 0.751,
       "anderson_darling": 5.009146629782208,
-      "ks_statistic": 0.16673147962868717,
+      "ks_statistic": 0.16673147962868795,
       "n": 573.0
     },
     "RES": {
       "ad_critical_5pct": 0.752,
       "anderson_darling": 35.044595220805604,
-      "ks_statistic": 0.20360235554758166,
+      "ks_statistic": 0.20360235554758238,
       "n": 1745.0
     }
   },
   "award_log_mean": {
-    "EEI": 9.832223119482467,
-    "RES": 9.950981369182722
+    "EEI": 9.83222311948247,
+    "RES": 9.950981369182724
   },
   "award_log_sd": {
     "EEI": 0.9059710105170171,
     "RES": 0.9782137749965759
   },
-  "error_share": 0.2625,
-  "median_capacity_kw": 30.05617727045468,
-  "median_replaced_fraction": 0.7609795393461076,
-  "median_request": 19224.387447475598,
-  "median_savings_fraction": 0.1313219649972383,
+  "error_share": 0.2975,
+  "median_capacity_kw": 28.695785176622802,
+  "median_replaced_fraction": 0.7476113666270277,
+  "median_request": 19302.5,
+  "median_savings_fraction": 0.13132196499723828,
   "median_station_distance_km": 50.4,
   "n": 400,
   "n_states": 48,

@@ -22,7 +22,8 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from reapschema.data.fetch import RAW, Site, load_sites
+from reapschema.data.fetch import RAW as RAW
+from reapschema.data.fetch import Site, load_sites
 from reapschema.provenance import REPO_ROOT, sha256_file, write_sidecar
 
 PROCESSED = REPO_ROOT / "data" / "processed"
@@ -90,8 +91,8 @@ def read_isd_lite(paths: list[Path]) -> pd.Series:
         series[series <= -9990] = np.nan
         parts.append(series / 10.0)
     temp = pd.concat(parts).sort_index()
-    temp = temp[~temp.index.duplicated()]
-    return temp
+    deduplicated: pd.Series = temp[~temp.index.duplicated()]
+    return deduplicated
 
 
 def _regular_hourly(series: pd.Series, first_year: int, last_year: int) -> pd.Series:
@@ -177,23 +178,24 @@ def build_load_profiles(sites: list[Site], building_types: list[str], load_year:
     for site in sites:
         temp_utc = pd.read_parquet(PROCESSED / "weather_load_year" / f"{site.state}.parquet")
         temp_local = temp_utc["temp_site"].copy()
-        temp_local.index = (temp_local.index + pd.Timedelta(hours=site.utc_offset)).tz_localize(
-            None
-        )
+        temp_local.index = (pd.DatetimeIndex(temp_local.index)
+                            + pd.Timedelta(hours=site.utc_offset)).tz_localize(None)
         for bt in building_types:
             hourly = comstock_hourly(
                 RAW / "comstock" / site.state / f"up00-{site.state.lower()}-{bt}.csv",
                 site.utc_offset,
             )
-            hourly = hourly[hourly.index.year == load_year]
+            stamps = pd.DatetimeIndex(hourly.index)
+            hourly = hourly[stamps.year == load_year]
+            stamps = pd.DatetimeIndex(hourly.index)
             temp = temp_local.reindex(hourly.index).interpolate(limit_direction="both")
             annual = float(hourly["total"].sum())
-            daytype = (hourly.index.dayofweek >= 5).astype(int)
-            hour = hourly.index.hour
+            daytype = (stamps.dayofweek >= 5).astype(int)
+            hour = stamps.hour
             group = np.asarray(daytype * 24 + hour)
             for name in BASE_END_USES:
                 prof = (hourly[name] / annual).groupby(
-                    [hourly.index.month, daytype, hour]
+                    [stamps.month, daytype, hour]
                 ).mean()
                 prof.index.names = ["month", "daytype", "hour"]
                 part = prof.rename("value").reset_index()

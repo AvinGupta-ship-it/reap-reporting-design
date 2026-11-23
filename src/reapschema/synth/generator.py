@@ -63,6 +63,7 @@ class Population:
     award_log_mean: dict[str, float]
     award_log_sd: dict[str, float]
     award_fit: dict[str, dict[str, float]]
+    award_samples: dict[str, np.ndarray]
     prices: dict[str, float]
 
 
@@ -76,9 +77,11 @@ def load_population(fit_years: tuple[int, ...]) -> Population:
     log_mean: dict[str, float] = {}
     log_sd: dict[str, float] = {}
     fit: dict[str, dict[str, float]] = {}
+    samples: dict[str, np.ndarray] = {}
     for cat in ("RES", "EEI"):
         sel = awards[(awards["category"] == cat) & awards["fiscal_year"].isin(fit_years)]
-        logs = np.log(sel["amount_usd"].to_numpy())
+        samples[cat] = np.sort(sel["amount_usd"].to_numpy(dtype=float))
+        logs = np.log(samples[cat])
         log_mean[cat] = float(logs.mean())
         log_sd[cat] = float(logs.std(ddof=1))
         ad = stats.anderson(logs, dist="norm")
@@ -90,7 +93,16 @@ def load_population(fit_years: tuple[int, ...]) -> Population:
     prices = dict(zip(prices_frame["state"], prices_frame["commercial_usd_per_kwh"],
                       strict=True))
     return Population(states, (counts / counts.sum()).to_numpy(), res_share, log_mean, log_sd,
-                      fit, {str(k): float(v) for k, v in prices.items()})
+                      fit, samples, {str(k): float(v) for k, v in prices.items()})
+
+
+def draw_award(rng: np.random.Generator, population: Population, category: str,
+               distribution: str) -> float:
+    """Historical award amount: resampled from observed awards or from the lognormal fit."""
+    if distribution == "empirical":
+        return float(rng.choice(population.award_samples[category]))
+    return float(np.exp(rng.normal(population.award_log_mean[category],
+                                   population.award_log_sd[category])))
 
 
 def _daily(x: np.ndarray) -> np.ndarray:
@@ -165,8 +177,7 @@ def generate_applicant(index: int, seed: np.random.SeedSequence, cfg: Config, *,
     if category == "RES":
         res = pop_cfg.res
         technology = "solar_electric"
-        award = float(np.exp(rng.normal(population.award_log_mean["RES"],
-                                        population.award_log_sd["RES"])))
+        award = draw_award(rng, population, "RES", pop_cfg.size_distribution)
         cost = award / pop_cfg.historical_award_share_of_cost
         capacity = cost / (res.cost_per_watt_median * float(
             rng.lognormal(0.0, res.cost_per_watt_log_sd))) / 1000.0
@@ -203,8 +214,7 @@ def generate_applicant(index: int, seed: np.random.SeedSequence, cfg: Config, *,
         savings_rel = occ_sel
         affected_share = float(sum(shares.get(e, 0.0) for e in measure.end_uses))
         fraction = float((savings_rel * noise)[pre_year].sum() / pre_total_rel)
-        award = float(np.exp(rng.normal(population.award_log_mean["EEI"],
-                                        population.award_log_sd["EEI"])))
+        award = draw_award(rng, population, "EEI", pop_cfg.size_distribution)
         cost = award / pop_cfg.historical_award_share_of_cost
         payback = float(np.clip(rng.lognormal(np.log(e_cfg.payback_median_years),
                                               e_cfg.payback_log_sd),

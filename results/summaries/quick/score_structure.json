@@ -1,8 +1,8 @@
 {
   "distinct_energy_scores": 8.0,
-  "share_eligible": 0.7725,
+  "share_eligible": 0.7875,
   "share_eligible_eei": 0.9789473684210527,
-  "share_eligible_res": 0.7081967213114754,
+  "share_eligible_res": 0.7278688524590164,
   "share_energy_points_at_cap": 1.0,
   "share_energy_points_at_cap_eei": 1.0,
   "share_energy_points_at_cap_res": 1.0

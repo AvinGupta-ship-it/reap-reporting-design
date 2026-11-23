@@ -36,7 +36,8 @@ def test_degree_days_match_direct_computation():
     start, end = np.array([10, 200]), np.array([40, 229])
     temp_f = temp_c * 9 / 5 + 32
     for k, tb in enumerate(GRID):
-        direct = [np.maximum(tb - temp_f[a:b + 1], 0).sum() for a, b in zip(start, end)]
+        direct = [np.maximum(tb - temp_f[a:b + 1], 0).sum()
+                  for a, b in zip(start, end, strict=True)]
         assert table.hdd(start, end)[:, k] == pytest.approx(direct)
 
 

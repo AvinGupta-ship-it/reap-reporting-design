@@ -1,0 +1,16 @@
+{
+  "baseline_burden_min": 165.90697973520113,
+  "baseline_flag_rate": 0.121,
+  "baseline_mare": 0.08153449970801335,
+  "baseline_selection_change": 0.0799447067048333,
+  "burden_min": 255.61253582830884,
+  "elements": [
+    "inverter_monthly",
+    "utility_interval",
+    "weather_normalization"
+  ],
+  "flag_rate": 0.16116666666666668,
+  "mare": 0.04460587399314799,
+  "selection_change": 0.03919617045565446,
+  "tolerance": 0.05
+}

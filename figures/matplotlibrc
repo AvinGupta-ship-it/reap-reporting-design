@@ -1,0 +1,24 @@
+# Shared figure style. Fonts are embedded as TrueType (Type 42) in PDF output.
+font.family: DejaVu Sans
+font.size: 8
+axes.titlesize: 8
+axes.labelsize: 8
+xtick.labelsize: 7
+ytick.labelsize: 7
+legend.fontsize: 7
+legend.frameon: False
+axes.spines.top: False
+axes.spines.right: False
+axes.linewidth: 0.6
+axes.grid: True
+grid.linewidth: 0.3
+grid.color: "#d9d9d9"
+lines.linewidth: 1.2
+lines.markersize: 3.5
+figure.dpi: 150
+savefig.dpi: 300
+savefig.bbox: tight
+pdf.fonttype: 42
+ps.fonttype: 42
+svg.hashsalt: reapschema
+axes.prop_cycle: cycler("color", ["0072B2", "D55E00", "009E73", "CC79A7", "E69F00", "56B4E9", "000000", "F0E442"])

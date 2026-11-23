@@ -1,16 +1,26 @@
 {
-  "baseline_burden_min": 165.7592571808771,
-  "baseline_flag_rate": 0.1175,
-  "baseline_mare": 0.09090678532435337,
-  "baseline_selection_change": 0.09313013996720822,
-  "burden_min": 255.14123053594182,
+  "baseline_burden_min": 165.65374107064568,
+  "baseline_flag_rate": 0.115,
+  "baseline_mare": 0.08590272932326705,
+  "baseline_selection_change": 0.07901515177545765,
+  "burden_min": 231.77406693727664,
   "elements": [
+    "billing_dates",
+    "inverter_monthly",
+    "meter_ids",
+    "read_type",
+    "weather_normalization"
+  ],
+  "flag_rate": 0.2975,
+  "interval_burden_min": 255.8798433075618,
+  "interval_elements": [
     "inverter_monthly",
     "utility_interval",
     "weather_normalization"
   ],
-  "flag_rate": 0.15,
-  "mare": 0.042649882001780194,
-  "selection_change": 0.05939656509936828,
+  "interval_mare": 0.04254304678304175,
+  "interval_selection_change": 0.03814352650315509,
+  "mare": 0.05340048099839888,
+  "selection_change": 0.06325514951450488,
   "tolerance": 0.05
 }

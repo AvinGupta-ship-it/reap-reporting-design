@@ -52,6 +52,7 @@ LICENSES = {
     "eia": "U.S. Energy Information Administration; public domain",
     "usaspending": "U.S. Department of the Treasury; public domain",
     "pvwatts": "NREL PVWatts API; public domain data, shared demonstration key",
+    "oig": "USDA Office of Inspector General; U.S. Government work, public domain",
 }
 
 
@@ -162,6 +163,25 @@ def fetch_federal_register(manifest: Manifest) -> None:
         url=f"https://www.govinfo.gov/content/pkg/FR-2026-10-01/pdf/{FR_DOC}.pdf",
         source="U.S. Government Publishing Office (govinfo)", license_key="federal_register",
         note="official PDF used to check transcribed figures",
+    )
+
+
+def fetch_oversight_documents(manifest: Manifest) -> None:
+    """OIG audit and memorandum on REAP performance data."""
+    _download(
+        manifest, RAW / "oversight" / "oig_34001-0001-21.pdf",
+        url="https://web.archive.org/web/20191013053312id_/"
+            "https://www.usda.gov/oig/webdocs/34001-0001-21.pdf",
+        source="USDA OIG Audit Report 34001-0001-21 (August 2016), Internet Archive capture",
+        license_key="oig",
+        note="no copy was found on a live USDA or oversight.gov address at retrieval",
+    )
+    _download(
+        manifest, RAW / "oversight" / "oig_rd_ira_memo_2023-01-09.pdf",
+        url="https://www.oig.usda.gov/sites/default/files/reports/2026-07/"
+            "RD-Lessons-Learned-MemoFinal.pdf",
+        source="USDA OIG memorandum, Prior OIG Audits Relevant to Rural Development's "
+               "Inflation Reduction Act Funding (January 9, 2023)", license_key="oig",
     )
 
 
@@ -357,6 +377,7 @@ def fetch_all(include_large: bool = True) -> None:
         fetch_federal_register(manifest)
         fetch_eia_prices(manifest)
         fetch_pvwatts_reference(manifest)
+        fetch_oversight_documents(manifest)
         manifest.save()
         if include_large:
             fetch_usaspending(manifest, [2021, 2022, 2023])

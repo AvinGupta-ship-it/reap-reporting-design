@@ -77,7 +77,8 @@ RULES: tuple[Rule, ...] = (
     _r("export_consistency", "Exports are consistent with the metering arrangement and do "
        "not exceed or equal claimed production", ("res_post_bills", "export_channel"), "RES"),
     _r("bill_difference_unlabelled", "Claimed production agrees with the change in billed "
-       "energy (billed quantity basis unknown)", ("res_post_bills",), "RES", "statistical", None, True),
+       "energy (billed quantity basis unknown)", ("res_post_bills",), "RES", "statistical",
+       None, True),
     _r("bill_difference", "Claimed production agrees with pre-installation use minus "
        "delivered energy plus exports", ("res_post_bills", "export_channel"), "RES",
        "statistical", None, True),

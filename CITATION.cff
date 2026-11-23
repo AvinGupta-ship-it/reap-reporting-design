@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software or its outputs, please cite it as below."
+title: "reap-reporting-schema: evidence schema, synthetic applicants and accuracy-burden analysis for REAP performance evidence"
+type: software
+version: 1.0.0
+authors:
+  - family-names: Gupta
+    given-names: Avin
+license: BSD-3-Clause
+keywords:
+  - measurement and verification
+  - response burden
+  - data quality
+  - Paperwork Reduction Act
+  - Rural Energy for America Program

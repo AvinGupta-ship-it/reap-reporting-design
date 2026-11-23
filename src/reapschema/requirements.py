@@ -365,7 +365,8 @@ def parse_scoring_tables(xml_path: Path = RULE_XML) -> dict[str, list[tuple[str,
         if sectno != "4280.140":
             continue
         for table in section.iter("GPOTABLE"):
-            title = _flatten(table.find("TTITLE")) if table.find("TTITLE") is not None else ""
+            ttitle = table.find("TTITLE")
+            title = _flatten(ttitle) if ttitle is not None else ""
             m = re.search(r"Paragraph\s*(.*)$", title)
             key = re.sub(r"\s+", "", m.group(1)) if m else title
             rows: list[tuple[str, float]] = []

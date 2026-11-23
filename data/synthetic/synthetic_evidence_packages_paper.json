@@ -23,13 +23,13 @@
     "category": "RES",
     "technology": "solar_electric",
     "in_service_date": "2011-05-14",
-    "project_cost": 84865.57,
-    "amount_requested": 21216.39,
+    "project_cost": 66600.0,
+    "amount_requested": 16650.0,
     "useful_life_years": 25.0,
-    "rated_capacity": 28.855,
+    "rated_capacity": 25.54,
     "rated_capacity_unit": "kW",
-    "array_tilt": 9.5,
-    "array_azimuth": 191.8
+    "array_tilt": 23.9,
+    "array_azimuth": 181.6
    },
    "meters": [
     {
@@ -49,290 +49,290 @@
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2010-04-14",
-     "period_end": "2010-05-10",
+     "period_start": "2010-04-30",
+     "period_end": "2010-05-31",
      "read_type": "actual",
-     "energy_imported": 895.9,
+     "energy_imported": 1995.8,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.96,
-     "energy_charge": 91.9
+     "peak_demand": 3.8,
+     "energy_charge": 204.71
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2010-05-11",
-     "period_end": "2010-06-12",
+     "period_start": "2010-06-01",
+     "period_end": "2010-06-27",
      "read_type": "actual",
-     "energy_imported": 1093.5,
+     "energy_imported": 1659.8,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2.12,
-     "energy_charge": 108.92
+     "peak_demand": 3.98,
+     "energy_charge": 165.32
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2010-06-13",
-     "period_end": "2010-07-14",
+     "period_start": "2010-06-28",
+     "period_end": "2010-07-30",
      "read_type": "actual",
-     "energy_imported": 1050.7,
+     "energy_imported": 2034.0,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.93,
-     "energy_charge": 105.48
+     "peak_demand": 3.63,
+     "energy_charge": 204.2
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2010-07-15",
-     "period_end": "2010-08-09",
+     "period_start": "2010-07-31",
+     "period_end": "2010-08-31",
      "read_type": "actual",
-     "energy_imported": 829.7,
+     "energy_imported": 1975.9,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.82,
-     "energy_charge": 77.69
+     "peak_demand": 3.77,
+     "energy_charge": 185.01
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2010-08-10",
-     "period_end": "2010-09-08",
+     "period_start": "2010-09-01",
+     "period_end": "2010-09-26",
      "read_type": "actual",
-     "energy_imported": 1021.9,
+     "energy_imported": 1610.1,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2.18,
-     "energy_charge": 98.42
+     "peak_demand": 4.09,
+     "energy_charge": 155.07
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2010-09-09",
-     "period_end": "2010-10-13",
+     "period_start": "2010-09-27",
+     "period_end": "2010-10-27",
      "read_type": "actual",
-     "energy_imported": 3212.0,
+     "energy_imported": 11401.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 25.45,
-     "energy_charge": 318.4
+     "peak_demand": 53.94,
+     "energy_charge": 1130.19
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2010-10-14",
-     "period_end": "2010-11-09",
+     "period_start": "2010-10-28",
+     "period_end": "2010-11-30",
      "read_type": "actual",
-     "energy_imported": 9097.8,
+     "energy_imported": 35429.8,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 37.44,
-     "energy_charge": 886.42
+     "peak_demand": 112.36,
+     "energy_charge": 3451.99
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2010-11-10",
-     "period_end": "2010-12-10",
+     "period_start": "2010-12-01",
+     "period_end": "2010-12-28",
      "read_type": "actual",
-     "energy_imported": 13502.1,
+     "energy_imported": 1725.4,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 59.8,
-     "energy_charge": 1297.91
+     "peak_demand": 3.91,
+     "energy_charge": 165.86
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2010-12-11",
-     "period_end": "2011-01-08",
+     "period_start": "2010-12-29",
+     "period_end": "2011-01-27",
      "read_type": "actual",
-     "energy_imported": 963.3,
+     "energy_imported": 1813.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2.08,
-     "energy_charge": 97.94
+     "peak_demand": 3.74,
+     "energy_charge": 184.34
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2011-01-09",
-     "period_end": "2011-02-08",
+     "period_start": "2011-01-28",
+     "period_end": "2011-02-25",
      "read_type": "actual",
-     "energy_imported": 998.0,
+     "energy_imported": 1791.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.99,
-     "energy_charge": 97.4
+     "peak_demand": 3.76,
+     "energy_charge": 174.82
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2011-02-09",
-     "period_end": "2011-03-13",
+     "period_start": "2011-02-26",
+     "period_end": "2011-03-28",
      "read_type": "actual",
-     "energy_imported": 1070.4,
+     "energy_imported": 1889.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2.0,
-     "energy_charge": 111.44
+     "peak_demand": 3.69,
+     "energy_charge": 196.69
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": true,
-     "period_start": "2011-03-14",
-     "period_end": "2011-04-12",
+     "period_start": "2011-03-29",
+     "period_end": "2011-04-30",
      "read_type": "estimated",
-     "energy_imported": 1064.7,
+     "energy_imported": 2200.4,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2.02,
-     "energy_charge": 105.31
+     "peak_demand": 3.79,
+     "energy_charge": 217.64
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2011-05-15",
-     "period_end": "2011-06-11",
+     "period_start": "2011-06-01",
+     "period_end": "2011-07-01",
      "read_type": "actual",
-     "energy_imported": 381.1,
-     "energy_exported": 2709.6,
+     "energy_imported": 833.3,
+     "energy_exported": 2591.6,
      "energy_unit": "kW.h",
-     "peak_demand": 1.66,
-     "energy_charge": 38.34
+     "peak_demand": 3.11,
+     "energy_charge": 83.83
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2011-06-12",
-     "period_end": "2011-07-10",
+     "period_start": "2011-07-02",
+     "period_end": "2011-07-30",
      "read_type": "actual",
-     "energy_imported": 373.4,
-     "energy_exported": 2775.3,
+     "energy_imported": 853.3,
+     "energy_exported": 2436.7,
      "energy_unit": "kW.h",
-     "peak_demand": 1.65,
-     "energy_charge": 38.99
+     "peak_demand": 3.1,
+     "energy_charge": 89.11
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2011-07-11",
-     "period_end": "2011-08-11",
+     "period_start": "2011-07-31",
+     "period_end": "2011-08-27",
      "read_type": "actual",
-     "energy_imported": 455.6,
-     "energy_exported": 2949.9,
+     "energy_imported": 816.3,
+     "energy_exported": 2682.1,
      "energy_unit": "kW.h",
-     "peak_demand": 1.74,
-     "energy_charge": 47.01
+     "peak_demand": 3.31,
+     "energy_charge": 84.23
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2011-08-12",
-     "period_end": "2011-09-10",
+     "period_start": "2011-08-28",
+     "period_end": "2011-09-28",
      "read_type": "actual",
-     "energy_imported": 457.6,
-     "energy_exported": 2966.4,
+     "energy_imported": 1057.1,
+     "energy_exported": 2571.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.76,
-     "energy_charge": 44.34
+     "peak_demand": 3.68,
+     "energy_charge": 102.43
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2011-09-11",
-     "period_end": "2011-10-12",
+     "period_start": "2011-09-29",
+     "period_end": "2011-10-28",
      "read_type": "actual",
-     "energy_imported": 1490.6,
-     "energy_exported": 2241.8,
+     "energy_imported": 10682.1,
+     "energy_exported": 1424.5,
      "energy_unit": "kW.h",
-     "peak_demand": 23.53,
-     "energy_charge": 144.14
+     "peak_demand": 75.6,
+     "energy_charge": 1032.94
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2011-10-13",
-     "period_end": "2011-11-12",
+     "period_start": "2011-10-29",
+     "period_end": "2011-11-29",
      "read_type": "actual",
-     "energy_imported": 10178.3,
-     "energy_exported": 559.1,
+     "energy_imported": 27285.7,
+     "energy_exported": 86.4,
      "energy_unit": "kW.h",
-     "peak_demand": 40.23,
-     "energy_charge": 1058.42
+     "peak_demand": 77.5,
+     "energy_charge": 2837.36
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2011-11-13",
-     "period_end": "2011-12-10",
+     "period_start": "2011-11-30",
+     "period_end": "2011-12-30",
      "read_type": "actual",
-     "energy_imported": 9064.1,
-     "energy_exported": 312.3,
+     "energy_imported": 2465.7,
+     "energy_exported": 1203.9,
      "energy_unit": "kW.h",
-     "peak_demand": 42.49,
-     "energy_charge": 915.71
+     "peak_demand": 79.83,
+     "energy_charge": 249.1
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2011-12-11",
-     "period_end": "2012-01-12",
+     "period_start": "2011-12-31",
+     "period_end": "2012-01-27",
      "read_type": "actual",
-     "energy_imported": 684.4,
-     "energy_exported": 1213.2,
+     "energy_imported": 1132.9,
+     "energy_exported": 1338.4,
      "energy_unit": "kW.h",
-     "peak_demand": 1.99,
-     "energy_charge": 65.89
+     "peak_demand": 3.89,
+     "energy_charge": 109.06
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2012-01-13",
-     "period_end": "2012-02-10",
+     "period_start": "2012-01-28",
+     "period_end": "2012-03-01",
      "read_type": "actual",
-     "energy_imported": 605.0,
-     "energy_exported": 1147.6,
+     "energy_imported": 1270.3,
+     "energy_exported": 2370.8,
      "energy_unit": "kW.h",
-     "peak_demand": 2.07,
-     "energy_charge": 63.47
+     "peak_demand": 4.01,
+     "energy_charge": 133.27
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2012-02-11",
-     "period_end": "2012-03-12",
+     "period_start": "2012-03-02",
+     "period_end": "2012-03-29",
      "read_type": "actual",
-     "energy_imported": 579.6,
-     "energy_exported": 2141.5,
+     "energy_imported": 964.4,
+     "energy_exported": 2335.1,
      "energy_unit": "kW.h",
-     "peak_demand": 2.13,
-     "energy_charge": 59.13
+     "peak_demand": 3.52,
+     "energy_charge": 98.39
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2012-03-13",
-     "period_end": "2012-04-09",
+     "period_start": "2012-03-30",
+     "period_end": "2012-04-30",
      "read_type": "estimated",
-     "energy_imported": 565.3,
-     "energy_exported": 2088.4,
+     "energy_imported": 1190.0,
+     "energy_exported": 2881.3,
      "energy_unit": "kW.h",
-     "peak_demand": 1.87,
-     "energy_charge": 56.93
+     "peak_demand": 3.53,
+     "energy_charge": 119.85
     },
     {
      "meter": "000000-utility",
      "is_pre_installation": false,
-     "period_start": "2012-04-10",
-     "period_end": "2012-05-13",
+     "period_start": "2012-05-01",
+     "period_end": "2012-05-27",
      "read_type": "actual",
-     "energy_imported": 412.6,
-     "energy_exported": 3620.5,
+     "energy_imported": 558.6,
+     "energy_exported": 2702.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.88,
-     "energy_charge": 42.28
+     "peak_demand": 3.24,
+     "energy_charge": 57.25
     },
     {
      "meter": "000000-inverter",
@@ -340,7 +340,7 @@
      "period_start": "2011-05-14",
      "period_end": "2011-06-12",
      "read_type": "actual",
-     "energy_imported": 3339.8,
+     "energy_imported": 3467.1,
      "energy_unit": "kW.h"
     },
     {
@@ -349,7 +349,7 @@
      "period_start": "2011-06-13",
      "period_end": "2011-07-13",
      "read_type": "actual",
-     "energy_imported": 3596.5,
+     "energy_imported": 3702.6,
      "energy_unit": "kW.h"
     },
     {
@@ -358,7 +358,7 @@
      "period_start": "2011-07-14",
      "period_end": "2011-08-12",
      "read_type": "actual",
-     "energy_imported": 3318.7,
+     "energy_imported": 3469.6,
      "energy_unit": "kW.h"
     },
     {
@@ -367,7 +367,7 @@
      "period_start": "2011-08-13",
      "period_end": "2011-09-12",
      "read_type": "actual",
-     "energy_imported": 3597.3,
+     "energy_imported": 3996.6,
      "energy_unit": "kW.h"
     },
     {
@@ -376,7 +376,7 @@
      "period_start": "2011-09-13",
      "period_end": "2011-10-12",
      "read_type": "actual",
-     "energy_imported": 2603.5,
+     "energy_imported": 3079.7,
      "energy_unit": "kW.h"
     },
     {
@@ -385,7 +385,7 @@
      "period_start": "2011-10-13",
      "period_end": "2011-11-11",
      "read_type": "actual",
-     "energy_imported": 2213.2,
+     "energy_imported": 2864.8,
      "energy_unit": "kW.h"
     },
     {
@@ -394,7 +394,7 @@
      "period_start": "2011-11-12",
      "period_end": "2011-12-12",
      "read_type": "actual",
-     "energy_imported": 1436.2,
+     "energy_imported": 1964.6,
      "energy_unit": "kW.h"
     },
     {
@@ -403,7 +403,7 @@
      "period_start": "2011-12-13",
      "period_end": "2012-01-11",
      "read_type": "actual",
-     "energy_imported": 1470.7,
+     "energy_imported": 2092.9,
      "energy_unit": "kW.h"
     },
     {
@@ -412,7 +412,7 @@
      "period_start": "2012-01-12",
      "period_end": "2012-02-11",
      "read_type": "actual",
-     "energy_imported": 1629.4,
+     "energy_imported": 2160.4,
      "energy_unit": "kW.h"
     },
     {
@@ -421,7 +421,7 @@
      "period_start": "2012-02-12",
      "period_end": "2012-03-12",
      "read_type": "actual",
-     "energy_imported": 2454.8,
+     "energy_imported": 3054.1,
      "energy_unit": "kW.h"
     },
     {
@@ -430,7 +430,7 @@
      "period_start": "2012-03-13",
      "period_end": "2012-04-12",
      "read_type": "actual",
-     "energy_imported": 3348.0,
+     "energy_imported": 3832.2,
      "energy_unit": "kW.h"
     },
     {
@@ -439,17 +439,17 @@
      "period_start": "2012-04-13",
      "period_end": "2012-05-12",
      "read_type": "actual",
-     "energy_imported": 3225.2,
+     "energy_imported": 3453.4,
      "energy_unit": "kW.h"
     }
    ],
    "performance_claim": {
     "quantity": "annual_energy_production",
-    "claimed_value": 32233.2,
+    "claimed_value": 37138.1,
     "energy_unit": "kW.h",
     "method": "metered_production",
     "normalization_basis": "none",
-    "pre_period_energy": 34800.2,
+    "pre_period_energy": 65526.3,
     "energy_price": 0.0996
    }
   },
@@ -475,13 +475,13 @@
     "category": "RES",
     "technology": "solar_electric",
     "in_service_date": "2008-09-12",
-    "project_cost": 72274.49,
-    "amount_requested": 18068.62,
+    "project_cost": 80000.0,
+    "amount_requested": 20000.0,
     "useful_life_years": 25.0,
-    "rated_capacity": 31.406,
+    "rated_capacity": 31.964,
     "rated_capacity_unit": "kW",
-    "array_tilt": 26.5,
-    "array_azimuth": 171.5
+    "array_tilt": 25.8,
+    "array_azimuth": 132.2
    },
    "meters": [
     {
@@ -501,290 +501,290 @@
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2007-09-06",
-     "period_end": "2007-10-03",
+     "period_start": "2007-09-09",
+     "period_end": "2007-10-06",
      "read_type": "actual",
-     "energy_imported": 4446.4,
+     "energy_imported": 28533.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 15.46,
-     "energy_charge": 416.95
+     "peak_demand": 98.95,
+     "energy_charge": 2562.62
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2007-10-04",
-     "period_end": "2007-11-04",
+     "period_start": "2007-10-07",
+     "period_end": "2007-11-07",
      "read_type": "actual",
-     "energy_imported": 3315.7,
+     "energy_imported": 19167.8,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 12.69,
-     "energy_charge": 303.28
+     "peak_demand": 69.29,
+     "energy_charge": 1740.42
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2007-11-05",
-     "period_end": "2007-12-06",
+     "period_start": "2007-11-08",
+     "period_end": "2007-12-09",
      "read_type": "actual",
-     "energy_imported": 2349.2,
+     "energy_imported": 14964.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 6.98,
-     "energy_charge": 210.98
+     "peak_demand": 44.69,
+     "energy_charge": 1398.94
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2007-12-07",
-     "period_end": "2008-01-04",
+     "period_start": "2007-12-10",
+     "period_end": "2008-01-06",
      "read_type": "actual",
-     "energy_imported": 2017.4,
+     "energy_imported": 12541.4,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 5.56,
-     "energy_charge": 183.17
+     "peak_demand": 38.02,
+     "energy_charge": 1099.28
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2008-01-05",
-     "period_end": "2008-02-04",
+     "period_start": "2008-01-07",
+     "period_end": "2008-02-07",
      "read_type": "actual",
-     "energy_imported": 2143.3,
+     "energy_imported": 14039.1,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 5.94,
-     "energy_charge": 200.37
+     "peak_demand": 34.72,
+     "energy_charge": 1300.84
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2008-02-05",
-     "period_end": "2008-03-05",
+     "period_start": "2008-02-08",
+     "period_end": "2008-03-08",
      "read_type": "actual",
-     "energy_imported": 2157.8,
+     "energy_imported": 13951.0,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 9.0,
-     "energy_charge": 189.14
+     "peak_demand": 57.59,
+     "energy_charge": 1286.41
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2008-03-06",
-     "period_end": "2008-04-02",
+     "period_start": "2008-03-09",
+     "period_end": "2008-04-05",
      "read_type": "actual",
-     "energy_imported": 2082.9,
+     "energy_imported": 13340.9,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 7.18,
-     "energy_charge": 193.0
+     "peak_demand": 45.94,
+     "energy_charge": 1252.84
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2008-04-03",
-     "period_end": "2008-05-05",
+     "period_start": "2008-04-06",
+     "period_end": "2008-05-08",
      "read_type": "actual",
-     "energy_imported": 2957.3,
+     "energy_imported": 19559.1,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 9.42,
-     "energy_charge": 272.69
+     "peak_demand": 60.77,
+     "energy_charge": 1896.44
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2008-05-06",
-     "period_end": "2008-06-06",
+     "period_start": "2008-05-09",
+     "period_end": "2008-06-09",
      "read_type": "actual",
-     "energy_imported": 3560.5,
+     "energy_imported": 24324.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 11.78,
-     "energy_charge": 334.36
+     "peak_demand": 75.78,
+     "energy_charge": 2270.04
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2008-06-07",
-     "period_end": "2008-07-03",
+     "period_start": "2008-06-10",
+     "period_end": "2008-07-06",
      "read_type": "actual",
-     "energy_imported": 4341.5,
+     "energy_imported": 27046.0,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 12.47,
-     "energy_charge": 420.95
+     "peak_demand": 80.06,
+     "energy_charge": 2545.09
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2008-07-04",
-     "period_end": "2008-08-05",
+     "period_start": "2008-07-07",
+     "period_end": "2008-08-07",
      "read_type": "actual",
-     "energy_imported": 5849.2,
+     "energy_imported": 36798.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 15.52,
-     "energy_charge": 545.86
+     "peak_demand": 99.35,
+     "energy_charge": 3362.79
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": true,
-     "period_start": "2008-08-06",
-     "period_end": "2008-09-01",
+     "period_start": "2008-08-08",
+     "period_end": "2008-09-04",
      "read_type": "actual",
-     "energy_imported": 4272.5,
+     "energy_imported": 28470.4,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 13.17,
-     "energy_charge": 402.06
+     "peak_demand": 85.39,
+     "energy_charge": 2674.67
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2008-10-05",
-     "period_end": "2008-11-02",
+     "period_start": "2008-10-07",
+     "period_end": "2008-11-05",
      "read_type": "actual",
-     "energy_imported": -456.4,
-     "energy_exported": 2025.5,
+     "energy_imported": 13998.4,
+     "energy_exported": 98.7,
      "energy_unit": "kW.h",
-     "peak_demand": 8.25,
-     "energy_charge": 147.42
+     "peak_demand": 62.15,
+     "energy_charge": 1301.11
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2008-11-03",
-     "period_end": "2008-12-01",
+     "period_start": "2008-11-06",
+     "period_end": "2008-12-04",
      "read_type": "actual",
-     "energy_imported": 120.2,
-     "energy_exported": 1369.2,
+     "energy_imported": 11287.8,
+     "energy_exported": 67.6,
      "energy_unit": "kW.h",
-     "peak_demand": 6.72,
-     "energy_charge": 136.48
+     "peak_demand": 37.0,
+     "energy_charge": 980.52
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2008-12-02",
-     "period_end": "2009-01-04",
+     "period_start": "2008-12-05",
+     "period_end": "2009-01-07",
      "read_type": "actual",
-     "energy_imported": 217.9,
-     "energy_exported": 1522.6,
+     "energy_imported": 13308.2,
+     "energy_exported": 68.4,
      "energy_unit": "kW.h",
-     "peak_demand": 5.91,
-     "energy_charge": 160.65
+     "peak_demand": 37.83,
+     "energy_charge": 1182.06
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2009-01-05",
-     "period_end": "2009-02-02",
-     "read_type": "actual",
-     "energy_imported": -355.4,
-     "energy_exported": 1729.3,
-     "energy_unit": "kW.h",
-     "peak_demand": 5.64,
-     "energy_charge": 118.63
-    },
-    {
-     "meter": "000001-utility",
-     "is_pre_installation": false,
-     "period_start": "2009-02-03",
-     "period_end": "2009-03-06",
+     "period_start": "2009-01-08",
+     "period_end": "2009-02-05",
      "read_type": "estimated",
-     "energy_imported": -345.3,
-     "energy_exported": 1680.0,
+     "energy_imported": 9993.4,
+     "energy_exported": 51.3,
      "energy_unit": "kW.h",
-     "peak_demand": 6.22,
-     "energy_charge": 117.94
+     "peak_demand": 36.07,
+     "energy_charge": 885.08
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2009-03-07",
-     "period_end": "2009-04-02",
+     "period_start": "2009-02-06",
+     "period_end": "2009-03-09",
      "read_type": "actual",
-     "energy_imported": -1723.6,
-     "energy_exported": 3010.4,
+     "energy_imported": 12201.6,
+     "energy_exported": 360.4,
      "energy_unit": "kW.h",
-     "peak_demand": 7.21,
-     "energy_charge": 113.39
+     "peak_demand": 44.48,
+     "energy_charge": 1192.56
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2009-04-03",
-     "period_end": "2009-05-07",
+     "period_start": "2009-03-10",
+     "period_end": "2009-04-05",
      "read_type": "estimated",
-     "energy_imported": -2226.9,
-     "energy_exported": 3889.5,
+     "energy_imported": 10261.0,
+     "energy_exported": 303.1,
      "energy_unit": "kW.h",
-     "peak_demand": 10.14,
-     "energy_charge": 157.84
+     "peak_demand": 50.49,
+     "energy_charge": 964.03
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2009-05-08",
-     "period_end": "2009-06-03",
+     "period_start": "2009-04-06",
+     "period_end": "2009-05-09",
      "read_type": "actual",
-     "energy_imported": 1223.6,
-     "energy_exported": 497.6,
+     "energy_imported": 16590.0,
+     "energy_exported": 198.5,
      "energy_unit": "kW.h",
-     "peak_demand": 9.89,
-     "energy_charge": 157.06
+     "peak_demand": 75.0,
+     "energy_charge": 1520.13
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2009-06-04",
-     "period_end": "2009-07-04",
+     "period_start": "2009-05-10",
+     "period_end": "2009-06-06",
      "read_type": "actual",
-     "energy_imported": 1137.3,
-     "energy_exported": 1554.9,
+     "energy_imported": 17961.4,
+     "energy_exported": 34.2,
      "energy_unit": "kW.h",
-     "peak_demand": 12.76,
-     "energy_charge": 243.76
+     "peak_demand": 66.51,
+     "energy_charge": 1750.82
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2009-07-05",
-     "period_end": "2009-08-04",
+     "period_start": "2009-06-07",
+     "period_end": "2009-07-07",
      "read_type": "estimated",
-     "energy_imported": 1250.2,
-     "energy_exported": 1709.2,
+     "energy_imported": 21901.6,
+     "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 12.38,
-     "energy_charge": 287.92
+     "peak_demand": 98.42,
+     "energy_charge": 1994.05
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2009-08-05",
-     "period_end": "2009-09-05",
+     "period_start": "2009-07-08",
+     "period_end": "2009-08-07",
      "read_type": "actual",
-     "energy_imported": 593.2,
-     "energy_exported": 1708.2,
+     "energy_imported": 33544.2,
+     "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 12.39,
-     "energy_charge": 209.53
+     "peak_demand": 83.78,
+     "energy_charge": 3138.32
     },
     {
      "meter": "000001-utility",
      "is_pre_installation": false,
-     "period_start": "2009-09-06",
-     "period_end": "2009-10-03",
+     "period_start": "2009-08-08",
+     "period_end": "2009-09-08",
      "read_type": "actual",
-     "energy_imported": 687.1,
-     "energy_exported": 1374.0,
+     "energy_imported": 27182.6,
+     "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 10.3,
-     "energy_charge": 192.83
+     "peak_demand": 89.97,
+     "energy_charge": 2374.47
+    },
+    {
+     "meter": "000001-utility",
+     "is_pre_installation": false,
+     "period_start": "2009-09-09",
+     "period_end": "2009-10-06",
+     "read_type": "actual",
+     "energy_imported": 18717.2,
+     "energy_exported": 27.5,
+     "energy_unit": "kW.h",
+     "peak_demand": 68.7,
+     "energy_charge": 1751.18
     },
     {
      "meter": "000001-inverter",
@@ -792,7 +792,7 @@
      "period_start": "2008-09-12",
      "period_end": "2008-10-11",
      "read_type": "actual",
-     "energy_imported": 3351.0,
+     "energy_imported": 3328.1,
      "energy_unit": "kW.h"
     },
     {
@@ -801,7 +801,7 @@
      "period_start": "2008-10-12",
      "period_end": "2008-11-11",
      "read_type": "actual",
-     "energy_imported": 2804.3,
+     "energy_imported": 2701.9,
      "energy_unit": "kW.h"
     },
     {
@@ -810,7 +810,7 @@
      "period_start": "2008-11-12",
      "period_end": "2008-12-11",
      "read_type": "actual",
-     "energy_imported": 2081.9,
+     "energy_imported": 1899.8,
      "energy_unit": "kW.h"
     },
     {
@@ -819,7 +819,7 @@
      "period_start": "2008-12-12",
      "period_end": "2009-01-11",
      "read_type": "actual",
-     "energy_imported": 1860.5,
+     "energy_imported": 1699.8,
      "energy_unit": "kW.h"
     },
     {
@@ -828,7 +828,7 @@
      "period_start": "2009-01-12",
      "period_end": "2009-02-10",
      "read_type": "actual",
-     "energy_imported": 2737.7,
+     "energy_imported": 2533.1,
      "energy_unit": "kW.h"
     },
     {
@@ -837,7 +837,7 @@
      "period_start": "2009-02-11",
      "period_end": "2009-03-12",
      "read_type": "actual",
-     "energy_imported": 3062.5,
+     "energy_imported": 2967.3,
      "energy_unit": "kW.h"
     },
     {
@@ -846,7 +846,7 @@
      "period_start": "2009-03-13",
      "period_end": "2009-04-12",
      "read_type": "actual",
-     "energy_imported": 3812.4,
+     "energy_imported": 3870.0,
      "energy_unit": "kW.h"
     },
     {
@@ -855,7 +855,7 @@
      "period_start": "2009-04-13",
      "period_end": "2009-05-12",
      "read_type": "actual",
-     "energy_imported": 3353.6,
+     "energy_imported": 3536.4,
      "energy_unit": "kW.h"
     },
     {
@@ -864,7 +864,7 @@
      "period_start": "2009-05-13",
      "period_end": "2009-06-12",
      "read_type": "actual",
-     "energy_imported": 3924.9,
+     "energy_imported": 4145.5,
      "energy_unit": "kW.h"
     },
     {
@@ -873,7 +873,7 @@
      "period_start": "2009-06-13",
      "period_end": "2009-07-12",
      "read_type": "actual",
-     "energy_imported": 3640.5,
+     "energy_imported": 3941.6,
      "energy_unit": "kW.h"
     },
     {
@@ -882,7 +882,7 @@
      "period_start": "2009-07-13",
      "period_end": "2009-08-12",
      "read_type": "actual",
-     "energy_imported": 4048.5,
+     "energy_imported": 4329.9,
      "energy_unit": "kW.h"
     },
     {
@@ -891,17 +891,17 @@
      "period_start": "2009-08-13",
      "period_end": "2009-09-11",
      "read_type": "actual",
-     "energy_imported": 3603.4,
+     "energy_imported": 3738.3,
      "energy_unit": "kW.h"
     }
    ],
    "performance_claim": {
     "quantity": "annual_energy_production",
-    "claimed_value": 38281.1,
+    "claimed_value": 38691.8,
     "energy_unit": "kW.h",
     "method": "metered_production",
     "normalization_basis": "none",
-    "pre_period_energy": 39493.6,
+    "pre_period_energy": 252736.7,
     "energy_price": 0.0915
    }
   },
@@ -927,13 +927,13 @@
     "category": "RES",
     "technology": "solar_electric",
     "in_service_date": "2010-02-23",
-    "project_cost": 59947.57,
-    "amount_requested": 14986.89,
+    "project_cost": 65008.0,
+    "amount_requested": 16252.0,
     "useful_life_years": 25.0,
-    "rated_capacity": 11.841,
+    "rated_capacity": 27.245,
     "rated_capacity_unit": "kW",
-    "array_tilt": 30.1,
-    "array_azimuth": 212.4
+    "array_tilt": 8.4,
+    "array_azimuth": 155.9
    },
    "meters": [
     {
@@ -953,290 +953,290 @@
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-01-28",
-     "period_end": "2009-02-28",
+     "period_start": "2009-01-27",
+     "period_end": "2009-02-24",
      "read_type": "actual",
-     "energy_imported": 1606.1,
+     "energy_imported": 4596.7,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 3.89,
-     "energy_charge": 164.45
+     "peak_demand": 12.57,
+     "energy_charge": 470.66
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-03-01",
-     "period_end": "2009-03-31",
+     "period_start": "2009-02-25",
+     "period_end": "2009-03-28",
      "read_type": "actual",
-     "energy_imported": 1562.1,
+     "energy_imported": 5121.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4.86,
-     "energy_charge": 161.2
+     "peak_demand": 15.28,
+     "energy_charge": 528.49
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-04-01",
-     "period_end": "2009-04-30",
+     "period_start": "2009-03-29",
+     "period_end": "2009-04-28",
      "read_type": "actual",
-     "energy_imported": 1398.7,
+     "energy_imported": 4555.1,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4.31,
-     "energy_charge": 141.85
+     "peak_demand": 13.55,
+     "energy_charge": 461.94
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-05-01",
-     "period_end": "2009-05-31",
+     "period_start": "2009-04-29",
+     "period_end": "2009-05-28",
      "read_type": "actual",
-     "energy_imported": 1539.7,
+     "energy_imported": 4591.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 5.48,
-     "energy_charge": 164.34
+     "peak_demand": 17.22,
+     "energy_charge": 490.05
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-06-01",
-     "period_end": "2009-06-29",
+     "period_start": "2009-05-29",
+     "period_end": "2009-06-28",
      "read_type": "actual",
-     "energy_imported": 1554.8,
+     "energy_imported": 5230.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 5.15,
-     "energy_charge": 166.26
+     "peak_demand": 16.19,
+     "energy_charge": 559.29
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-06-30",
-     "period_end": "2009-08-01",
+     "period_start": "2009-06-29",
+     "period_end": "2009-07-27",
      "read_type": "actual",
-     "energy_imported": 1923.2,
+     "energy_imported": 5359.0,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 6.37,
-     "energy_charge": 208.39
+     "peak_demand": 20.03,
+     "energy_charge": 580.68
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-08-02",
+     "period_start": "2009-07-28",
      "period_end": "2009-08-29",
      "read_type": "actual",
-     "energy_imported": 1616.6,
+     "energy_imported": 5968.1,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 6.09,
-     "energy_charge": 169.66
+     "peak_demand": 19.14,
+     "energy_charge": 626.34
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
      "period_start": "2009-08-30",
-     "period_end": "2009-09-30",
+     "period_end": "2009-09-26",
      "read_type": "actual",
-     "energy_imported": 1672.0,
+     "energy_imported": 4609.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 5.95,
-     "energy_charge": 163.37
+     "peak_demand": 18.71,
+     "energy_charge": 450.36
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-10-01",
-     "period_end": "2009-10-30",
+     "period_start": "2009-09-27",
+     "period_end": "2009-10-28",
      "read_type": "actual",
-     "energy_imported": 1446.9,
+     "energy_imported": 4854.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4.38,
-     "energy_charge": 143.63
+     "peak_demand": 15.3,
+     "energy_charge": 481.83
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-10-31",
-     "period_end": "2009-12-01",
+     "period_start": "2009-10-29",
+     "period_end": "2009-11-27",
      "read_type": "actual",
-     "energy_imported": 1565.0,
+     "energy_imported": 4640.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4.13,
-     "energy_charge": 157.69
+     "peak_demand": 12.99,
+     "energy_charge": 467.54
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-12-02",
-     "period_end": "2009-12-30",
+     "period_start": "2009-11-28",
+     "period_end": "2009-12-29",
      "read_type": "actual",
-     "energy_imported": 1614.3,
+     "energy_imported": 5517.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4.6,
-     "energy_charge": 169.32
+     "peak_demand": 14.45,
+     "energy_charge": 578.72
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": true,
-     "period_start": "2009-12-31",
-     "period_end": "2010-01-30",
+     "period_start": "2009-12-30",
+     "period_end": "2010-01-27",
      "read_type": "actual",
-     "energy_imported": 1654.2,
+     "energy_imported": 4858.9,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4.28,
-     "energy_charge": 169.2
+     "peak_demand": 12.49,
+     "energy_charge": 496.98
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
-     "period_start": "2010-03-03",
+     "period_start": "2010-02-28",
      "period_end": "2010-03-30",
      "read_type": "actual",
-     "energy_imported": -129.5,
-     "energy_exported": 822.7,
+     "energy_imported": 1463.1,
+     "energy_exported": 1161.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2.84,
-     "energy_charge": 70.57
+     "peak_demand": 9.12,
+     "energy_charge": 267.13
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
      "period_start": "2010-03-31",
-     "period_end": "2010-05-03",
+     "period_end": "2010-04-27",
      "read_type": "actual",
-     "energy_imported": -500.4,
-     "energy_exported": 1157.0,
+     "energy_imported": 242.0,
+     "energy_exported": 1533.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2.77,
-     "energy_charge": 67.75
+     "peak_demand": 8.83,
+     "energy_charge": 183.12
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
-     "period_start": "2010-05-04",
-     "period_end": "2010-05-29",
+     "period_start": "2010-04-28",
+     "period_end": "2010-05-31",
      "read_type": "actual",
-     "energy_imported": -324.3,
-     "energy_exported": 813.9,
+     "energy_imported": 104.2,
+     "energy_exported": 1978.6,
      "energy_unit": "kW.h",
-     "peak_demand": 2.72,
-     "energy_charge": 48.77
+     "peak_demand": 8.76,
+     "energy_charge": 207.49
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
-     "period_start": "2010-05-30",
-     "period_end": "2010-07-03",
+     "period_start": "2010-06-01",
+     "period_end": "2010-06-26",
      "read_type": "actual",
-     "energy_imported": -114.4,
-     "energy_exported": 817.7,
+     "energy_imported": 893.9,
+     "energy_exported": 863.1,
      "energy_unit": "kW.h",
-     "peak_demand": 3.78,
-     "energy_charge": 74.84
+     "peak_demand": 12.39,
+     "energy_charge": 186.95
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
-     "period_start": "2010-07-04",
-     "period_end": "2010-07-30",
+     "period_start": "2010-06-27",
+     "period_end": "2010-07-31",
      "read_type": "actual",
-     "energy_imported": 71.4,
-     "energy_exported": 512.3,
+     "energy_imported": 1603.0,
+     "energy_exported": 905.8,
      "energy_unit": "kW.h",
-     "peak_demand": 3.41,
-     "energy_charge": 60.73
+     "peak_demand": 11.21,
+     "energy_charge": 261.03
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
-     "period_start": "2010-07-31",
-     "period_end": "2010-09-02",
+     "period_start": "2010-08-01",
+     "period_end": "2010-08-27",
      "read_type": "actual",
-     "energy_imported": -58.3,
-     "energy_exported": 778.3,
+     "energy_imported": 1252.4,
+     "energy_exported": 703.7,
      "energy_unit": "kW.h",
-     "peak_demand": 3.29,
-     "energy_charge": 73.17
+     "peak_demand": 11.33,
+     "energy_charge": 198.78
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
-     "period_start": "2010-09-03",
-     "period_end": "2010-10-02",
+     "period_start": "2010-08-28",
+     "period_end": "2010-09-30",
      "read_type": "actual",
-     "energy_imported": -66.3,
-     "energy_exported": 726.3,
+     "energy_imported": 1736.3,
+     "energy_exported": 897.4,
      "energy_unit": "kW.h",
-     "peak_demand": 4.65,
-     "energy_charge": 66.2
+     "peak_demand": 14.8,
+     "energy_charge": 264.21
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
-     "period_start": "2010-10-03",
+     "period_start": "2010-10-01",
      "period_end": "2010-10-30",
      "read_type": "actual",
-     "energy_imported": -80.0,
-     "energy_exported": 723.3,
+     "energy_imported": 1552.5,
+     "energy_exported": 780.8,
      "energy_unit": "kW.h",
-     "peak_demand": 3.14,
-     "energy_charge": 64.56
+     "peak_demand": 10.38,
+     "energy_charge": 234.14
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
      "period_start": "2010-10-31",
-     "period_end": "2010-12-01",
+     "period_end": "2010-11-27",
      "read_type": "actual",
-     "energy_imported": 312.7,
-     "energy_exported": 641.0,
+     "energy_imported": 2406.1,
+     "energy_exported": 445.9,
      "energy_unit": "kW.h",
-     "peak_demand": 3.23,
-     "energy_charge": 93.97
+     "peak_demand": 10.17,
+     "energy_charge": 281.01
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
-     "period_start": "2010-12-02",
-     "period_end": "2010-12-30",
+     "period_start": "2010-11-28",
+     "period_end": "2010-12-29",
      "read_type": "actual",
-     "energy_imported": 675.2,
-     "energy_exported": 333.9,
+     "energy_imported": 3486.6,
+     "energy_exported": 223.0,
      "energy_unit": "kW.h",
-     "peak_demand": 3.86,
-     "energy_charge": 101.24
+     "peak_demand": 11.35,
+     "energy_charge": 372.21
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
-     "period_start": "2010-12-31",
-     "period_end": "2011-01-28",
+     "period_start": "2010-12-30",
+     "period_end": "2011-01-27",
      "read_type": "actual",
-     "energy_imported": 556.6,
-     "energy_exported": 513.6,
+     "energy_imported": 3391.4,
+     "energy_exported": 304.2,
      "energy_unit": "kW.h",
-     "peak_demand": 4.41,
-     "energy_charge": 111.63
+     "peak_demand": 13.85,
+     "energy_charge": 385.47
     },
     {
      "meter": "000002-utility",
      "is_pre_installation": false,
-     "period_start": "2011-01-29",
-     "period_end": "2011-02-28",
+     "period_start": "2011-01-28",
+     "period_end": "2011-02-25",
      "read_type": "actual",
-     "energy_imported": 167.3,
-     "energy_exported": 779.2,
+     "energy_imported": 2385.9,
+     "energy_exported": 687.1,
      "energy_unit": "kW.h",
-     "peak_demand": 3.72,
-     "energy_charge": 98.63
+     "peak_demand": 11.71,
+     "energy_charge": 320.22
     },
     {
      "meter": "000002-inverter",
@@ -1244,7 +1244,7 @@
      "period_start": "2010-02-23",
      "period_end": "2010-03-24",
      "read_type": "actual",
-     "energy_imported": 1460.4,
+     "energy_imported": 2896.4,
      "energy_unit": "kW.h"
     },
     {
@@ -1253,7 +1253,7 @@
      "period_start": "2010-03-25",
      "period_end": "2010-04-24",
      "read_type": "actual",
-     "energy_imported": 1791.2,
+     "energy_imported": 3961.4,
      "energy_unit": "kW.h"
     },
     {
@@ -1262,7 +1262,7 @@
      "period_start": "2010-04-25",
      "period_end": "2010-05-24",
      "read_type": "actual",
-     "energy_imported": 1847.0,
+     "energy_imported": 4435.8,
      "energy_unit": "kW.h"
     },
     {
@@ -1271,7 +1271,7 @@
      "period_start": "2010-05-25",
      "period_end": "2010-06-24",
      "read_type": "actual",
-     "energy_imported": 1904.0,
+     "energy_imported": 4633.2,
      "energy_unit": "kW.h"
     },
     {
@@ -1280,7 +1280,7 @@
      "period_start": "2010-06-25",
      "period_end": "2010-07-24",
      "read_type": "actual",
-     "energy_imported": 1792.3,
+     "energy_imported": 4481.1,
      "energy_unit": "kW.h"
     },
     {
@@ -1289,7 +1289,7 @@
      "period_start": "2010-07-25",
      "period_end": "2010-08-23",
      "read_type": "actual",
-     "energy_imported": 1830.2,
+     "energy_imported": 4285.2,
      "energy_unit": "kW.h"
     },
     {
@@ -1298,7 +1298,7 @@
      "period_start": "2010-08-24",
      "period_end": "2010-09-23",
      "read_type": "actual",
-     "energy_imported": 1820.0,
+     "energy_imported": 4029.6,
      "energy_unit": "kW.h"
     },
     {
@@ -1307,7 +1307,7 @@
      "period_start": "2010-09-24",
      "period_end": "2010-10-23",
      "read_type": "actual",
-     "energy_imported": 1585.8,
+     "energy_imported": 3134.4,
      "energy_unit": "kW.h"
     },
     {
@@ -1316,7 +1316,7 @@
      "period_start": "2010-10-24",
      "period_end": "2010-11-23",
      "read_type": "actual",
-     "energy_imported": 1315.6,
+     "energy_imported": 2323.4,
      "energy_unit": "kW.h"
     },
     {
@@ -1325,7 +1325,7 @@
      "period_start": "2010-11-24",
      "period_end": "2010-12-23",
      "read_type": "actual",
-     "energy_imported": 937.7,
+     "energy_imported": 1651.4,
      "energy_unit": "kW.h"
     },
     {
@@ -1334,7 +1334,7 @@
      "period_start": "2010-12-24",
      "period_end": "2011-01-23",
      "read_type": "actual",
-     "energy_imported": 1059.6,
+     "energy_imported": 1779.5,
      "energy_unit": "kW.h"
     },
     {
@@ -1343,17 +1343,17 @@
      "period_start": "2011-01-24",
      "period_end": "2011-02-22",
      "read_type": "actual",
-     "energy_imported": 1413.8,
+     "energy_imported": 2576.0,
      "energy_unit": "kW.h"
     }
    ],
    "performance_claim": {
     "quantity": "annual_energy_production",
-    "claimed_value": 18757.5,
+    "claimed_value": 40187.4,
     "energy_unit": "kW.h",
     "method": "metered_production",
     "normalization_basis": "none",
-    "pre_period_energy": 19153.7,
+    "pre_period_energy": 59902.1,
     "energy_price": 0.1029
    }
   },
@@ -1379,10 +1379,10 @@
     "category": "RES",
     "technology": "solar_electric",
     "in_service_date": "2011-05-17",
-    "project_cost": 29449.58,
-    "amount_requested": 7362.39,
+    "project_cost": 80000.0,
+    "amount_requested": 20000.0,
     "useful_life_years": 25.0,
-    "rated_capacity": 13.276,
+    "rated_capacity": 36.064,
     "rated_capacity_unit": "kW",
     "array_tilt": 38.8,
     "array_azimuth": 174.5
@@ -1405,290 +1405,290 @@
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
-     "period_start": "2010-05-03",
+     "period_start": "2010-05-05",
      "period_end": "2010-06-01",
-     "read_type": "estimated",
-     "energy_imported": 1363.1,
+     "read_type": "actual",
+     "energy_imported": 13764.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 21.01,
-     "energy_charge": 129.27
+     "peak_demand": 57.07,
+     "energy_charge": 1235.69
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
      "period_start": "2010-06-02",
-     "period_end": "2010-07-04",
-     "read_type": "actual",
-     "energy_imported": 14276.9,
+     "period_end": "2010-07-02",
+     "read_type": "estimated",
+     "energy_imported": 17149.9,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 28.62,
-     "energy_charge": 1253.02
+     "peak_demand": 77.75,
+     "energy_charge": 1626.34
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
-     "period_start": "2010-07-05",
-     "period_end": "2010-08-01",
+     "period_start": "2010-07-03",
+     "period_end": "2010-08-03",
      "read_type": "actual",
-     "energy_imported": 10257.8,
+     "energy_imported": 40555.7,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 28.3,
-     "energy_charge": 942.3
+     "peak_demand": 76.88,
+     "energy_charge": 3559.39
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
-     "period_start": "2010-08-02",
-     "period_end": "2010-08-31",
+     "period_start": "2010-08-04",
+     "period_end": "2010-09-01",
      "read_type": "actual",
-     "energy_imported": 10811.9,
+     "energy_imported": 28319.7,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 30.2,
-     "energy_charge": 1050.47
+     "peak_demand": 82.03,
+     "energy_charge": 2601.5
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
-     "period_start": "2010-09-01",
+     "period_start": "2010-09-02",
      "period_end": "2010-09-30",
      "read_type": "actual",
-     "energy_imported": 6869.0,
+     "energy_imported": 17721.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 24.18,
-     "energy_charge": 617.97
+     "peak_demand": 65.68,
+     "energy_charge": 1721.75
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
      "period_start": "2010-10-01",
-     "period_end": "2010-11-01",
+     "period_end": "2010-10-31",
      "read_type": "actual",
-     "energy_imported": 941.9,
+     "energy_imported": 2480.0,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.78,
-     "energy_charge": 81.86
+     "peak_demand": 4.85,
+     "energy_charge": 223.11
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
-     "period_start": "2010-11-02",
+     "period_start": "2010-11-01",
      "period_end": "2010-12-01",
      "read_type": "actual",
-     "energy_imported": 919.4,
+     "energy_imported": 2576.5,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.83,
-     "energy_charge": 79.24
+     "peak_demand": 4.98,
+     "energy_charge": 223.92
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
      "period_start": "2010-12-02",
      "period_end": "2010-12-31",
-     "read_type": "estimated",
-     "energy_imported": 1060.4,
+     "read_type": "actual",
+     "energy_imported": 2545.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.78,
-     "energy_charge": 93.48
+     "peak_demand": 4.84,
+     "energy_charge": 219.38
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
      "period_start": "2011-01-01",
-     "period_end": "2011-01-30",
-     "read_type": "actual",
-     "energy_imported": 801.0,
+     "period_end": "2011-01-31",
+     "read_type": "estimated",
+     "energy_imported": 3033.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.82,
-     "energy_charge": 76.51
+     "peak_demand": 4.95,
+     "energy_charge": 267.45
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
-     "period_start": "2011-01-31",
-     "period_end": "2011-02-28",
+     "period_start": "2011-02-01",
+     "period_end": "2011-03-01",
      "read_type": "actual",
-     "energy_imported": 914.1,
+     "energy_imported": 2044.7,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2.0,
-     "energy_charge": 80.1
+     "peak_demand": 5.44,
+     "energy_charge": 195.3
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
-     "period_start": "2011-03-01",
-     "period_end": "2011-04-02",
+     "period_start": "2011-03-02",
+     "period_end": "2011-03-31",
      "read_type": "actual",
-     "energy_imported": 1019.9,
+     "energy_imported": 2509.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.78,
-     "energy_charge": 95.98
+     "peak_demand": 4.85,
+     "energy_charge": 219.89
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": true,
-     "period_start": "2011-04-03",
+     "period_start": "2011-04-01",
      "period_end": "2011-05-02",
      "read_type": "actual",
-     "energy_imported": 1017.5,
+     "energy_imported": 2941.1,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 7.96,
-     "energy_charge": 93.49
+     "peak_demand": 21.63,
+     "energy_charge": 276.79
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2011-06-01",
+     "period_start": "2011-06-03",
      "period_end": "2011-06-30",
      "read_type": "actual",
-     "energy_imported": 7125.8,
+     "energy_imported": 18224.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 24.81,
-     "energy_charge": 666.04
+     "peak_demand": 67.39,
+     "energy_charge": 1688.53
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
      "period_start": "2011-07-01",
-     "period_end": "2011-08-02",
+     "period_end": "2011-07-30",
      "read_type": "actual",
-     "energy_imported": 10812.2,
+     "energy_imported": 26795.7,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 25.06,
-     "energy_charge": 979.82
+     "peak_demand": 68.07,
+     "energy_charge": 2504.58
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2011-08-03",
-     "period_end": "2011-08-30",
+     "period_start": "2011-07-31",
+     "period_end": "2011-09-02",
      "read_type": "actual",
-     "energy_imported": 7205.5,
+     "energy_imported": 25145.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 22.56,
-     "energy_charge": 639.88
+     "peak_demand": 67.15,
+     "energy_charge": 2278.71
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2011-08-31",
-     "period_end": "2011-10-01",
+     "period_start": "2011-09-03",
+     "period_end": "2011-09-29",
      "read_type": "actual",
-     "energy_imported": 4692.7,
+     "energy_imported": 9590.5,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 24.72,
-     "energy_charge": 419.7
+     "peak_demand": 59.57,
+     "energy_charge": 851.68
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2011-10-02",
-     "period_end": "2011-11-02",
+     "period_start": "2011-09-30",
+     "period_end": "2011-11-01",
      "read_type": "actual",
-     "energy_imported": 592.1,
+     "energy_imported": 1716.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.81,
-     "energy_charge": 51.7
+     "peak_demand": 12.56,
+     "energy_charge": 153.5
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2011-11-03",
-     "period_end": "2011-12-01",
+     "period_start": "2011-11-02",
+     "period_end": "2011-12-02",
      "read_type": "actual",
-     "energy_imported": 602.8,
+     "energy_imported": 1748.7,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.77,
-     "energy_charge": 55.17
+     "peak_demand": 4.8,
+     "energy_charge": 152.67
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2011-12-02",
-     "period_end": "2012-01-02",
+     "period_start": "2011-12-03",
+     "period_end": "2012-01-01",
      "read_type": "actual",
-     "energy_imported": 695.2,
+     "energy_imported": 1778.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.89,
-     "energy_charge": 64.98
+     "peak_demand": 5.13,
+     "energy_charge": 162.78
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2012-01-03",
-     "period_end": "2012-01-31",
+     "period_start": "2012-01-02",
+     "period_end": "2012-02-01",
      "read_type": "actual",
-     "energy_imported": 604.6,
+     "energy_imported": 1741.8,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.78,
-     "energy_charge": 55.37
+     "peak_demand": 4.82,
+     "energy_charge": 162.8
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2012-02-01",
-     "period_end": "2012-02-29",
+     "period_start": "2012-02-02",
+     "period_end": "2012-03-02",
      "read_type": "actual",
-     "energy_imported": 570.5,
+     "energy_imported": 1613.4,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 1.79,
-     "energy_charge": 50.85
+     "peak_demand": 4.89,
+     "energy_charge": 147.74
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2012-03-01",
-     "period_end": "2012-04-01",
+     "period_start": "2012-03-03",
+     "period_end": "2012-03-30",
      "read_type": "actual",
-     "energy_imported": 581.2,
+     "energy_imported": 1366.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2.1,
-     "energy_charge": 49.62
+     "peak_demand": 5.7,
+     "energy_charge": 121.81
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2012-04-02",
-     "period_end": "2012-05-02",
+     "period_start": "2012-03-31",
+     "period_end": "2012-05-01",
      "read_type": "actual",
-     "energy_imported": 856.8,
+     "energy_imported": 1759.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 15.1,
-     "energy_charge": 74.57
+     "peak_demand": 34.48,
+     "energy_charge": 150.21
     },
     {
      "meter": "000003-utility",
      "is_pre_installation": false,
-     "period_start": "2012-05-03",
+     "period_start": "2012-05-02",
      "period_end": "2012-06-02",
      "read_type": "actual",
-     "energy_imported": 5243.8,
+     "energy_imported": 14914.8,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 23.35,
-     "energy_charge": 493.89
+     "peak_demand": 63.44,
+     "energy_charge": 1298.05
     },
     {
      "meter": "000003-inverter",
@@ -1696,7 +1696,7 @@
      "period_start": "2011-05-17",
      "period_end": "2011-06-15",
      "read_type": "actual",
-     "energy_imported": 1626.9,
+     "energy_imported": 4369.0,
      "energy_unit": "kW.h"
     },
     {
@@ -1705,7 +1705,7 @@
      "period_start": "2011-06-16",
      "period_end": "2011-07-16",
      "read_type": "actual",
-     "energy_imported": 1759.5,
+     "energy_imported": 4725.3,
      "energy_unit": "kW.h"
     },
     {
@@ -1714,7 +1714,7 @@
      "period_start": "2011-07-17",
      "period_end": "2011-08-15",
      "read_type": "actual",
-     "energy_imported": 1799.9,
+     "energy_imported": 4833.7,
      "energy_unit": "kW.h"
     },
     {
@@ -1723,7 +1723,7 @@
      "period_start": "2011-08-16",
      "period_end": "2011-09-15",
      "read_type": "actual",
-     "energy_imported": 1859.9,
+     "energy_imported": 4994.8,
      "energy_unit": "kW.h"
     },
     {
@@ -1732,7 +1732,7 @@
      "period_start": "2011-09-16",
      "period_end": "2011-10-15",
      "read_type": "actual",
-     "energy_imported": 1611.6,
+     "energy_imported": 4328.1,
      "energy_unit": "kW.h"
     },
     {
@@ -1741,7 +1741,7 @@
      "period_start": "2011-10-16",
      "period_end": "2011-11-14",
      "read_type": "actual",
-     "energy_imported": 1223.5,
+     "energy_imported": 3285.8,
      "energy_unit": "kW.h"
     },
     {
@@ -1750,7 +1750,7 @@
      "period_start": "2011-11-15",
      "period_end": "2011-12-15",
      "read_type": "actual",
-     "energy_imported": 1033.3,
+     "energy_imported": 2775.0,
      "energy_unit": "kW.h"
     },
     {
@@ -1759,7 +1759,7 @@
      "period_start": "2011-12-16",
      "period_end": "2012-01-14",
      "read_type": "actual",
-     "energy_imported": 1223.5,
+     "energy_imported": 3285.8,
      "energy_unit": "kW.h"
     },
     {
@@ -1768,7 +1768,7 @@
      "period_start": "2012-01-15",
      "period_end": "2012-02-14",
      "read_type": "actual",
-     "energy_imported": 1242.2,
+     "energy_imported": 3336.1,
      "energy_unit": "kW.h"
     },
     {
@@ -1777,7 +1777,7 @@
      "period_start": "2012-02-15",
      "period_end": "2012-03-15",
      "read_type": "actual",
-     "energy_imported": 1750.2,
+     "energy_imported": 4700.2,
      "energy_unit": "kW.h"
     },
     {
@@ -1786,7 +1786,7 @@
      "period_start": "2012-03-16",
      "period_end": "2012-04-15",
      "read_type": "actual",
-     "energy_imported": 1871.9,
+     "energy_imported": 5027.0,
      "energy_unit": "kW.h"
     },
     {
@@ -1795,17 +1795,17 @@
      "period_start": "2012-04-16",
      "period_end": "2012-05-15",
      "read_type": "actual",
-     "energy_imported": 1766.6,
+     "energy_imported": 4744.2,
      "energy_unit": "kW.h"
     }
    ],
    "performance_claim": {
     "quantity": "annual_energy_production",
-    "claimed_value": 18768.9,
+    "claimed_value": 50404.8,
     "energy_unit": "kW.h",
     "method": "metered_production",
     "normalization_basis": "none",
-    "pre_period_energy": 50253.1,
+    "pre_period_energy": 135641.5,
     "energy_price": 0.0915
    }
   },
@@ -1831,8 +1831,8 @@
     "category": "EEI",
     "technology": "eei_refrigeration",
     "in_service_date": "2014-07-16",
-    "project_cost": 140489.85,
-    "amount_requested": 35122.46,
+    "project_cost": 280800.0,
+    "amount_requested": 70200.0,
     "useful_life_years": 15.0,
     "affected_end_use_share": 0.2152
    },
@@ -1850,299 +1850,299 @@
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2013-06-14",
+     "period_start": "2013-06-19",
      "period_end": "2013-07-17",
      "read_type": "actual",
-     "energy_imported": 1825116.4,
+     "energy_imported": 742659.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4808.01,
-     "energy_charge": 167237.6
+     "peak_demand": 2255.18,
+     "energy_charge": 68050.76
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
      "period_start": "2013-07-18",
-     "period_end": "2013-08-15",
+     "period_end": "2013-08-21",
      "read_type": "actual",
-     "energy_imported": 1494983.3,
+     "energy_imported": 850387.9,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4780.44,
-     "energy_charge": 140571.99
+     "peak_demand": 2242.25,
+     "energy_charge": 79961.24
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2013-08-16",
-     "period_end": "2013-09-14",
+     "period_start": "2013-08-22",
+     "period_end": "2013-09-19",
      "read_type": "actual",
-     "energy_imported": 1751817.1,
+     "energy_imported": 783744.1,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 5490.15,
-     "energy_charge": 162727.49
+     "peak_demand": 2575.14,
+     "energy_charge": 72802.53
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2013-09-15",
-     "period_end": "2013-10-16",
+     "period_start": "2013-09-20",
+     "period_end": "2013-10-19",
      "read_type": "actual",
-     "energy_imported": 1348714.9,
+     "energy_imported": 568496.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 3974.64,
-     "energy_charge": 123812.94
+     "peak_demand": 1784.91,
+     "energy_charge": 52188.38
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2013-10-17",
-     "period_end": "2013-11-14",
+     "period_start": "2013-10-20",
+     "period_end": "2013-11-20",
      "read_type": "actual",
-     "energy_imported": 1024469.1,
+     "energy_imported": 526007.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 3049.89,
-     "energy_charge": 96930.58
+     "peak_demand": 1430.54,
+     "energy_charge": 49768.41
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2013-11-15",
-     "period_end": "2013-12-13",
+     "period_start": "2013-11-21",
+     "period_end": "2013-12-19",
      "read_type": "actual",
-     "energy_imported": 985545.3,
+     "energy_imported": 463253.9,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2799.41,
-     "energy_charge": 91239.75
+     "peak_demand": 1313.06,
+     "energy_charge": 42887.09
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2013-12-14",
-     "period_end": "2014-01-13",
+     "period_start": "2013-12-20",
+     "period_end": "2014-01-17",
      "read_type": "actual",
-     "energy_imported": 1054229.1,
+     "energy_imported": 466668.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2715.34,
-     "energy_charge": 93824.97
+     "peak_demand": 1341.1,
+     "energy_charge": 41532.85
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2014-01-14",
-     "period_end": "2014-02-14",
+     "period_start": "2014-01-18",
+     "period_end": "2014-02-16",
      "read_type": "actual",
-     "energy_imported": 1117137.3,
+     "energy_imported": 489984.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2859.2,
-     "energy_charge": 104037.98
+     "peak_demand": 1311.18,
+     "energy_charge": 45631.78
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2014-02-15",
-     "period_end": "2014-03-15",
+     "period_start": "2014-02-17",
+     "period_end": "2014-03-21",
      "read_type": "actual",
-     "energy_imported": 1012296.2,
+     "energy_imported": 542176.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2751.82,
-     "energy_charge": 94579.52
+     "peak_demand": 1290.73,
+     "energy_charge": 50655.89
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2014-03-16",
-     "period_end": "2014-04-13",
+     "period_start": "2014-03-22",
+     "period_end": "2014-04-18",
      "read_type": "actual",
-     "energy_imported": 1042122.4,
+     "energy_imported": 472646.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2867.2,
-     "energy_charge": 94721.25
+     "peak_demand": 1344.85,
+     "energy_charge": 42960.07
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2014-04-14",
-     "period_end": "2014-05-17",
+     "period_start": "2014-04-19",
+     "period_end": "2014-05-18",
      "read_type": "actual",
-     "energy_imported": 1317883.1,
+     "energy_imported": 551444.2,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4010.2,
-     "energy_charge": 119813.47
+     "peak_demand": 1880.97,
+     "energy_charge": 50133.77
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": true,
-     "period_start": "2014-05-18",
-     "period_end": "2014-06-14",
+     "period_start": "2014-05-19",
+     "period_end": "2014-06-21",
      "read_type": "actual",
-     "energy_imported": 1297996.9,
+     "energy_imported": 780703.3,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4161.85,
-     "energy_charge": 123602.32
+     "peak_demand": 2023.23,
+     "energy_charge": 74342.82
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2014-07-17",
-     "period_end": "2014-08-17",
+     "period_start": "2014-07-20",
+     "period_end": "2014-08-20",
      "read_type": "actual",
-     "energy_imported": 1432280.3,
+     "energy_imported": 683081.4,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4099.29,
-     "energy_charge": 125452.18
+     "peak_demand": 1922.76,
+     "energy_charge": 59830.5
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2014-08-18",
-     "period_end": "2014-09-14",
+     "period_start": "2014-08-21",
+     "period_end": "2014-09-20",
      "read_type": "actual",
-     "energy_imported": 1428950.7,
+     "energy_imported": 708125.1,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4669.63,
-     "energy_charge": 126687.14
+     "peak_demand": 2190.28,
+     "energy_charge": 62780.57
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2014-09-15",
-     "period_end": "2014-10-17",
+     "period_start": "2014-09-21",
+     "period_end": "2014-10-19",
      "read_type": "actual",
-     "energy_imported": 1205383.5,
+     "energy_imported": 490481.8,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4035.69,
-     "energy_charge": 116495.01
+     "peak_demand": 1892.93,
+     "energy_charge": 47402.9
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2014-10-18",
-     "period_end": "2014-11-12",
+     "period_start": "2014-10-20",
+     "period_end": "2014-11-20",
      "read_type": "actual",
-     "energy_imported": 853289.5,
+     "energy_imported": 495005.4,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 3418.62,
-     "energy_charge": 80945.63
+     "peak_demand": 1603.49,
+     "energy_charge": 46957.71
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2014-11-13",
-     "period_end": "2014-12-14",
+     "period_start": "2014-11-21",
+     "period_end": "2014-12-17",
      "read_type": "actual",
-     "energy_imported": 1047672.9,
+     "energy_imported": 414940.9,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2630.38,
-     "energy_charge": 93193.94
+     "peak_demand": 1350.97,
+     "energy_charge": 36910.35
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2014-12-15",
-     "period_end": "2015-01-15",
+     "period_start": "2014-12-18",
+     "period_end": "2015-01-18",
      "read_type": "actual",
-     "energy_imported": 1056503.1,
+     "energy_imported": 497114.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2880.24,
-     "energy_charge": 94979.07
+     "peak_demand": 1220.31,
+     "energy_charge": 44690.34
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2015-01-16",
-     "period_end": "2015-02-12",
+     "period_start": "2015-01-19",
+     "period_end": "2015-02-19",
      "read_type": "actual",
-     "energy_imported": 938239.0,
+     "energy_imported": 494912.0,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2778.87,
-     "energy_charge": 85586.5
+     "peak_demand": 1303.42,
+     "energy_charge": 45146.06
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2015-02-13",
-     "period_end": "2015-03-14",
+     "period_start": "2015-02-20",
+     "period_end": "2015-03-19",
      "read_type": "actual",
-     "energy_imported": 985905.8,
+     "energy_imported": 436614.7,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 2592.18,
-     "energy_charge": 94776.86
+     "peak_demand": 1305.6,
+     "energy_charge": 41972.54
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2015-03-15",
-     "period_end": "2015-04-14",
+     "period_start": "2015-03-20",
+     "period_end": "2015-04-18",
      "read_type": "actual",
-     "energy_imported": 1045343.7,
+     "energy_imported": 487739.1,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 3721.98,
-     "energy_charge": 96101.8
+     "peak_demand": 1745.78,
+     "energy_charge": 44839.42
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2015-04-15",
-     "period_end": "2015-05-15",
+     "period_start": "2015-04-19",
+     "period_end": "2015-05-19",
      "read_type": "actual",
-     "energy_imported": 1164685.5,
+     "energy_imported": 550992.1,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 3712.99,
-     "energy_charge": 104240.44
+     "peak_demand": 1741.56,
+     "energy_charge": 49314.31
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2015-05-16",
-     "period_end": "2015-06-14",
+     "period_start": "2015-05-20",
+     "period_end": "2015-06-18",
      "read_type": "actual",
-     "energy_imported": 1349522.2,
+     "energy_imported": 647077.0,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4504.77,
-     "energy_charge": 119528.05
+     "peak_demand": 2112.95,
+     "energy_charge": 57312.03
     },
     {
      "meter": "000004-utility",
      "is_pre_installation": false,
-     "period_start": "2015-06-15",
-     "period_end": "2015-07-15",
+     "period_start": "2015-06-19",
+     "period_end": "2015-07-19",
      "read_type": "actual",
-     "energy_imported": 1487338.1,
+     "energy_imported": 710869.6,
      "energy_exported": 0.0,
      "energy_unit": "kW.h",
-     "peak_demand": 4493.05,
-     "energy_charge": 139683.33
+     "peak_demand": 2107.45,
+     "energy_charge": 66761.3
     }
    ],
    "performance_claim": {
     "quantity": "annual_energy_savings",
-    "claimed_value": 1277196.7,
+    "claimed_value": 621218.2,
     "energy_unit": "kW.h",
     "method": "billing_difference",
     "normalization_basis": "none",
-    "pre_period_energy": 15272311.1,
+    "pre_period_energy": 7238171.7,
     "energy_price": 0.0915
    }
   }
