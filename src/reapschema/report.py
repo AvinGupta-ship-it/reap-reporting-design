@@ -20,7 +20,7 @@ import yaml
 
 from reapschema import burden as bm
 from reapschema.config import Config, load_config
-from reapschema.experiments import NAMED_SPECS
+from reapschema.experiments import NAMED_SPECS, savings_bands
 from reapschema.pipeline import SUMMARY_FILES
 from reapschema.provenance import REPO_ROOT
 from reapschema.schema.build import schema_elements, schema_view
@@ -262,7 +262,8 @@ def build_values(res: Path, cfg: Config) -> Values:
     v.add("GapClosedPct", pct((pth["eei_undated"] - pth["eei_normalized_merged"])
                               / (pth["eei_undated"] - pth["eei_interval"]), 0))
     bands = rd("e2_by_savings_fraction.csv")
-    band_names = {"below 10%": "Low", "10-20%": "Mid", "above 20%": "High"}
+    band_names = dict(zip([b[2] for b in savings_bands(cfg)], ("Low", "Mid", "High"),
+                          strict=True))
     for r in records(bands):
         if r["estimator"] in ("eei_undated", "eei_normalized_guarded", "eei_interval"):
             v.add(f"Band{band_names[r['savings_fraction']]}{PATH_NAMES[r['estimator']]}Median",
@@ -476,13 +477,24 @@ def build_values(res: Path, cfg: Config) -> Values:
     v.add("SizeSensN", fmt_int(cfg.experiments.size_sensitivity_n))
 
     # --- model verification: PVWatts reference --------------------------------------------------
-    pv = pvwatts_comparison()
+    pv = pvwatts_comparison(cfg)
     v.add("PvRefAnnualDiff", pct(abs(pv["annual"]), 1))
     v.add("PvRefMonthlyMaxDiff", pct(pv["monthly_max"], 1))
     v.add("PvRefCorrelation", fmt(pv["correlation"], 4))
 
     # --- configuration values quoted in the text -----------------------------------------------
     v.add("CfgSeed", str(cfg.seed))
+    v.add("CfgPvTolAnnual", pct(cfg.mv.pvwatts_annual_tolerance, 0))
+    v.add("CfgPvTolMonthly", pct(cfg.mv.pvwatts_monthly_tolerance, 0))
+    v.add("CfgBootstrapBlock", fmt_int(cfg.mv.bootstrap_block))
+    v.add("CfgMinNonzero", fmt_int(cfg.mv.min_nonzero_periods))
+    v.add("CfgGridLow", fmt(cfg.mv.balance_grid_f[0], 0))
+    v.add("CfgGridHigh", fmt(cfg.mv.balance_grid_f[1], 0))
+    v.add("CfgGridStep", fmt(cfg.mv.balance_grid_f[2], 0))
+    v.add("CfgAreCap", fmt(cfg.experiments.are_cap, 0))
+    v.add("BandLowEdge", pct(cfg.experiments.savings_bands[0], 0))
+    v.add("BandHighEdge", pct(cfg.experiments.savings_bands[1], 0))
+    v.add("ErrorShareThreshold", pct(cfg.experiments.error_share_thresholds[0], 0))
     v.add("CfgEstimatedProb", pct(cfg.billing.estimated_read_prob, 0))
     v.add("CfgCvrmseMax", pct(cfg.validation.cvrmse_max, 0))
     v.add("CfgConfidence", pct(cfg.mv.confidence, 0))
@@ -498,7 +510,7 @@ def build_values(res: Path, cfg: Config) -> Values:
     return v
 
 
-def pvwatts_comparison() -> dict[str, float]:
+def pvwatts_comparison(cfg: Config) -> dict[str, float]:
     """Difference between the pvlib implementation and the stored PVWatts v8 run."""
     import pvlib
 
@@ -519,7 +531,8 @@ def pvwatts_comparison() -> dict[str, float]:
         dni_extra=pvlib.irradiance.get_extra_radiation(index).to_numpy(),
         capacity_kw=float(inp["system_capacity"]), tilt=float(inp["tilt"]),
         surface_azimuth=float(inp["azimuth"]), dc_ac_ratio=1.2, inverter_efficiency=0.96,
-        system_losses=float(inp["losses"]) / 100.0, temperature_coefficient=-0.0037)
+        system_losses=float(inp["losses"]) / 100.0, temperature_coefficient=-0.0037,
+        albedo=cfg.population.res.albedo, sapm_cell=cfg.population.res.sapm_cell)
     ref = np.asarray(out["ac"], float) / 1000.0
     monthly = pd.Series(ours, index=index).groupby(index.month).sum().to_numpy()
     ref_m = pd.Series(ref, index=index).groupby(index.month).sum().to_numpy()
@@ -685,11 +698,11 @@ def build_tables(res: Path, out: Path, cfg: Config) -> None:
         rows, "p{0.5\\linewidth}rrrr"))
     bands = rd("e2_by_savings_fraction.csv")
     piv = bands.pivot(index="estimator", columns="savings_fraction", values="median_are")
-    order = ["below 10%", "10-20%", "above 20%"]
+    order = [b[2] for b in savings_bands(cfg)]
     rows = [[tex_escape(est.replace("eei_", "").replace("_", " ")),
              *[pct(piv.loc[est, c], 0) for c in order]] for est in piv.index]
     (out / "tab_savings_bands.tex").write_text(_tabular(
-        ["Estimator", "Savings $<10\\%$", "10--20\\%", "$>20\\%$"], rows, "lrrr"))
+        ["Estimator", *[tex_escape(c) for c in order]], rows, "lrrr"))
     acc = rd("e2_accuracy.csv")
     acc = acc[acc["condition"].isin(list(COND_NAMES))]
     rows = [[tex_escape(NAMED_SPECS[r.spec][0][:60]), COND_NAMES[r.condition], r.category,

@@ -11,12 +11,15 @@ import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
+from reapschema.config import load_config
 from reapschema.data.fetch import RAW
+from reapschema.provenance import REPO_ROOT
 from reapschema.synth.pv import pvwatts_ac
 
 REFERENCE = RAW / "pvwatts" / "pvwatts_v8_reference.json"
-ANNUAL_TOLERANCE = 0.03
-MONTHLY_TOLERANCE = 0.06
+CFG = load_config(REPO_ROOT / "configs" / "quick.yaml")
+ANNUAL_TOLERANCE = CFG.mv.pvwatts_annual_tolerance
+MONTHLY_TOLERANCE = CFG.mv.pvwatts_monthly_tolerance
 
 
 def reference_inputs():
@@ -35,6 +38,7 @@ def reference_inputs():
         capacity_kw=float(inp["system_capacity"]), tilt=float(inp["tilt"]),
         surface_azimuth=float(inp["azimuth"]), dc_ac_ratio=1.2, inverter_efficiency=0.96,
         system_losses=float(inp["losses"]) / 100.0, temperature_coefficient=-0.0037,
+        albedo=CFG.population.res.albedo, sapm_cell=CFG.population.res.sapm_cell,
     )
     return kwargs, np.asarray(out["ac"], float) / 1000.0, index
 

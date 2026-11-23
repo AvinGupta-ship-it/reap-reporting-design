@@ -239,7 +239,7 @@ def isd_lite_coverage(raw: bytes) -> float:
 
 
 def fetch_isd(manifest: Manifest, sites: list[Site], years: list[int],
-              min_coverage: float = 0.95, max_candidates: int = 12) -> dict[str, dict[str, Any]]:
+              min_coverage: float, max_candidates: int) -> dict[str, dict[str, Any]]:
     """Select, per site, the nearest ISD station with adequate coverage in every year."""
     hist = _download(
         manifest, RAW / "isd" / "isd-history.csv", url=f"{ISD_BASE}/isd-history.csv",
@@ -382,7 +382,9 @@ def fetch_all(include_large: bool = True) -> None:
         if include_large:
             fetch_usaspending(manifest, [2021, 2022, 2023])
             manifest.save()
-            fetch_isd(manifest, sites, [*range(years[0], years[1] + 1), load_year])
+            fetch_isd(manifest, sites, [*range(years[0], years[1] + 1), load_year],
+                      float(cfg["processing"]["station_min_coverage"]),
+                      int(cfg["processing"]["station_max_candidates"]))
             manifest.save()
             fetch_pvgis(manifest, sites, years, load_year)
             manifest.save()

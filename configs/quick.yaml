@@ -31,6 +31,8 @@ population:
     balance_shift_sd_c: 1.5
     occupancy_change_prob: 0.15        # probability of a non-routine step change in base load
     occupancy_change_sd: 0.08
+    occupancy_change_window_days: 300  # change falls within this many days of installation
+    occupancy_factor_min: 0.5
   res:
     cost_per_watt_median: 2.6          # scenario_hypothetical installed cost, USD per W dc
     cost_per_watt_log_sd: 0.25
@@ -38,6 +40,9 @@ population:
     tilt_range_deg: [5, 40]
     azimuth_mean_deg: 180
     azimuth_sd_deg: 30
+    azimuth_range_deg: [90, 270]
+    albedo: 0.2
+    sapm_cell: [-3.56, -0.075, 3.0]    # SAPM open-rack glass/polymer parameters (a, b, deltaT)
     dc_ac_ratio: 1.2
     inverter_efficiency: 0.96
     system_losses: 0.14                # PVWatts default system losses
@@ -62,6 +67,8 @@ population:
       eei_irrigation: {end_uses: [pumping], reduction: [0.15, 0.40]}
     payback_median_years: 6.0
     payback_log_sd: 0.5
+    payback_min_years: 0.5
+    reported_share_noise_sd: 0.10      # error of the end-use share stated in the audit
     useful_life_years: 15
     min_savings_fraction: 0.03
 
@@ -70,6 +77,9 @@ billing:
   read_jitter_days: 2                  # read date varies around the schedule
   estimated_read_prob: 0.05
   estimate_noise_sd: 0.10
+  charge_noise_sd: 0.03                # bill-to-bill variation of the effective energy rate
+  history_days_before: 830             # simulated billing history around the in-service day
+  history_days_after: 420
   fixed_charge_usd: 25.0
   transcription_rounding: 1            # bills transcribed to whole kWh
 
@@ -83,6 +93,12 @@ errors:
     gross_net: 0.05
     nameplate_hours: 0.05
   second_meter_fraction_range: [0.15, 0.60]
+  second_meter_noise_sd: 0.1
+  unit_factor: 1000                    # kWh/MWh confusion
+  variant_probability: 0.5             # split between the two variants of a class
+  transposed_targets_res: {claim: 0.4, inverter: 0.3, pre_bill: 0.3}
+  transposed_targets_eei: {pre_bill: 0.5, post_bill: 0.5}
+  straddle_shift_max_bills: 3
   correction_success: 1.0              # flagged submissions are corrected on resubmission
 
 validation:
@@ -98,6 +114,9 @@ validation:
                                        # false-positive rate on error-free submissions
   charge_consistency_tolerance: 0.25
   estimated_share_max: 0.25
+  outlier_scale_floor: 0.05
+  export_excess_tolerance: 0.02
+  export_equal_tolerance: 0.005
   cvrmse_max: 0.25                     # diagnostic threshold for monthly baseline models
   ndb_max: 0.005
 
@@ -108,9 +127,12 @@ mv:
   confidence: 0.90
   bootstrap_replicates: 200
   bootstrap_block: 3
-  bootstrap_subsample: 60
+  bootstrap_subsample: 300             # applicants with index below this get bootstrap intervals
   default_tilt_deg: 20
   default_azimuth_deg: 180
+  min_nonzero_periods: 3               # periods with non-zero degree days needed for a slope
+  pvwatts_annual_tolerance: 0.03       # acceptance limits of the PVWatts verification test
+  pvwatts_monthly_tolerance: 0.06
 
 competition:
   # scenario_hypothetical competition; funds expressed relative to total requests
@@ -167,6 +189,17 @@ burden:
   sobol_base_samples: 256
 
 experiments:
+  are_cap: 1.0                         # cap on absolute relative error in the accuracy loss
+  error_share_thresholds: [0.10, 0.50]
+  savings_bands: [0.10, 0.20]
+  e4_bins: 8
+  recall_fpr: 0.05
+  surrogate_sample: 600
+  ilp_budgets: 8
+  mip_gap: 0.0001
+  frontier_budget_points: 60
+  convergence_points: 12
+  convergence_min_n: 100
   e4_min_per_bin: 30
   e5_missing_months: [0, 1, 2, 3]
   e5_estimated_read_probs: [0.0, 0.1, 0.3, 0.5]

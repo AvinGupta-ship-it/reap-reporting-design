@@ -22,7 +22,6 @@ from reapschema import mv
 from reapschema.config import Config
 from reapschema.evaluate import simulate
 from reapschema.optimize import (
-    ARE_CAP,
     MODES,
     SelectionEvaluator,
     SpecEvaluator,
@@ -68,22 +67,27 @@ EEI_PATHS = {
     "eei_normalized_merged": ("s_norm_merged_guarded", "As above, estimated reads merged"),
     "eei_interval": ("s_interval_norm", "Daily interval data, normalized"),
 }
-SAVINGS_BANDS = ((0.0, 0.10, "below 10%"), (0.10, 0.20, "10-20%"), (0.20, 1.0, "above 20%"))
+def savings_bands(cfg: Config) -> list[tuple[float, float, str]]:
+    """Bands of true savings fraction used to stratify estimator error."""
+    lo, hi = cfg.experiments.savings_bands
+    return [(0.0, lo, f"below {lo:.0%}"), (lo, hi, f"{lo:.0%}-{hi:.0%}".replace("%-", "-")),
+            (hi, 1.0, f"above {hi:.0%}")]
 
 
-def accuracy_by_savings_fraction(records: pd.DataFrame) -> pd.DataFrame:
+def accuracy_by_savings_fraction(records: pd.DataFrame, cfg: Config) -> pd.DataFrame:
     """EEI estimator error on error-free evidence by true savings fraction."""
     eei = records[records["category"] == "EEI"]
     truth = eei["true_savings_normal"].to_numpy()
     frac = eei["savings_fraction"].to_numpy()
     rows = []
-    for lo, hi, label in SAVINGS_BANDS:
+    low_thr = cfg.experiments.error_share_thresholds[0]
+    for lo, hi, label in savings_bands(cfg):
         m = (frac >= lo) & (frac < hi)
         for key, (col, _label) in EEI_PATHS.items():
             are = np.abs(eei[f"c_{col}"].to_numpy()[m] - truth[m]) / np.abs(truth[m])
             rows.append({"savings_fraction": label, "estimator": key, "n": int(m.sum()),
                          "median_are": float(np.median(are)) if m.any() else np.nan,
-                         "share_above_10pct": float((are > 0.10).mean()) if m.any()
+                         "share_above_10pct": float((are > low_thr).mean()) if m.any()
                          else np.nan})
     return pd.DataFrame(rows)
 # (label, evidence contains injected errors, validation rules applied)
@@ -126,6 +130,7 @@ def e2_accuracy(records: pd.DataFrame, cfg: Config, rng: np.random.Generator
     """
     ev = SpecEvaluator(records, cfg)
     reps = cfg.experiments.bootstrap_replicates
+    thr_lo, thr_hi = cfg.experiments.error_share_thresholds
     rows = []
     samples = []
     for key, (label, elements) in NAMED_SPECS.items():
@@ -137,12 +142,12 @@ def e2_accuracy(records: pd.DataFrame, cfg: Config, rng: np.random.Generator
                     "spec": key, "label": label, "condition": condition, "category": cat,
                     "n": int(are.size), **_quantiles(are),
                     "median_se": _boot_se(are, rng, np.median, reps),
-                    "mare_capped": float(np.minimum(are, ARE_CAP).mean()),
-                    "mare_capped_se": float(np.minimum(are, ARE_CAP).std(ddof=1)
+                    "mare_capped": float(np.minimum(are, cfg.experiments.are_cap).mean()),
+                    "mare_capped_se": float(np.minimum(are, cfg.experiments.are_cap).std(ddof=1)
                                             / np.sqrt(are.size)),
                     "mean_are": float(are.mean()),
-                    "share_above_10pct": float((are > 0.10).mean()),
-                    "share_above_50pct": float((are > 0.50).mean()),
+                    "share_above_10pct": float((are > thr_lo).mean()),
+                    "share_above_50pct": float((are > thr_hi).mean()),
                 })
                 if condition != "with_errors_unvalidated":
                     samples.append(pd.DataFrame({"spec": key, "condition": condition,
@@ -158,23 +163,24 @@ def e2_accuracy(records: pd.DataFrame, cfg: Config, rng: np.random.Generator
             rows.append({"spec": key, "label": label, "condition": f"path_vs_{basis}",
                          "category": "EEI", "n": int(are.size), **_quantiles(are),
                          "median_se": _boot_se(are, rng, np.median, reps),
-                         "mare_capped": float(np.minimum(are, ARE_CAP).mean()),
-                         "mare_capped_se": float(np.minimum(are, ARE_CAP).std(ddof=1)
-                                                 / np.sqrt(are.size)),
+                         "mare_capped": float(np.minimum(are, cfg.experiments.are_cap).mean()),
+                         "mare_capped_se": float(
+                             np.minimum(are, cfg.experiments.are_cap).std(ddof=1)
+                             / np.sqrt(are.size)),
                          "mean_are": float(are.mean()),
-                         "share_above_10pct": float((are > 0.10).mean()),
-                         "share_above_50pct": float((are > 0.50).mean())})
+                         "share_above_10pct": float((are > thr_lo).mean()),
+                         "share_above_50pct": float((are > thr_hi).mean())})
     truth_c = records["true_pre_consumption"].to_numpy()
     for key, (col, label) in CPRE_PATHS.items():
         are = np.abs(records[f"c_{col}"].to_numpy() - truth_c) / truth_c
         rows.append({"spec": key, "label": label, "condition": "path_pre_consumption",
                      "category": "all", "n": int(are.size), **_quantiles(are),
                      "median_se": _boot_se(are, rng, np.median, reps),
-                     "mare_capped": float(np.minimum(are, ARE_CAP).mean()),
+                     "mare_capped": float(np.minimum(are, cfg.experiments.are_cap).mean()),
                      "mare_capped_se": float(are.std(ddof=1) / np.sqrt(are.size)),
                      "mean_are": float(are.mean()),
-                     "share_above_10pct": float((are > 0.10).mean()),
-                     "share_above_50pct": float((are > 0.50).mean())})
+                     "share_above_10pct": float((are > thr_lo).mean()),
+                     "share_above_50pct": float((are > thr_hi).mean())})
     return pd.DataFrame(rows), pd.concat(samples, ignore_index=True)
 
 
@@ -262,7 +268,7 @@ def e3_validation(class_records: pd.DataFrame, cfg: Config
                     pos = pos[np.isfinite(pos)]
                     neg = clean_scores[np.isfinite(clean_scores)]
                     auc = _auc(pos, neg)
-                    thr5 = float(np.quantile(neg, 0.95))
+                    thr5 = float(np.quantile(neg, 1.0 - cfg.experiments.recall_fpr))
                     recall5 = float((pos > thr5).mean())
                     grid = np.quantile(np.concatenate([pos, neg]),
                                        np.linspace(0, 1, cfg.experiments.roc_points))
@@ -316,7 +322,7 @@ def e4_normalization(records: pd.DataFrame, cfg: Config) -> tuple[pd.DataFrame, 
     estimators = {"unnormalized": "c_s_dated", "normalized_avoided": "c_s_avoided",
                   "normalized_unguarded": "c_s_norm", "normalized_annual": "c_s_norm_guarded",
                   "interval_normalized": "c_s_interval_norm"}
-    edges = np.quantile(x, np.linspace(0, 1, 9))
+    edges = np.quantile(x, np.linspace(0, 1, cfg.experiments.e4_bins + 1))
     for name, col in estimators.items():
         # error as a share of pre-installation use, so that projects are comparable
         err = (eei[col].to_numpy() - truth) / pre
@@ -341,7 +347,7 @@ def e4_normalization(records: pd.DataFrame, cfg: Config) -> tuple[pd.DataFrame, 
     xr = res["ghi_anomaly"].to_numpy()
     normalized = measured * res["model_normal_default"].to_numpy() / res[
         "model_post_default"].to_numpy()
-    edges = np.quantile(xr, np.linspace(0, 1, 9))
+    edges = np.quantile(xr, np.linspace(0, 1, cfg.experiments.e4_bins + 1))
     for name, est in (("unnormalized", measured), ("normalized_annual", normalized)):
         err = (est - truth_n) / truth_n
         slope = stats.linregress(xr, err)
@@ -413,12 +419,12 @@ def e5_incomplete(cfg: Config) -> pd.DataFrame:
                                       / abs(t))
                 est = mv.estimate_savings((pre.start, pre.end, pre.printed),
                                           (post.start, post.end, post.printed), table,
-                                          cfg.mv.confidence)
+                                          cfg.mv.confidence, cfg.mv.min_nonzero_periods)
                 acc["s_norm"].append(abs(est.normalized - t) / abs(t))
                 merged = mv.estimate_savings(
                     mv.merge_estimated(pre.start, pre.end, pre.printed, pre.estimated),
                     mv.merge_estimated(post.start, post.end, post.printed, post.estimated),
-                    table, cfg.mv.confidence)
+                    table, cfg.mv.confidence, cfg.mv.min_nonzero_periods)
                 acc["s_norm_merged"].append(abs(merged.normalized - t) / abs(t))
             for name, values in acc.items():
                 arr = np.asarray(values)
@@ -426,7 +432,7 @@ def e5_incomplete(cfg: Config) -> pd.DataFrame:
                              "estimator": name, "n": int(arr.size),
                              "median_are": float(np.median(arr)),
                              "q95_are": float(np.quantile(arr, 0.95)),
-                             "mare_capped": float(np.minimum(arr, ARE_CAP).mean()),
+                             "mare_capped": float(np.minimum(arr, cfg.experiments.are_cap).mean()),
                              "date_rules_flag_rate": flagged / total})
     return pd.DataFrame(rows)
 
@@ -486,7 +492,8 @@ def e6_frontier(records: pd.DataFrame, cfg: Config, rng: np.random.Generator,
     burden_draws = base_d[None, :] + x @ tau_d + np.outer(manual["flag_rate"].to_numpy(),
                                                           rework_d)
     budgets = np.linspace(float(manual["burden_min"].min()),
-                          float(manual["burden_min"].quantile(0.9)), 60)
+                          float(manual["burden_min"].quantile(0.9)),
+                          cfg.experiments.frontier_budget_points)
     lo_q, hi_q = cfg.experiments.frontier_mc_bands
     band_rows = []
     for metric in ("mare", "selection_change"):
@@ -508,15 +515,17 @@ def e6_frontier(records: pd.DataFrame, cfg: Config, rng: np.random.Generator,
 
     # surrogate-assisted ILP on a designed sample, checked against enumeration
     tau = element_tau(cfg, res_share, modal, kappa)
-    sample_idx = rng.choice(len(manual), size=min(600, len(manual)), replace=False)
+    sample_idx = rng.choice(len(manual),
+                            size=min(cfg.experiments.surrogate_sample, len(manual)),
+                            replace=False)
     surrogate = fit_surrogate(x[sample_idx], manual["mare"].to_numpy()[sample_idx])
     base_burden = float(bm.mean_burden(frozenset(), "manual_transcription", res_share, modal,
                                        cfg.burden, kappa))
     ilp_rows = []
     # burden without rework, to match the linear constraint of the programme
     linear_burden = base_burden + x @ tau
-    for extra in np.linspace(0.0, float(tau.sum()), 9)[1:]:
-        sol = solve_surrogate_ilp(surrogate, tau, float(extra))
+    for extra in np.linspace(0.0, float(tau.sum()), cfg.experiments.ilp_budgets + 1)[1:]:
+        sol = solve_surrogate_ilp(surrogate, tau, float(extra), cfg.experiments.mip_gap)
         direct = ev.losses(ev.evaluate(sol["elements"]))["mare"]
         feasible_mask = linear_burden <= base_burden + extra + 1e-9
         best = int(np.argmin(np.where(feasible_mask, manual["mare"].to_numpy(), np.inf)))
@@ -701,9 +710,11 @@ def convergence(records: pd.DataFrame, cfg: Config, specs: dict[str, frozenset[s
     """Running estimates and Monte Carlo standard errors of headline quantities."""
     ev = SpecEvaluator(records, cfg)
     rows = []
-    sizes = np.unique(np.round(np.geomspace(100, ev.n, 12)).astype(int))
+    sizes = np.unique(np.round(np.geomspace(
+        min(cfg.experiments.convergence_min_n, ev.n), ev.n,
+        cfg.experiments.convergence_points)).astype(int))
     for key, elements in specs.items():
-        are = np.minimum(ev.evaluate(elements).are, ARE_CAP)
+        are = np.minimum(ev.evaluate(elements).are, cfg.experiments.are_cap)
         for n in sizes:
             sub = are[:n]
             rows.append({"spec": key, "n": int(n), "mare": float(sub.mean()),

@@ -35,12 +35,17 @@ population.load.hvac\_coef\_log\_sd & 0.3 \\
 population.load.balance\_shift\_sd\_c & 1.5 \\
 population.load.occupancy\_change\_prob & 0.15 \\
 population.load.occupancy\_change\_sd & 0.08 \\
+population.load.occupancy\_change\_window\_days & 300 \\
+population.load.occupancy\_factor\_min & 0.5 \\
 population.res.cost\_per\_watt\_median & 2.6 \\
 population.res.cost\_per\_watt\_log\_sd & 0.25 \\
 population.res.replaced\_fraction\_range & [0.15, 1.3] \\
 population.res.tilt\_range\_deg & [5.0, 40.0] \\
 population.res.azimuth\_mean\_deg & 180.0 \\
 population.res.azimuth\_sd\_deg & 30.0 \\
+population.res.azimuth\_range\_deg & [90.0, 270.0] \\
+population.res.albedo & 0.2 \\
+population.res.sapm\_cell & [-3.56, -0.075, 3.0] \\
 population.res.dc\_ac\_ratio & 1.2 \\
 population.res.inverter\_efficiency & 0.96 \\
 population.res.system\_losses & 0.14 \\
@@ -68,12 +73,17 @@ population.eei.measures.eei\_irrigation.end\_uses & ['pumping'] \\
 population.eei.measures.eei\_irrigation.reduction & [0.15, 0.4] \\
 population.eei.payback\_median\_years & 6.0 \\
 population.eei.payback\_log\_sd & 0.5 \\
+population.eei.payback\_min\_years & 0.5 \\
+population.eei.reported\_share\_noise\_sd & 0.1 \\
 population.eei.useful\_life\_years & 15.0 \\
 population.eei.min\_savings\_fraction & 0.03 \\
 billing.cycle\_mean\_days & 30.4375 \\
 billing.read\_jitter\_days & 2 \\
 billing.estimated\_read\_prob & 0.05 \\
 billing.estimate\_noise\_sd & 0.1 \\
+billing.charge\_noise\_sd & 0.03 \\
+billing.history\_days\_before & 830 \\
+billing.history\_days\_after & 420 \\
 billing.fixed\_charge\_usd & 25.0 \\
 billing.transcription\_rounding & 1 \\
 errors.rates.unit & 0.04 \\
@@ -83,6 +93,15 @@ errors.rates.double\_counting & 0.04 \\
 errors.rates.gross\_net & 0.05 \\
 errors.rates.nameplate\_hours & 0.05 \\
 errors.second\_meter\_fraction\_range & [0.15, 0.6] \\
+errors.second\_meter\_noise\_sd & 0.1 \\
+errors.unit\_factor & 1000.0 \\
+errors.variant\_probability & 0.5 \\
+errors.transposed\_targets\_res.claim & 0.4 \\
+errors.transposed\_targets\_res.inverter & 0.3 \\
+errors.transposed\_targets\_res.pre\_bill & 0.3 \\
+errors.transposed\_targets\_eei.pre\_bill & 0.5 \\
+errors.transposed\_targets\_eei.post\_bill & 0.5 \\
+errors.straddle\_shift\_max\_bills & 3 \\
 errors.correction\_success & 1.0 \\
 validation.capacity\_factor\_bounds\_rel & [0.5, 1.4] \\
 validation.billing\_days\_total & [350, 380] \\
@@ -95,6 +114,9 @@ validation.statistical\_rule\_fpr & 0.01 \\
 validation.charge\_consistency\_tolerance & 0.25 \\
 validation.payback\_upper\_multiple & 4.0 \\
 validation.estimated\_share\_max & 0.25 \\
+validation.outlier\_scale\_floor & 0.05 \\
+validation.export\_excess\_tolerance & 0.02 \\
+validation.export\_equal\_tolerance & 0.005 \\
 validation.cvrmse\_max & 0.25 \\
 validation.ndb\_max & 0.005 \\
 mv.balance\_grid\_f & [30.0, 90.0, 3.0] \\
@@ -103,9 +125,12 @@ mv.daily\_cooling\_grid\_f & [55.0, 85.0, 3.0] \\
 mv.confidence & 0.9 \\
 mv.bootstrap\_replicates & 200 \\
 mv.bootstrap\_block & 3 \\
-mv.bootstrap\_subsample & 400 \\
+mv.bootstrap\_subsample & 2000 \\
 mv.default\_tilt\_deg & 20.0 \\
 mv.default\_azimuth\_deg & 180.0 \\
+mv.min\_nonzero\_periods & 3 \\
+mv.pvwatts\_annual\_tolerance & 0.03 \\
+mv.pvwatts\_monthly\_tolerance & 0.06 \\
 competition.n\_applicants & 2000 \\
 competition.n\_competitions & 400 \\
 competition.funding\_ratio & 0.35 \\
@@ -128,6 +153,17 @@ burden.calibrate\_to\_notice & True \\
 burden.rework\_minutes & [10.0, 20.0, 45.0] \\
 burden.monte\_carlo\_draws & 2000 \\
 burden.sobol\_base\_samples & 4096 \\
+experiments.are\_cap & 1.0 \\
+experiments.error\_share\_thresholds & [0.1, 0.5] \\
+experiments.savings\_bands & [0.1, 0.2] \\
+experiments.e4\_bins & 8 \\
+experiments.recall\_fpr & 0.05 \\
+experiments.surrogate\_sample & 600 \\
+experiments.ilp\_budgets & 8 \\
+experiments.mip\_gap & 0.0001 \\
+experiments.frontier\_budget\_points & 60 \\
+experiments.convergence\_points & 12 \\
+experiments.convergence\_min\_n & 100 \\
 experiments.e4\_min\_per\_bin & 30 \\
 experiments.e5\_missing\_months & [0, 1, 2, 3] \\
 experiments.e5\_estimated\_read\_probs & [0.0, 0.1, 0.3, 0.5] \\

@@ -18,8 +18,6 @@ from reapschema.config import MvConfig, ResConfig
 from reapschema.synth import pv
 from reapschema.synth.weather import site_weather
 
-MIN_NONZERO_PERIODS = 3  # a degree-day term needs this many periods with non-zero degree days
-
 
 def c_to_f(temp_c: np.ndarray) -> np.ndarray:
     return temp_c * 9.0 / 5.0 + 32.0
@@ -134,13 +132,15 @@ def _candidates(n_grid_h: int, n_grid_c: int, grid_h: np.ndarray, grid_c: np.nda
 def fit_degree_day_model(
     energy: np.ndarray, days: np.ndarray, hdd: np.ndarray, cdd: np.ndarray,
     grid_h: np.ndarray, grid_c: np.ndarray, extra: np.ndarray | None = None,
+    min_nonzero_periods: int = 3,
 ) -> DegreeDayModel:
     """Weighted least-squares fit with a grid search over balance points.
 
     The model is fitted to average daily use with weights equal to the number of
     days in each period, which is the per-day form of
     ``E_m = b0*d_m + bH*HDD_m + bC*CDD_m``. Candidates with a negative degree-day
-    coefficient, or with too few periods of non-zero degree days, are rejected;
+    coefficient, or with fewer than ``min_nonzero_periods`` periods of non-zero degree
+    days, are rejected;
     the candidate with the highest adjusted R-squared is selected.
     """
     energy = np.asarray(energy, dtype=float)
@@ -177,8 +177,8 @@ def fit_degree_day_model(
     nonzero_h = (x[:, :, 1] > 0).sum(axis=1)
     nonzero_c = (x[:, :, 2] > 0).sum(axis=1)
     valid = (n - p) >= 1
-    valid &= ~has_h | ((beta[:, 1] > 0) & (nonzero_h >= MIN_NONZERO_PERIODS))
-    valid &= ~has_c | ((beta[:, 2] > 0) & (nonzero_c >= MIN_NONZERO_PERIODS))
+    valid &= ~has_h | ((beta[:, 1] > 0) & (nonzero_h >= min_nonzero_periods))
+    valid &= ~has_c | ((beta[:, 2] > 0) & (nonzero_c >= min_nonzero_periods))
     valid[0] = True
     score = np.where(valid, np.nan_to_num(adj, nan=-np.inf), -np.inf)
     score[0] = max(score[0], 0.0) if np.isfinite(score[0]) else 0.0
@@ -264,7 +264,7 @@ def fractional_savings_uncertainty(cvrmse: float, savings_fraction: float, n: in
 
 def estimate_savings(
     pre: tuple[np.ndarray, np.ndarray, np.ndarray], post: tuple[np.ndarray, np.ndarray, np.ndarray],
-    table: DegreeDayTable, confidence: float,
+    table: DegreeDayTable, confidence: float, min_nonzero_periods: int = 3,
 ) -> SavingsEstimate:
     """Savings from (start, end, energy) period arrays before and after installation."""
     g = table.grid_f
@@ -272,7 +272,8 @@ def estimate_savings(
     def fit(periods: tuple[np.ndarray, np.ndarray, np.ndarray]) -> DegreeDayModel:
         start, end, energy = periods
         return fit_degree_day_model(energy, end - start + 1, table.hdd(start, end),
-                                    table.cdd(start, end), g, g)
+                                    table.cdd(start, end), g, g,
+                                    min_nonzero_periods=min_nonzero_periods)
 
     base = fit(pre)
     report = fit(post)
@@ -291,7 +292,8 @@ def estimate_savings(
 def estimate_savings_daily(pre_daily: np.ndarray, post_daily: np.ndarray, pre_start: int,
                            post_start: int, daily_temp_c: np.ndarray, weekend: np.ndarray,
                            normal_table_h: DegreeDayTable, normal_table_c: DegreeDayTable,
-                           confidence: float) -> SavingsEstimate:
+                           confidence: float, min_nonzero_periods: int = 3
+                           ) -> SavingsEstimate:
     """Savings from daily energy (aggregated interval data) with a weekday/weekend term."""
     gh, gc = normal_table_h.grid_f, normal_table_c.grid_f
 
@@ -304,8 +306,10 @@ def estimate_savings_daily(pre_daily: np.ndarray, post_daily: np.ndarray, pre_st
     ones_post = np.ones(post_daily.size)
     h_pre, c_pre, x_pre = design(pre_start, pre_daily.size)
     h_post, c_post, x_post = design(post_start, post_daily.size)
-    base = fit_degree_day_model(pre_daily, ones_pre, h_pre, c_pre, gh, gc, extra=x_pre)
-    report = fit_degree_day_model(post_daily, ones_post, h_post, c_post, gh, gc, extra=x_post)
+    base = fit_degree_day_model(pre_daily, ones_pre, h_pre, c_pre, gh, gc, extra=x_pre,
+                                min_nonzero_periods=min_nonzero_periods)
+    report = fit_degree_day_model(post_daily, ones_post, h_post, c_post, gh, gc, extra=x_post,
+                                  min_nonzero_periods=min_nonzero_periods)
     predicted = base.predict(ones_post, h_post, c_post, extra=x_post)
     avoided = float(predicted.sum() - post_daily.sum())
     wk = np.array([2.0 / 7.0])
@@ -387,13 +391,15 @@ def bootstrap_avoided_interval(
 @lru_cache(maxsize=128)
 def default_pv_daily(state: str, tilt: float, azimuth: float, dc_ac_ratio: float,
                      inverter_efficiency: float, system_losses: float,
-                     temperature_coefficient: float) -> np.ndarray:
+                     temperature_coefficient: float, albedo: float,
+                     sapm_cell: tuple[float, float, float]) -> np.ndarray:
     """Modelled daily production per kW (kWh/kW) at a State's site for a default geometry."""
     weather = site_weather(state)
     hourly = pv.simulate_site_pv(
         weather, 0, weather.n_days * 24, capacity_kw=1.0, tilt=tilt, surface_azimuth=azimuth,
         dc_ac_ratio=dc_ac_ratio, inverter_efficiency=inverter_efficiency,
         system_losses=system_losses, temperature_coefficient=temperature_coefficient,
+        albedo=albedo, sapm_cell=sapm_cell,
     )
     return hourly.reshape(-1, 24).sum(axis=1)
 
@@ -401,7 +407,8 @@ def default_pv_daily(state: str, tilt: float, azimuth: float, dc_ac_ratio: float
 def default_model(state: str, mv_cfg: MvConfig, res_cfg: ResConfig) -> np.ndarray:
     return default_pv_daily(state, mv_cfg.default_tilt_deg, mv_cfg.default_azimuth_deg,
                             res_cfg.dc_ac_ratio, res_cfg.inverter_efficiency,
-                            res_cfg.system_losses, res_cfg.temperature_coefficient)
+                            res_cfg.system_losses, res_cfg.temperature_coefficient,
+                            res_cfg.albedo, res_cfg.sapm_cell)
 
 
 def normalized_production(measured: float, modelled_actual: float, modelled_normal: float

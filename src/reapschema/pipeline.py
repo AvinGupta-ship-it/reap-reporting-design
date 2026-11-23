@@ -163,7 +163,7 @@ def run(cfg: Config) -> Path:
              "recommended_interval": int_elements,
              "metadata": ex.NAMED_SPECS["metadata"][1],
              "interval": ex.NAMED_SPECS["interval"][1]}
-    _save(ex.accuracy_by_savings_fraction(records), out / "e2_by_savings_fraction.csv", cfg)
+    _save(ex.accuracy_by_savings_fraction(records, cfg), out / "e2_by_savings_fraction.csv", cfg)
     _save(ex.size_distribution_sensitivity(
         cfg, {"current": frozenset(), "recommended": rec_elements}),
         out / "sensitivity_size_distribution.csv", cfg)

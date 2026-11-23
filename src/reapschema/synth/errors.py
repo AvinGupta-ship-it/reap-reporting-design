@@ -78,7 +78,8 @@ def inject(ev: Evidence, error_class: str, rng: np.random.Generator, cfg: ErrorC
         return ev, ErrorLabel("none")
     res = ev.category == "RES"
     if error_class == "unit":
-        factor = 1e-3 if rng.random() < 0.5 else 1e3
+        factor = (1.0 / cfg.unit_factor if rng.random() < cfg.variant_probability
+                  else cfg.unit_factor)
         variant = "entered_in_MWh" if factor < 1 else "entered_times_1000"
         if res:
             out = replace(ev, claim_value=ev.claim_value * factor,
@@ -90,8 +91,9 @@ def inject(ev: Evidence, error_class: str, rng: np.random.Generator, cfg: ErrorC
                       post_bills=_scale_bills(ev.post_bills, factor))
         return out, ErrorLabel("unit", variant, "bills", factor)
     if error_class == "transposed_digits":
-        targets = ["claim", "inverter", "pre_bill"] if res else ["pre_bill", "post_bill"]
-        probs = [0.4, 0.3, 0.3] if res else [0.5, 0.5]
+        weights = cfg.transposed_targets_res if res else cfg.transposed_targets_eei
+        targets = list(weights)
+        probs = [weights[t] for t in targets]
         target = str(rng.choice(targets, p=probs))
         if target == "claim":
             new = transpose_digits(ev.claim_value, rng)
@@ -114,7 +116,7 @@ def inject(ev: Evidence, error_class: str, rng: np.random.Generator, cfg: ErrorC
         return replace(ev, post_bills=new_bills), ErrorLabel(
             "transposed_digits", "", "post_bill", ratio)
     if error_class == "wrong_period":
-        if rng.random() < 0.5:
+        if rng.random() < cfg.variant_probability:
             out = replace(ev, pre_bills=earlier_bills,
                           claim_pre_energy=float(earlier_bills.printed.sum()))
             if not res:
@@ -135,7 +137,8 @@ def inject(ev: Evidence, error_class: str, rng: np.random.Generator, cfg: ErrorC
     if error_class == "double_counting":
         lo, hi = cfg.second_meter_fraction_range
         frac = float(rng.uniform(lo, hi))
-        extra = ev.pre_bills.delivered * frac * (1.0 + rng.normal(0.0, 0.1, len(ev.pre_bills)))
+        extra = ev.pre_bills.delivered * frac * (
+            1.0 + rng.normal(0.0, cfg.second_meter_noise_sd, len(ev.pre_bills)))
         extra = np.maximum(extra, 0.0)
         pre = replace(ev.pre_bills, delivered=ev.pre_bills.delivered + extra,
                       charge=ev.pre_bills.charge * (1.0 + frac),
@@ -147,7 +150,7 @@ def inject(ev: Evidence, error_class: str, rng: np.random.Generator, cfg: ErrorC
         return out, ErrorLabel("double_counting", "second_meter", "pre_bills", 1.0 + frac)
     if error_class == "gross_net":
         exported = float(ev.post_bills.export.sum())
-        if exported > 0 and rng.random() < 0.5:
+        if exported > 0 and rng.random() < cfg.variant_probability:
             new, variant = exported, "exports_reported_as_production"
         else:
             new = float(ev.pre_bills.delivered.sum() - ev.post_bills.delivered.sum())

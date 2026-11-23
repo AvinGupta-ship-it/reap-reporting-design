@@ -115,7 +115,7 @@ def schema_errors(package: dict[str, Any]) -> list[str]:
                   for e in validator.iter_errors(package))
 
 
-def _outlier_score(values: np.ndarray) -> float:
+def _outlier_score(values: np.ndarray, scale_floor: float) -> float:
     v = np.log(np.maximum(np.asarray(values, dtype=float), 1e-9))
     if v.size < 4:
         return 0.0
@@ -123,7 +123,7 @@ def _outlier_score(values: np.ndarray) -> float:
     neighbours[1:-1] = 0.5 * (v[:-2] + v[2:])
     neighbours[0], neighbours[-1] = v[1], v[-2]
     d = v - neighbours
-    scale = max(1.4826 * float(np.median(np.abs(d - np.median(d)))), 0.05)
+    scale = max(1.4826 * float(np.median(np.abs(d - np.median(d)))), scale_floor)
     return float(np.max(np.abs(d - np.median(d))) / scale)
 
 
@@ -167,8 +167,9 @@ def rule_scores(ev: Evidence, cfg: Config, *, model_post_declared: float) -> dic
         inconsistent = inconsistent or bool(np.nanmax(np.abs(implied / med - 1.0)) > tol)
         inconsistent = inconsistent or abs(med / ev.energy_price - 1.0) > tol
     out["charge_consistency"] = float(inconsistent)
-    out["bill_outlier"] = max(_outlier_score(b.delivered) for b in sets)
-    out["bill_outlier_dated"] = max(_outlier_score(b.delivered / b.days) for b in sets)
+    out["bill_outlier"] = max(_outlier_score(b.delivered, v.outlier_scale_floor) for b in sets)
+    out["bill_outlier_dated"] = max(
+        _outlier_score(b.delivered / b.days, v.outlier_scale_floor) for b in sets)
     value = ev.claim_value
     payback = ev.project_cost / max(value * ev.energy_price, 1e-9) if value > 0 else float("inf")
     out["payback_bounds"] = float(
@@ -186,8 +187,10 @@ def rule_scores(ev: Evidence, cfg: Config, *, model_post_declared: float) -> dic
         out["claim_recompute_inverter"] = float(
             abs(value - inv_sum) > v.claim_recompute_tolerance * max(inv_sum, 1e-9))
         exported = float(post.export.sum())
-        bad_export = (ev.arrangement == "none" and exported > 0) or exported > 1.02 * value
-        bad_export = bad_export or (exported > 0 and abs(value - exported) < 0.005 * exported)
+        bad_export = (ev.arrangement == "none" and exported > 0) or exported > (
+            1.0 + v.export_excess_tolerance) * value
+        bad_export = bad_export or (exported > 0 and abs(value - exported)
+                                    < v.export_equal_tolerance * exported)
         out["export_consistency"] = float(bad_export)
         util_unlabelled = pre_sum - post_sum
         util = pre_sum - float(post.delivered.sum()) + exported

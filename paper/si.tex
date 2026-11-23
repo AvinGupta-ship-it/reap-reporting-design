@@ -86,10 +86,10 @@ Hypothetical values.}\label{tab:times}
 
 \paragraph{Billing model.} For baseline periods $m=1,\dots,n$ the model
 $E_m=\beta_0d_m+\beta_H\mathrm{HDD}_m(T_H)+\beta_C\mathrm{CDD}_m(T_C)+\varepsilon_m$ is
-fitted on $u_m=E_m/d_m$ with weights $d_m$, over $T_H,T_C\in\{30,33,\dots,90\}\,^\circ$F
-with $T_C\ge T_H$, including the intercept-only, heating-only and cooling-only forms. A
-candidate is rejected if a degree-day coefficient is not positive or if fewer than three
-periods have non-zero degree days. The candidate with the highest adjusted $R^2$ is
+fitted on $u_m=E_m/d_m$ with weights $d_m$, over balance points from \CfgGridLow{} to
+\CfgGridHigh$\,^\circ$F in steps of \CfgGridStep$\,^\circ$F with $T_C\ge T_H$, including the intercept-only, heating-only and cooling-only forms. A
+candidate is rejected if a degree-day coefficient is not positive or if fewer than
+\CfgMinNonzero{} periods have non-zero degree days. The candidate with the highest adjusted $R^2$ is
 selected. Degree days are computed from daily mean station temperature on the dates of
 each bill.
 
@@ -116,7 +116,7 @@ of baseline residuals. This is the approximation associated with ASHRAE Guidelin
 is a proprietary document and the form above was taken from secondary reproductions,
 so it should be checked against the Guideline before reuse. The block bootstrap
 \cite{kunsch1989jackknife} resamples baseline residuals (inflated by $\sqrt{n/(n-p)}$) in
-blocks of three periods, refits the coefficients at the selected balance points and adds
+blocks of \CfgBootstrapBlock{} periods, refits the coefficients at the selected balance points and adds
 resampled residuals to the reporting-period prediction. Nominal \CoverageNominal\%
 intervals covered the true avoided energy use in \CoverageFsu\% (Guideline 14 form) and
 \CoverageBootstrap\% (bootstrap) of \CoverageN{} synthetic EEI projects; median half-widths
@@ -153,7 +153,7 @@ equality of the integer-programming optimum with brute-force enumeration.
 weather returned by one PVWatts v8 API call \cite{pvwatts8api} and compared with that
 service's hourly AC output: annual energy differs by \PvRefAnnualDiff\%, the largest
 monthly difference is \PvRefMonthlyMaxDiff\% and the hourly correlation is
-\PvRefCorrelation. The test tolerance is 3\% annual and 6\% monthly. No published numerical
+\PvRefCorrelation. The test tolerance is \CfgPvTolAnnual\% annual and \CfgPvTolMonthly\% monthly. No published numerical
 test case for the CalTRACK billing method was available to us; verification of the
 regression rests on the analytical cases and the independent implementation above.
 

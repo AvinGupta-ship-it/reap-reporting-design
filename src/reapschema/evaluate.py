@@ -43,7 +43,8 @@ def path_values(ev: Evidence, cfg: Config, *, with_bootstrap: np.random.Generato
     out["s_undated"] = float(pre.printed.sum() - post.printed.sum())
     out["s_dated"] = float(365.0 * (pre.printed.sum() / pre.days.sum()
                                     - post.printed.sum() / post.days.sum()))
-    est = mv.estimate_savings(_periods(pre), _periods(post), table, cfg.mv.confidence)
+    est = mv.estimate_savings(_periods(pre), _periods(post), table, cfg.mv.confidence,
+                              cfg.mv.min_nonzero_periods)
     out["s_norm"] = est.normalized
     out["s_avoided"] = est.avoided
     out["fsu"] = est.fsu
@@ -60,7 +61,7 @@ def path_values(ev: Evidence, cfg: Config, *, with_bootstrap: np.random.Generato
     merged = mv.estimate_savings(
         mv.merge_estimated(pre.start, pre.end, pre.printed, pre.estimated),
         mv.merge_estimated(post.start, post.end, post.printed, post.estimated),
-        table, cfg.mv.confidence)
+        table, cfg.mv.confidence, cfg.mv.min_nonzero_periods)
     out["s_norm_merged"] = merged.normalized
     out["s_avoided_merged"] = merged.avoided
     fits_m = merged.baseline.cvrmse <= limit and merged.reporting.cvrmse <= limit
@@ -70,7 +71,8 @@ def path_values(ev: Evidence, cfg: Config, *, with_bootstrap: np.random.Generato
     daily = mv.estimate_savings_daily(
         ev.interval_pre_daily, ev.interval_post_daily, d0 - 365, d0, weather.daily_temp_station,
         weekend, mv.station_table(ev.state, cfg.mv.daily_heating_grid_f),
-        mv.station_table(ev.state, cfg.mv.daily_cooling_grid_f), cfg.mv.confidence)
+        mv.station_table(ev.state, cfg.mv.daily_cooling_grid_f), cfg.mv.confidence,
+        cfg.mv.min_nonzero_periods)
     out["s_interval_norm"] = daily.normalized
     out["s_interval_avoided"] = daily.avoided
     out["fsu_interval"] = daily.fsu
@@ -115,7 +117,7 @@ def evaluate_applicant(app: SyntheticApplicant, cfg: Config,
                                         / app.covariates["pv_factor"])
     boot = None
     if (seed is not None and app.category == "EEI"
-            and app.index < cfg.mv.bootstrap_subsample * 5):
+            and app.index < cfg.mv.bootstrap_subsample):
         boot = np.random.default_rng(seed.spawn(1)[0])
     clean_paths = path_values(ev, cfg, with_bootstrap=boot)
     clean_rules = validate.rule_scores(ev, cfg, model_post_declared=model_declared)

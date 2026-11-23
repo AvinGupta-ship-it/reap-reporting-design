@@ -4,6 +4,13 @@
 radiation_years: [2005, 2015]   # PVGIS-NSRDB coverage used for pre/post year pairs
 load_profile_year: 2018         # ComStock actual-meteorological-year basis
 comstock_building_types: [warehouse, retailstandalone, smalloffice, fullservicerestaurant]
+processing:
+  station_min_coverage: 0.95       # hourly temperature coverage required in every year
+  station_max_candidates: 12
+  dni_min_elevation_deg: 3.0       # direct normal irradiance set to zero below this sun elevation
+  dni_max_w_m2: 1100.0
+  cooling_balance_grid_c: [6.0, 24.0, 1.0]
+  heating_balance_grid_c: [4.0, 22.0, 1.0]
 sites:
   - {state: AL, site_id: scenario_hypothetical_site_AL, latitude: 32.40, longitude: -86.90, utc_offset: -6}
   - {state: AK, site_id: scenario_hypothetical_site_AK, latitude: 59.65, longitude: -151.50, utc_offset: -9}

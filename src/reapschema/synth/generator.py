@@ -21,9 +21,6 @@ from reapschema.synth import billing, eei, errors, loads, pv
 from reapschema.synth.evidence import Evidence
 from reapschema.synth.weather import SiteWeather, available_states, site_weather
 
-PRE_HISTORY_DAYS = 830
-POST_HISTORY_DAYS = 420
-
 
 @dataclass(frozen=True)
 class Truth:
@@ -132,12 +129,13 @@ def generate_applicant(index: int, seed: np.random.SeedSequence, cfg: Config, *,
     model = loads.individualize(loads.facility_model(state, facility_type), rng, pop_cfg.load)
     price = population.prices[state]
 
-    d_lo = max(weather.day_of(pop_cfg.install_date_range[0]), PRE_HISTORY_DAYS)
+    pre_days, post_days = cfg.billing.history_days_before, cfg.billing.history_days_after
+    d_lo = max(weather.day_of(pop_cfg.install_date_range[0]), pre_days)
     d_hi = min(weather.day_of(pop_cfg.install_date_range[1]),
-               weather.n_days - POST_HISTORY_DAYS - 1)
+               weather.n_days - post_days - 1)
     day0 = int(rng.integers(d_lo, d_hi + 1))  # in-service day
-    first_day = day0 - PRE_HISTORY_DAYS
-    h0, h1 = first_day * 24, (day0 + POST_HISTORY_DAYS) * 24
+    first_day = day0 - pre_days
+    h0, h1 = first_day * 24, (day0 + post_days) * 24
     n_hours = h1 - h0
     rel = np.arange(n_hours) // 24 + first_day  # day index of each hour
     after = rel >= day0
@@ -148,8 +146,10 @@ def generate_applicant(index: int, seed: np.random.SeedSequence, cfg: Config, *,
     noise = loads.noise_factors(rng, n_hours, pop_cfg.load)
     occupancy = np.ones(n_hours)
     if rng.random() < pop_cfg.load.occupancy_change_prob:
-        when = int(rng.integers(day0 - 300, day0 + 300))
-        occupancy[rel >= when] = max(1.0 + rng.normal(0.0, pop_cfg.load.occupancy_change_sd), 0.5)
+        window = pop_cfg.load.occupancy_change_window_days
+        when = int(rng.integers(day0 - window, day0 + window))
+        occupancy[rel >= when] = max(1.0 + rng.normal(0.0, pop_cfg.load.occupancy_change_sd),
+                                     pop_cfg.load.occupancy_factor_min)
     base_names = set(model.base)
     shape = np.zeros(n_hours)
     for name, arr in end_uses.items():
@@ -182,15 +182,17 @@ def generate_applicant(index: int, seed: np.random.SeedSequence, cfg: Config, *,
         capacity = cost / (res.cost_per_watt_median * float(
             rng.lognormal(0.0, res.cost_per_watt_log_sd))) / 1000.0
         tilt = float(rng.uniform(*res.tilt_range_deg))
-        azimuth = float(np.clip(rng.normal(res.azimuth_mean_deg, res.azimuth_sd_deg), 90, 270))
+        azimuth = float(np.clip(rng.normal(res.azimuth_mean_deg, res.azimuth_sd_deg),
+                                *res.azimuth_range_deg))
         factor = (float(rng.lognormal(0.0, res.derate_log_sd))
                   * (1.0 - float(rng.uniform(0.0, res.shading_loss_max)))
                   * (1.0 + float(rng.normal(0.0, res.irradiance_bias_sd))))
-        kwargs = dict(capacity_kw=capacity, tilt=tilt, surface_azimuth=azimuth,
-                      dc_ac_ratio=res.dc_ac_ratio, inverter_efficiency=res.inverter_efficiency,
-                      system_losses=res.system_losses,
-                      temperature_coefficient=res.temperature_coefficient)
-        full = pv.simulate_site_pv(weather, 0, full_hours, **kwargs) * factor
+        full = pv.simulate_site_pv(
+            weather, 0, full_hours, capacity_kw=capacity, tilt=tilt, surface_azimuth=azimuth,
+            dc_ac_ratio=res.dc_ac_ratio, inverter_efficiency=res.inverter_efficiency,
+            system_losses=res.system_losses,
+            temperature_coefficient=res.temperature_coefficient, albedo=res.albedo,
+            sapm_cell=res.sapm_cell) * factor
         production_normal = float(full.sum() / years)
         pv_series = np.where(after, full[h0:h1], 0.0)
         production = float(pv_series[post_year].sum())
@@ -218,7 +220,7 @@ def generate_applicant(index: int, seed: np.random.SeedSequence, cfg: Config, *,
         cost = award / pop_cfg.historical_award_share_of_cost
         payback = float(np.clip(rng.lognormal(np.log(e_cfg.payback_median_years),
                                               e_cfg.payback_log_sd),
-                                0.5, e_cfg.useful_life_years))
+                                e_cfg.payback_min_years, e_cfg.useful_life_years))
         annual_savings = cost / (payback * price)
         scale = annual_savings / max(fraction, 1e-6) / pre_total_rel
         useful_life = e_cfg.useful_life_years
@@ -244,7 +246,7 @@ def generate_applicant(index: int, seed: np.random.SeedSequence, cfg: Config, *,
         export_register = export_h
     basis = "net_of_exports" if arrangement == "conventional_net_metering" else "delivered_only"
 
-    reads = billing.read_days(rng, first_day, day0 + POST_HISTORY_DAYS - 1,
+    reads = billing.read_days(rng, first_day, day0 + post_days - 1,
                               cfg.billing.cycle_mean_days, cfg.billing.read_jitter_days)
     all_bills = billing.make_bills(
         rng, _daily(delivered_h), _daily(export_register),
@@ -284,7 +286,8 @@ def generate_applicant(index: int, seed: np.random.SeedSequence, cfg: Config, *,
     daily_delivered = _daily(delivered_h)
     daily_export = _daily(export_register)
     a_pre, a_post = day0 - 365 - first_day, day0 - first_day
-    reported_share = float(np.clip(affected_share * (1.0 + rng.normal(0.0, 0.10)), 0.0, 1.0))
+    reported_share = float(np.clip(affected_share * (1.0 + rng.normal(
+        0.0, pop_cfg.eei.reported_share_noise_sd)), 0.0, 1.0))
     clean = Evidence(
         applicant_id=f"{index:06d}", state=state, category=category, technology=technology,
         in_service_day=day0, project_cost=cost, amount_requested=request, energy_price=price,
@@ -303,7 +306,7 @@ def generate_applicant(index: int, seed: np.random.SeedSequence, cfg: Config, *,
         rng, category, cfg.errors)
     if category == "EEI" and chosen in errors.RES_ONLY:
         chosen = "none"
-    shift = int(rng.integers(0, 3))
+    shift = int(rng.integers(0, cfg.errors.straddle_shift_max_bills))
     ghi_daily_kwh = float(weather.ghi.sum() / weather.n_days / 1000.0)
     reported, label = errors.inject(
         clean, chosen, rng, cfg.errors, earlier_bills=earlier,

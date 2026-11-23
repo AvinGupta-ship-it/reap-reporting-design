@@ -32,6 +32,8 @@ population:
     balance_shift_sd_c: 1.5
     occupancy_change_prob: 0.15
     occupancy_change_sd: 0.08
+    occupancy_change_window_days: 300
+    occupancy_factor_min: 0.5
   res:
     cost_per_watt_median: 2.6
     cost_per_watt_log_sd: 0.25
@@ -43,6 +45,14 @@ population:
     - 40.0
     azimuth_mean_deg: 180.0
     azimuth_sd_deg: 30.0
+    azimuth_range_deg:
+    - 90.0
+    - 270.0
+    albedo: 0.2
+    sapm_cell:
+    - -3.56
+    - -0.075
+    - 3.0
     dc_ac_ratio: 1.2
     inverter_efficiency: 0.96
     system_losses: 0.14
@@ -101,6 +111,8 @@ population:
         - 0.4
     payback_median_years: 6.0
     payback_log_sd: 0.5
+    payback_min_years: 0.5
+    reported_share_noise_sd: 0.1
     useful_life_years: 15.0
     min_savings_fraction: 0.03
 billing:
@@ -108,6 +120,9 @@ billing:
   read_jitter_days: 2
   estimated_read_prob: 0.05
   estimate_noise_sd: 0.1
+  charge_noise_sd: 0.03
+  history_days_before: 830
+  history_days_after: 420
   fixed_charge_usd: 25.0
   transcription_rounding: 1
 errors:
@@ -121,6 +136,17 @@ errors:
   second_meter_fraction_range:
   - 0.15
   - 0.6
+  second_meter_noise_sd: 0.1
+  unit_factor: 1000.0
+  variant_probability: 0.5
+  transposed_targets_res:
+    claim: 0.4
+    inverter: 0.3
+    pre_bill: 0.3
+  transposed_targets_eei:
+    pre_bill: 0.5
+    post_bill: 0.5
+  straddle_shift_max_bills: 3
   correction_success: 1.0
 validation:
   capacity_factor_bounds_rel:
@@ -140,6 +166,9 @@ validation:
   charge_consistency_tolerance: 0.25
   payback_upper_multiple: 4.0
   estimated_share_max: 0.25
+  outlier_scale_floor: 0.05
+  export_excess_tolerance: 0.02
+  export_equal_tolerance: 0.005
   cvrmse_max: 0.25
   ndb_max: 0.005
 mv:
@@ -158,9 +187,12 @@ mv:
   confidence: 0.9
   bootstrap_replicates: 200
   bootstrap_block: 3
-  bootstrap_subsample: 400
+  bootstrap_subsample: 2000
   default_tilt_deg: 20.0
   default_azimuth_deg: 180.0
+  min_nonzero_periods: 3
+  pvwatts_annual_tolerance: 0.03
+  pvwatts_monthly_tolerance: 0.06
 competition:
   n_applicants: 2000
   n_competitions: 400
@@ -317,6 +349,21 @@ burden:
   monte_carlo_draws: 2000
   sobol_base_samples: 4096
 experiments:
+  are_cap: 1.0
+  error_share_thresholds:
+  - 0.1
+  - 0.5
+  savings_bands:
+  - 0.1
+  - 0.2
+  e4_bins: 8
+  recall_fpr: 0.05
+  surrogate_sample: 600
+  ilp_budgets: 8
+  mip_gap: 0.0001
+  frontier_budget_points: 60
+  convergence_points: 12
+  convergence_min_n: 100
   e4_min_per_bin: 30
   e5_missing_months:
   - 0

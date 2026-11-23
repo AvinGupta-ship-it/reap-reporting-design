@@ -63,7 +63,7 @@ def test_ilp_solution_equals_brute_force_optimum():
     surrogate = opt.fit_surrogate(x, y)
     tau = rng.uniform(1, 20, k)
     for budget in (10.0, 35.0, 80.0):
-        sol = opt.solve_surrogate_ilp(surrogate, tau, budget)
+        sol = opt.solve_surrogate_ilp(surrogate, tau, budget, 1e-4)
         assert sol["status"] == "ok" and sol["condition"] == "optimal"
         assert sol["primal_feasible"]
         feasible = x @ tau <= budget + 1e-9

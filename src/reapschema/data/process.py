@@ -50,7 +50,8 @@ TOTAL_COLUMN = "out.electricity.total.energy_consumption.kwh"
 COMSTOCK_UTC_OFFSET = -5
 
 
-def read_pvgis(path: Path) -> pd.DataFrame:
+def read_pvgis(path: Path, min_elevation_deg: float = 3.0, dni_max: float = 1100.0
+               ) -> pd.DataFrame:
     """Parse a PVGIS ``seriescalc`` CSV (horizontal plane, components) into UTC hourly data."""
     lines = path.read_text().splitlines()
     start = next(i for i, ln in enumerate(lines) if ln.startswith("time,"))
@@ -61,8 +62,9 @@ def read_pvgis(path: Path) -> pd.DataFrame:
     dhi = frame["Gd(i)"].to_numpy(float)
     elevation = np.radians(frame["H_sun"].to_numpy(float))
     sin_el = np.sin(elevation)
-    dni = np.where(sin_el > np.sin(np.radians(3.0)), beam_h / np.maximum(sin_el, 1e-6), 0.0)
-    dni = np.clip(dni, 0.0, 1100.0)
+    above = sin_el > np.sin(np.radians(min_elevation_deg))
+    dni = np.where(above, beam_h / np.maximum(sin_el, 1e-6), 0.0)
+    dni = np.clip(dni, 0.0, dni_max)
     out = pd.DataFrame(
         {
             "ghi": beam_h + dhi,
@@ -101,7 +103,8 @@ def _regular_hourly(series: pd.Series, first_year: int, last_year: int) -> pd.Se
     return out
 
 
-def build_weather(sites: list[Site], years: tuple[int, int], load_year: int) -> None:
+def build_weather(sites: list[Site], years: tuple[int, int], load_year: int,
+                  processing: dict[str, Any]) -> None:
     selection = json.loads((RAW / "isd" / "station_selection.json").read_text())
     (PROCESSED / "weather").mkdir(parents=True, exist_ok=True)
     (PROCESSED / "weather_load_year").mkdir(parents=True, exist_ok=True)
@@ -113,14 +116,16 @@ def build_weather(sites: list[Site], years: tuple[int, int], load_year: int) -> 
         if out.exists() and out_ly.exists():
             continue
         station = selection[site.state]["station"]
-        frame = read_pvgis(src)
+        dni_args = (float(processing["dni_min_elevation_deg"]),
+                    float(processing["dni_max_w_m2"]))
+        frame = read_pvgis(src, *dni_args)
         index = pd.date_range(f"{years[0]}-01-01", f"{years[1]}-12-31 23:00", freq="h", tz="UTC")
         frame = frame.reindex(index).interpolate(limit=3).fillna(0.0)
         isd_paths = [RAW / "isd_lite" / f"{station}-{y}.gz" for y in range(years[0], years[1] + 1)]
         frame["temp_station"] = _regular_hourly(read_isd_lite(isd_paths), *years).to_numpy()
         frame.index.name = "time_utc"
         frame.astype("float32").to_parquet(out)
-        ly = read_pvgis(src_ly)[["temp_site"]]
+        ly = read_pvgis(src_ly, *dni_args)[["temp_site"]]
         idx_ly = pd.date_range(f"{load_year}-01-01", f"{load_year}-12-31 23:00", freq="h",
                                tz="UTC")
         ly = ly.reindex(idx_ly).interpolate(limit_direction="both")
@@ -150,6 +155,11 @@ def _fit_response(y: np.ndarray, temp: np.ndarray, group: np.ndarray, cooling: b
     return best
 
 
+def _grid(spec: list[float]) -> np.ndarray:
+    lo, hi, step = (float(x) for x in spec)
+    return np.arange(lo, hi + 0.5 * step, step)
+
+
 def comstock_hourly(path: Path, utc_offset: int) -> pd.DataFrame:
     """Hourly end-use electricity in local standard time from a ComStock aggregate file."""
     columns = [c for cols in BASE_END_USES.values() for c in cols]
@@ -168,7 +178,8 @@ def comstock_hourly(path: Path, utc_offset: int) -> pd.DataFrame:
     return out
 
 
-def build_load_profiles(sites: list[Site], building_types: list[str], load_year: int) -> None:
+def build_load_profiles(sites: list[Site], building_types: list[str], load_year: int,
+                        processing: dict[str, Any]) -> None:
     out_profiles = PROCESSED / "load_profiles.parquet"
     out_response = PROCESSED / "load_response.json"
     if out_profiles.exists() and out_response.exists():
@@ -205,11 +216,11 @@ def build_load_profiles(sites: list[Site], building_types: list[str], load_year:
                 rows.append(part)
             tc, coef_c, r2_c = _fit_response(
                 hourly["cooling"].to_numpy() / annual, temp.to_numpy(), group, True,
-                np.arange(6.0, 24.5, 1.0),
+                _grid(processing["cooling_balance_grid_c"]),
             )
             th, coef_h, r2_h = _fit_response(
                 hourly["heating"].to_numpy() / annual, temp.to_numpy(), group, False,
-                np.arange(4.0, 22.5, 1.0),
+                _grid(processing["heating_balance_grid_c"]),
             )
             response[f"{site.state}/{bt}"] = {
                 "cooling_balance_c": tc, "cooling_coef": coef_c.tolist(), "cooling_r2": r2_c,
@@ -283,8 +294,9 @@ def build_all() -> None:
     load_year = int(cfg["load_profile_year"])
     build_prices()
     build_awards()
-    build_weather(sites, years, load_year)
-    build_load_profiles(sites, list(cfg["comstock_building_types"]), load_year)
+    build_weather(sites, years, load_year, cfg["processing"])
+    build_load_profiles(sites, list(cfg["comstock_building_types"]), load_year,
+                        cfg["processing"])
 
 
 if __name__ == "__main__":

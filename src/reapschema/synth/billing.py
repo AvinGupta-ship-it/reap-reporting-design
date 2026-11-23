@@ -101,7 +101,7 @@ def make_bills(rng: np.random.Generator, daily_delivered: np.ndarray, daily_expo
     delivered = np.diff(reg_d)
     export = np.diff(reg_e)
     demand = np.array([daily_peak[offset[i]:offset[i + 1]].max() for i in range(n)])
-    charge = price * delivered * (1.0 + rng.normal(0.0, 0.03, n))
+    charge = price * delivered * (1.0 + rng.normal(0.0, cfg.charge_noise_sd, n))
     return Bills(
         start=reads[:-1].copy(), end=reads[1:] - 1, delivered=delivered, export=export,
         estimated=est_read[1:], demand=demand, charge=np.maximum(charge, 0.0),

@@ -31,7 +31,6 @@ DEPENDENCIES: dict[str, tuple[str, ...]] = {
 }
 MODES = ("manual_transcription", "utility_file_upload", "green_button_download",
          "automated_utility_access")
-ARE_CAP = 1.0
 
 
 def feasible(elements: frozenset[str] | set[str]) -> bool:
@@ -172,7 +171,7 @@ class SpecEvaluator:
         return SpecResult(energy, pre, flagged, corrected, are)
 
     def losses(self, result: SpecResult) -> dict[str, float]:
-        capped = np.minimum(result.are, ARE_CAP)
+        capped = np.minimum(result.are, self.cfg.experiments.are_cap)
         out = {
             "mare": float(capped.mean()),
             "mare_se": float(capped.std(ddof=1) / np.sqrt(self.n)),
@@ -288,7 +287,7 @@ def surrogate_value(s: Surrogate, x: np.ndarray) -> float:
 
 
 def solve_surrogate_ilp(s: Surrogate, tau: np.ndarray, budget: float,
-                        mip_gap: float = 1e-4) -> dict[str, Any]:
+                        mip_gap: float) -> dict[str, Any]:
     """Minimise the surrogate loss subject to a burden budget and element dependencies."""
     names = list(OPTIONAL_ELEMENTS)
     k = len(names)

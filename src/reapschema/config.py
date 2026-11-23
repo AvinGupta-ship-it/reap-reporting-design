@@ -23,6 +23,8 @@ class LoadConfig(_Strict):
     balance_shift_sd_c: float = Field(ge=0)
     occupancy_change_prob: float = Field(ge=0, le=1)
     occupancy_change_sd: float = Field(ge=0)
+    occupancy_change_window_days: int = Field(ge=1)
+    occupancy_factor_min: float = Field(gt=0)
 
 
 class ResConfig(_Strict):
@@ -32,6 +34,9 @@ class ResConfig(_Strict):
     tilt_range_deg: tuple[float, float]
     azimuth_mean_deg: float
     azimuth_sd_deg: float
+    azimuth_range_deg: tuple[float, float]
+    albedo: float = Field(ge=0, le=1)
+    sapm_cell: Triple
     dc_ac_ratio: float = Field(gt=0)
     inverter_efficiency: float = Field(gt=0, le=1)
     system_losses: float = Field(ge=0, lt=1)
@@ -54,6 +59,8 @@ class EeiConfig(_Strict):
     measures: dict[str, MeasureConfig]
     payback_median_years: float = Field(gt=0)
     payback_log_sd: float = Field(ge=0)
+    payback_min_years: float = Field(gt=0)
+    reported_share_noise_sd: float = Field(ge=0)
     useful_life_years: float = Field(gt=0)
     min_savings_fraction: float = Field(ge=0)
 
@@ -85,6 +92,9 @@ class BillingConfig(_Strict):
     read_jitter_days: int = Field(ge=0)
     estimated_read_prob: float = Field(ge=0, le=1)
     estimate_noise_sd: float = Field(ge=0)
+    charge_noise_sd: float = Field(ge=0)
+    history_days_before: int = Field(ge=760)
+    history_days_after: int = Field(ge=400)
     fixed_charge_usd: float = Field(ge=0)
     transcription_rounding: int = Field(ge=1)
 
@@ -92,6 +102,12 @@ class BillingConfig(_Strict):
 class ErrorConfig(_Strict):
     rates: dict[str, float]
     second_meter_fraction_range: tuple[float, float]
+    second_meter_noise_sd: float = Field(ge=0)
+    unit_factor: float = Field(gt=1)
+    variant_probability: float = Field(ge=0, le=1)
+    transposed_targets_res: dict[str, float]
+    transposed_targets_eei: dict[str, float]
+    straddle_shift_max_bills: int = Field(ge=1)
     correction_success: float = Field(ge=0, le=1)
 
     @model_validator(mode="after")
@@ -113,6 +129,9 @@ class ValidationConfig(_Strict):
     charge_consistency_tolerance: float
     payback_upper_multiple: float
     estimated_share_max: float
+    outlier_scale_floor: float = Field(gt=0)
+    export_excess_tolerance: float = Field(ge=0)
+    export_equal_tolerance: float = Field(ge=0)
     cvrmse_max: float
     ndb_max: float
 
@@ -127,6 +146,9 @@ class MvConfig(_Strict):
     bootstrap_subsample: int = Field(ge=1)
     default_tilt_deg: float
     default_azimuth_deg: float
+    min_nonzero_periods: int = Field(ge=1)
+    pvwatts_annual_tolerance: float = Field(gt=0)
+    pvwatts_monthly_tolerance: float = Field(gt=0)
 
 
 class PointsConfig(_Strict):
@@ -162,6 +184,17 @@ class BurdenConfig(_Strict):
 
 
 class ExperimentConfig(_Strict):
+    are_cap: float = Field(gt=0)
+    error_share_thresholds: tuple[float, float]
+    savings_bands: tuple[float, float]
+    e4_bins: int = Field(ge=2)
+    recall_fpr: float = Field(gt=0, lt=1)
+    surrogate_sample: int = Field(ge=100)
+    ilp_budgets: int = Field(ge=1)
+    mip_gap: float = Field(gt=0)
+    frontier_budget_points: int = Field(ge=2)
+    convergence_points: int = Field(ge=2)
+    convergence_min_n: int = Field(ge=1)
     e4_min_per_bin: int
     e5_missing_months: list[int]
     e5_estimated_read_probs: list[float]
