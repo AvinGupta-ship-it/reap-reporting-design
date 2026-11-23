@@ -83,7 +83,9 @@ def build() -> None:
     (GENERATED / "reap_evidence.schema.json").write_text(
         json.dumps(json_schema(), indent=2, sort_keys=True) + "\n"
     )
-    (GENERATED / "models.py").write_text(PydanticGenerator(str(SOURCE)).serialize())
+    # the generator embeds the absolute path of the schema; keep the file relocatable
+    models = PydanticGenerator(str(SOURCE)).serialize().replace(str(SOURCE), SOURCE.name)
+    (GENERATED / "models.py").write_text(models)
     view = schema_view()
     templates = GENERATED / "templates"
     templates.mkdir(exist_ok=True)

@@ -88,7 +88,7 @@ linkml_meta = LinkMLMeta({'default_prefix': 'reap',
                              'prefix_reference': 'http://schema.org/'},
                   'ucum': {'prefix_prefix': 'ucum',
                            'prefix_reference': 'http://unitsofmeasure.org/'}},
-     'source_file': '/Users/avingupta/Documents/research/reap-reporting-design/src/reapschema/schema/reap_evidence.yaml',
+     'source_file': 'reap_evidence.yaml',
      'title': 'REAP performance-evidence schema'} )
 
 class ApplicantType(str, Enum):
