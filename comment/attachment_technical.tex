@@ -153,11 +153,13 @@ specification (median, interquartile range, 5th--95th percentile; share above 10
 right). Blue: error-free evidence. Vermilion: injected errors, after validation.}
 \end{figure}
 
-For RES, correctly reported metered production is accurate to about
-\AccCurrentCleanResMedian\%; with injected errors the share of applicants more than 10\%
+For RES, correctly reported metered production is as accurate as the meter (assumed
+\CfgMeterError\%); with injected errors the share of applicants more than 10\%
 off is \AccCurrentUnvalidatedResShareTen\% without validation,
 \AccCurrentValidatedResShareTen\% with the checks possible under the current elements and
-\AccProductionMeterValidatedResShareTen\% with monthly production readings. For EEI,
+\AccProductionMeterValidatedResShareTen\% with monthly production readings (assuming
+the readings supplied are actual meter readings and flagged discrepancies are
+corrected). For EEI,
 median error falls from \PathUndatedNormalMedian\% (undated difference) to
 \PathNormMergedNormalMedian\% (dated bills, read type, guarded adjustment) and
 \PathIntervalPathNormalMedian\% (interval data); the root-mean-square error of the
@@ -228,6 +230,22 @@ monthly-data frontier specification; \SelIntervalValidatedMid\% with interval da
 \clearpage
 \section{Validation status and limitations}
 
+\begin{table}[h]
+\caption{Synthetic data ($n=\SizeSensN$ applicants per scenario). Sensitivity to assumed
+load noise and rate of non-routine changes: median absolute relative error (\%) of EEI
+savings estimators, share of projects with error above \ErrorShareThreshold\% for the
+undated difference, and share of awards changed with error-free evidence under the
+current elements.}\label{tab:a8}
+\centering\footnotesize
+\input{../paper/generated/tab_noise.tex}
+\end{table}
+
+The median error of the undated twelve-bill difference is \BasisComstockUndatedMedian\%
+for facility types with ComStock-derived load shapes ($n=\BasisComstockN$) and
+\BasisHypotheticalUndatedMedian\% for the hypothetical agricultural types
+($n=\BasisHypotheticalN$); with dated bills, read type and adjustment,
+\BasisComstockNormMedian\% and \BasisHypotheticalNormMedian\%.
+
 \begin{itemize}
 \item \emph{Numerical correctness}: unit and property tests (energy conservation in
 billing, recovery of known regression coefficients, agreement with an independent
@@ -236,6 +254,10 @@ least-squares implementation, selection invariants, optimizer against enumeratio
 run on identical weather within \PvRefAnnualDiff\% annually.
 \item \emph{Empirical validity}: not established. No REAP microdata were used and none
 are public for the revised rule.
+\item \emph{Built in by construction}: deterministic rules detect the error class they
+were written for whenever their elements are collected (the 100\% entries of Table 2);
+the informative entries are those for specifications lacking the elements, and the
+statistical rules. Detection also presumes that requested records are truthful.
 \item \emph{Assumptions}: aggregate commercial load shapes; hypothetical agricultural
 shapes, electricity only; photovoltaic RES only; hypothetical noise, error rates, element
 times, funding and non-energy points; flagged errors assumed corrected; fabricated

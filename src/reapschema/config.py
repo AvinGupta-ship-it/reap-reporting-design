@@ -183,7 +183,13 @@ class BurdenConfig(_Strict):
     sobol_base_samples: int = Field(ge=16)
 
 
+class NoiseScenario(_Strict):
+    noise_multiplier: float = Field(ge=0)
+    occupancy_multiplier: float = Field(ge=0)
+
+
 class ExperimentConfig(_Strict):
+    noise_scenarios: dict[str, NoiseScenario]
     are_cap: float = Field(gt=0)
     error_share_thresholds: tuple[float, float]
     savings_bands: tuple[float, float]

@@ -212,6 +212,9 @@ experiments:
   size_sensitivity_n: 4000
   e3_per_class: 2000
   evidence_sample: 5
+  noise_scenarios:                     # multipliers on load noise and on the probability of a
+    low: {noise_multiplier: 0.5, occupancy_multiplier: 0.0}    # non-routine change
+    high: {noise_multiplier: 2.0, occupancy_multiplier: 2.0}
   availability_grid: [0.0, 0.25, 0.5, 0.75, 1.0]
 
 hypothesis_tests:

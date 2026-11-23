@@ -1,8 +1,8 @@
 {
   "config_hash": "bf924a36341b44e43e18205e7f4cf4a2cf0f97cf3f8960414faf74f2810159c4",
-  "created_utc": "2026-11-23T06:37:53+00:00",
+  "created_utc": "2026-11-23T07:21:10+00:00",
   "data_basis": "synthetic",
-  "git_commit": "443706b9130da102504ace165def992a51fdb40d",
+  "git_commit": "a0ef3753da65b791b56063da3224722f5995641c",
   "input_checksums": {
     "e6_bands.csv": "6365f62f6846431937b476d302ec7d19826b01a115c9a6546f0cdc810eb883f8",
     "e6_specs.parquet": "44da3b3ecc5365daaff564f6eaa451a65d5a18716982901e2b3fcd738b048c29",

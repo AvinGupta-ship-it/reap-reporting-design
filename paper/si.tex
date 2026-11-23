@@ -236,6 +236,21 @@ function of the share of respondents able to use a mode (right).}\label{fig:mode
 \end{figure}
 
 \begin{table}[h]
+\caption{Synthetic data ($n=\SizeSensN$ applicants per scenario). Sensitivity to assumed
+load noise (multipliers \NoiseLowDailySd/\NoiseCentralDailySd/\NoiseHighDailySd\% daily s.d.)
+and probability of a non-routine change: median absolute relative error (\%) of EEI
+savings estimators against normal-year savings, share above \ErrorShareThreshold\% for
+the undated difference, and share of awards changed with error-free evidence under the
+current elements. By origin of the load shape, the undated median error is
+\BasisComstockUndatedMedian\% (ComStock types, $n=\BasisComstockN$) and
+\BasisHypotheticalUndatedMedian\% (hypothetical agricultural types,
+$n=\BasisHypotheticalN$); interval data give \BasisComstockIntervalMedian\% and
+\BasisHypotheticalIntervalMedian\%.}\label{tab:noise}
+\centering\footnotesize
+\input{generated/tab_noise.tex}
+\end{table}
+
+\begin{table}[h]
 \caption{Sobol indices (Saltelli sampling, $N=\SobolN$ base samples, bootstrap
 confidence half-widths) of the difference in respondent time between the monthly-data
 frontier specification and the current specification (mean \SobolOutputMean{} min, s.d.\

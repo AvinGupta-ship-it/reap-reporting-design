@@ -1,8 +1,8 @@
 {
   "config_hash": "a4954a706669ff14724d86e79f15db1487720dae24495c760036b10279b4d7c9",
-  "created_utc": "2026-11-23T06:37:48+00:00",
+  "created_utc": "2026-11-23T07:20:58+00:00",
   "data_basis": "synthetic",
-  "git_commit": "443706b9130da102504ace165def992a51fdb40d",
+  "git_commit": "a0ef3753da65b791b56063da3224722f5995641c",
   "input_checksums": {},
   "output": "fig1_schema.pdf",
   "package_versions": {

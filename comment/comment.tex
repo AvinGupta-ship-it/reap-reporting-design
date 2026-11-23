@@ -75,8 +75,8 @@ the principal new element of the collection.
 tolerance, and assess with the Agency's own historical data whether savings computed
 from twelve bills before and after an efficiency project are precise enough for the
 uses the rule makes of them.
-\item[A2.] Collect production of renewable energy systems as monthly production-meter
-readings with dates, not only as an annual total.
+\item[A2.] Consider collecting production of renewable energy systems as monthly
+production-meter readings with dates, not only as an annual total.
 \end{enumerate}
 
 \textbf{(c) Quality, utility and clarity.}
@@ -97,9 +97,10 @@ do not have to devise it.
 \begin{enumerate}
 \item[D1.] Accept utility billing-history files and production-monitoring exports in the
 planned online application portal in place of manual transcription.
-\item[D2.] Validate submissions at entry with deterministic checks (units and ranges,
-date continuity and alignment with the in-service date, account identity, agreement of
-totals with records) so that applicants correct errors before scoring.
+\item[D2.] Validate submissions at entry with deterministic checks (units and ranges, date
+continuity and alignment with the in-service date, account identity, agreement of totals
+with records) so that applicants correct errors before scoring, and test any statistical
+screen before relying on it.
 \item[D3.] Compute sums, annualized values and payback from the submitted records in the
 portal rather than asking applicants to calculate them.
 \end{enumerate}
@@ -162,8 +163,8 @@ approval covers \InvResponses{} responses and \InvHours{} hours from \InvRespond
 respondents \cite{omb05700067}. The revision reports \ChangeResponsesPct\% more responses
 and \ChangeHoursPct\% fewer hours from \ChangeRespondentsPct\% fewer respondents:
 responses per respondent rise by a factor of \ChangeResponsesPerRespondentFactor{} while
-hours per response fall by \ChangeHoursPerResponsePct\%. The rule removes three recurring
-reports, which would be expected to lower, not raise, responses per respondent. The
+hours per response fall by \ChangeHoursPerResponsePct\%. The notice does not
+explain why responses per respondent rise when the rule removes three recurring reports. The
 regulatory impact analysis in the docket estimates \RiaApplications{} RES/EEI applications
 and \RiaEaReda{} energy audit and development assistance applications a year
 \cite{ria2026reap}, which sum to \RiaTotal, the notice's respondent count; so the estimate
@@ -182,116 +183,128 @@ include ``a specific, objectively supported estimate of burden''
 
 \subsection*{4.2 What twelve-month evidence can establish (question a)}
 
-The following findings are from the simulation of synthetic applicants and hold under
-its stated assumptions (Section~6).
+The findings in Sections 4.2--4.4 are from the simulation of synthetic applicants. They
+show what follows from its stated assumptions (Section~6); they are not measurements of
+REAP applications.
 
-\emph{Renewable energy systems.} Production read from a meter is an observation, and in
-the simulation it is verified to within about \AccCurrentCleanResMedian\% when reported
-correctly. Its accuracy as evidence depends on whether reporting errors are caught. With
-hypothetical error rates and only an annual total collected,
+\emph{Renewable energy systems.} Production read from a meter is an observation; when it
+is reported correctly its accuracy is that of the meter (assumed \CfgMeterError\% in the
+simulation). Its value as evidence therefore turns on whether reporting errors are
+caught. With hypothetical error rates and only an annual total collected,
 \AccCurrentUnvalidatedResShareTen\% of synthetic RES applicants had a verified value more
-than 10\% from the truth if values were taken as submitted,
-\AccCurrentValidatedResShareTen\% after the checks possible on the current elements, and
-\AccProductionMeterValidatedResShareTen\% when monthly production-meter readings were
-collected, because the claim can then be recomputed (Figure~\ref{fig:errors}).
+than \ErrorShareThreshold\% from the truth when values were taken as submitted and
+\AccCurrentValidatedResShareTen\% after the checks possible on the current elements
+(Figure~\ref{fig:errors}). When monthly production-meter readings were collected the
+share fell to \AccProductionMeterValidatedResShareTen\%, but that figure rests on two
+assumptions built into the simulation: that an applicant asked for monthly readings
+supplies actual meter readings, and that a flagged discrepancy is corrected. It shows that
+the annual total can then be recomputed, not how often real applicants would err.
 
 \emph{Efficiency improvements.} Savings are the difference between measured use and
 what use would have been. With error-free synthetic evidence, the calculation in the
 rule's definition of Simple Payback (historical minus actual use over twelve bills) had
-a median absolute error of \PathUndatedNormalMedian\% of true normal-year savings; using
-bill dates and a degree-day adjustment computed by the verifier,
-\PathNormNormalMedian\%, or \PathNormMergedNormalMedian\% when estimated reads are
-identified; and with daily interval data, \PathIntervalPathNormalMedian\%. For synthetic
-projects saving less than 10\% of facility use the median error of the twelve-bill
-difference was \BandLowUndatedMedian\%; for those saving more than 20\% it was
-\BandHighUndatedMedian\%. A mixed result is also relevant: degree-day adjustment
-of twelve bills lowered the typical error but not the root-mean-square error
-(\NormEeiNormRmse\% of pre-installation use, against \NormEeiRawRmse\% for the simple
-difference), because a regression on twelve points occasionally fails badly. Weather
-adjustment is therefore not a remedy by itself, and the choice of calculation should be
-tested on real program data.
+a median absolute error of \PathUndatedNormalMedian\% of true normal-year savings; with
+bill dates, read types and a degree-day adjustment computed by the verifier,
+\PathNormMergedNormalMedian\%; and with daily interval data,
+\PathIntervalPathNormalMedian\%. These levels depend on the simulated facilities, in which
+the median project saves \MedianSavingsFraction\% of facility use. Three checks bear on
+how far they can be relied on. (i) Halving the assumed load noise and removing
+non-routine changes left the median error of the twelve-bill difference at
+\NoiseLowUndatedMedian\% (\NoiseCentralUndatedMedian\% in the matching central run), and
+doubling both raised it to \NoiseHighUndatedMedian\%; year-to-year weather and the size of
+savings relative to use, rather than the noise assumptions, drive it. (ii) For facility
+types whose load shapes come from NREL's ComStock profiles the median error was
+\BasisComstockUndatedMedian\%, and for the agricultural types, whose shapes are my
+assumptions, \BasisHypotheticalUndatedMedian\%. (iii) The error is larger for small
+savings: \BandLowUndatedMedian\% for projects saving less than \BandLowEdge\% of use and
+\BandHighUndatedMedian\% for those saving more than \BandHighEdge\%. A mixed result is also
+relevant: degree-day adjustment of twelve bills lowered the median error but not the
+root-mean-square error (\NormEeiNormRmse\% of pre-installation use, against
+\NormEeiRawRmse\% for the simple difference), because a regression on twelve points
+occasionally fails badly. Weather adjustment is therefore not a remedy by itself.
 
-\emph{Consequence for decisions.} In simulated competitions with hypothetical funding and
-the scoring formulas of \S4280.140(d)(2), (3) and (6), \SelCurrentCleanMid\% of awards
-differed from the selection on true values even with error-free evidence under the
-current specification, \SelCurrentValidatedMid\% with injected errors after validation,
-and \SelCurrentUnvalidatedMid\% with errors taken at face value. Collecting the monthly
-metadata listed in recommendation C1 reduced the middle figure to \SelRecValidatedMid\%.
+\emph{Consequence for decisions.} In simulated competitions with hypothetical funding,
+hypothetical non-energy points and the formulas of \S4280.140(d)(2), (3) and (6),
+\SelCurrentCleanMid\% of awards differed from the selection on true values with error-free
+evidence under the current elements (\SelCurrentCleanHigh--\SelCurrentCleanLow\% across the
+funding levels examined). With injected errors the figure was \SelCurrentValidatedMid\%
+after validation, and \SelRecValidatedMid\% when the frontier elements of Section 4.4 (bill
+dates, read type, account identifiers, monthly production readings, Agency-side
+adjustment) were collected; these two depend directly on the assumed error rates. I offer the
+magnitudes as illustration and the direction as the finding: estimation error in savings
+can move applications across the percentage and payback bands.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/fig3_error_distributions}
+\includegraphics[width=0.92\linewidth]{figures/fig3_error_distributions}
 \caption{Synthetic data (attachment Figure 3). Absolute relative error of the verified
 quantity by evidence specification: median, interquartile range and 5th--95th
-percentile; the numbers at right give the share of applicants with error above 10\%.
-Blue: error-free evidence; vermilion: with injected errors, after validation. Error
-rates are hypothetical.}\label{fig:errors}
+percentile; numbers at right give the share of applicants with error above
+\ErrorShareThreshold\%. Blue: error-free evidence; vermilion: with injected errors, after
+validation. Error rates are hypothetical.}\label{fig:errors}
 \end{figure}
 
-\subsection*{4.3 Which checks work, and what they need (questions c and d)}
+\subsection*{4.3 Which checks need which elements (questions c and d)}
 
-Each automated check needs particular data elements. In the simulation
-(Figure~\ref{fig:roc}; attachment Table 2):
+Several results here are true by construction and are stated as logic rather than as
+measured performance: a check on bill dates detects a wrong billing period whenever
+dates are collected and truthful, and a check on account identifiers detects a second
+meter whenever identifiers are collected. The informative results are what happens
+\emph{without} those elements, and which statistical screens fail (attachment Table 2 and
+Figure 4):
 
 \begin{itemize}
-\item Capacity-factor bounds from the rated system size and location caught every unit
-error in production, with no element beyond those the rule already requires.
-\item Date checks caught every wrong-period error (bills from another year, or periods
-straddling the in-service date), but only when bill dates were collected; without dates
-the checks available detected \DetCurrentEeiPeriod\% (EEI) and \DetCurrentResPeriod\%
-(RES) of them.
-\item Account identifiers caught every case of a second meter included in
-pre-installation use; without them \DetCurrentEeiDouble\% (EEI) and
-\DetCurrentResDouble\% (RES) were detected. The rule requires a dedicated meter
-(\S4280.122(a)(16)) but collects a certification rather than the identifier.
-\item Recomputing the claim from monthly production readings caught
-\DetProductionMeterResGrossNet\% of cases where exports or bill reductions were reported
-as production and \DetProductionMeterResNameplate\% of cases where a
-capacity-times-sun-hours estimate was reported.
-\item Some checks did not work. A bill-outlier test did not detect transposed digits
-(area under the ROC curve \AucOutlierTransposed). Comparing claimed production with the
-change in utility bills was weak even with exports and the netting basis known (area
-\AucBillDiffGrossNet), because facility use changes between years. Post-installation
-utility bills for RES projects did not appear on the accuracy--burden frontier in this
-study; I note that the simulation did not include fabricated readings, against which
-utility records would be the only independent source.
+\item Without bill dates, the checks that could still run detected
+\DetCurrentEeiPeriod\% (EEI) and \DetCurrentResPeriod\% (RES) of simulated wrong-period
+errors (bills from another year, or periods straddling the in-service date).
+\item Without account identifiers they detected \DetCurrentEeiDouble\% (EEI) and
+\DetCurrentResDouble\% (RES) of cases in which a second meter was included in
+pre-installation use. The rule requires a dedicated meter (\S4280.122(a)(16)) but
+collects a certification rather than the identifier.
+\item A bound on capacity factor from the rated system size and location, which needs no
+element beyond those already required, detected the simulated thousand-fold unit errors
+in production; it would not detect smaller unit or conversion errors.
+\item A plausibility comparison of claimed production with modelled output detected
+\DetRulePlausGrossNet\% of cases where exports or bill reductions were reported as
+production but only \DetRulePlausNameplate\% of cases where a capacity-times-sun-hours
+estimate was reported, at a \StatRuleFpr\% false-positive rate.
+\item Two screens did not work. The bill-outlier statistic tested did not detect
+transposed digits (area under the ROC curve \AucOutlierTransposed). Comparing claimed
+production with the change in utility bills was weak even with exports and the netting
+basis known (area \AucBillDiffGrossNet), because facility use changes between years.
+Post-installation utility bills for RES projects consequently did not appear on the
+accuracy--burden frontier. The simulation did not include fabricated readings, against
+which utility records would be the only independent source, so this is not evidence
+that such records lack value.
 \end{itemize}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figures/fig4_validation_roc}
-\caption{Synthetic data (attachment Figure 4). Detection rate against false-positive rate
-of the statistical validation rules by injected error class; area under the curve in the
-legend.}\label{fig:roc}
-\end{figure}
 
 \subsection*{4.4 Accuracy and burden together (questions c and d)}
 
 No source reports respondent time by data element for this collection, so the study uses
-stated time assumptions, scaled so that the evidence the rule now requires equals
+assumed times, scaled so that the evidence the rule now requires equals
 \AnchorResponses{} responses of the notice's average of \AuditHoursPerResponse{} hours.
-On that scale (Figure~\ref{fig:frontier}), adding bill dates with Agency-side adjustment
-costs about \DatesNormBurdenIncrease{} minutes per application and lowers the accuracy
-loss by \DatesNormMareReductionPct\%; the monthly-data specification on the frontier
-(\RecElements) costs about \RecBurdenIncrease{} minutes more than the current elements
-(\RecBurden{} against \BaseBurden{} minutes) and lowers the loss by
-\RecMareReductionPct\%. These minutes are scenario values, not measurements; their ordering
-is more reliable than their size.
+The scale is arbitrary; relative sizes are more meaningful than minutes. On those
+assumptions (Figure~\ref{fig:frontier}), adding bill dates with Agency-side adjustment
+adds about \DatesNormBurdenIncreasePct\% to the time for the energy evidence and lowers
+the accuracy loss by \DatesNormMareReductionPct\%; the monthly-data specification on the
+frontier (\RecElements) adds about \RecBurdenIncreasePct\% and lowers the loss by
+\RecMareReductionPct\%. Part of the added time is rework on flagged submissions.
 
-The mode of collection matters more than the number of elements. If the applicant
-uploads the utility's billing-history file instead of typing from bills, the same
-specification takes an estimated \ModeRecUploadBurden{} minutes,
-\ModeRecUploadVsCurrentPct\% less than manual entry of the current elements, because
-dates, read types and account identifiers are already in the file. Where Green Button
-data \cite{naesbreq21espi} are available, interval data come with the download.
+If the applicant uploads the utility's billing-history file instead of typing from
+bills, dates, read types and account identifiers arrive with the file at no extra
+effort. Whether that is quicker than manual entry depends on how long obtaining the file
+takes, which I assumed (\ModeRecUploadBurden{} minutes for the frontier specification,
+against \BaseBurden{} for manual entry of the current elements); the Agency could measure
+it when testing its portal. Not every utility offers such files or Green Button data
+\cite{naesbreq21espi}, so manual entry would have to remain available.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth]{figures/fig6_frontier}
-\caption{Synthetic data, hypothetical element times (attachment Figure 6). Respondent time
-and loss of every feasible combination of \NOptionalElements{} optional elements under
-manual entry (grey), the Pareto frontier with a 90\% Monte Carlo band (blue), the current
-rule (square) and the monthly-data frontier specification (diamond). Left: accuracy loss.
+\includegraphics[width=0.92\linewidth]{figures/fig6_frontier}
+\caption{Synthetic data, assumed element times (attachment Figure 6). Respondent time and
+loss of every feasible combination of \NOptionalElements{} optional elements under manual
+entry (grey), the Pareto frontier with a 90\% Monte Carlo band (blue), the current rule
+(square) and the monthly-data frontier specification (diamond). Left: accuracy loss.
 Right: share of awards changed by verification error.}\label{fig:frontier}
 \end{figure}
 
@@ -329,16 +342,18 @@ disclosure; the study's element times are hypothetical \\
 A1 & State verification method and tolerance for 12-month quantities; assess precision
 of EEI savings from 12 bills with historical program data & \S4280.131(b)(17)(i);
 definition of Simple Payback, \S4280.104; 5 CFR 1320.8(a)(1), (7); question (a) &
-Attachment Figure 3, Tables 3--4. Verified model of stated assumptions; synthetic data;
-request for analysis \\
-A2 & Collect monthly production-meter readings with dates & \S4280.131(b)(13),
+Attachment Figure 3, Tables 3--4 and 8. Verified model of stated assumptions; synthetic
+data; request for analysis \\
+A2 & Consider collecting monthly production-meter readings with dates & \S4280.131(b)(13),
 (b)(17)(i); definition of Annual Energy Production, \S4280.104; question (a) &
-Attachment Figure 3, Table 2. Synthetic data \\
+Attachment Figure 3, Table 2. Synthetic data; assumes readings supplied are actual
+meter readings \\
 C1 & Specify bill dates, coded units, read type, account identifier, delivered/net
 basis, in-service date, array geometry, affected end-use share as data elements &
 \S4280.131(b)(9), (b)(13), (b)(17); \S4280.122(a)(8)(i)(F), (a)(16); 5 CFR 1320.9(d);
 question (c) & Attachment Tables 2, 5, 6 and Figure 6. Synthetic data; requirement
-traceability from the rule text (observed). The delivered/net basis is recommended for
+traceability from the rule text (observed). Coded units rest on the OIG finding on unit
+conversion, not on the simulation. The delivered/net basis is recommended for
 interpretability of bills under the metering agreements named in
 \S4280.122(a)(8)(i)(F)(3); it did not improve accuracy in the simulation \\
 C2 & Publish a machine-readable format (schema and templates) & 5 CFR 1320.9(e), (j);
@@ -348,9 +363,10 @@ estimated reads, exports) & Definition of Simple Payback, \S4280.104
 (``same input and output conditions''); 5 CFR 1320.9(d); question (c) & OIG audit
 finding on calculation guidance (observed); attachment Table 3 (synthetic) \\
 D1 & Accept billing-history files and monitoring exports in the application portal &
-5 CFR 1320.8(a)(5), 1320.9(j); question (d) & Attachment Table 7. Hypothetical element
-times; direction of effect follows from the file containing the elements \\
-D2 & Validate at entry with deterministic checks; do not rely on outlier screens &
+5 CFR 1320.8(a)(5), 1320.9(j); question (d) & Attachment Table 7. Assumed element
+times; the file contains the elements, the time to obtain it is not measured \\
+D2 & Validate at entry with deterministic checks; test any statistical screen before
+relying on it &
 5 CFR 1320.9(j); question (d) & Attachment Table 2, Figure 4. Synthetic data, including
 null results \\
 D3 & Compute sums, annualized values and payback in the portal & 5 CFR 1320.8(a)(5);
@@ -376,11 +392,16 @@ as comments on the scoring criteria.
 commercial buildings are State-level aggregates of a modelled building stock;
 agricultural load shapes are assumptions and cover electricity only, although many REAP
 efficiency projects save propane or diesel; only photovoltaic RES projects are modelled.
-\item Error-class rates, noise levels, competition size, funding and element times are
-hypothetical scenario parameters. In particular the error rates are not estimates of how
-often such errors occur in REAP submissions, and the minutes attached to data elements
-are not measurements.
-\item The study has no REAP application microdata and its agreement with real
+\item Error-class rates, noise levels, competition size, funding, non-energy points and
+element times are hypothetical. The error rates are not estimates of how often such
+errors occur in REAP submissions, and the times attached to data elements are not
+measurements. Results that depend directly on them (shares of applicants in error, shares
+of awards changed with errors, minutes) are illustrations.
+\item Deterministic checks detect the simulated errors they were written for by
+construction, and the simulation assumes that a flagged error is corrected and that
+requested records are supplied truthfully. Real detection and correction rates would be
+lower.
+\item The study has no REAP application microdata, and its agreement with real
 submissions is not established. The Agency holds historical bills and outcome reports
 with which the central question, the precision of twelve-month savings estimates, could
 be tested directly; recommendation A1 asks for that.

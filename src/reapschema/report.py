@@ -475,6 +475,28 @@ def build_values(res: Path, cfg: Config) -> Values:
             v.add(f"Size{dtag}{stag}Mare", pct(sens.loc[(dist, spec), "mare"], 1))
         v.add(f"Size{dtag}EeiMedian", pct(sens.loc[(dist, "current"), "median_are_eei"], 1))
     v.add("SizeSensN", fmt_int(cfg.experiments.size_sensitivity_n))
+    load_basis = rd("e2_by_load_basis.csv").set_index(["load_basis", "estimator"])
+    for lb, btag in (("comstock", "Comstock"), ("scenario_hypothetical", "Hypothetical")):
+        v.add(f"Basis{btag}UndatedMedian",
+              pct(load_basis.loc[(lb, "eei_undated"), "median_are"], 0))
+        v.add(f"Basis{btag}NormMedian",
+              pct(load_basis.loc[(lb, "eei_normalized_merged"), "median_are"], 0))
+        v.add(f"Basis{btag}IntervalMedian",
+              pct(load_basis.loc[(lb, "eei_interval"), "median_are"], 0))
+        v.add(f"Basis{btag}N", fmt_int(load_basis.loc[(lb, "eei_undated"), "n"]))
+    noise = rd("sensitivity_noise.csv").set_index("scenario")
+    for scen, stag in (("low", "Low"), ("central", "Central"), ("high", "High")):
+        nrow: Any = noise.loc[scen]
+        v.add(f"Noise{stag}UndatedMedian", pct(nrow["median_eei_undated"], 0))
+        v.add(f"Noise{stag}NormMedian", pct(nrow["median_eei_normalized_merged"], 0))
+        v.add(f"Noise{stag}IntervalMedian", pct(nrow["median_eei_interval"], 0))
+        v.add(f"Noise{stag}UndatedShareTen", pct(nrow["share_above_eei_undated"], 0))
+        v.add(f"Noise{stag}SelClean", pct(nrow["selection_error_free_current"], 1))
+        v.add(f"Noise{stag}DailySd", pct(nrow["daily_noise_sd"], 0))
+        v.add(f"Noise{stag}OccupancyProb", pct(nrow["occupancy_change_prob"], 0))
+    v.add("CfgMeterError", pct(cfg.population.res.meter_error_sd, 1))
+    v.add("DatesNormBurdenIncreasePct",
+          pct(dn["burden_min"] / r6["baseline_burden_min"] - 1, 0))
 
     # --- model verification: PVWatts reference --------------------------------------------------
     pv = pvwatts_comparison(cfg)
@@ -713,6 +735,14 @@ def build_tables(res: Path, out: Path, cfg: Config) -> None:
         rows, "p{0.36\\linewidth}llrrrrr", longtable=True,
         caption="Synthetic data: absolute relative error (\\%) of the verified quantity by "
         "specification and condition (E2).", label="tab:acc-full"))
+    noise = rd("sensitivity_noise.csv")
+    rows = [[r.scenario, pct(r.daily_noise_sd, 0), pct(r.occupancy_change_prob, 0),
+             pct(r.median_eei_undated, 0), pct(r.median_eei_normalized_merged, 0),
+             pct(r.median_eei_interval, 0), pct(r.share_above_eei_undated, 0),
+             pct(r.selection_error_free_current, 1)] for r in rows_of(noise)]
+    (out / "tab_noise.tex").write_text(_tabular(
+        ["Scenario", "Daily noise s.d.", "Non-routine change", "Undated", "Dated, adjusted",
+         "Interval", "Undated $>10\\%$", "Awards changed"], rows, "lrrrrrrr"))
     params = bm.time_parameters(cfg.burden)
     rows = [[tex_escape(p.name), fmt(p.low, 2), fmt(p.mode, 2), fmt(p.high, 2)] for p in params]
     (out / "tab_time_parameters.tex").write_text(_tabular(

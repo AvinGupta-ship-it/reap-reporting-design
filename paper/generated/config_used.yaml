@@ -349,6 +349,13 @@ burden:
   monte_carlo_draws: 2000
   sobol_base_samples: 4096
 experiments:
+  noise_scenarios:
+    low:
+      noise_multiplier: 0.5
+      occupancy_multiplier: 0.0
+    high:
+      noise_multiplier: 2.0
+      occupancy_multiplier: 2.0
   are_cap: 1.0
   error_share_thresholds:
   - 0.1

@@ -36,6 +36,7 @@ SUMMARY_FILES = (
     "e8_modes.csv", "sobol_burden.csv", "convergence.csv", "interval_coverage.csv",
     "population.json", "score_structure.json", "traceability.csv", "recommended.json",
     "e2_by_savings_fraction.csv", "sensitivity_size_distribution.csv",
+    "sensitivity_noise.csv", "e2_by_load_basis.csv",
 )
 
 
@@ -164,9 +165,12 @@ def run(cfg: Config) -> Path:
              "metadata": ex.NAMED_SPECS["metadata"][1],
              "interval": ex.NAMED_SPECS["interval"][1]}
     _save(ex.accuracy_by_savings_fraction(records, cfg), out / "e2_by_savings_fraction.csv", cfg)
+    _save(ex.accuracy_by_load_basis(records, cfg), out / "e2_by_load_basis.csv", cfg)
     _save(ex.size_distribution_sensitivity(
         cfg, {"current": frozenset(), "recommended": rec_elements}),
         out / "sensitivity_size_distribution.csv", cfg)
+    _save(ex.noise_sensitivity(cfg, {"current": frozenset(), "recommended": rec_elements}),
+          out / "sensitivity_noise.csv", cfg)
     _save(ex.e8_modes(records, cfg, rng, hours, named), out / "e8_modes.csv", cfg)
     _save(ex.burden_sobol(cfg, hours, rec_elements, float(frontier["calibration"][
         "res_share"].iloc[0]), (float(base_row["flag_rate"]), float(rec_row["flag_rate"]))),

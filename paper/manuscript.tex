@@ -28,10 +28,10 @@ as a machine-readable schema traced to the regulation, build a physically ground
 generator of synthetic applicants with known ground truth and labelled reporting errors,
 and evaluate estimators, \NRules{} validation rules and all \NSpecs{} feasible combinations
 of \NOptionalElements{} optional data elements. All results are for synthetic applicants
-and hypothetical scenario parameters. Metered photovoltaic production is verified to
-within about \AccProductionMeterCleanResMedian\% (median), so accuracy for renewable
-systems depends on catching reporting errors, which monthly production-meter readings
-do almost completely. Savings from efficiency improvements are much less well determined:
+and hypothetical scenario parameters. Correctly reported metered photovoltaic production is as accurate as the meter, so
+accuracy for renewable systems depends on catching reporting errors, which monthly
+production-meter readings allow under the assumption that the readings themselves are
+genuine. Savings from efficiency improvements are much less well determined:
 the undated twelve-bill difference prescribed by the rule has a median absolute error of
 \PathUndatedNormalMedian\% of true normal-year savings, degree-day normalization of dated
 bills \PathNormNormalMedian\%, and interval data \PathIntervalPathNormalMedian\%.
@@ -363,7 +363,9 @@ correction. Error-class rates are hypothetical.}\label{fig:errors}
 
 \subsection{Validation performance}
 
-Deterministic rules behave as designed (Table~\ref{tab:rules}): capacity-factor bounds
+Deterministic rules detect the error class they were written for by construction
+(Table~\ref{tab:rules}), so their detection rates are statements of logic, not of
+measured performance: capacity-factor bounds
 catch every unit error in production; date rules catch every wrong-period error;
 account identifiers catch every double-counted meter; recomputation against monthly
 production readings catches \DetProductionMeterResGrossNet\% of gross/net and
@@ -559,6 +561,13 @@ shapes are assumptions and cover electricity only, whereas many REAP efficiency 
 save propane or diesel. Noise, non-routine changes, measure sizes, error-class rates,
 competition size, funding and non-energy points are hypothetical; error rates in
 particular are not estimates of prevalence, and the selection results depend on them.
+Halving load noise and removing non-routine changes changes the median error of
+the undated EEI difference from \NoiseCentralUndatedMedian\% to \NoiseLowUndatedMedian\%,
+and doubling both raises it to \NoiseHighUndatedMedian\% (\NoiseLowNormMedian\%,
+\NoiseCentralNormMedian\% and \NoiseHighNormMedian\% for dated, adjusted bills; SI), so the
+undated result is not driven by the noise assumptions, whereas the benefit of adjustment
+is. The undated median error is \BasisComstockUndatedMedian\% for ComStock-based facility
+types and \BasisHypotheticalUndatedMedian\% for the hypothetical agricultural types.
 Only photovoltaic RES projects are modelled. Sites cover the 50 States, not the
 territories that the rule treats as States. Flagged errors are assumed to be corrected,
 which is optimistic. Element times are assumptions scaled to the published average; the

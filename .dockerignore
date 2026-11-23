@@ -1,0 +1,14 @@
+.git
+.venv
+.mypy_cache
+.pytest_cache
+.ruff_cache
+.hypothesis
+__pycache__
+results
+data/raw/comstock
+data/raw/pvgis
+data/raw/isd_lite
+data/raw/usaspending
+data/processed/weather
+data/processed/weather_load_year

@@ -99,6 +99,28 @@ CPRE_PATHS = {
 }
 
 
+def accuracy_by_load_basis(records: pd.DataFrame, cfg: Config) -> pd.DataFrame:
+    """EEI estimator error on error-free evidence by origin of the load shape.
+
+    Separates facility types whose shapes derive from ComStock from the hypothetical
+    agricultural types, to show how far results depend on the assumed shapes.
+    """
+    eei = records[records["category"] == "EEI"]
+    truth = eei["true_savings_normal"].to_numpy()
+    hypothetical = eei["facility_type"].str.startswith("scenario_hypothetical").to_numpy()
+    thr = cfg.experiments.error_share_thresholds[0]
+    rows = []
+    for label, mask in (("comstock", ~hypothetical), ("scenario_hypothetical", hypothetical)):
+        for key, (col, _label) in EEI_PATHS.items():
+            are = np.abs(eei[f"c_{col}"].to_numpy()[mask] - truth[mask]) / np.abs(truth[mask])
+            rows.append({"load_basis": label, "estimator": key, "n": int(mask.sum()),
+                         "median_are": float(np.median(are)),
+                         "share_above_10pct": float((are > thr).mean()),
+                         "mean_savings_fraction": float(
+                             eei["savings_fraction"].to_numpy()[mask].mean())})
+    return pd.DataFrame(rows)
+
+
 def _quantiles(x: np.ndarray) -> dict[str, float]:
     q = np.quantile(x, [0.05, 0.25, 0.5, 0.75, 0.95])
     return {"q05": float(q[0]), "q25": float(q[1]), "median": float(q[2]),
@@ -590,6 +612,42 @@ def size_distribution_sensitivity(cfg: Config, specs: dict[str, frozenset[str]]
 
 def spec_elements(row: pd.Series) -> frozenset[str]:
     return frozenset(e for e in OPTIONAL_ELEMENTS if int(row[e]) == 1)
+
+
+def noise_sensitivity(cfg: Config, specs: dict[str, frozenset[str]]) -> pd.DataFrame:
+    """Estimator error under lower and higher load noise and non-routine change rates."""
+    scenarios: dict[str, tuple[float, float]] = {"central": (1.0, 1.0)}
+    scenarios |= {k: (v.noise_multiplier, v.occupancy_multiplier)
+                  for k, v in cfg.experiments.noise_scenarios.items()}
+    rows = []
+    for name, (noise, occupancy) in scenarios.items():
+        base = cfg.population.load
+        load = base.model_copy(update={
+            "daily_noise_sd": base.daily_noise_sd * noise,
+            "hourly_noise_sd": base.hourly_noise_sd * noise,
+            "occupancy_change_prob": min(base.occupancy_change_prob * occupancy, 1.0)})
+        alt = cfg.model_copy(update={
+            "population": cfg.population.model_copy(update={"load": load})})
+        rec = simulate(alt, cfg.experiments.size_sensitivity_n, seed=cfg.seed + 951)
+        eei = rec[rec["category"] == "EEI"]
+        truth = eei["true_savings_normal"].to_numpy()
+        thr = cfg.experiments.error_share_thresholds[0]
+        row: dict[str, Any] = {
+            "scenario": name, "noise_multiplier": noise, "occupancy_multiplier": occupancy,
+            "daily_noise_sd": load.daily_noise_sd,
+            "occupancy_change_prob": load.occupancy_change_prob, "n_eei": int(len(eei))}
+        for key in ("eei_undated", "eei_normalized_merged", "eei_interval"):
+            are = np.abs(eei[f"c_{EEI_PATHS[key][0]}"].to_numpy() - truth) / np.abs(truth)
+            row[f"median_{key}"] = float(np.median(are))
+            row[f"share_above_{key}"] = float((are > thr).mean())
+        ev = SpecEvaluator(rec, alt)
+        sel = SelectionEvaluator(ev, np.random.default_rng(cfg.seed + 7))
+        for key, elements in specs.items():
+            res_clean = ev.evaluate(elements, with_errors=False)
+            row[f"mare_{key}"] = ev.losses(ev.evaluate(elements))["mare"]
+            row[f"selection_error_free_{key}"] = sel.change_probability(res_clean)[0]
+        rows.append(row)
+    return pd.DataFrame(rows)
 
 
 # --- E7 -------------------------------------------------------------------------------------
