@@ -1,0 +1,257 @@
+requirement_id,heading,scope,schema_elements,mapped_by,note
+4280.104:Annual energy production,Annual energy production,evidence,PerformanceClaim.claimed_value; PerformanceClaim.energy_unit; Meter.meter_type; BillingRecord.energy_imported,4280.104:Annual energy production,Measured at the common point of electrical coupling; production-meter readings are BillingRecord rows of an inverter Meter.
+4280.104:Energy assessment,Energy assessment,evidence,BillingRecord.energy_imported; Project.affected_end_use_share,4280.104:Energy assessment,Analysis of energy bills; the schema carries the bill data the assessment summarises.
+4280.104:Energy audit (EA),Energy audit (EA),evidence,BillingRecord.energy_imported; Project.affected_end_use_share; PerformanceClaim.claimed_value,4280.104:Energy audit (EA),
+4280.104:Kilowatt-hour (kWh),Kilowatt-hour (kWh),evidence,BillingRecord.energy_unit; PerformanceClaim.energy_unit,4280.104:Kilowatt-hour (kWh),
+4280.104:Megawatt-hour (MWh),Megawatt-hour (MWh),evidence,BillingRecord.energy_unit; PerformanceClaim.energy_unit,4280.104:Megawatt-hour (MWh),
+4280.104:Metering agreement,Metering agreement,evidence,Meter.netting_arrangement; Meter.billed_quantity_basis,4280.104:Metering agreement,
+4280.104:Rated system size,Rated system size,evidence,Project.rated_capacity; Project.rated_capacity_unit,4280.104:Rated system size,
+4280.104:Renewable energy system (RES),Renewable energy system (RES),evidence,Project.res_subcategory; PerformanceClaim.pre_period_energy; PerformanceClaim.claimed_value,4280.104:Renewable energy system (RES),The 120 percent subcategory test compares annual production with use in the 12 months before installation.
+4280.104:Simple payback,Simple payback,evidence,Project.project_cost; PerformanceClaim.pre_period_energy; PerformanceClaim.post_period_energy; PerformanceClaim.energy_price; BillingRecord.energy_charge; BillingRecord.energy_imported; BillingRecord.is_pre_installation,4280.104:Simple payback,
+4280.104:Useful life,Useful life,evidence,Project.useful_life_years,4280.104:Useful life,
+4280.122(a),Eligible Projects,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(1),Project purpose,evidence,Project.category; Project.technology; Project.in_service_date,4280.122(a)(1),
+4280.122(a)(1)(i),RES Projects,evidence,Project.category; Project.technology; Project.in_service_date,4280.122(a)(1),
+4280.122(a)(1)(i)(A),,evidence,Project.category; Project.technology; Project.in_service_date,4280.122(a)(1),
+4280.122(a)(1)(i)(B),,evidence,Project.category; Project.technology; Project.in_service_date,4280.122(a)(1),
+4280.122(a)(1)(i)(C),,evidence,Project.category; Project.technology; Project.in_service_date,4280.122(a)(1),
+4280.122(a)(1)(ii),EEI Projects,evidence,Project.category; Project.technology; Project.in_service_date,4280.122(a)(1),
+4280.122(a)(1)(ii)(A),Energy Efficiency Improvements,evidence,Project.category; Project.technology; Project.in_service_date,4280.122(a)(1),
+4280.122(a)(1)(ii)(B),Efficiency improvements,evidence,Project.category; Project.technology; Project.in_service_date,4280.122(a)(1),
+4280.122(a)(1)(ii)(C),Replacement of previously funded Project,evidence,Project.category; Project.technology; Project.in_service_date,4280.122(a)(1),
+4280.122(a)(2),Amount requested,evidence,Project.amount_requested,4280.122(a)(2),
+4280.122(a)(2)(i),Minimum request,evidence,Project.amount_requested,4280.122(a)(2),
+4280.122(a)(2)(ii),Maximum request,evidence,Project.amount_requested,4280.122(a)(2),
+4280.122(a)(3),Cost Sharing,evidence,Project.project_cost; Project.amount_requested,4280.122(a)(3),
+4280.122(a)(4),Rural area,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(5),Allowable use of funds,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(6),Project Period,evidence,Project.project_period_start; Project.project_period_end; Project.in_service_date,4280.122(a)(6),
+4280.122(a)(7),Commercially Available technology,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(8),Technical sustainability,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(8)(i),Resource Assessment,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(8)(i)(A),Source of energy,evidence,Project.technology,4280.122(a)(8)(i)(A),
+4280.122(a)(8)(i)(B),Type of technology,evidence,Project.technology; Project.storage_capacity,4280.122(a)(8)(i)(B),
+4280.122(a)(8)(i)(C),Energy output,evidence,PerformanceClaim.quantity; PerformanceClaim.energy_unit,4280.122(a)(8)(i)(C),
+4280.122(a)(8)(i)(D),Byproducts,out_of_scope,,4280.122(a)(8)(i)(D),Byproduct quantities are not electrical or thermal energy evidence.
+4280.122(a)(8)(i)(E),Storage system,evidence,Project.storage_capacity; IntervalSeries.values,4280.122(a)(8)(i)(E),Storage dispatch curves for the 12 months after installation are interval series.
+4280.122(a)(8)(i)(F),Use of energy,evidence,Meter.netting_arrangement; Meter.billed_quantity_basis,4280.122(a)(8)(i)(F),Interconnection and metering agreement type.
+4280.122(a)(8)(i)(F)(1),Interconnection,evidence,Meter.netting_arrangement; Meter.billed_quantity_basis,4280.122(a)(8)(i)(F),Interconnection and metering agreement type.
+4280.122(a)(8)(i)(F)(2),End User,evidence,Meter.netting_arrangement; Meter.billed_quantity_basis,4280.122(a)(8)(i)(F),Interconnection and metering agreement type.
+4280.122(a)(8)(i)(G),Sale of energy,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.
+4280.122(a)(8)(i)(G)(1),Percentage,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.
+4280.122(a)(8)(i)(G)(2),Quantity,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.
+4280.122(a)(8)(i)(G)(3),Price,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.
+4280.122(a)(8)(i)(G)(4),Buyer,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.
+4280.122(a)(8)(i)(G)(5),Type of agreement,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.
+4280.122(a)(8)(i)(G)(5)(i),Purchasing energy output,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.
+4280.122(a)(8)(i)(G)(5)(ii),Byproducts,evidence,BillingRecord.energy_exported; PerformanceClaim.energy_price,4280.122(a)(8)(i)(G),Quantity and price of energy sold; buyer identity and agreement type are narrative.
+4280.122(a)(8)(i)(H),Additional information,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(1),Wind,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(1)(i),Source,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(1)(ii),Conditions and assumptions,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(2),Solar,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modelled resource.
+4280.122(a)(8)(i)(H)(2)(i),Source,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modelled resource.
+4280.122(a)(8)(i)(H)(2)(ii),Type of system,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modelled resource.
+4280.122(a)(8)(i)(H)(2)(iii),Assumptions,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modelled resource.
+4280.122(a)(8)(i)(H)(3),Bioenergy/Biomass Project,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(3)(i),Renewable Biomass resource,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(3)(ii),Shipping and receiving,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(3)(iii),Process method,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(3)(iv),Woody biomass,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(3)(v),Feedstock,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(4),Geothermal Electric Generation,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(4)(i),Ground-source,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(4)(ii),Quality of the resource,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(4)(iii),Special handling,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(4)(iv),Resource determination,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(5),Geothermal Direct Generation,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(5)(i),Quality of resource,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(5)(ii),Special handling,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(5)(iii),Resource determination,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(6),Biogas,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(6)(i),Capture and treatment,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(6)(ii),Feedstock information,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(7),Anaerobic Digester,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(7)(i),Type of system,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(7)(ii),Feedstock information,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(7)(iii),Gas production estimates,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(7)(iv),Type of operation,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(7)(v),Waste collection,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(7)(vi),System developer,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(7)(vii),Digester design assumptions,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(7)(viii),Treatment of digester effluent,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(8),Hydrogen Project,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(8)(i),Resource information,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(8)(ii),Renewable resource,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(9),Hydroelectric/Ocean Energy Projects,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(9)(i),Quality of the resource,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(9)(ii),Resource evaluation,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(9)(iii),Measurement setup,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(9)(iv),Proximity,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
+4280.122(a)(8)(i)(H)(10),Storage components,evidence,Project.storage_capacity,4280.122(a)(8)(i)(H)(10),
+4280.122(a)(8)(i)(H)(10)(i),Storage system specifications,evidence,Project.storage_capacity,4280.122(a)(8)(i)(H)(10),
+4280.122(a)(8)(i)(H)(10)(ii),Integration of the system,evidence,Project.storage_capacity,4280.122(a)(8)(i)(H)(10),
+4280.122(a)(8)(i)(H)(10)(iii),Distribution of the stored resource(s),evidence,Project.storage_capacity,4280.122(a)(8)(i)(H)(10),
+4280.122(a)(8)(ii),Feasibility Study,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(A),Economic analysis,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(A)(1),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(A)(2),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(A)(3),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(A)(5),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(B),Market analysis,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(B)(1),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(B)(2),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(B)(3),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(B)(4),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(B)(5),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(B)(6),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(C),Technical analysis,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(C)(1),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(C)(2),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(C)(3),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(C)(4),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(C)(5),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(C)(6),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(C)(7),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(C)(8),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(C)(9),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D),Financial analysis,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(1),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(2),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(3),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(4),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(5),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(6),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(7),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(8),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(9),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(10),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(11),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(D)(12),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(E),Management analysis,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(E)(1),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(E)(2),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(E)(3),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(E)(4),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(E)(5),,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(F),Recommendation,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(8)(ii)(G),Qualifications,out_of_scope,,4280.122(a)(8)(ii),Feasibility study narrative.
+4280.122(a)(9),Qualified Key Service Providers,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(10),Key Service Provider selection,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(11),Completion certificate,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(12),Environmental requirements,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(13),Architectural barriers,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(14),Seismic safety,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(15),Bioenergy,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(16),Dedicated metering,evidence,Meter.dedicated; Meter.utility_account,4280.122(a)(16),
+4280.122(a)(17),Residential use exceptions,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(17)(i),,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(17)(ii),,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(17)(iii),,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(a)(18),Simple Payback Period,evidence,Project.useful_life_years; Project.project_cost; PerformanceClaim.energy_price; PerformanceClaim.claimed_value,4280.122(a)(18),
+4280.122(a)(19),Energy Storage Systems including BESS,evidence,Project.storage_capacity; Project.rated_capacity; PerformanceClaim.pre_period_energy; PerformanceClaim.claimed_value,4280.122(a)(19),
+4280.122(a)(20),Permits and codes,out_of_scope,,4280.122(a),Eligibility conditions established from documents other than energy evidence.
+4280.122(b),Ineligible projects,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(1),Amount requested,evidence,Project.amount_requested,4280.122(b)(1),
+4280.122(b)(2),Research and development,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(3),Technology,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(4),Residential,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(5),Use of energy,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(5)(i),,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(5)(ii),,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(5)(iii),,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(6),Co-firing with non-Renewable Energy sources,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(7),RES Retrofitting Projects,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(8),EEI replacement Projects,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(9),Multiple technologies,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(10),Multiple locations,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(11),Cropland installation,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(12),Rated System Size,evidence,Project.rated_capacity; Project.rated_capacity_unit,4280.122(b)(12),
+4280.122(b)(13),Historical Energy Usage Documentation,evidence,PerformanceClaim.pre_period_energy; BillingRecord.energy_imported; BillingRecord.is_pre_installation,4280.122(b)(13),Commensurate historical energy usage for ground-mount solar or wind.
+4280.122(b)(14),Mobile system,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(15),Dispensing energy at retail,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(16),Labor only Projects,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(17),Distribution only Projects,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(18),Storage systems,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(18)(i),Retrofitting an existing RES to add an energy storage system,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(18)(ii),Stand-alone energy storage systems,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(19),Foreign components,evidence,EquipmentItem.country_of_origin; Project.in_service_date,4280.122(b)(19),
+4280.122(b)(20),REAP funding limitation,evidence,Project.project_cost; Project.amount_requested,4280.122(b)(20),
+4280.122(b)(21),Unallowable costs,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.122(b)(22),Conflict of interest,out_of_scope,,4280.122(b),Ineligibility conditions established from documents other than energy evidence.
+4280.131(a),Applicant eligibility,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(1),Applicant's legal name,evidence,Applicant.legal_name,4280.131(a)(1),
+4280.131(a)(2),Applicant's address,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(3),Identification numbers,evidence,Applicant.unique_entity_identifier,4280.131(a)(3),"Only the Unique Entity Identifier is carried, to link evidence to an application; taxpayer identifiers are excluded."
+4280.131(a)(4),Incorporation date,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(5),Certificate of Good Standing,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(6),Entity bylaws,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(7),Principals,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(8),Applicant entity type,evidence,Applicant.applicant_type,4280.131(a)(8),
+4280.131(a)(8)(i),Agricultural Producer,out_of_scope,,4280.131(a)(8)(i),Ownership and income details.
+4280.131(a)(8)(i)(A),Owner names,out_of_scope,,4280.131(a)(8)(i),Ownership and income details.
+4280.131(a)(8)(i)(B),Percentage of ownership,out_of_scope,,4280.131(a)(8)(i),Ownership and income details.
+4280.131(a)(8)(i)(C),Participation in operations,out_of_scope,,4280.131(a)(8)(i),Ownership and income details.
+4280.131(a)(8)(i)(D),Agricultural Commodity,out_of_scope,,4280.131(a)(8)(i),Ownership and income details.
+4280.131(a)(8)(i)(E),Annual income,out_of_scope,,4280.131(a)(8)(i),Ownership and income details.
+4280.131(a)(8)(ii),Rural Small Business,out_of_scope,,4280.131(a)(8)(ii),Ownership details.
+4280.131(a)(8)(ii)(A),Owner names,out_of_scope,,4280.131(a)(8)(ii),Ownership details.
+4280.131(a)(8)(ii)(B),Percentage of ownership,out_of_scope,,4280.131(a)(8)(ii),Ownership details.
+4280.131(a)(9),Financial statements,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(9)(i),All applications,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(9)(ii),"Project Cost $200,000 and greater",out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(10),Summary of REAP awards,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(11),Business operations,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(12),Foreign ownership,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(a)(13),Conflict of interest,out_of_scope,,4280.131(a),"Applicant identity, ownership, financial and conflict-of-interest information."
+4280.131(b),Project eligibility,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(1),Project description,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(2),Type of Project,evidence,Project.category; Project.res_subcategory,4280.131(b)(2),
+4280.131(b)(3),Technical sustainability,evidence,BillingRecord.energy_imported; PerformanceClaim.claimed_value; Project.affected_end_use_share,4280.131(b)(3),"Information from the Energy Assessment, Energy Audit or Resource Assessment that the Agency uses to assess the project."
+4280.131(b)(4),Agreements,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(5),Country of origin,evidence,EquipmentItem.country_of_origin; EquipmentItem.make; EquipmentItem.model,4280.131(b)(5),
+4280.131(b)(6),Commercially Available technology,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(6)(i),Operating history,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(6)(ii),Performance data,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(6)(iii),Feedstock,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(6)(iv),Process to produce or save energy,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(6)(v),Design and installation procedures,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(6)(vi),Replicability,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(6)(vii),Service providers,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(6)(viii),Equipment availability,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(6)(ix),Service availability,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(6)(x),Warranty,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(7),Key Service Providers,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(7)(i),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(7)(ii),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(7)(iii),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(7)(iv),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(7)(v),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(7)(vi),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(8),Procurement contracts,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(8)(i),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(8)(ii),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(8)(iii),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(8)(iv),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(9),Dedicated meter,evidence,Meter.dedicated,4280.131(b)(9),
+4280.131(b)(10),Completion certificate,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(11),Project location,evidence,Facility.address; Facility.state; Facility.latitude; Facility.longitude,4280.131(b)(11),
+4280.131(b)(12),Cropland usage,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(13),Size of RES,evidence,Project.rated_capacity; Project.rated_capacity_unit; PerformanceClaim.claimed_value; PerformanceClaim.energy_unit,4280.131(b)(13),
+4280.131(b)(14),Project Period,evidence,Project.project_period_start; Project.project_period_end,4280.131(b)(14),
+4280.131(b)(15),Budget,evidence,Project.project_cost; Project.amount_requested,4280.131(b)(15),Totals only; the itemised budget is outside the schema.
+4280.131(b)(16),Cost Sharing verification,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(17),Simple Payback,evidence,PerformanceClaim.pre_period_energy; PerformanceClaim.post_period_energy; PerformanceClaim.energy_price,4280.131(b)(17),
+4280.131(b)(17)(i),Energy amount,evidence,PerformanceClaim.pre_period_energy; PerformanceClaim.post_period_energy; PerformanceClaim.energy_unit; BillingRecord.energy_imported; BillingRecord.energy_unit; BillingRecord.is_pre_installation; BillingRecord.period_start; BillingRecord.period_end,4280.131(b)(17)(i),Quantity and unit of historical use for 12 consecutive months before installation and 12 months of production or use after it.
+4280.131(b)(17)(ii),Energy value,evidence,PerformanceClaim.energy_price; BillingRecord.energy_charge,4280.131(b)(17)(ii),"Per-unit dollar value excluding fixed meter, demand and subsidy charges and sales tax."
+4280.131(b)(18),Ownership of the RES or EEI,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(19),Ownership of the Project site,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(19)(i),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(19)(ii),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(19)(iii),,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(20),Architectural barriers,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(21),Seismic safety,out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.131(b)(22),"Applicable laws, regulations, agreements, permits, codes, and standards",out_of_scope,,4280.131(b),"Project eligibility items established from narrative, contractual or certification documents."
+4280.160(a),Financial report,out_of_scope,,4280.160(a),Financial report (SF-425).
+4280.160(b),Performance report,evidence,PerformanceClaim.claimed_value; PerformanceClaim.method,4280.160(b),"Content specified in Form RD 4280-2, which is not reproduced in the rule."
+4280.160(c),Equipment report,evidence,EquipmentItem.make; EquipmentItem.model; EquipmentItem.item_quantity; EquipmentItem.acquisition_cost; EquipmentItem.acquisition_date,4280.160(c),Equipment records under 2 CFR 200.313.

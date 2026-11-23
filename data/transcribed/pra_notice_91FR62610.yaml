@@ -1,0 +1,26 @@
+# Figures of the Paperwork Reduction Act notice in the preamble of
+# 91 FR 62600 (October 1, 2026), FR Doc. 2026-20178, printed pages 62610-62611.
+# Transcribed twice, independently, from the official PDF (entry_a) and from the
+# Federal Register XML (entry_b); tests require the two entries to agree and to
+# match the values parsed from the XML by reapschema.requirements.
+citation: "91 FR 62610-62611 (Oct. 1, 2026), Paperwork Reduction Act"
+entry_a:
+  omb_control_number: "0570-0067"
+  type_of_request: "Revision of a currently approved information collection"
+  hours_per_response: 1.34
+  respondent_description: "Nonprofit corporations and institutions of higher education"
+  respondents: 2977
+  responses_per_respondent: 37.64
+  responses: 112073
+  total_hours: 150883
+  comment_deadline: "November 30, 2026"
+entry_b:
+  omb_control_number: "0570-0067"
+  type_of_request: "Revision of a currently approved information collection"
+  hours_per_response: 1.34
+  respondent_description: "Nonprofit corporations and institutions of higher education"
+  respondents: 2977
+  responses_per_respondent: 37.64
+  responses: 112073
+  total_hours: 150883
+  comment_deadline: "November 30, 2026"

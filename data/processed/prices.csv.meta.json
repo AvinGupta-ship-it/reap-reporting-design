@@ -1,0 +1,24 @@
+{
+  "config_hash": "8b77500f938673a4bdb49f854982b60fe8bb1d40ba1246d8ffb34e01d7ca181b",
+  "created_utc": "2026-11-23T06:08:25+00:00",
+  "git_commit": "89c8604d0a9b09b17582550ee2c2d12c50c2d7ec",
+  "input_checksums": {
+    "avgprice_annual.xlsx": "27af5b91bd669756e72912c454eb58cea88a195cc5f67548eda12213aaa24522"
+  },
+  "output": "prices.csv",
+  "package_versions": {
+    "SALib": "1.6.0",
+    "highspy": "1.16.0",
+    "linkml": "1.12.1",
+    "linopy": "0.10.1",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "pvlib": "0.16.1",
+    "pydantic": "2.14.4",
+    "python": "3.12.14",
+    "scipy": "1.18.1",
+    "statsmodels": "0.15.0"
+  },
+  "seed": null
+}

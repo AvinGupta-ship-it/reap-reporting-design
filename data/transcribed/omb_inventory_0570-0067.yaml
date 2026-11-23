@@ -1,0 +1,16 @@
+# Current OMB inventory for control number 0570-0067 as displayed on reginfo.gov,
+# ICR reference number 202602-0570-001 (received 2026-03-18, concluded 2026-04-20,
+# approved without change; expiration 2028-09-30). Double-entered.
+citation: "reginfo.gov, PRAViewICR ref_nbr=202602-0570-001, viewed 2026-11-23"
+entry_a:
+  icr_reference: "202602-0570-001"
+  expiration: "2028-09-30"
+  annual_responses: 81765
+  annual_hours: 257879
+  respondents: 4615
+entry_b:
+  icr_reference: "202602-0570-001"
+  expiration: "2028-09-30"
+  annual_responses: 81765
+  annual_hours: 257879
+  respondents: 4615

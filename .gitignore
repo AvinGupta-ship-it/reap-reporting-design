@@ -19,7 +19,7 @@ results/*
 !results/summaries/
 data/synthetic/*
 !data/synthetic/README.md
-!data/synthetic/*sample*
+!data/synthetic/synthetic_*paper*
 # LaTeX build products
 paper/*.aux
 paper/*.log
@@ -37,3 +37,6 @@ comment/*.fls
 comment/*.fdb_latexmk
 comment/*.bbl
 comment/*.blg
+# regenerable hourly weather tables
+data/processed/weather/
+data/processed/weather_load_year/

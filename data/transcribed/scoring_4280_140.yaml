@@ -1,0 +1,27 @@
+# Point tables of 7 CFR 4280.140(d) as published at 91 FR 62625-62626.
+# Double-entered; tests compare both entries with the tables parsed from the XML.
+# Each row is [label as printed, points].
+citation: "91 FR 62625-62626 (Oct. 1, 2026), section 4280.140(d)(3) and (d)(6)"
+entry_a:
+  "(d)(3)(i)": [["9.4% or less", 0], ["9.5%-19.4%", 5], ["19.5%-34.4%", 10], ["34.5%-49.4%", 15], ["49.5% and above", 20]]
+  "(d)(3)(ii)": [["9.4% or less", 0], ["9.5%-24.4%", 5], ["24.5%-49.4%", 10], ["49.5%-74.4%", 15], ["74.5%-109.4%", 20], ["109.5% and above", 0]]
+  "(d)(6)(i)": [["More than 12", 0], ["At least 8 and up to 12", 5], ["At least 4 and up to 7", 10], ["Less than 4", 15]]
+  "(d)(6)(ii)": [["More than 25 years", 0], ["At least 15 and up to 25", 5], ["At least 10 and up to 14", 10], ["Less than 10", 15]]
+entry_b:
+  "(d)(3)(i)": [["9.4% or less", 0], ["9.5%-19.4%", 5], ["19.5%-34.4%", 10], ["34.5%-49.4%", 15], ["49.5% and above", 20]]
+  "(d)(3)(ii)": [["9.4% or less", 0], ["9.5%-24.4%", 5], ["24.5%-49.4%", 10], ["49.5%-74.4%", 15], ["74.5%-109.4%", 20], ["109.5% and above", 0]]
+  "(d)(6)(i)": [["More than 12", 0], ["At least 8 and up to 12", 5], ["At least 4 and up to 7", 10], ["Less than 4", 15]]
+  "(d)(6)(ii)": [["More than 25 years", 0], ["At least 15 and up to 25", 5], ["At least 10 and up to 14", 10], ["Less than 10", 15]]
+# Numerical reading of the tables used by reapschema.competition. Percent values
+# are rounded to one decimal place before lookup ("standard rounding", 4280.140(d)).
+# The payback tables leave the intervals (7, 8) and (14, 15) years unassigned; the
+# lower bound of each band is used as the cut point (an interpretation, see docs/model.md).
+numeric:
+  percent_saved_eei: {lower_bounds: [0.0, 9.5, 19.5, 34.5, 49.5], points: [0, 5, 10, 15, 20]}
+  percent_replaced_res: {lower_bounds: [0.0, 9.5, 24.5, 49.5, 74.5, 109.5], points: [0, 5, 10, 15, 20, 0]}
+  payback_eei: {upper_bounds: [4.0, 8.0, 12.0], points: [15, 10, 5, 0], last_bound_inclusive: true}
+  payback_res: {upper_bounds: [10.0, 15.0, 25.0], points: [15, 10, 5, 0], last_bound_inclusive: true}
+  energy_per_dollar: {divisor_btu_per_dollar: 100.0, cap: 25.0}
+  merit_total: 90
+  priority_max: 10
+  minimum_score: 40
