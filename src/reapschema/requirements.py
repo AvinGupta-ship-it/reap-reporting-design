@@ -141,6 +141,9 @@ def _leading_designators(p: ET.Element) -> tuple[list[tuple[str, bool]], str, st
     raw = ET.tostring(p, encoding="unicode")
     raw = re.sub(r"<PRTPAGE[^>]*/>", "", raw)
     body = re.sub(r"^<P[^>]*>\s*", "", raw)
+    # a designator typeset inside the italic heading: <E>(3) Heading.</E>
+    body = re.sub(r'^<E T="03">\s*\(\s*([A-Za-z0-9]+)\s*\)\s*', r'(<E T="03">\1</E>) <E T="03">',
+                  body)
     pos = 0
     index = 0
     while True:
