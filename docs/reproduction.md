@@ -16,7 +16,7 @@ manuscript and comment; the `Dockerfile` provides them.
 |---|---|---|---|
 | 1. Retrieve inputs | `python scripts/fetch_data.py` | `data/raw/`, `data/MANIFEST.yaml` | 1 h (about 2.8 GB; PVGIS requests dominate) |
 | 2. Process inputs | `python -m reapschema.data.process` | `data/processed/` | 2 min |
-| 3. Experiments | `python -m reapschema.pipeline run --config configs/paper.yaml` | `results/paper/`, `results/summaries/paper/`, `data/synthetic/` | see `results/paper/runtime.json` |
+| 3. Experiments | `python -m reapschema.pipeline run --config configs/paper.yaml` | `results/paper/`, `results/summaries/paper/`, `data/synthetic/` | 15 min (recorded in `results/paper/runtime.json`) |
 | 4. Values and tables | `python -m reapschema.report --config configs/paper.yaml` | `paper/generated/` | 10 s |
 | 5. Figures | `make figures` | `paper/figures/` | 1 min |
 | 6. Manuscript and SI | `make paper` | `paper/manuscript.pdf`, `paper/manuscript.docx`, `paper/si.pdf` | 1 min |
@@ -51,6 +51,22 @@ package versions and seed. `paper/generated/values.tex` records a hash of the re
 summaries it was built from; `tests/test_generated.py` fails if a macro used in the
 manuscript, the supporting information or the comment is undefined, or if the values
 are stale relative to `results/summaries/paper/`.
+
+Result summaries, processed tables, generated values and figure PDFs are reproduced byte
+for byte from the raw inputs; compiled PDF and DOCX documents differ between builds only in
+embedded timestamps. Raw inputs are pinned by the checksums in `data/MANIFEST.yaml`; if a
+source republishes a file, `scripts/fetch_data.py` downloads the new version and records its
+checksum, and results may then differ.
+
+## Container
+
+```
+docker build -t reapschema .
+docker run --rm -v "$PWD/data:/work/data" reapschema sh -c "make quick && make test"
+```
+
+The image contains the code, environment and LaTeX toolchain; the downloaded inputs are
+mounted from the host.
 
 ## Checks
 
