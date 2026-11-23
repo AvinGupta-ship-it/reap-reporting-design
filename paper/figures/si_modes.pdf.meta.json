@@ -1,8 +1,8 @@
 {
   "config_hash": "761920f4422bc16fff619574b7e73471a3a199c9cfc831702c8d0882910f9986",
-  "created_utc": "2026-11-23T07:21:15+00:00",
+  "created_utc": "2026-11-23T08:54:32+00:00",
   "data_basis": "synthetic",
-  "git_commit": "a0ef3753da65b791b56063da3224722f5995641c",
+  "git_commit": "90942f9aa435234501158f19eba54271a24d35b3",
   "input_checksums": {
     "e8_modes.csv": "e98d0ce37dbcfe69a52b7a1464d9c1d97dcec740ebabcc29c2611a603410c236"
   },

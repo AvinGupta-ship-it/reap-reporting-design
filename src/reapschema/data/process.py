@@ -5,7 +5,7 @@ Outputs under ``data/processed/``:
 * ``weather/<ST>.parquet`` - hourly (UTC) irradiance, site temperature, wind and
   station temperature for the radiation years;
 * ``weather_load_year/<ST>.parquet`` - site temperature for the load-profile year;
-* ``load_profiles.parquet`` and ``load_response.json`` - normalised end-use shapes
+* ``load_profiles.parquet`` and ``load_response.json`` - normalized end-use shapes
   and temperature responses derived from ComStock aggregates;
 * ``prices.csv`` - State average commercial electricity price;
 * ``reap_awards.csv`` - award amounts by fiscal year, State and project category.

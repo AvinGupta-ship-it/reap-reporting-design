@@ -1,4 +1,4 @@
-"""Generate schema artefacts from the LinkML source.
+"""Generate schema artifacts from the LinkML source.
 
 Outputs, written to ``src/reapschema/schema/generated/``:
 
@@ -79,7 +79,7 @@ def _documentation(view: SchemaView) -> str:
 
 def build() -> None:
     GENERATED.mkdir(exist_ok=True)
-    (GENERATED / "__init__.py").write_text('"""Artefacts generated from reap_evidence.yaml."""\n')
+    (GENERATED / "__init__.py").write_text('"""Artifacts generated from reap_evidence.yaml."""\n')
     (GENERATED / "reap_evidence.schema.json").write_text(
         json.dumps(json_schema(), indent=2, sort_keys=True) + "\n"
     )

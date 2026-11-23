@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 \usepackage[margin=0.9in]{geometry}
 \usepackage[numbers]{natbib}
@@ -14,7 +15,7 @@
 the Rural Energy for America Program, OMB Control Number 0570-0067\\
 (91 FR 62600, FR Doc.\ 2026-20178, Docket No.\ RBS-26-Business-0529)}
 \author{Avin Gupta}
-\date{November 2026}
+\date{November 23, 2026}
 \begin{document}
 \maketitle
 
@@ -131,8 +132,11 @@ $\times$ hours (\NPerClass{} synthetic applicants per class).}\label{tab:a2}
 \setcounter{figure}{3}
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/fig4_validation_roc}
-\caption{Synthetic data. ROC curves of the statistical rules by injected error class.}
+\includegraphics[width=\linewidth]{figures/fig4_validation_roc}
+\par\smallskip{\footnotesize\input{../paper/generated/tab_auc.tex}}
+\caption{Synthetic data. ROC curves of the statistical rules by injected error class;
+panels (a)--(e) are for RES and (f) for EEI submissions. The table gives the area under
+the curve by panel and error class (-- not applicable).}
 \end{figure}
 
 \subsection{Accuracy of verification}
@@ -147,7 +151,7 @@ annual-savings estimators against true normal-year savings ($n=\NEei$).}\label{t
 \setcounter{figure}{2}
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/fig3_error_distributions}
+\includegraphics[width=\linewidth]{figures/fig3_error_distributions}
 \caption{Synthetic data. Absolute relative error of the verified quantity by evidence
 specification (median, interquartile range, 5th--95th percentile; share above 10\% at
 right). Blue: error-free evidence. Vermilion: injected errors, after validation.}
@@ -180,7 +184,7 @@ true savings as a share of pre-installation use.}
 \setcounter{figure}{5}
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.95\linewidth]{figures/fig6_frontier}
+\includegraphics[width=\linewidth]{figures/fig6_frontier}
 \caption{Synthetic data, hypothetical element times. All feasible specifications under
 manual entry, Pareto frontier with 90\% Monte Carlo band, current rule (square) and
 monthly-data frontier specification (diamond).}
@@ -206,7 +210,7 @@ awards changed (\%); errors detected (\%); false-positive rate (\%).}\label{tab:
 collection mode when the mode is available to every respondent. ``recommended'' is the
 monthly-data frontier specification; ``recommended interval'' the frontier specification
 when interval data are allowed.}\label{tab:a6}
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{4pt}
 \input{../paper/generated/tab_modes.tex}
 \end{table}
 
@@ -214,7 +218,7 @@ when interval data are allowed.}\label{tab:a6}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/fig7_selection}
+\includegraphics[width=\linewidth]{figures/fig7_selection}
 \caption{Synthetic competitions with hypothetical funding and non-energy scores. Share of
 awards that differ from selection on true values.}
 \end{figure}
@@ -236,7 +240,7 @@ load noise and rate of non-routine changes: median absolute relative error (\%) 
 savings estimators, share of projects with error above \ErrorShareThreshold\% for the
 undated difference, and share of awards changed with error-free evidence under the
 current elements.}\label{tab:a8}
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \input{../paper/generated/tab_noise.tex}
 \end{table}
 
@@ -261,20 +265,20 @@ statistical rules. Detection also presumes that requested records are truthful.
 \item \emph{Assumptions}: aggregate commercial load shapes; hypothetical agricultural
 shapes, electricity only; photovoltaic RES only; hypothetical noise, error rates, element
 times, funding and non-energy points; flagged errors assumed corrected; fabricated
-readings not modelled; territories not represented. Monte Carlo standard errors of the
+readings not modeled; territories not represented. Monte Carlo standard errors of the
 headline losses are below 2\% of their values.
 \end{itemize}
 
 \section{Schema element list}
 
 The schema source, JSON Schema, pydantic models and CSV templates are in the repository
-directory \texttt{src/reapschema/schema/}. Elements marked ``no'' under Required are
+directory \nolinkurl{src/reapschema/schema/}. Elements marked ``no'' under Required are
 optional in the schema.
 
 {\footnotesize
 \input{../paper/generated/tab_schema.tex}
 }
 
-\bibliographystyle{unsrtnat}
+\bibliographystyle{unsrturl}
 \bibliography{../paper/references}
 \end{document}

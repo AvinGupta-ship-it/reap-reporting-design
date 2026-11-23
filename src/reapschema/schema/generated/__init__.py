@@ -1,1 +1,1 @@
-"""Artefacts generated from reap_evidence.yaml."""
+"""Artifacts generated from reap_evidence.yaml."""

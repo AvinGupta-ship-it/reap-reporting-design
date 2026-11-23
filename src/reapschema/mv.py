@@ -381,8 +381,8 @@ def bootstrap_avoided_interval(
         # the estimate's sampling error: refitted baseline plus period scatter
         out[b] = float((((xp @ beta) - resid[pidx]) * pdays).sum() - penergy.sum())
     lo, hi = np.quantile(out, [0.5 - confidence / 2.0, 0.5 + confidence / 2.0])
-    centre = estimate.avoided
-    return float(2 * centre - hi), float(2 * centre - lo)
+    center = estimate.avoided
+    return float(2 * center - hi), float(2 * center - lo)
 
 
 # --- photovoltaic production -------------------------------------------------------------
@@ -393,7 +393,7 @@ def default_pv_daily(state: str, tilt: float, azimuth: float, dc_ac_ratio: float
                      inverter_efficiency: float, system_losses: float,
                      temperature_coefficient: float, albedo: float,
                      sapm_cell: tuple[float, float, float]) -> np.ndarray:
-    """Modelled daily production per kW (kWh/kW) at a State's site for a default geometry."""
+    """Modeled daily production per kW (kWh/kW) at a State's site for a default geometry."""
     weather = site_weather(state)
     hourly = pv.simulate_site_pv(
         weather, 0, weather.n_days * 24, capacity_kw=1.0, tilt=tilt, surface_azimuth=azimuth,
@@ -411,16 +411,16 @@ def default_model(state: str, mv_cfg: MvConfig, res_cfg: ResConfig) -> np.ndarra
                             res_cfg.albedo, res_cfg.sapm_cell)
 
 
-def normalized_production(measured: float, modelled_actual: float, modelled_normal: float
+def normalized_production(measured: float, modeled_actual: float, modeled_normal: float
                           ) -> float:
     """Weather-normalized production ``P * Y_normal / Y_actual``."""
-    if modelled_actual <= 0:
+    if modeled_actual <= 0:
         return float("nan")
-    return measured * modelled_normal / modelled_actual
+    return measured * modeled_normal / modeled_actual
 
 
-def plausibility_z(measured: float, modelled: float, sigma_log: float) -> float:
-    """Standardised log ratio of measured to modelled production."""
-    if measured <= 0 or modelled <= 0 or sigma_log <= 0:
+def plausibility_z(measured: float, modeled: float, sigma_log: float) -> float:
+    """Standardized log ratio of measured to modeled production."""
+    if measured <= 0 or modeled <= 0 or sigma_log <= 0:
         return float("inf") if measured <= 0 else 0.0
-    return float(np.log(measured / modelled) / sigma_log)
+    return float(np.log(measured / modeled) / sigma_log)

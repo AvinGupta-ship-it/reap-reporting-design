@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 \usepackage[margin=0.9in]{geometry}
 \usepackage[numbers]{natbib}
@@ -157,15 +158,15 @@ monthly difference is \PvRefMonthlyMaxDiff\% and the hourly correlation is
 test case for the CalTRACK billing method was available to us; verification of the
 regression rests on the analytical cases and the independent implementation above.
 
-\paragraph{Optimization.} Table~\ref{tab:ilp} compares the surrogate integer programme
+\paragraph{Optimization.} Table~\ref{tab:ilp} compares the surrogate integer program
 with enumeration. HiGHS reported an optimal status at every budget with a relative gap
 tolerance of \IlpGap\%; primal feasibility (budget and element dependencies) was checked
 independently of the solver.
 
 \begin{table}[h]
-\caption{Surrogate integer programme against exhaustive enumeration (loss
+\caption{Surrogate integer program against exhaustive enumeration (loss
 $\mathcal{L}_1$, \%).}\label{tab:ilp}
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{3.5pt}
 \input{generated/tab_ilp.tex}
 \end{table}
 
@@ -177,10 +178,9 @@ specification and \ConvRelSeRec\% for the monthly-data frontier specification
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/si_convergence}
-\caption{Synthetic data. Running estimate of the accuracy loss with 95\% intervals (left)
-and its Monte Carlo standard error relative to the estimate (right; dashed line at
-2\%).}\label{fig:conv}
+\includegraphics[width=\linewidth]{figures/si_convergence}
+\caption{Synthetic data. (a) Running estimate of the accuracy loss with 95\% intervals and
+(b) its Monte Carlo standard error relative to the estimate (dashed line at 2\%).}\label{fig:conv}
 \end{figure}
 
 \paragraph{Empirical validity.} Not established. No REAP application microdata under the
@@ -209,30 +209,30 @@ error-free evidence by true savings fraction ($n=\BandLowN$, \BandMidN, \BandHig
 \input{generated/tab_savings_bands.tex}
 \end{table}
 
-{\footnotesize
+{\footnotesize\setlength{\tabcolsep}{3.5pt}
 \input{generated/tab_e5.tex}
 }
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figures/si_incomplete}
-\caption{Synthetic data ($n=\EFiveN$ applicants per condition). Median error with missing
-months and with estimated reads.}\label{fig:e5}
+\caption{Synthetic data ($n=\EFiveN$ applicants per condition). Median error (a, b) with
+missing months per period and (c) with estimated reads.}\label{fig:e5}
 \end{figure}
 
 \begin{table}[h]
 \caption{Synthetic data, hypothetical element times. Respondent time and losses by
 collection mode when the mode is available to all respondents.}\label{tab:modes}
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{4pt}
 \input{generated/tab_modes.tex}
 \end{table}
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figures/si_modes}
-\caption{Hypothetical element times. Respondent time by collection mode (left, with 90\%
-Monte Carlo intervals) and mean time for the monthly-data frontier specification as a
-function of the share of respondents able to use a mode (right).}\label{fig:modes}
+\caption{Hypothetical element times. (a) Respondent time by collection mode, with 90\%
+Monte Carlo intervals, and (b) mean time for the monthly-data frontier specification as a
+function of the share of respondents able to use a mode.}\label{fig:modes}
 \end{figure}
 
 \begin{table}[h]
@@ -246,7 +246,7 @@ current elements. By origin of the load shape, the undated median error is
 \BasisHypotheticalUndatedMedian\% (hypothetical agricultural types,
 $n=\BasisHypotheticalN$); interval data give \BasisComstockIntervalMedian\% and
 \BasisHypotheticalIntervalMedian\%.}\label{tab:noise}
-\centering\footnotesize
+\centering\footnotesize\setlength{\tabcolsep}{2.5pt}
 \input{generated/tab_noise.tex}
 \end{table}
 
@@ -259,6 +259,6 @@ frontier specification and the current specification (mean \SobolOutputMean{} mi
 \input{generated/tab_sobol.tex}
 \end{table}
 
-\bibliographystyle{unsrtnat}
+\bibliographystyle{unsrturl}
 \bibliography{references}
 \end{document}

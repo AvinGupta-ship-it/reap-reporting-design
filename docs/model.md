@@ -85,7 +85,7 @@ quantile with *n − p* degrees of freedom; and a residual moving-block bootstra
 
 **RES.** Verified production is the claim, the sum of monthly production-meter readings
 or the interval total, depending on the specification. Normalized production is
-`P̂·Y_normal/Y_actual` with *Y* the modelled yield. Plausibility statistic:
+`P̂·Y_normal/Y_actual` with *Y* the modeled yield. Plausibility statistic:
 `z = ln(P̂/P̂_model)/σ`, with σ a robust scale of the log ratio on error-free submissions.
 
 ## 3. Validation rules
@@ -118,7 +118,7 @@ mean of `min(|V − target|/|target|, 1)` over applicants; loss (ii) is the mean
 applications selected on true values that are not selected on verified values. All
 feasible specifications are enumerated. As a check of the method intended for larger
 element sets, a quadratic pseudo-Boolean surrogate is fitted to a sample of
-specifications and `min L̂(x) s.t. τᵀx ≤ B` is solved as a mixed-integer programme
+specifications and `min L̂(x) s.t. τᵀx ≤ B` is solved as a mixed-integer program
 (products linearized) with HiGHS at a relative gap of 10⁻⁴; the returned specification
 is checked for feasibility and evaluated by direct simulation.
 

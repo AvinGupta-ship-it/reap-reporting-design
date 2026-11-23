@@ -1,8 +1,10 @@
 % Bibliography database. Every DOI is checked against Crossref or DataCite by
 % scripts/check_refs.py. The field "sourcerank" records the source hierarchy:
 % 1 statute, regulation, Federal Register and docket documents; 2 agency datasets;
-% 3 peer-reviewed literature and recognised technical standards; 4 government and
-% national-laboratory reports and documentation; 5 grey literature.
+% 3 peer-reviewed literature and recognized technical standards; 4 government and
+% national-laboratory reports and documentation; 5 gray literature.
+% Entries whose full date is given in howpublished carry a "date" field instead of "year";
+% BibTeX styles ignore it and the DOCX build reads it.
 
 @article{wang1996beyond,
   sourcerank = {3},
@@ -120,6 +122,7 @@
   author       = {{CalTRACK Technical Working Group}},
   title        = {{CalTRACK} Methods (Version 2.0)},
   howpublished = {CalTRACK Technical Documentation 2.0},
+  year         = {2018},
   url          = {https://docs.caltrack.org/en/latest/methods.html}
 }
 
@@ -186,18 +189,18 @@
 
 @misc{pvgis_api,
   sourcerank = {4},
-  author       = {{European Commission Joint Research Centre}},
+  author       = {{European Commission Joint Research Center}},
   title        = {{PVGIS} 5: {API} non-interactive service},
   howpublished = {Photovoltaic Geographical Information System (PVGIS) documentation},
-  url          = {https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis/using-pvgis-5/api-non-interactive-service_en}
+  url          = {https://joint-research-center.ec.europa.eu/photovoltaic-geographical-information-system-pvgis/using-pvgis-5/api-non-interactive-service_en}
 }
 
 @misc{pvgis_manual,
   sourcerank = {4},
-  author       = {{European Commission Joint Research Centre}},
+  author       = {{European Commission Joint Research Center}},
   title        = {{PVGIS} 5 user manual},
   howpublished = {Photovoltaic Geographical Information System (PVGIS) documentation},
-  url          = {https://joint-research-centre.ec.europa.eu/photovoltaic-geographical-information-system-pvgis/using-pvgis-5/pvgis-5-user-manual_en}
+  url          = {https://joint-research-center.ec.europa.eu/photovoltaic-geographical-information-system-pvgis/using-pvgis-5/pvgis-5-user-manual_en}
 }
 
 @article{huangfu2018parallelizing,
@@ -304,18 +307,20 @@
 }
 
 @misc{cfr1320_3,
+  date = {2026-11-19},
   sourcerank = {1},
   author       = {{U.S. Office of Management and Budget}},
   title        = {5 {CFR} 1320.3 -- Definitions},
-  howpublished = {Electronic Code of Federal Regulations, Title 5, Part 1320 (Controlling Paperwork Burdens on the Public), current as of 2026-11-19},
+  howpublished = {Electronic Code of Federal Regulations, Title 5, Part 1320 (Controlling Paperwork Burdens on the Public; current as of November 19, 2026)},
   url          = {https://www.ecfr.gov/current/title-5/chapter-III/subchapter-B/part-1320/section-1320.3}
 }
 
 @misc{cfr1320_8,
+  date = {2026-11-19},
   sourcerank = {1},
   author       = {{U.S. Office of Management and Budget}},
   title        = {5 {CFR} 1320.8 -- Agency collection of information responsibilities},
-  howpublished = {Electronic Code of Federal Regulations, Title 5, Part 1320 (Controlling Paperwork Burdens on the Public), current as of 2026-11-19},
+  howpublished = {Electronic Code of Federal Regulations, Title 5, Part 1320 (Controlling Paperwork Burdens on the Public; current as of November 19, 2026)},
   url          = {https://www.ecfr.gov/current/title-5/chapter-III/subchapter-B/part-1320/section-1320.8}
 }
 
@@ -344,38 +349,38 @@
 }
 
 @misc{fr2026reap,
+  date = {2026-10-01},
   sourcerank = {1},
   author       = {{Rural Business-Cooperative Service}},
-  title        = {Unleashing {American} Energy and Economic Prosperity; {Rural Energy for America Program} ({REAP}). Final rule with comment period},
-  year         = {2026},
-  howpublished = {91 FR 62600--62633 (October 1, 2026), FR Doc. 2026-20178, RIN 0570-AB13, Docket RBS-26-Business-0529},
+  title        = {Unleashing {American} Energy and Economic Prosperity; {Rural Energy for America Program} ({REAP}). {Final} rule with comment period},
+  howpublished = {91 FR 62600--62633, FR Doc. 2026-20178, RIN 0570-AB13, Docket RBS-26-Business-0529 (October 1, 2026)},
   url          = {https://www.federalregister.gov/documents/2026/10/01/2026-20178/unleashing-american-energy-and-economic-prosperity-rural-energy-for-america-program-reap}
 }
 
 @misc{ecfr4280b,
+  date = {2026-11-19},
   sourcerank = {1},
   author       = {{Rural Business-Cooperative Service}},
   title        = {7 {CFR} part 4280, subpart {B} -- {Rural Energy for America Program} -- Grants for Renewable Energy Systems and Energy Efficiency Improvements},
-  year         = {2026},
-  howpublished = {Electronic Code of Federal Regulations, current as of November 19, 2026},
+  howpublished = {Electronic Code of Federal Regulations (current as of November 19, 2026)},
   url          = {https://www.ecfr.gov/current/title-7/subtitle-B/chapter-XLII/part-4280/subpart-B}
 }
 
 @misc{ria2026reap,
   sourcerank = {1},
   author       = {{Rural Business-Cooperative Service}},
-  title        = {{REAP} {RIA}},
+  title        = {Regulatory Impact Analysis: {Renewable Energy for America} ({REAP}) {Renewable Energy System} and {Energy Efficiency Improvements} ({RES EEI}) Grant Program and {Energy Audit} and {Renewable Energy Development Assistance} ({EA REDA}) Grant Program},
   year         = {2026},
-  howpublished = {Regulations.gov document RBS-26-BUSINESS-0529-0004},
+  howpublished = {Regulations.gov document RBS-26-BUSINESS-0529-0004, listed in the docket as ``REAP RIA''},
   url          = {https://www.regulations.gov/document/RBS-26-BUSINESS-0529-0004}
 }
 
 @misc{omb05700067,
+  date = {2026-04-20},
   sourcerank = {1},
   author       = {{U.S. Office of Management and Budget}},
   title        = {Information Collection Request 202602-0570-001, {Rural Energy for America Program}, {OMB} Control Number 0570-0067},
-  year         = {2026},
-  howpublished = {Office of Information and Regulatory Affairs, reginfo.gov; concluded April 20, 2026},
+  howpublished = {Office of Information and Regulatory Affairs, reginfo.gov (concluded April 20, 2026)},
   url          = {https://www.reginfo.gov/public/do/PRAViewICR?ref_nbr=202602-0570-001}
 }
 
@@ -384,19 +389,19 @@
   author      = {{U.S. Department of Agriculture, Office of Inspector General}},
   title       = {{Rural Energy for America Program}},
   institution = {USDA Office of Inspector General},
-  number      = {Audit Report 34001-0001-21},
+  type        = {Audit Report},
+  number      = {34001-0001-21},
   year        = {2016},
   url         = {https://web.archive.org/web/20191013053312id_/https://www.usda.gov/oig/webdocs/34001-0001-21.pdf}
 }
 
-@techreport{oig2023memo,
+@misc{oig2023memo,
+  date = {2023-01-09},
   sourcerank = {4},
-  author      = {{U.S. Department of Agriculture, Office of Inspector General}},
-  title       = {Prior {OIG} Audits Relevant to {Rural Development's} {Inflation Reduction Act} Funding},
-  institution = {USDA Office of Inspector General},
-  number      = {Memorandum, January 9, 2023},
-  year        = {2023},
-  url         = {https://www.oig.usda.gov/sites/default/files/reports/2026-07/RD-Lessons-Learned-MemoFinal.pdf}
+  author       = {{U.S. Department of Agriculture, Office of Inspector General}},
+  title        = {Prior {OIG} Audits Relevant to {Rural Development's} {Inflation Reduction Act} Funding},
+  howpublished = {Memorandum to the Under Secretary for Rural Development (January 9, 2023)},
+  url          = {https://www.oig.usda.gov/sites/default/files/reports/2026-07/RD-Lessons-Learned-MemoFinal.pdf}
 }
 
 @misc{eia2021prices,
@@ -409,28 +414,28 @@
 }
 
 @misc{usaspending10868,
+  date = {2026-11},
   sourcerank = {2},
   author       = {{U.S. Department of the Treasury}},
   title        = {{USAspending.gov} award data, Assistance Listing 10.868, {Rural Energy for America Program}, fiscal years 2021--2023},
-  year         = {2026},
-  howpublished = {Award search API, retrieved November 2026},
+  howpublished = {Award search API (retrieved November 2026)},
   url          = {https://www.usaspending.gov/}
 }
 
 @misc{pvwatts8api,
+  date = {2026-11},
   sourcerank = {4},
   author       = {{National Renewable Energy Laboratory}},
   title        = {{PVWatts} {V8} {API}},
-  year         = {2026},
-  howpublished = {Developer network web service, retrieved November 2026},
+  howpublished = {Developer network web service (retrieved November 2026)},
   url          = {https://developer.nlr.gov/docs/solar/pvwatts/v8/}
 }
 
 @misc{cfr1320_9,
+  date = {2026-11-19},
   sourcerank = {1},
   author       = {{U.S. Office of Management and Budget}},
   title        = {5 {CFR} 1320.9 -- Agency certifications for proposed collections of information},
-  year         = {2026},
-  howpublished = {Electronic Code of Federal Regulations, current as of November 19, 2026},
+  howpublished = {Electronic Code of Federal Regulations (current as of November 19, 2026)},
   url          = {https://www.ecfr.gov/current/title-5/chapter-III/subchapter-B/part-1320/section-1320.9}
 }

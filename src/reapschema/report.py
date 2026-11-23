@@ -93,7 +93,27 @@ def fmt_int(x: Any) -> str:
 def fmt(x: Any, digits: int = 1) -> str:
     if x is None or (isinstance(x, float) and not np.isfinite(x)):
         return "n/a"
-    return f"{x:.{digits}f}"
+    text = f"{x:.{digits}f}"
+    # negative numbers are typeset with a true minus sign
+    return "$-$" + text[1:] if text.startswith("-") else text
+
+
+def time_parameter_label(name: str) -> str:
+    """Prose description of a time parameter of the burden model."""
+    fixed = {
+        "required.locate_bills": "the time to locate bills",
+        "required.bill_energy_per_bill": "the time to enter the energy on each bill",
+        "required.annual_claim": "the time to state the annual claim",
+        "required.rated_capacity": "the time to state the rated capacity",
+        "required.energy_price": "the time to compute the energy price",
+        "rework": "the time to resolve a flagged submission",
+    }
+    if name in fixed:
+        return fixed[name]
+    kind, element = name.split(".")[0], name.split(".")[1]
+    if kind == "mode":
+        return "the time to obtain a billing-history file"
+    return f"the time for {ELEMENT_LABELS[element]}"
 
 
 def pct(x: Any, digits: int = 1) -> str:
@@ -301,7 +321,7 @@ def build_values(res: Path, cfg: Config) -> Values:
         ("plausibility_z_geometry", "RES", "nameplate_hours"): "AucPlausGeomNameplate",
         ("plausibility_z", "RES", "gross_net"): "AucPlausGrossNet",
         ("bill_difference", "RES", "gross_net"): "AucBillDiffGrossNet",
-        ("bill_difference_unlabelled", "RES", "gross_net"): "AucBillDiffUnlabGrossNet",
+        ("bill_difference_unlabeled", "RES", "gross_net"): "AucBillDiffUnlabGrossNet",
         ("bill_outlier_dated", "EEI", "transposed_digits"): "AucOutlierTransposed",
         ("monthly_shape", "RES", "transposed_digits"): "AucShapeTransposed",
     }.items():
@@ -455,9 +475,9 @@ def build_values(res: Path, cfg: Config) -> Values:
 
     # --- sensitivity and intervals -------------------------------------------------------------
     sob = rd("sobol_burden.csv").sort_values("ST", ascending=False)
-    v.add("SobolTopName", tex_escape(sob["parameter"].iloc[0]))
+    v.add("SobolTopName", tex_escape(time_parameter_label(sob["parameter"].iloc[0])))
     v.add("SobolTopST", fmt(sob["ST"].iloc[0], 2))
-    v.add("SobolSecondName", tex_escape(sob["parameter"].iloc[1]))
+    v.add("SobolSecondName", tex_escape(time_parameter_label(sob["parameter"].iloc[1])))
     v.add("SobolSecondST", fmt(sob["ST"].iloc[1], 2))
     v.add("SobolOutputMean", fmt(sob["output_mean"].iloc[0], 0))
     v.add("SobolOutputSd", fmt(sob["output_sd"].iloc[0], 0))
@@ -488,6 +508,7 @@ def build_values(res: Path, cfg: Config) -> Values:
     for scen, stag in (("low", "Low"), ("central", "Central"), ("high", "High")):
         nrow: Any = noise.loc[scen]
         v.add(f"Noise{stag}UndatedMedian", pct(nrow["median_eei_undated"], 0))
+        v.add(f"Noise{stag}UndatedExact", pct(nrow["median_eei_undated"], 1))
         v.add(f"Noise{stag}NormMedian", pct(nrow["median_eei_normalized_merged"], 0))
         v.add(f"Noise{stag}IntervalMedian", pct(nrow["median_eei_interval"], 0))
         v.add(f"Noise{stag}UndatedShareTen", pct(nrow["share_above_eei_undated"], 0))
@@ -627,7 +648,7 @@ def build_tables(res: Path, out: Path, cfg: Config) -> None:
                      ", ".join(used)])
     (out / "tab_traceability.tex").write_text(_tabular(
         ["Section", "Subject", "Paragraphs", "Mapped", "Schema classes used"], rows,
-        "llrrp{0.42\\linewidth}"))
+        "llrrp{0.34\\linewidth}"))
     rows = [[tex_escape(r.requirement_id), tex_escape(r.heading[:38]),
              "evidence" if r.scope == "evidence" else "out of scope",
              tex_escape(r.schema_elements.replace("; ", ", "))]
@@ -657,7 +678,7 @@ def build_tables(res: Path, out: Path, cfg: Config) -> None:
         {"unit": "U", "transposed_digits": "T", "wrong_period": "P", "double_counting": "D",
          "gross_net": "G", "nameplate_hours": "N"}[c] for c in ERROR_CLASSES]
     (out / "tab_rules.tex").write_text(_tabular(
-        header, rows, "p{0.33\\linewidth}p{0.17\\linewidth}llrrrrrrr"))
+        header, rows, "p{0.29\\linewidth}p{0.15\\linewidth}llrrrrrrr"))
 
     # frontier specifications
     front = rd("e6_frontier.csv")
@@ -674,6 +695,21 @@ def build_tables(res: Path, out: Path, cfg: Config) -> None:
     (out / "tab_frontier.tex").write_text(_tabular(
         ["Optional elements collected", "Min.", "MARE", "RES", "EEI", "Sel.", "Det.", "FP"],
         rows, "p{0.44\\linewidth}rrrrrrr"))
+
+    # area under the ROC curve of the statistical rules (panels of the ROC figure)
+    roc = pd.read_parquet(res / "e3_roc.parquet")
+    auc = roc.groupby(["rule", "category", "error_class"])["auc"].first()
+    panels = [("a", "plausibility_z", "RES"), ("b", "plausibility_z_geometry", "RES"),
+              ("c", "bill_difference", "RES"), ("d", "bill_difference_unlabeled", "RES"),
+              ("e", "monthly_shape", "RES"), ("f", "bill_outlier_dated", "EEI")]
+    rows = []
+    for letter, rule_key, cat in panels:
+        cells = [fmt(auc.loc[(rule_key, cat, c)], 2) if (rule_key, cat, c) in auc.index
+                 else "--" for c in ERROR_CLASSES]
+        rows.append([f"({letter})", *cells])
+    (out / "tab_auc.tex").write_text(_tabular(
+        ["Panel", "Unit", "Transposed", "Period", "Double", "Gross/net", "Nameplate"], rows,
+        "lrrrrrr"))
 
     # supporting-information tables
     e5 = rd("e5_incomplete.csv")

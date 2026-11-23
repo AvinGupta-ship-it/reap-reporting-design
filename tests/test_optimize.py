@@ -1,4 +1,4 @@
-"""Frontier computation and the surrogate integer programme."""
+"""Frontier computation and the surrogate integer program."""
 
 from __future__ import annotations
 

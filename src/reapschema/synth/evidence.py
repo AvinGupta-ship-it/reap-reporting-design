@@ -47,7 +47,7 @@ class Evidence:
 def to_package(ev: Evidence, first_date: pd.Timestamp, *, latitude: float, longitude: float,
                station_id: str, climate_zone: int, collection_mode: str = "manual_transcription"
                ) -> dict[str, Any]:
-    """Serialise evidence as an ``EvidencePackage`` instance of the LinkML schema."""
+    """Serialize evidence as an ``EvidencePackage`` instance of the LinkML schema."""
 
     def date(day: int) -> str:
         return str((first_date + pd.Timedelta(days=int(day))).date())

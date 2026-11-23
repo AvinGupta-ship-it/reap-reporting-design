@@ -1,6 +1,6 @@
 requirement_id,heading,scope,schema_elements,mapped_by,note
 4280.104:Annual energy production,Annual energy production,evidence,PerformanceClaim.claimed_value; PerformanceClaim.energy_unit; Meter.meter_type; BillingRecord.energy_imported,4280.104:Annual energy production,Measured at the common point of electrical coupling; production-meter readings are BillingRecord rows of an inverter Meter.
-4280.104:Energy assessment,Energy assessment,evidence,BillingRecord.energy_imported; Project.affected_end_use_share,4280.104:Energy assessment,Analysis of energy bills; the schema carries the bill data the assessment summarises.
+4280.104:Energy assessment,Energy assessment,evidence,BillingRecord.energy_imported; Project.affected_end_use_share,4280.104:Energy assessment,Analysis of energy bills; the schema carries the bill data the assessment summarizes.
 4280.104:Energy audit (EA),Energy audit (EA),evidence,BillingRecord.energy_imported; Project.affected_end_use_share; PerformanceClaim.claimed_value,4280.104:Energy audit (EA),
 4280.104:Kilowatt-hour (kWh),Kilowatt-hour (kWh),evidence,BillingRecord.energy_unit; PerformanceClaim.energy_unit,4280.104:Kilowatt-hour (kWh),
 4280.104:Megawatt-hour (MWh),Megawatt-hour (MWh),evidence,BillingRecord.energy_unit; PerformanceClaim.energy_unit,4280.104:Megawatt-hour (MWh),
@@ -50,10 +50,10 @@ requirement_id,heading,scope,schema_elements,mapped_by,note
 4280.122(a)(8)(i)(H)(1),Wind,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
 4280.122(a)(8)(i)(H)(1)(i),Source,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
 4280.122(a)(8)(i)(H)(1)(ii),Conditions and assumptions,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
-4280.122(a)(8)(i)(H)(2),Solar,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modelled resource.
-4280.122(a)(8)(i)(H)(2)(i),Source,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modelled resource.
-4280.122(a)(8)(i)(H)(2)(ii),Type of system,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modelled resource.
-4280.122(a)(8)(i)(H)(2)(iii),Assumptions,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modelled resource.
+4280.122(a)(8)(i)(H)(2),Solar,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modeled resource.
+4280.122(a)(8)(i)(H)(2)(i),Source,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modeled resource.
+4280.122(a)(8)(i)(H)(2)(ii),Type of system,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modeled resource.
+4280.122(a)(8)(i)(H)(2)(iii),Assumptions,evidence,Project.technology; Project.array_tilt; Project.array_azimuth; Facility.latitude; Facility.longitude,4280.122(a)(8)(i)(H)(2),Solar resource source and assumptions; array geometry and location determine the modeled resource.
 4280.122(a)(8)(i)(H)(3),Bioenergy/Biomass Project,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
 4280.122(a)(8)(i)(H)(3)(i),Renewable Biomass resource,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.
 4280.122(a)(8)(i)(H)(3)(ii),Shipping and receiving,out_of_scope,,4280.122(a)(8)(i)(H),Technology-specific resource narrative.

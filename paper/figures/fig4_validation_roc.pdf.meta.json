@@ -1,10 +1,10 @@
 {
   "config_hash": "755e90cb21f407570f6f2cd94fae286e0fbabe53ffdb806feca9919707d58c8a",
-  "created_utc": "2026-11-23T07:21:03+00:00",
+  "created_utc": "2026-11-23T08:54:27+00:00",
   "data_basis": "synthetic",
-  "git_commit": "a0ef3753da65b791b56063da3224722f5995641c",
+  "git_commit": "90942f9aa435234501158f19eba54271a24d35b3",
   "input_checksums": {
-    "e3_roc.parquet": "fc53fa3638ba4500feaa44e3db9a3e61e2397e5f5bf756dba113b17d42077a87"
+    "e3_roc.parquet": "0a1ccb5f4124065875507db67ea7019da39fe1514148e436d95b0088279eb209"
   },
   "output": "fig4_validation_roc.pdf",
   "package_versions": {

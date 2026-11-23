@@ -3,44 +3,46 @@
 from __future__ import annotations
 
 import matplotlib.pyplot as plt
-from common import BLUE, GREEN, VERMILION, read, save, style
+from common import BLACK, BLUE, FIG_WIDTH, GREEN, VERMILION, legend_below, read, save, style
+
+SERIES = {"cpre_undated": (VERMILION, "o", "Sum of bills / undated difference"),
+          "cpre_dated": (BLACK, "D", "Day-annualized / dated difference"),
+          "s_undated": (VERMILION, "o", ""), "s_dated": (BLACK, "D", ""),
+          "s_norm": (BLUE, "s", "Normalized"),
+          "s_norm_merged": (GREEN, "^", "Normalized, estimated reads merged")}
 
 
 def main() -> None:
     style()
     e5 = read("e5_incomplete.csv")
     p0 = e5["estimated_read_prob"].min()
-    fig, axes = plt.subplots(1, 3, figsize=(7.2, 2.6))
+    fig, axes = plt.subplots(1, 3, figsize=(FIG_WIDTH, 3.5))
+    fig.subplots_adjust(left=0.09, right=0.99, top=0.91, bottom=0.36, wspace=0.34)
     miss = e5[e5["estimated_read_prob"] == p0]
-    for est, color, label in (("cpre_undated", VERMILION, "Sum of bills"),
-                              ("cpre_dated", BLUE, "Day-annualized")):
-        g = miss[miss["estimator"] == est].sort_values("missing_months")
-        axes[0].plot(g["missing_months"], 100 * g["median_are"], color=color, marker="o",
-                     label=label)
-    axes[0].set_title("Pre-installation use")
-    axes[0].set_xlabel("Missing months per period")
-    axes[0].set_ylabel("Median absolute relative error (%)")
-    for est, color, label in (("s_undated", VERMILION, "Undated difference"),
-                              ("s_dated", GREEN, "Dated difference"),
-                              ("s_norm", BLUE, "Normalized")):
-        g = miss[miss["estimator"] == est].sort_values("missing_months")
-        axes[1].plot(g["missing_months"], 100 * g["median_are"], color=color, marker="o",
-                     label=label)
-    axes[1].set_title("EEI savings")
-    axes[1].set_xlabel("Missing months per period")
     full = e5[e5["missing_months"] == 0]
-    for est, color, label in (("s_undated", VERMILION, "Undated difference"),
-                              ("s_norm", BLUE, "Normalized"),
-                              ("s_norm_merged", GREEN, "Normalized, estimates merged")):
-        g = full[full["estimator"] == est].sort_values("estimated_read_prob")
-        axes[2].plot(100 * g["estimated_read_prob"], 100 * g["median_are"], color=color,
-                     marker="o", label=label)
-    axes[2].set_title("EEI savings")
-    axes[2].set_xlabel("Probability a read is estimated (%)")
-    for ax in axes:
-        ax.legend(fontsize=6)
+    handles: dict[str, object] = {}
+
+    def draw(ax: plt.Axes, frame, x: str, names: tuple[str, ...], scale: float) -> None:
+        for name in names:
+            color, marker, label = SERIES[name]
+            g = frame[frame["estimator"] == name].sort_values(x)
+            (line,) = ax.plot(scale * g[x], 100 * g["median_are"], color=color, marker=marker,
+                              ms=4)
+            if label:
+                handles.setdefault(label, line)
         ax.set_ylim(bottom=0)
-    fig.tight_layout()
+
+    draw(axes[0], miss, "missing_months", ("cpre_undated", "cpre_dated"), 1.0)
+    axes[0].set_title("(a) Pre-installation use", loc="left")
+    axes[0].set_xlabel("Missing months")
+    axes[0].set_ylabel("Median absolute relative error (%)")
+    draw(axes[1], miss, "missing_months", ("s_undated", "s_dated", "s_norm"), 1.0)
+    axes[1].set_title("(b) EEI savings", loc="left")
+    axes[1].set_xlabel("Missing months")
+    draw(axes[2], full, "estimated_read_prob", ("s_undated", "s_norm", "s_norm_merged"), 100.0)
+    axes[2].set_title("(c) EEI savings", loc="left")
+    axes[2].set_xlabel("Estimated reads (%)")
+    legend_below(fig, list(handles.values()), list(handles), ncol=2, y=0.005)
     save(fig, "si_incomplete", ["e5_incomplete.csv"])
 
 

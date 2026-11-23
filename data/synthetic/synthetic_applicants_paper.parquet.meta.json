@@ -1,8 +1,8 @@
 {
   "config_hash": "de00ab8f91009b2385d17c53fdce5803f91295742734fdeae3f21d5fba760921",
-  "created_utc": "2026-11-23T07:09:45+00:00",
+  "created_utc": "2026-11-23T08:43:33+00:00",
   "data_basis": "synthetic",
-  "git_commit": "a0ef3753da65b791b56063da3224722f5995641c",
+  "git_commit": "90942f9aa435234501158f19eba54271a24d35b3",
   "input_checksums": {
     "2026-20178.xml": "f8cf5b5a5055e243bef78b8b799cbd5980a306573c5c97a02483183e6e2d469e",
     "load_profiles.parquet": "ca70a675e8bcc765ba731076f6af39a8bae74f58dd775192736437d9bdd45a9e",

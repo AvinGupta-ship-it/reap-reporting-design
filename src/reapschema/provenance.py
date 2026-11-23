@@ -42,7 +42,7 @@ def sha256_text(text: str) -> str:
 
 
 def config_hash(config: Any) -> str:
-    """Hash of a JSON-serialisable configuration (key order independent)."""
+    """Hash of a JSON-serializable configuration (key order independent)."""
     return sha256_text(json.dumps(config, sort_keys=True, default=str))
 
 

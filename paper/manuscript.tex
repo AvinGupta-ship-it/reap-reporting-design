@@ -4,6 +4,7 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
 \usepackage[margin=1in]{geometry}
 \input{generated/values.tex}
@@ -17,6 +18,7 @@
 a machine-readable evidence schema, automated validation, and the accuracy--burden
 frontier for twelve-month pre/post metered data}
 \author{Avin Gupta}
+\address{\texttt{iamavingupta@gmail.com}}
 
 \begin{abstract}
 A 2026 revision of the U.S. Department of Agriculture's Rural Energy for America Program
@@ -25,7 +27,7 @@ and after installation. How accurately such evidence establishes annual producti
 savings, and what each additional data element costs respondents, is a
 measurement-and-verification and information-design question. We formalize the evidence
 as a machine-readable schema traced to the regulation, build a physically grounded
-generator of synthetic applicants with known ground truth and labelled reporting errors,
+generator of synthetic applicants with known ground truth and labeled reporting errors,
 and evaluate estimators, \NRules{} validation rules and all \NSpecs{} feasible combinations
 of \NOptionalElements{} optional data elements. All results are for synthetic applicants
 and hypothetical scenario parameters. Correctly reported metered photovoltaic production is as accurate as the meter, so
@@ -135,11 +137,12 @@ mapping assigns each to schema elements or marks it out of scope (applicant iden
 financial, narrative and certification material). Tests require every parsed paragraph to
 be mapped and every mapped element to exist.
 
-\begin{figure}[t]
+\begin{figure}[p]
 \centering
 \includegraphics[width=\linewidth]{figures/fig1_schema}
 \caption{Classes of the evidence schema, generated from the LinkML source. A question mark
-denotes an optional element; brackets denote a list or a UCUM unit. No data are
+denotes an optional element; brackets after a type denote a list or a UCUM unit, and
+brackets in a class header give its multiplicity within an evidence package. No data are
 shown.}\label{fig:schema}
 \end{figure}
 
@@ -215,7 +218,7 @@ uncertainty approximation of ASHRAE Guideline 14 with an autocorrelation correct
 
 For RES projects the verified production is the applicant's annual claim, the sum of
 monthly production-meter readings, or the interval total, depending on what is
-collected. A plausibility statistic compares production with modelled yield for the
+collected. A plausibility statistic compares production with modeled yield for the
 rated capacity and location,
 \begin{equation}
 z=\ln\!\big(\hat P/\hat P_{\mathrm{model}}\big)/\sigma ,
@@ -228,7 +231,7 @@ and weather-normalized production is $\hat P\,Y_{\mathrm{normal}}/Y_{\mathrm{act
 \NRules{} rules (Table~\ref{tab:rules}) check ranges, sums and recomputations, billing
 continuity and alignment with the in-service date, account identity, price consistency,
 export consistency, end-use bounds, payback plausibility, and statistical agreement of
-claimed production with modelled yield and with the change in utility bills. Each rule
+claimed production with modeled yield and with the change in utility bills. Each rule
 declares the optional elements it needs. Thresholds of statistical rules are set to a
 \StatRuleFpr\% false-positive rate on error-free submissions. A flagged erroneous
 submission is assumed to be corrected on resubmission; a flagged error-free submission
@@ -263,7 +266,7 @@ and (6) and selected under \S4280.150 (reserve for requests of at most \$\SmallR
 requests in the central scenario). With $J=\NOptionalElements\le 16$ all \NSpecs{} feasible
 specifications are enumerated. As a check of the method intended for larger element
 sets, a quadratic surrogate of $\mathcal{L}_1$ is minimized subject to
-$\sum_j\tau_jx_j\le B$ as a mixed-integer programme with HiGHS
+$\sum_j\tau_jx_j\le B$ as a mixed-integer program with HiGHS
 \cite{huangfu2018parallelizing} and the solution is evaluated by simulation.
 
 \section{Results}
@@ -274,7 +277,7 @@ coefficients, agreement with an independent weighted least-squares implementatio
 selection invariants and the optimizer. \emph{Model verification}: the photovoltaic
 model reproduces an independent PVWatts v8 run on identical hourly weather within
 \PvRefAnnualDiff\% for annual energy and \PvRefMonthlyMaxDiff\% for any month.
-\emph{Empirical validity} is not established: no REAP microdata or open labelled
+\emph{Empirical validity} is not established: no REAP microdata or open labeled
 pre/post dataset was available. \emph{Regulatory applicability}: each result maps to
 one of the four Paperwork Reduction Act questions on the collection (Section~4). All
 figures and tables below except the burden audit rest on \NApplicants{} synthetic
@@ -404,15 +407,17 @@ stat.\ statistical, diag.\ diagnostic.}\label{tab:rules}
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{figures/fig4_validation_roc}
+\par\smallskip{\footnotesize\input{generated/tab_auc.tex}}
 \caption{Synthetic data. Receiver operating characteristic of the statistical rules by
-injected error class, with area under the curve in the legend.}\label{fig:roc}
+injected error class; panels (a)--(e) are for RES and (f) for EEI submissions. The table
+gives the area under the curve by panel and error class (-- not applicable).}\label{fig:roc}
 \end{figure}
 
 \subsection{Normalization}
 
 For photovoltaic production the effect of weather is direct: the error of measured
 production as an estimate of long-term production moves one-for-one with the irradiance
-anomaly (slope \NormResRawSlope), with RMSE \NormResRawRmse\%; normalization by modelled
+anomaly (slope \NormResRawSlope), with RMSE \NormResRawRmse\%; normalization by modeled
 yield reduces the RMSE to \NormResNormRmse\% (Fig.~\ref{fig:norm}). The rule scores
 actual production, so this matters only if the agency wants expected rather than realized
 output. For EEI savings the mean bias of the unnormalized difference is small
@@ -464,7 +469,7 @@ corresponding specification (\RecIntervalElements) reaches \RecIntervalMare\% at
 \RecIntervalBurden{} minutes under manual collection. Post-installation utility bills with
 exports and netting basis, bill charges and a declared method do not appear on the
 frontier: in this model they add checks that duplicate cheaper ones. The surrogate
-programme returned optimal, feasible solutions at all \IlpNBudgets{} budgets with a
+program returned optimal, feasible solutions at all \IlpNBudgets{} budgets with a
 simulated loss within \IlpMaxRegret{} \pp{} of the enumeration optimum (surrogate
 $R^2=\SurrogateRsq$).
 
@@ -472,10 +477,10 @@ $R^2=\SurrogateRsq$).
 \centering
 \includegraphics[width=\linewidth]{figures/fig6_frontier}
 \caption{Synthetic data, hypothetical element times. Respondent time and loss of all
-feasible specifications under manual entry (grey), the Pareto frontier (blue) with a 90\%
+feasible specifications under manual entry (gray), the Pareto frontier (blue) with a 90\%
 Monte Carlo band over element times and sampling error, the current rule (square) and the
-selected monthly-data frontier specification (diamond). Left: accuracy loss
-$\mathcal{L}_1$. Right: selection loss $\mathcal{L}_2$.}\label{fig:frontier}
+selected monthly-data frontier specification (diamond). (a) Accuracy loss
+$\mathcal{L}_1$. (b) Selection loss $\mathcal{L}_2$.}\label{fig:frontier}
 \end{figure}
 
 \begin{table}[!ht]
@@ -509,8 +514,8 @@ additional elements reduce but do not remove the sensitivity.
 \centering
 \includegraphics[width=\linewidth]{figures/fig7_selection}
 \caption{Synthetic competitions with hypothetical funding and non-energy scores. Share of
-awards that differ from selection on true values, by specification and condition (left,
-with 95\% Monte Carlo intervals) and by available funds (right).}\label{fig:selection}
+awards that differ from selection on true values, (a) by specification and condition, with
+95\% Monte Carlo intervals, and (b) by available funds.}\label{fig:selection}
 \end{figure}
 
 \subsection{Collection modes}
@@ -561,23 +566,25 @@ shapes are assumptions and cover electricity only, whereas many REAP efficiency 
 save propane or diesel. Noise, non-routine changes, measure sizes, error-class rates,
 competition size, funding and non-energy points are hypothetical; error rates in
 particular are not estimates of prevalence, and the selection results depend on them.
-Halving load noise and removing non-routine changes changes the median error of
-the undated EEI difference from \NoiseCentralUndatedMedian\% to \NoiseLowUndatedMedian\%,
-and doubling both raises it to \NoiseHighUndatedMedian\% (\NoiseLowNormMedian\%,
+In a matched sensitivity run of \SizeSensN{} applicants, halving load noise and removing
+non-routine changes lowers the median error of the undated EEI difference from
+\NoiseCentralUndatedExact\% to \NoiseLowUndatedExact\% (the main run gives
+\PathUndatedNormalMedian\%), and doubling both raises it to \NoiseHighUndatedExact\% (\NoiseLowNormMedian\%,
 \NoiseCentralNormMedian\% and \NoiseHighNormMedian\% for dated, adjusted bills; SI), so the
 undated result is not driven by the noise assumptions, whereas the benefit of adjustment
 is. The undated median error is \BasisComstockUndatedMedian\% for ComStock-based facility
 types and \BasisHypotheticalUndatedMedian\% for the hypothetical agricultural types.
-Only photovoltaic RES projects are modelled. Sites cover the 50 States, not the
+Only photovoltaic RES projects are modeled. Sites cover the 50 States, not the
 territories that the rule treats as States. Flagged errors are assumed to be corrected,
 which is optimistic. Element times are assumptions scaled to the published average; the
-Sobol analysis (SI) shows that \SobolTopName{} accounts for most of the variance of the
-burden difference (total index \SobolTopST). A lognormal fit to award sizes is rejected
+Sobol analysis (SI) shows that the largest contributors to the variance of the burden
+difference are \SobolTopName{} (total index \SobolTopST) and \SobolSecondName{}
+(\SobolSecondST). A lognormal fit to award sizes is rejected
 (Anderson--Darling \AwardFitADRes{} against a 5\% critical value of
 \AwardFitADCritical), so sizes are resampled from observed awards; using the lognormal
 instead changes $\mathcal{L}_1$ for the current specification from \SizeEmpCurrentMare\%
 to \SizeLognCurrentMare\% in a run of \SizeSensN{} applicants. Fabricated readings are not
-modelled, so the value of utility-side cross-checks as an independent source is not
+modeled, so the value of utility-side cross-checks as an independent source is not
 measured. Empirical validity against real submissions is not established.
 
 \section{Conclusions}
@@ -596,7 +603,8 @@ documented performance.
 
 \section*{Data and code availability}
 All code, configurations, input provenance, synthetic datasets and generated values are in
-the repository \texttt{reap-reporting-schema}. No archive identifier has been assigned.
+the repository \texttt{reap-reporting-design},
+\url{https://github.com/AvinGupta-ship-it/reap-reporting-design}. No archive identifier has been assigned.
 
 \section*{Author contributions}
 Avin Gupta: conceptualization, methodology, software, validation, formal analysis, data

@@ -544,7 +544,7 @@ def e6_frontier(records: pd.DataFrame, cfg: Config, rng: np.random.Generator,
     base_burden = float(bm.mean_burden(frozenset(), "manual_transcription", res_share, modal,
                                        cfg.burden, kappa))
     ilp_rows = []
-    # burden without rework, to match the linear constraint of the programme
+    # burden without rework, to match the linear constraint of the program
     linear_burden = base_burden + x @ tau
     for extra in np.linspace(0.0, float(tau.sum()), cfg.experiments.ilp_budgets + 1)[1:]:
         sol = solve_surrogate_ilp(surrogate, tau, float(extra), cfg.experiments.mip_gap)

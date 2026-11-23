@@ -102,7 +102,7 @@ errors:
   correction_success: 1.0              # flagged submissions are corrected on resubmission
 
 validation:
-  capacity_factor_bounds_rel: [0.5, 1.4]   # relative to modelled yield at the site
+  capacity_factor_bounds_rel: [0.5, 1.4]   # relative to modeled yield at the site
   billing_days_total: [350, 380]
   billing_days_each: [25, 36]
   period_alignment_days: 45

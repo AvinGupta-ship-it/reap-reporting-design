@@ -1,4 +1,4 @@
-# reap-reporting-schema
+# reap-reporting-design
 
 Evidence schema, synthetic applicants, measurement-and-verification estimators,
 validation rules and accuracy–burden optimization for the pre- and post-installation
@@ -9,7 +9,7 @@ energy evidence collected by USDA's Rural Energy for America Program (REAP) unde
 The repository contains
 
 - `src/reapschema/` — the importable package `reapschema`:
-  - `schema/` — LinkML schema of performance evidence and the artefacts generated from
+  - `schema/` — LinkML schema of performance evidence and the artifacts generated from
     it (JSON Schema, pydantic models, CSV templates, element documentation), and the
     requirement-to-schema traceability mapping;
   - `requirements` — parser of the rule's Federal Register XML;

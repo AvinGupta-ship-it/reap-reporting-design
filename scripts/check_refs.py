@@ -23,7 +23,7 @@ ENTRY = re.compile(r"@(\w+)\s*\{\s*([^,]+),(.*?)\n\}", re.S)
 FIELD = re.compile(r"(\w+)\s*=\s*(\{(?:[^{}]|\{(?:[^{}]|\{[^{}]*\})*\})*\}|\"[^\"]*\"|\d+)", re.S)
 
 
-def normalise(text: str) -> str:
+def normalize(text: str) -> str:
     text = re.sub(r"\\[a-zA-Z]+\s*|[{}\\\"'`^~$]", "", text)
     text = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode()
     return re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
@@ -74,7 +74,7 @@ def check(entry: dict[str, str]) -> list[str]:
     if meta is None:
         return [f"{entry['_key']}: DOI {doi} did not resolve"]
     problems = []
-    ours, theirs = normalise(entry.get("title", "")), normalise(meta["title"])
+    ours, theirs = normalize(entry.get("title", "")), normalize(meta["title"])
     if not ours or not (ours in theirs or theirs in ours or ours[:40] == theirs[:40]):
         problems.append(f"{entry['_key']}: title mismatch: {entry.get('title')!r} vs "
                         f"{meta['title']!r}")
@@ -83,8 +83,8 @@ def check(entry: dict[str, str]) -> list[str]:
                         f"{meta['years']}")
     first = entry.get("author", entry.get("editor", "")).split(" and ")[0]
     family = first.split(",")[0] if "," in first else first.split()[-1] if first else ""
-    if family and meta["family"] and normalise(family) not in normalise(meta["family"]) and (
-            normalise(meta["family"]) not in normalise(first)):
+    if family and meta["family"] and normalize(family) not in normalize(meta["family"]) and (
+            normalize(meta["family"]) not in normalize(first)):
         problems.append(f"{entry['_key']}: first author {family!r} vs {meta['family']!r}")
     return problems
 

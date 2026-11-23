@@ -12,7 +12,7 @@ mappings:
   - requirement: "4280.104:Energy assessment"
     scope: evidence
     elements: [BillingRecord.energy_imported, Project.affected_end_use_share]
-    note: Analysis of energy bills; the schema carries the bill data the assessment summarises.
+    note: Analysis of energy bills; the schema carries the bill data the assessment summarizes.
   - requirement: "4280.104:Energy audit (EA)"
     scope: evidence
     elements: [BillingRecord.energy_imported, Project.affected_end_use_share, PerformanceClaim.claimed_value]
@@ -84,7 +84,7 @@ mappings:
   - requirement: "4280.122(a)(8)(i)(H)(2)"
     scope: evidence
     elements: [Project.technology, Project.array_tilt, Project.array_azimuth, Facility.latitude, Facility.longitude]
-    note: Solar resource source and assumptions; array geometry and location determine the modelled resource.
+    note: Solar resource source and assumptions; array geometry and location determine the modeled resource.
   - requirement: "4280.122(a)(8)(i)(H)(10)"
     scope: evidence
     elements: [Project.storage_capacity]

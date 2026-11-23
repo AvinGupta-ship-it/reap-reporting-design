@@ -1,11 +1,11 @@
-"""Accuracy-burden optimisation over data-element specifications.
+"""Accuracy-burden optimization over data-element specifications.
 
 A specification is a set of optional data elements plus a collection mode. Its
 accuracy is evaluated on simulated applicants: validation rules that can run under
 the specification flag submissions, flagged erroneous submissions are corrected,
 and the verified quantity is computed by the best estimator the specification
 supports. The frontier is computed by exhaustive enumeration and, as a check of
-the method intended for larger element sets, by a surrogate integer programme
+the method intended for larger element sets, by a surrogate integer program
 solved with HiGHS.
 """
 
@@ -237,7 +237,7 @@ class SelectionEvaluator:
 
 
 def pareto_front(cost: np.ndarray, loss: np.ndarray) -> np.ndarray:
-    """Indices of non-dominated points (minimise both), ordered by increasing cost."""
+    """Indices of non-dominated points (minimize both), ordered by increasing cost."""
     order = np.lexsort((loss, cost))
     best = np.inf
     keep = []
@@ -256,7 +256,7 @@ def frontier_at_budgets(cost: np.ndarray, loss: np.ndarray, budgets: np.ndarray)
     return np.where(idx >= 0, running[np.clip(idx, 0, None)], np.nan)
 
 
-# --- surrogate-assisted integer programme -------------------------------------------------
+# --- surrogate-assisted integer program -------------------------------------------------
 
 
 @dataclass(frozen=True)
@@ -288,7 +288,7 @@ def surrogate_value(s: Surrogate, x: np.ndarray) -> float:
 
 def solve_surrogate_ilp(s: Surrogate, tau: np.ndarray, budget: float,
                         mip_gap: float) -> dict[str, Any]:
-    """Minimise the surrogate loss subject to a burden budget and element dependencies."""
+    """Minimize the surrogate loss subject to a burden budget and element dependencies."""
     names = list(OPTIONAL_ELEMENTS)
     k = len(names)
     m = linopy.Model()

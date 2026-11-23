@@ -2,13 +2,18 @@
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{array}
+\usepackage{xurl}
 \usepackage[hidelinks]{hyperref}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.9in]{geometry}
 \usepackage[numbers]{natbib}
 \graphicspath{{../paper/}}
 \input{../paper/generated/values.tex}
-\setlength{\parskip}{5pt}
+\setlength{\parskip}{4pt}
 \setlength{\parindent}{0pt}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.08}
+\renewcommand{\floatpagefraction}{0.85}
 \begin{document}
 
 \begin{center}
@@ -19,7 +24,8 @@ Rural Energy for America Program (REAP),'' final rule with comment period\\
 91 FR 62600, 62610--62611 (October 1, 2026); FR Doc.\ 2026-20178; RIN 0570-AB13\\
 Docket No.\ RBS-26-Business-0529\\[6pt]
 Submitted by Avin Gupta\\
-November 2026
+November 23, 2026\\
+\texttt{iamavingupta@gmail.com}
 \end{center}
 
 \section*{1. Commenter and proceeding}
@@ -53,6 +59,10 @@ finding about any real applicant, project or award. Recommendations that rest on
 simulation are therefore framed as requests for analysis, disclosure or clarification.
 
 \section*{2. Summary of recommendations}
+
+The recommendations are grouped by the four questions the notice poses under
+5 CFR 1320.8(d) and keep the letters of those questions; they are ordered with the burden
+estimate (b) first, because it rests on published figures alone.
 
 \textbf{(b) Accuracy of the burden estimate.}
 \begin{enumerate}
@@ -137,7 +147,7 @@ raises the stakes of how it is specified, validated and estimated.
 Table~\ref{tab:audit} reproduces the notice's figures and their products. These are
 exact calculations on published numbers.
 
-\begin{table}[h]
+\begin{table}[!htbp]
 \caption{Arithmetic of the burden estimate in the PRA notice (91 FR 62611) and the
 current OMB inventory (ICR \InvIcr).}\label{tab:audit}
 \centering\footnotesize
@@ -203,15 +213,17 @@ the annual total can then be recomputed, not how often real applicants would err
 \emph{Efficiency improvements.} Savings are the difference between measured use and
 what use would have been. With error-free synthetic evidence, the calculation in the
 rule's definition of Simple Payback (historical minus actual use over twelve bills) had
-a median absolute error of \PathUndatedNormalMedian\% of true normal-year savings; with
-bill dates, read types and a degree-day adjustment computed by the verifier,
+a median absolute error of \PathUndatedNormalMedian\% of true normal-year savings. With
+bill dates and a degree-day adjustment computed by the verifier and applied only where the
+fitted models meet a standard fit criterion (``guarded''), the median error was
+\PathNormNormalMedian\%; with bill dates, read type and the guarded degree-day adjustment,
 \PathNormMergedNormalMedian\%; and with daily interval data,
 \PathIntervalPathNormalMedian\%. These levels depend on the simulated facilities, in which
 the median project saves \MedianSavingsFraction\% of facility use. Three checks bear on
-how far they can be relied on. (i) Halving the assumed load noise and removing
-non-routine changes left the median error of the twelve-bill difference at
-\NoiseLowUndatedMedian\% (\NoiseCentralUndatedMedian\% in the matching central run), and
-doubling both raised it to \NoiseHighUndatedMedian\%; year-to-year weather and the size of
+how far they can be relied on. (i) In a matched sensitivity run, halving the assumed load
+noise and removing non-routine changes lowered the median error of the twelve-bill
+difference from \NoiseCentralUndatedExact\% to \NoiseLowUndatedExact\% (the main run gives
+\PathUndatedNormalMedian\%), and doubling both raised it to \NoiseHighUndatedExact\%; year-to-year weather and the size of
 savings relative to use, rather than the noise assumptions, drive it. (ii) For facility
 types whose load shapes come from NREL's ComStock profiles the median error was
 \BasisComstockUndatedMedian\%, and for the agricultural types, whose shapes are my
@@ -234,9 +246,9 @@ adjustment) were collected; these two depend directly on the assumed error rates
 magnitudes as illustration and the direction as the finding: estimation error in savings
 can move applications across the percentage and payback bands.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
-\includegraphics[width=0.92\linewidth]{figures/fig3_error_distributions}
+\includegraphics[width=\linewidth]{figures/fig3_error_distributions}
 \caption{Synthetic data (attachment Figure 3). Absolute relative error of the verified
 quantity by evidence specification: median, interquartile range and 5th--95th
 percentile; numbers at right give the share of applicants with error above
@@ -264,7 +276,7 @@ collects a certification rather than the identifier.
 \item A bound on capacity factor from the rated system size and location, which needs no
 element beyond those already required, detected the simulated thousand-fold unit errors
 in production; it would not detect smaller unit or conversion errors.
-\item A plausibility comparison of claimed production with modelled output detected
+\item A plausibility comparison of claimed production with modeled output detected
 \DetRulePlausGrossNet\% of cases where exports or bill reductions were reported as
 production but only \DetRulePlausNameplate\% of cases where a capacity-times-sun-hours
 estimate was reported, at a \StatRuleFpr\% false-positive rate.
@@ -298,14 +310,14 @@ against \BaseBurden{} for manual entry of the current elements); the Agency coul
 it when testing its portal. Not every utility offers such files or Green Button data
 \cite{naesbreq21espi}, so manual entry would have to remain available.
 
-\begin{figure}[h]
+\begin{figure}[!tb]
 \centering
-\includegraphics[width=0.92\linewidth]{figures/fig6_frontier}
+\includegraphics[width=\linewidth]{figures/fig6_frontier}
 \caption{Synthetic data, assumed element times (attachment Figure 6). Respondent time and
 loss of every feasible combination of \NOptionalElements{} optional elements under manual
-entry (grey), the Pareto frontier with a 90\% Monte Carlo band (blue), the current rule
-(square) and the monthly-data frontier specification (diamond). Left: accuracy loss.
-Right: share of awards changed by verification error.}\label{fig:frontier}
+entry (gray), the Pareto frontier with a 90\% Monte Carlo band (blue), the current rule
+(square) and the monthly-data frontier specification (diamond). (a) Accuracy loss.
+(b) Share of awards changed by verification error.}\label{fig:frontier}
 \end{figure}
 
 \section*{5. Recommendations}
@@ -389,9 +401,9 @@ as comments on the scoring criteria.
 
 \begin{itemize}
 \item The applicant-level results are for synthetic applicants. Load shapes for
-commercial buildings are State-level aggregates of a modelled building stock;
+commercial buildings are State-level aggregates of a modeled building stock;
 agricultural load shapes are assumptions and cover electricity only, although many REAP
-efficiency projects save propane or diesel; only photovoltaic RES projects are modelled.
+efficiency projects save propane or diesel; only photovoltaic RES projects are modeled.
 \item Error-class rates, noise levels, competition size, funding, non-energy points and
 element times are hypothetical. The error rates are not estimates of how often such
 errors occur in REAP submissions, and the times attached to data elements are not
@@ -413,9 +425,11 @@ be tested directly; recommendation A1 asks for that.
 The attachment (\texttt{attachment\_technical.pdf}) gives the methods, the tables and
 figures cited above, the validation rules and the schema element list. The code,
 configurations, input provenance and synthetic datasets that reproduce every number in
-this comment are in the research repository \texttt{reap-reporting-schema}; no archive
-identifier has been assigned.
+this comment are in the research repository \texttt{reap-reporting-design},
+\url{https://github.com/AvinGupta-ship-it/reap-reporting-design}; no archive identifier has been assigned.
 
-\bibliographystyle{unsrtnat}
+{\footnotesize\setlength{\bibsep}{1pt}
+\bibliographystyle{unsrturl}
 \bibliography{../paper/references}
+}
 \end{document}

@@ -3,70 +3,109 @@
 from __future__ import annotations
 
 import matplotlib.pyplot as plt
-from common import BLUE, save, style
+from common import BLUE, FIG_WIDTH, save, style
 from matplotlib.patches import FancyArrowPatch, Rectangle
 
 from reapschema.schema.build import schema_view
 
-LAYOUT = {  # class -> (x, y of top-left corner)
-    "EvidencePackage": (4.3, 10.0),
-    "Applicant": (0.0, 10.0), "Facility": (0.0, 7.9), "Meter": (0.0, 5.1),
-    "IntervalSeries": (0.0, 2.3),
-    "BillingRecord": (4.3, 5.6),
-    "Project": (8.6, 10.0), "PerformanceClaim": (8.6, 4.6), "EquipmentItem": (8.6, 1.4),
-}
-WIDTH, ROW = 3.5, 0.27
-EDGES = [("EvidencePackage", "Applicant", "1"), ("EvidencePackage", "Facility", "1"),
-         ("EvidencePackage", "Meter", "1..*"), ("EvidencePackage", "IntervalSeries", "0..*"),
-         ("EvidencePackage", "BillingRecord", "0..*"), ("EvidencePackage", "Project", "1"),
-         ("EvidencePackage", "PerformanceClaim", "1"),
-         ("EvidencePackage", "EquipmentItem", "0..*"),
-         ("BillingRecord", "Meter", "meter"), ("IntervalSeries", "Meter", "meter")]
+# two-column layout; all lengths in inches
+COLUMNS = (("EvidencePackage", "Applicant", "Facility", "Meter", "IntervalSeries"),
+           ("Project", "BillingRecord", "PerformanceClaim", "EquipmentItem"))
+MULTIPLICITY = {"Applicant": "1", "Facility": "1", "Project": "1", "Meter": "1..*",
+                "BillingRecord": "0..*", "IntervalSeries": "0..*", "PerformanceClaim": "1",
+                "EquipmentItem": "0..*"}
+BOX_W, ROW, HEAD, GAP = 2.82, 0.142, 0.20, 0.17
+LEFT, GUTTER = 0.30, 0.56
+FONT = 7.0
+LINE = "0.3"
 
 
 def main() -> None:
     style()
     plt.rcParams["axes.grid"] = False
     view = schema_view()
-    fig, ax = plt.subplots(figsize=(7.2, 7.4))
-    boxes = {}
-    for cls, (x, y) in LAYOUT.items():
-        slots = view.class_induced_slots(cls)
-        height = ROW * (len(slots) + 1.3)
-        ax.add_patch(Rectangle((x, y - height), WIDTH, height, fill=False, lw=0.7))
-        ax.add_patch(Rectangle((x, y - ROW * 1.2), WIDTH, ROW * 1.2, color=BLUE, alpha=0.18,
-                               lw=0))
-        ax.text(x + WIDTH / 2, y - ROW * 0.6, cls, ha="center", va="center", weight="bold",
-                fontsize=7.5)
-        for k, slot in enumerate(slots):
-            unit = f" [{slot.unit.ucum_code}]" if slot.unit is not None else ""
-            mark = "" if slot.required else "?"
-            star = "[]" if slot.multivalued else ""
-            ax.text(x + 0.06, y - ROW * (1.75 + k),
-                    f"{slot.name}{mark}: {slot.range}{star}{unit}", fontsize=5.3, va="center",
-                    family="DejaVu Sans Mono")
-        boxes[cls] = (x, y, height)
-    for src, dst, label in EDGES:
-        sx, sy, sh = boxes[src]
-        dx, dy, dh = boxes[dst]
-        if dx + WIDTH <= sx:  # target in the column to the left
-            a = (sx, min(max(dy - 0.3, sy - sh + 0.15), sy - 0.15))
-            b = (dx + WIDTH, dy - min(0.3, dh / 2))
-        elif dx >= sx + WIDTH:  # target in the column to the right
-            a = (sx + WIDTH, min(max(dy - 0.3, sy - sh + 0.15), sy - 0.15))
-            b = (dx, dy - min(0.3, dh / 2))
-        elif dy < sy:  # target below in the same column
-            a, b = (sx + WIDTH / 2, sy - sh), (dx + WIDTH / 2, dy)
-        else:  # target above in the same column
-            a, b = (sx + WIDTH / 2, sy), (dx + WIDTH / 2, dy - dh)
-        ax.add_patch(FancyArrowPatch(a, b, arrowstyle="-|>", mutation_scale=7, lw=0.6,
-                                     color="0.25", shrinkA=0, shrinkB=0))
-        ax.text(a[0] + 0.75 * (b[0] - a[0]), a[1] + 0.75 * (b[1] - a[1]) + 0.09, label,
-                fontsize=5.5, ha="center", color="0.25")
-    ax.set_xlim(-0.2, 12.3)
-    ax.set_ylim(-1.0, 10.3)
-    ax.set_aspect("equal")
+    slots = {c: view.class_induced_slots(c) for col in COLUMNS for c in col}
+    heights = {c: HEAD + ROW * len(s) + 0.05 for c, s in slots.items()}
+    total = max(sum(heights[c] for c in col) + GAP * (len(col) - 1) for col in COLUMNS)
+    fig_h = total + 0.70
+    fig = plt.figure(figsize=(FIG_WIDTH, fig_h))
+    ax = fig.add_axes((0, 0, 1, 1))
+    ax.set_xlim(0, FIG_WIDTH)
+    ax.set_ylim(0, fig_h)
     ax.axis("off")
+    boxes: dict[str, tuple[float, float, float]] = {}  # class -> (x, top, height)
+    rows: dict[tuple[str, str], float] = {}  # (class, slot) -> y of the slot row
+    for k, col in enumerate(COLUMNS):
+        x = LEFT + k * (BOX_W + GUTTER)
+        top = fig_h - 0.12
+        for cls in col:
+            h = heights[cls]
+            ax.add_patch(Rectangle((x, top - h), BOX_W, h, fill=False, lw=0.8, ec="0.15"))
+            ax.add_patch(Rectangle((x, top - HEAD), BOX_W, HEAD, color=BLUE, alpha=0.18, lw=0))
+            ax.text(x + 0.06, top - HEAD / 2, cls, ha="left", va="center", weight="bold",
+                    fontsize=FONT + 1)
+            if cls in MULTIPLICITY:
+                ax.text(x + BOX_W - 0.06, top - HEAD / 2, f"[{MULTIPLICITY[cls]}]", ha="right",
+                        va="center", fontsize=FONT, color="0.25")
+            for i, slot in enumerate(slots[cls]):
+                unit = f" [{slot.unit.ucum_code}]" if slot.unit is not None else ""
+                text = (f"{slot.name}{'' if slot.required else '?'}: {slot.range}"
+                        f"{'[]' if slot.multivalued else ''}{unit}")
+                y = top - HEAD - ROW * (i + 0.62)
+                rows[(cls, slot.name)] = y
+                ax.text(x + 0.06, y, text, fontsize=FONT, va="center",
+                        family="DejaVu Sans Mono")
+            boxes[cls] = (x, top, h)
+            top -= h + GAP
+
+    def arrow(points: list[tuple[float, float]], style_: str = "-|>") -> None:
+        for a, b in zip(points[:-2], points[1:-1], strict=True):
+            ax.plot([a[0], b[0]], [a[1], b[1]], color=LINE, lw=0.8, solid_capstyle="round")
+        ax.add_patch(FancyArrowPatch(points[-2], points[-1], arrowstyle=style_,
+                                     mutation_scale=8, lw=0.8, color=LINE, shrinkA=0,
+                                     shrinkB=0))
+
+    ex, etop, eh = boxes["EvidencePackage"]
+    # composition: trunk in the left margin to the classes of the left column
+    trunk_l = LEFT - 0.17
+    start_y = etop - eh + 0.12
+    ax.plot([ex, trunk_l], [start_y, start_y], color=LINE, lw=0.8)
+    lows = []
+    for cls in COLUMNS[0][1:]:
+        x, top, _h = boxes[cls]
+        y = top - HEAD / 2
+        lows.append(y)
+        arrow([(trunk_l, y), (x, y)])
+    ax.plot([trunk_l, trunk_l], [start_y, min(lows)], color=LINE, lw=0.8)
+    # composition: trunk in the gutter to the classes of the right column
+    trunk_r = LEFT + BOX_W + 0.16
+    src_y = etop - HEAD / 2
+    ax.plot([ex + BOX_W, trunk_r], [src_y, src_y], color=LINE, lw=0.8)
+    ys = []
+    for cls in COLUMNS[1]:
+        x, top, _h = boxes[cls]
+        y = top - HEAD / 2
+        ys.append(y)
+        arrow([(trunk_r, y), (x, y)])
+    ax.plot([trunk_r, trunk_r], [min(ys), max([*ys, src_y])], color=LINE, lw=0.8)
+    # references to Meter: second trunk in the gutter, dashed
+    ref_x = LEFT + BOX_W + 0.38
+    mx, mtop, _mh = boxes["Meter"]
+    # enter Meter at the slot row farthest from the composition arrows
+    meter_rows = [rows[("Meter", s.name)] for s in slots["Meter"]]
+    target_y = max(meter_rows, key=lambda y: min(abs(y - c) for c in [*ys, *lows]))
+    for cls in ("BillingRecord", "IntervalSeries"):
+        x, _top, _h = boxes[cls]
+        y = rows[(cls, "meter")]
+        edge = x if cls == "BillingRecord" else x + BOX_W
+        ax.plot([edge, ref_x, ref_x], [y, y, target_y], color=LINE, lw=0.8, ls=(0, (3, 2)))
+    ax.plot([ref_x, mx + BOX_W + 0.12], [target_y, target_y], color=LINE, lw=0.8,
+            ls=(0, (3, 2)))
+    arrow([(mx + BOX_W + 0.12, target_y), (mx + BOX_W, target_y)])
+    ax.plot([0.30, 0.62], [0.2, 0.2], color=LINE, lw=0.8)
+    ax.text(0.68, 0.2, "contains (multiplicity in brackets)", fontsize=FONT, va="center")
+    ax.plot([3.25, 3.57], [0.2, 0.2], color=LINE, lw=0.8, ls=(0, (3, 2)))
+    ax.text(3.63, 0.2, "refers to (slot meter)", fontsize=FONT, va="center")
     save(fig, "fig1_schema", [])
 
 

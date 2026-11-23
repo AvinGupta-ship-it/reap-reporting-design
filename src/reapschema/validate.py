@@ -51,7 +51,7 @@ def _r(key: str, description: str, requires: tuple[str, ...], applies_to: str,
 
 RULES: tuple[Rule, ...] = (
     _r("cf_range_claim", "Claimed production implies a capacity factor within bounds "
-       "relative to modelled yield at the site", (), "RES"),
+       "relative to modeled yield at the site", (), "RES"),
     _r("cf_range_inverter", "Sum of production-meter readings implies a capacity factor "
        "within bounds", ("inverter_monthly",), "RES"),
     _r("sum_check_pre", "Monthly pre-installation quantities sum to the stated annual "
@@ -76,17 +76,17 @@ RULES: tuple[Rule, ...] = (
        ("billing_dates",), "both", "statistical"),
     _r("export_consistency", "Exports are consistent with the metering arrangement and do "
        "not exceed or equal claimed production", ("res_post_bills", "export_channel"), "RES"),
-    _r("bill_difference_unlabelled", "Claimed production agrees with the change in billed "
+    _r("bill_difference_unlabeled", "Claimed production agrees with the change in billed "
        "energy (billed quantity basis unknown)", ("res_post_bills",), "RES", "statistical",
        None, True),
     _r("bill_difference", "Claimed production agrees with pre-installation use minus "
        "delivered energy plus exports", ("res_post_bills", "export_channel"), "RES",
        "statistical", None, True),
-    _r("plausibility_z", "Claimed production agrees with modelled production for the rated "
+    _r("plausibility_z", "Claimed production agrees with modeled production for the rated "
        "capacity and location (default array geometry)", (), "RES", "statistical", None, True),
-    _r("plausibility_z_geometry", "Claimed production agrees with modelled production for "
+    _r("plausibility_z_geometry", "Claimed production agrees with modeled production for "
        "the declared array geometry", ("pv_geometry",), "RES", "statistical", None, True),
-    _r("monthly_shape", "Monthly production readings follow the modelled seasonal shape",
+    _r("monthly_shape", "Monthly production readings follow the modeled seasonal shape",
        ("inverter_monthly",), "RES", "statistical"),
     _r("enduse_bound", "Savings do not exceed the share of use in the affected end uses",
        ("enduse_share",), "EEI"),
@@ -192,9 +192,9 @@ def rule_scores(ev: Evidence, cfg: Config, *, model_post_declared: float) -> dic
         bad_export = bad_export or (exported > 0 and abs(value - exported)
                                     < v.export_equal_tolerance * exported)
         out["export_consistency"] = float(bad_export)
-        util_unlabelled = pre_sum - post_sum
+        util_unlabeled = pre_sum - post_sum
         util = pre_sum - float(post.delivered.sum()) + exported
-        out["bill_difference_unlabelled"] = _log_ratio(value, util_unlabelled)
+        out["bill_difference_unlabeled"] = _log_ratio(value, util_unlabeled)
         out["bill_difference"] = _log_ratio(value, util)
         out["plausibility_z"] = _log_ratio(value, model_default)
         out["plausibility_z_geometry"] = _log_ratio(value, model_post_declared)

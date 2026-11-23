@@ -1,7 +1,7 @@
 """Retrieval of raw inputs with provenance recorded in ``data/MANIFEST.yaml``.
 
 Every download is stored unmodified under ``data/raw/``. The manifest records the
-source organisation, URL, query parameters, retrieval date, SHA-256 checksum and
+source organization, URL, query parameters, retrieval date, SHA-256 checksum and
 terms of use for each file. Downloads are idempotent: an existing file whose
 checksum matches the manifest is not fetched again.
 """
